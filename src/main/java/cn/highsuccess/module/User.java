@@ -6,10 +6,12 @@ package cn.highsuccess.module;
 public class User {
     private String id;
     private String role;
+    private String password;
 
-    public User(String id, String role) {
+    public User(String id, String role,String password) {
         this.id = id;
         this.role = role;
+        this.password = password;
     }
 
     public String getId() {
@@ -26,5 +28,13 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

@@ -27,8 +27,8 @@ public class UserService implements UserDetailsService{
         User user = userRepository.findUserByUsername(s);
         if(user != null){
             List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
-            grantedAuthorities.add(new SimpleGrantedAuthority(UserRoleEnum.ROLE_MEMBER.getRole()));
-            return new org.springframework.security.core.userdetails.User(user.getId(),"111",grantedAuthorities);
+            grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole()));
+            return new org.springframework.security.core.userdetails.User(user.getId(),user.getPassword(),grantedAuthorities);
         }
         throw new UsernameNotFoundException("not found user!");
     }
