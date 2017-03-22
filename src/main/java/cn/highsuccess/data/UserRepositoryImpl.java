@@ -10,11 +10,11 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public User login(String userName, String password) {
 
-        return new User("lee", UserRoleEnum.ROLE_MEMBER.getRole(),"123");
+        return new User("lee", "123");
     }
 
     @Override
     public User findUserByUsername(String userName) {
-        return new User(userName,UserRoleEnum.ROLE_GUEST.getRole(),"123");
+        return new User(userName,"123");
     }
 }
