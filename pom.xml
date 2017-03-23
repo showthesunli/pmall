@@ -128,37 +128,32 @@
         <dependency>
             <groupId>cn.highsuccess</groupId>
             <artifactId>hisu-jar-dbservice</artifactId>
-            <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${pom.basedir}/src/main/resources/lib/hisu-jar-dbservice.jar</systemPath>
+            <version>0.0.1</version>
         </dependency>
         <dependency>
             <groupId>cn.highsuccess</groupId>
             <artifactId>hisu-jar-disposeConf</artifactId>
-            <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${pom.basedir}/src/main/resources/lib/hisu-jar-disposeConf-0.0.1-SNAPSHOT.jar</systemPath>
+            <version>0.0.1</version>
         </dependency>
         <dependency>
             <groupId>cn.highsuccess</groupId>
-            <artifactId>hisu-jar-facdeService</artifactId>
-            <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${pom.basedir}/src/main/resources/lib/hisu-jar-facdeService-0.0.1-SNAPSHOT.jar</systemPath>
+            <artifactId>hisu-jar-facdeServce</artifactId>
+            <version>0.0.1</version>
         </dependency>
         <dependency>
             <groupId>cn.highsuccess</groupId>
             <artifactId>hisu-jar-util</artifactId>
-            <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${pom.basedir}/src/main/resources/lib/hisu-jar-util-0.0.1-SNAPSHOT.jar</systemPath>
+            <version>0.0.1</version>
         </dependency>
         <dependency>
             <groupId>cn.highsuccess</groupId>
             <artifactId>hisu-readConf</artifactId>
-            <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${pom.basedir}/src/main/resources/lib/hisu-readConf-0.0.1-SNAPSHOT.jar</systemPath>
+            <version>0.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.highsuccess</groupId>
+            <artifactId>json-20090211</artifactId>
+            <version>0.0.1</version>
         </dependency>
     </dependencies>
 
@@ -208,6 +203,7 @@
             <name>Nexus aliyun</name>
             <url>http://maven.aliyun.com/nexus/content/groups/public</url>
         </repository>
+
 
     </repositories>
 

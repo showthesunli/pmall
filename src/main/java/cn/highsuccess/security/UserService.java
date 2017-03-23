@@ -32,7 +32,7 @@ public class UserService implements UserDetailsService{
         if(user != null){
             //添加用户权限  本应用无需权限认证，仅适用登录认证
             List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
-            grantedAuthorities.add(new SimpleGrantedAuthority(""));
+            grantedAuthorities.add(new SimpleGrantedAuthority("rol_user"));
             //使用User初始化UserDetails，并返回UserDetails对象
             return new org.springframework.security.core.userdetails.User(user.getId(),user.getPassword(),grantedAuthorities);
         }
