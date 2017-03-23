@@ -1,6 +1,7 @@
 package cn.highsuccess.config;
 
 import cn.highsuccess.data.UserRepositoryImpl;
+import cn.highsuccess.security.HisuAuthenticationProvider;
 import cn.highsuccess.security.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -18,9 +19,12 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 public class PmallSecurityConfig extends WebSecurityConfigurerAdapter{
     @Autowired
     UserService us;
+    @Autowired
+    HisuAuthenticationProvider hisuAuthenticationProvider;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(this.us);
+        auth.authenticationProvider(this.hisuAuthenticationProvider).userDetailsService(this.us);
     }
 
     @Override

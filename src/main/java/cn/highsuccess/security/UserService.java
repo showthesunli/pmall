@@ -1,9 +1,6 @@
 package cn.highsuccess.security;
 
-import cn.highsuccess.data.UserRepository;
 import cn.highsuccess.module.User;
-import cn.highsuccess.module.UserRoleEnum;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,19 +13,15 @@ import java.util.List;
 
 /**
  * Created by prototype on 2017/3/20.
+ * 没有获取到password之前无法想后台验证并获取用户信息，
+ * 此类只使用用户上送的用户名构建一个密码为空的用户实例，用户验证与用户信息查询交由HisuAuthenticationProvider
  */
 @Component
 public class UserService implements UserDetailsService{
-    private final UserRepository userRepository;
-
-    @Autowired
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        User user = userRepository.findUserByUsername(s);
+        User user = new User(s);
         if(user != null){
             //添加用户权限  本应用无需权限认证，仅适用登录认证
             List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
