@@ -1,44 +1,37 @@
 package cn.highsuccess.data.impl;
 
-import cn.highsuccess.conf.module.HisuMngSvrImpl;
-import cn.highsuccess.conf.module.HisuMngTcpIpImpl;
-import cn.highsuccess.point.module.LoginUser;
+import cn.highsuccess.config.systemproperties.HisuMngAttribute;
+import cn.highsuccess.config.systemproperties.HisuMngSvr;
+import cn.highsuccess.module.User;
 import cn.highsuccess.transform.HisuTransform;
-import cn.highsuccess.transform.impl.HisuTransformImpl;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
 
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpSession;
-import java.util.List;
 
-public class BaseConnect {
-    protected ServletContext application;
-    protected HttpSession session;
-    protected HisuMngSvrImpl hmsi;
-    protected List<HisuMngTcpIpImpl> tcpip;
+public abstract class BaseConnect {
+    @Autowired
+    protected HisuMngAttribute hmsi;
+    @Autowired
+    protected HisuMngSvr hisuMngSvr;
+
     protected String productName;
-    protected LoginUser user;
     protected JSONObject data;
     protected int returnCode;
     protected String responseRemark;
+    protected WebAuthenticationDetails userDetails;
+    protected String userName;
+
+    @Autowired
     protected HisuTransform htf;
 
-    protected BaseConnect(HttpSession session) {
-        this.application = session.getServletContext();
-        this.session = session;
-        this.hmsi = (HisuMngSvrImpl) application.getAttribute("HisuMngSvr");
-        //this.tcpip = (List<HisuMngTcpIpImpl>)application.getAttribute("HisuMngTcpIp");
-        this.productName = (String) hmsi.getData().get("productName");
-        this.user = (LoginUser) session.getAttribute("user");
-        this.htf = new HisuTransformImpl(user.getIp(), user.getPort());
+    protected BaseConnect() {
+        this.productName =  hmsi.getPRODUCTNAME();
+        this.userDetails = (WebAuthenticationDetails)SecurityContextHolder.getContext().getAuthentication().getDetails();
+        this.userName = SecurityContextHolder.getContext().getAuthentication().getName();
     }
 
-    /**
-     * @return 当前用户类
-     */
-    public LoginUser getUser() {
-        return user;
-    }
 
     /**
      * @return 后台返回的整个json数据集
@@ -61,4 +54,11 @@ public class BaseConnect {
         return responseRemark;
     }
 
+    public WebAuthenticationDetails getUserDetails() {
+        return userDetails;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
 }

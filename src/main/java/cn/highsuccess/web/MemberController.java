@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * Created by prototype on 2017/3/21.
  */
 @Controller
-public class MemberController {
+public class MemberController extends HisuBaseControllerAdapter {
 
-    @RequestMapping(value = "/member" )
+    @RequestMapping(value = "/member" ,method = RequestMethod.GET)
     public String member(Model model){
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal instanceof UserDetails){
@@ -22,8 +22,10 @@ public class MemberController {
         return "member";
     }
 
-    @RequestMapping(value = "/login" ,method = RequestMethod.POST)
-    public String login(Model model){
-        return "member";
+    @RequestMapping(value = "/productList",method = RequestMethod.GET)
+    public String productList(){
+
+        return "productList";
     }
+
 }

@@ -11,18 +11,18 @@ import org.springframework.context.annotation.PropertySource;
 @PropertySource("classpath:/HisuMngSvr.properties")
 public class HisuMngSvr {
     private String ip;
-    private String prot;
+    private int port;
+
+    public HisuMngSvr(@Value("${DataServerIp}")String ip,@Value("${DataServerPort}") int port) {
+        this.ip = ip;
+        this.port = port;
+    }
 
     public String getIp() {
         return ip;
     }
 
-    public String getProt() {
-        return prot;
-    }
-
-    public HisuMngSvr(@Value("${DataServerIp}")String ip,@Value("${DataServerPort}") String prot) {
-        this.ip = ip;
-        this.prot = prot;
+    public int getProt() {
+        return port;
     }
 }

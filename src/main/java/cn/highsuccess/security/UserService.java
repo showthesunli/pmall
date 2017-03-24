@@ -1,6 +1,8 @@
 package cn.highsuccess.security;
 
+import cn.highsuccess.data.UserRepository;
 import cn.highsuccess.module.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,10 +20,12 @@ import java.util.List;
  */
 @Component
 public class UserService implements UserDetailsService{
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        User user = new User(s);
+        User user = userRepository.findUserByUsername(s);
         if(user != null){
             //添加用户权限  本应用无需权限认证，仅适用登录认证
             List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();

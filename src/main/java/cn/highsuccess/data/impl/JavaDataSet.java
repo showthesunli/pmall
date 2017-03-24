@@ -11,10 +11,6 @@ public class JavaDataSet extends BaseConnect {
     private String pageDataGrpID;
     private String condition;
 
-    public JavaDataSet(HttpSession session) {
-        super(session);
-        // TODO Auto-generated constructor stub
-    }
 
     /**j
      * @param pageID        页面ID
@@ -23,10 +19,7 @@ public class JavaDataSet extends BaseConnect {
      */
     public JSONObject service(String pageID, String pageDataGrpID, String condition) {
 
-        this.pageID = pageID;
-        this.pageDataGrpID = pageDataGrpID;
-        this.condition = condition;
-        JSONObject responsedata = htf.getDataSet(user.getCliIpAddr(), user.getId(), productName, pageID, pageDataGrpID, condition);
+        JSONObject responsedata = htf.getDataSet(this.getUserDetails().getRemoteAddress(),this.getUserName() , productName, pageID, pageDataGrpID, condition);
         data = responsedata;
         return responsedata;
     }
@@ -39,11 +32,7 @@ public class JavaDataSet extends BaseConnect {
      * @return 如果无数据返回就为空
      */
     public JSONObject service(String pageID, String pageDataGrpID) {
-        this.pageID = pageID;
-        this.pageDataGrpID = pageDataGrpID;
-        JSONObject responsedata = htf.getDataSet(user.getCliIpAddr(), user.getId(), productName, pageID, pageDataGrpID, "");
-        data = responsedata;
-        return responsedata;
+        return this.data = this.service(pageID,pageDataGrpID,"");
     }
 
     /**
