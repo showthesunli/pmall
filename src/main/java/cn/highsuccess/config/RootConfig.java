@@ -44,7 +44,7 @@ public class RootConfig {
      * @return
      */
     @Bean
-    @Scope(value = WebApplicationContext.SCOPE_REQUEST,proxyMode = ScopedProxyMode.INTERFACES)
+    @Scope(value = WebApplicationContext.SCOPE_REQUEST,proxyMode = ScopedProxyMode.TARGET_CLASS)
     public JavaDataSet javaDataSet(){
         return new JavaDataSet();
     }

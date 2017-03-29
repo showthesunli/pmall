@@ -1,6 +1,5 @@
 package cn.highsuccess.security;
 
-import cn.highsuccess.data.UserRepository;
 import cn.highsuccess.transform.HisuTransform;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;

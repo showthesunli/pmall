@@ -1,11 +1,14 @@
 package cn.highsuccess.web;
 
+import cn.highsuccess.data.impl.JavaDataSet;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 
 /**
  * Created by prototype on 2017/3/21.
@@ -22,10 +25,9 @@ public class MemberController extends HisuBaseControllerAdapter {
         return "member";
     }
 
-    @RequestMapping(value = "/productList",method = RequestMethod.GET)
-    public String productList(){
-
-        return "productList";
+    @Override
+    @Autowired
+    public void setJds(JavaDataSet jds) {
+        this.jds = jds;
     }
-
 }
