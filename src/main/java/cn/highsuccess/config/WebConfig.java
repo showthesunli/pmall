@@ -20,7 +20,8 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 public class WebConfig extends WebMvcConfigurerAdapter{
 
 
-    @Bean(name = "viewReslover")
+//    @Bean(name = "viewReslover")
+    @Bean
     public FreeMarkerViewResolver freeMarkerViewResolver(){
         FreeMarkerViewResolver freeMarkerViewResolver = new FreeMarkerViewResolver();
         freeMarkerViewResolver.setPrefix("");
@@ -30,7 +31,8 @@ public class WebConfig extends WebMvcConfigurerAdapter{
         return freeMarkerViewResolver;
     }
 
-    @Bean(name = "freemarkerConfig")
+//    @Bean(name = "freemarkerConfig")
+    @Bean
     public FreeMarkerConfigurer freeMarkerConfigurer(){
         FreeMarkerConfigurer freeMarkerConfigurer = new FreeMarkerConfigurer();
         freeMarkerConfigurer.setTemplateLoaderPath("/WEB-INF/pages");

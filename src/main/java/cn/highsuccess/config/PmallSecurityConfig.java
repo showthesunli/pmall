@@ -27,6 +27,11 @@ public class PmallSecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.formLogin().and().authorizeRequests().antMatchers("/member").authenticated();
+        http.formLogin()
+                .loginPage("/login")
+                .and()
+            .authorizeRequests()
+                .antMatchers("/member")
+                .authenticated();
     }
 }

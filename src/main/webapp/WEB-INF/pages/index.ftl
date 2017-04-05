@@ -23,7 +23,7 @@ $(function(){
 <body>
 	<div class="jf-wrapper">
         <!--头部-->
-        <jsp:include page="header.jsp"></jsp:include>
+        <#include "/lib/template/header.ftl" encoding="UTF-8">
         <!--头部end-->
 
         <div class="jf-main">
