@@ -7,7 +7,7 @@
         <#--<@sec.authorize access="authenticated">-->
         <@sec.authorize access="isAuthenticated()">
         <li><a href="member/member.jsp"><@sec.authentication property="principal.username"/></a></li>
-        <li><a href="member/logout" >注销</a></li>
+        <li><a href="/logout" >注销</a></li>
         </@sec.authorize>
         <#--未登录显示登录按钮 -->
         <@sec.authorize access="isAnonymous()">

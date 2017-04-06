@@ -13,7 +13,7 @@ public class User {
     }
 
     public User(String id){
-        this(id, "");
+        this(id,"");
     }
 
     public String getId() {

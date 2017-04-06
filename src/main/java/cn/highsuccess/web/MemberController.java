@@ -18,6 +18,11 @@ public class MemberController extends HisuBaseControllerAdapter {
 
     @RequestMapping(value = "/member" ,method = RequestMethod.GET)
     public String member(Model model){
+        this.jds.service("jf_memberCenter","memberInfo");
+        System.out.println(this.jds.getData().toString());
+        System.out.println(this.jds.getReturnCode());
+        System.out.println(this.jds.getResponseRemark());
+        System.out.println("member");
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal instanceof UserDetails){
             model.addAttribute("userName",((UserDetails) principal).getUsername());

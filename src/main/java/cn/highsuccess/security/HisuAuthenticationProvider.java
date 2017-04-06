@@ -29,10 +29,12 @@ public class HisuAuthenticationProvider extends AbstractUserDetailsAuthenticatio
         String password = usernamePasswordAuthenticationToken.getCredentials().toString();
         JSONObject obj = htf.login(de.getRemoteAddress()+"|logonType=1|",userDetails.getUsername(),password);
         if (null != obj){
-            if(!"0".equals(obj.optString("responseCode"))){
-                this.logger.debug("Authentication failed: password does not match stored value");
+            if(0 > obj.optInt("responseCode")){
+                this.logger.info("Authentication failed: " + obj.optJSONObject("responseObj").optString("错误原因"));
                 throw new BadCredentialsException(this.messages.getMessage("AbstractUserDetailsAuthenticationProvider.badCredentials", "Bad credentials"));
             }
+        }else {
+            throw new BadCredentialsException("网络错误!");
         }
     }
 

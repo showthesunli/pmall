@@ -7,32 +7,8 @@
 <link href="/css/model.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="/js/jquery.js"></script>
 <script type="text/javascript" src="/js/model.js"></script>
-<script type="text/javascript" src="/js/security.js"></script>
-<script type="text/javascript" src="/js/encrypt.js"></script>
-    <script type="application/javascript">
-        function checklogin() {
-            if ($("#loginname").val() == "" || $("#lgpaswd").val() == "") {
-                $("#formmsg").html("用户名和密码不允许为空");
-                openForm();
-                return false;
-            }
-            var username = $("#loginname").val();
-            var reg1 = /^[A-Za-z0-9_-]{4,12}$/g;
-            var reg2 = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/g;
-            if (!reg1.test(username) && !reg2.test(username)) {
-                $("#formmsg").html("用户名不合法！");
-                openForm();
-                return false;
-            }
-            if ($("#lgpaswd").val().length < 6) {
-                $("#formmsg").html("密码长度不能小于6");
-                openForm();
-                return false;
-            }
-            encrypt($('#keyfield'), $("#lgpaswd"));
-            $(".loginForm").submit();
-        }
-    </script>
+<#--<script type="text/javascript" src="/js/security.js"></script>-->
+<#--<script type="text/javascript" src="/js/encrypt.js"></script>-->
 <style>
 .jf-productList{ width:323px; margin:0 10px 10px 0; background:none;}
 .jf-productList:hover{ background:#faecec;}
@@ -55,17 +31,16 @@
                 
             </div>
             
-			<form class="loginForm" action="login" id="redLoginForm" method="post">
+			<form class="loginForm" action="/login" id="redLoginForm" method="post">
        	    <p><b class="bgImgS" style="background-position:0 -30px;"></b><input  class="loginTxt" type="text" id="loginname" name="username" placeholder="用户名/手机/邮箱"  /></p>
                 <p>
                     <b class="bgImgS" style="background-position:0 -52px;"></b>
-                    <input class="loginTxt" id="lgpaswd" type="password" name="pswd"  placeholder="请输入密码" />
+                    <input class="loginTxt" id="lgpaswd" type="password" name="password"  placeholder="请输入密码" />
                 </p>
-                <input type="hidden" id="keyfield"
-                       value="<%=login.getUser().getRsaRandomString() %>|<%=((Map<String,String>)application.getAttribute("keyArgs")).get("modulus") %>|<%=((Map<String,String>)application.getAttribute("keyArgs")).get("exponent") %>"/>
                 <p><input name="" type="checkbox" value="" /><label>自动登录</label><a href="#" class="forgotPsd">忘记密码？</a></p>
-                <p style="margin-bottom:10px;"><input type="button" onclick="checklogin()" value="登录" class="loginBtn btnBgS" /></p>
+                <p style="margin-bottom:10px;"><input type="submit"  value="登录" class="loginBtn btnBgS" /></p>
                 <p class="toRegister">还没有账号<a href="#">请注册</a></p>
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             </form>
                         
         </div>

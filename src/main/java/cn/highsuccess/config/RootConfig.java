@@ -1,5 +1,6 @@
 package cn.highsuccess.config;
 
+import cn.highsuccess.config.systemproperties.HisuMngAttribute;
 import cn.highsuccess.config.systemproperties.HisuMngSvr;
 import cn.highsuccess.data.UserRepository;
 import cn.highsuccess.data.impl.JavaDataSet;
@@ -45,8 +46,8 @@ public class RootConfig {
      */
     @Bean
     @Scope(value = WebApplicationContext.SCOPE_REQUEST,proxyMode = ScopedProxyMode.TARGET_CLASS)
-    public JavaDataSet javaDataSet(){
-        return new JavaDataSet();
+    public JavaDataSet javaDataSet(HisuMngAttribute hmsi,HisuMngSvr hisuMngSvr,HisuTransform hisuTransform){
+        return new JavaDataSet(hmsi,hisuMngSvr,hisuTransform);
     }
 
     /**

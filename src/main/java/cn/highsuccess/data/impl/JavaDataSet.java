@@ -1,16 +1,20 @@
 package cn.highsuccess.data.impl;
 
+import cn.highsuccess.config.systemproperties.HisuMngAttribute;
+import cn.highsuccess.config.systemproperties.HisuMngSvr;
+import cn.highsuccess.transform.HisuTransform;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import javax.servlet.http.HttpSession;
 
 public class JavaDataSet extends BaseConnect {
     private String pageID;
     private String pageDataGrpID;
     private String condition;
 
+    public JavaDataSet(HisuMngAttribute hmsi, HisuMngSvr hisuMngSvr, HisuTransform htf) {
+        super(hmsi, hisuMngSvr, htf);
+    }
 
     /**j
      * @param pageID        页面ID

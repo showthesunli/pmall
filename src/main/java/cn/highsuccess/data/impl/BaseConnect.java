@@ -11,9 +11,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetails;
 
 
 public abstract class BaseConnect {
-    @Autowired
     protected HisuMngAttribute hmsi;
-    @Autowired
     protected HisuMngSvr hisuMngSvr;
 
     protected String productName;
@@ -23,14 +21,17 @@ public abstract class BaseConnect {
     protected WebAuthenticationDetails userDetails;
     protected String userName;
 
-    @Autowired
     protected HisuTransform htf;
 
-    protected BaseConnect() {
-        this.productName =  hmsi.getPRODUCTNAME();
+    protected BaseConnect(HisuMngAttribute hmsi,HisuMngSvr hisuMngSvr,HisuTransform htf) {
+        this.hmsi = hmsi;
+        this.hisuMngSvr = hisuMngSvr;
+        this.htf = htf;
+        this.productName =  this.hmsi.getPRODUCTNAME();
         this.userDetails = (WebAuthenticationDetails)SecurityContextHolder.getContext().getAuthentication().getDetails();
         this.userName = SecurityContextHolder.getContext().getAuthentication().getName();
     }
+
 
 
     /**

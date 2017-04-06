@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /**
  * Created by prototype on 2017/3/21.
@@ -32,6 +33,14 @@ public class PmallSecurityConfig extends WebSecurityConfigurerAdapter{
                 .and()
             .authorizeRequests()
                 .antMatchers("/member")
-                .authenticated();
+                .authenticated()
+            .and()
+                .rememberMe()
+                .tokenValiditySeconds(2419200)
+                .key("pmallKey")
+            .and()
+                .logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/");
     }
 }

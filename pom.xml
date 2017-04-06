@@ -15,6 +15,14 @@
     </properties>
 
     <dependencies>
+        <!-- 开发依赖 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <version>1.5.3.BUILD-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+
         <!-- spring依赖 -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -160,6 +168,7 @@
             <artifactId>json-20090211</artifactId>
             <version>0.0.1</version>
         </dependency>
+
     </dependencies>
 
     <build>
