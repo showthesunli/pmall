@@ -19,13 +19,12 @@ import java.util.List;
  * 此类只使用用户上送的用户名构建一个密码为空的用户实例，用户验证与用户信息查询交由HisuAuthenticationProvider
  */
 @Component
-public class UserService implements UserDetailsService{
+public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        User user = userRepository.findUserByUsername(s);
+    public UserDetails loadUserByUsername(String s,String password) throws UsernameNotFoundException {
+        User user = userRepository.findUserByUsername(s,password);
         if(user != null){
             //添加用户权限  本应用无需权限认证，仅适用登录认证
             List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();

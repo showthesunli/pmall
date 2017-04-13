@@ -1,11 +1,22 @@
 package cn.highsuccess.module;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 /**
  * Created by prototype on 2017/3/20.
  */
 public class User {
+    @NotNull
+    @Size(min = 2)
     private String id;
+    @NotNull
+    @Size(min = 2)
     private String password;
+
+    public User(){
+
+    }
 
     public User(String id, String password) {
         this.id = id;

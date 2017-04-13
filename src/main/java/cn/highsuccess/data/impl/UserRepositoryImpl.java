@@ -13,7 +13,7 @@ public class UserRepositoryImpl implements UserRepository{
     }
 
     @Override
-    public User findUserByUsername(String userName) {
-        return new User(userName);
+    public User findUserByUsername(String userName,String password) {
+        return new User(userName,password);
     }
 }

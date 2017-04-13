@@ -1,7 +1,6 @@
 package cn.highsuccess.web;
 
-import cn.highsuccess.data.impl.JavaDataSet;
-import org.springframework.beans.factory.annotation.Autowired;
+import cn.highsuccess.data.JavaDataSet;
 
 /**
  * Created by prototype on 2017/3/24.

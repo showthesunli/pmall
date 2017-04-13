@@ -17,13 +17,11 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class PmallSecurityConfig extends WebSecurityConfigurerAdapter{
     @Autowired
-    UserService us;
-    @Autowired
     HisuAuthenticationProvider hisuAuthenticationProvider;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(this.hisuAuthenticationProvider).userDetailsService(this.us);
+        auth.authenticationProvider(this.hisuAuthenticationProvider);
     }
 
     @Override

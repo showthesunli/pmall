@@ -3,7 +3,7 @@ package cn.highsuccess.config;
 import cn.highsuccess.config.systemproperties.HisuMngAttribute;
 import cn.highsuccess.config.systemproperties.HisuMngSvr;
 import cn.highsuccess.data.UserRepository;
-import cn.highsuccess.data.impl.JavaDataSet;
+import cn.highsuccess.data.JavaDataSet;
 import cn.highsuccess.data.impl.UserRepositoryImpl;
 import cn.highsuccess.transform.HisuTransform;
 import cn.highsuccess.transform.impl.HisuTransformImpl;
@@ -25,7 +25,7 @@ public class RootConfig {
      * @return
      */
     @Bean
-    public PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer(){
+    public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer(){
         return new PropertySourcesPlaceholderConfigurer();
     }
 

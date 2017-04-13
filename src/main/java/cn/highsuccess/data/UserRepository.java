@@ -14,5 +14,5 @@ public interface UserRepository {
      * @param userName
      * @return
      */
-    public User findUserByUsername(String userName);
+    public User findUserByUsername(String userName,String password);
 }

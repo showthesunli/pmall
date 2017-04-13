@@ -19,15 +19,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class HisuAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
     @Autowired
-    private UserDetailsService userDetailsService;
+    private UserService userDetailsService;
     @Autowired
     private HisuTransform htf;
 
     @Override
     protected void additionalAuthenticationChecks(UserDetails userDetails, UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken) throws AuthenticationException {
         WebAuthenticationDetails de = (WebAuthenticationDetails)usernamePasswordAuthenticationToken.getDetails();
-        String password = usernamePasswordAuthenticationToken.getCredentials().toString();
-        JSONObject obj = htf.login(de.getRemoteAddress()+"|logonType=1|",userDetails.getUsername(),password);
+        JSONObject obj = htf.login(de.getRemoteAddress()+"|logonType=1|",userDetails.getUsername(),userDetails.getPassword());
         if (null != obj){
             if(0 > obj.optInt("responseCode")){
                 this.logger.info("Authentication failed: " + obj.optJSONObject("responseObj").optString("错误原因"));
@@ -40,7 +39,7 @@ public class HisuAuthenticationProvider extends AbstractUserDetailsAuthenticatio
 
     @Override
     protected UserDetails retrieveUser(String s, UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken) throws AuthenticationException {
-        UserDetails loadedUser = this.userDetailsService.loadUserByUsername(s);
+        UserDetails loadedUser = this.userDetailsService.loadUserByUsername(s,usernamePasswordAuthenticationToken.getCredentials().toString());
         if(loadedUser == null) {
             throw new InternalAuthenticationServiceException("UserDetailsService returned null, which is an interface contract violation");
         } else {
