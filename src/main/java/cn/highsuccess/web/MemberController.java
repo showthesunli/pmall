@@ -30,9 +30,11 @@ public class MemberController extends HisuBaseControllerAdapter {
         return "member";
     }
 
+
     @Override
     @Autowired
     public void setJds(JavaDataSet jds) {
         this.jds = jds;
     }
+
 }

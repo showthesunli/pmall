@@ -28,19 +28,16 @@ public class RegisterController extends HisuBaseControllerAdapter {
     @RequestMapping(method = RequestMethod.GET)
     public String registerForm(Model model){
 
+        model.addAttribute(new User());
         return "register";
     }
 
     @RequestMapping(method = RequestMethod.POST)
     public String register(Model model,@Valid User user,Errors errors){
         if (errors.hasErrors()){
-//            model.addAttribute("errors",bindingResult.getAllErrors());
-            errors.reject("user.id","自定义错误");
-            errors.reject("id","1自定义错误");
+            handleError(model,errors);
             return "register";
         }
-        System.out.println(user.getId());
-        System.out.println(user.getPassword());
         return "redirect:/";
     }
 }
