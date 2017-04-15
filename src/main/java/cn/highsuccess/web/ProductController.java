@@ -1,5 +1,6 @@
 package cn.highsuccess.web;
 
+import cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId;
 import cn.highsuccess.data.JavaDataSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,10 +11,9 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class ProductController extends HisuBaseControllerAdapter{
 
-    @Override
     @Autowired
-    public void setJds(JavaDataSet jds) {
-        this.jds = jds;
+    protected ProductController(JavaDataSet jds, HisuMngDataGroupAndId hisuMngDataGroupAndId) {
+        super(jds, hisuMngDataGroupAndId);
     }
 
     public String productList(){

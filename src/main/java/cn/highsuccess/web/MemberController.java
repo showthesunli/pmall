@@ -1,5 +1,6 @@
 package cn.highsuccess.web;
 
+import cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId;
 import cn.highsuccess.data.JavaDataSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,6 +17,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class MemberController extends HisuBaseControllerAdapter {
 
+    @Autowired
+    protected MemberController(JavaDataSet jds, HisuMngDataGroupAndId hisuMngDataGroupAndId) {
+        super(jds, hisuMngDataGroupAndId);
+    }
+
     @RequestMapping(value = "/member" ,method = RequestMethod.GET)
     public String member(Model model){
         this.jds.service("jf_memberCenter","memberInfo");
@@ -30,11 +36,5 @@ public class MemberController extends HisuBaseControllerAdapter {
         return "member";
     }
 
-
-    @Override
-    @Autowired
-    public void setJds(JavaDataSet jds) {
-        this.jds = jds;
-    }
 
 }

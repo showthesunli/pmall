@@ -1,5 +1,6 @@
 package cn.highsuccess.web;
 
+import cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId;
 import cn.highsuccess.data.JavaDataSet;
 import cn.highsuccess.module.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +19,12 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping(value = "/register")
 public class RegisterController extends HisuBaseControllerAdapter {
-    @Autowired
-    @Override
-    public void setJds(JavaDataSet jds) {
-        this.jds = jds;
-    }
 
+
+    @Autowired
+    protected RegisterController(JavaDataSet jds, HisuMngDataGroupAndId hisuMngDataGroupAndId) {
+        super(jds, hisuMngDataGroupAndId);
+    }
 
     @RequestMapping(method = RequestMethod.GET)
     public String registerForm(Model model){

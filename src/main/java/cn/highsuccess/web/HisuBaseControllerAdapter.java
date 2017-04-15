@@ -1,7 +1,7 @@
 package cn.highsuccess.web;
 
+import cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId;
 import cn.highsuccess.data.JavaDataSet;
-import org.json.JSONObject;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
@@ -16,24 +16,21 @@ import java.util.Map;
  */
 public abstract class HisuBaseControllerAdapter {
     protected JavaDataSet jds;
-    protected List<String> dataGroup;
-    protected Map<String,List<String>> dataId;
+    protected HisuMngDataGroupAndId hisuMngDataGroupAndId;
 
     protected JavaDataSet getJds() {
         return jds;
     }
 
-    protected  void setDataGroup(List<String> dataGroup) {
-        this.dataGroup = dataGroup;
+    public HisuMngDataGroupAndId getHisuMngDataGroupAndId() {
+        return hisuMngDataGroupAndId;
     }
 
-    protected void setDataId(Map<String, List<String>> dataId) {
-        this.dataId = dataId;
+
+    protected  HisuBaseControllerAdapter(JavaDataSet jds,HisuMngDataGroupAndId hisuMngDataGroupAndId){
+        this.jds = jds;
+        this.hisuMngDataGroupAndId = hisuMngDataGroupAndId;
     }
-
-//    protected abstract <E> void  initGroupAndData(E e);
-
-    public abstract void  setJds(JavaDataSet jds);
 
     protected void handleError(Model model,Errors errors){
         List<FieldError> fieldErrors = errors.getFieldErrors();
@@ -44,5 +41,9 @@ public abstract class HisuBaseControllerAdapter {
             errorMap.put(fieldError.getField(), fieldError.getDefaultMessage());
         }
         model.addAttribute("errorMsg", errorMap);
+    }
+
+    protected void excute(Model model){
+
     }
 }
