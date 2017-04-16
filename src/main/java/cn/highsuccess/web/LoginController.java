@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping(value = "/login")
 public class LoginController extends HisuBaseControllerAdapter{
 
+    @Autowired
     protected LoginController(JavaDataSet jds, HisuMngDataGroupAndId hisuMngDataGroupAndId) {
         super(jds, hisuMngDataGroupAndId);
     }

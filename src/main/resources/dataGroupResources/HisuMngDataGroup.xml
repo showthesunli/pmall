@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       <beans>
+              <bean name="memberDataGroup" class="cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId">
+                     <property name="dataId">
+                            <value>classpath:/dataGroupResources/memberDataGroup.properties</value>
+                     </property>
+              </bean>
+
+              <bean name="memeber" class="cn.highsuccess.web.RoutingController">
+                     <constructor-arg index="0" ref="memberDataGroup"/>
+              </bean>
+
+
+
+       </beans>
+
+</beans>
