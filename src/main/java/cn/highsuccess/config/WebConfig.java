@@ -1,8 +1,12 @@
 package cn.highsuccess.config;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import cn.highsuccess.config.systemproperties.HisuMngAttribute;
+import cn.highsuccess.config.systemproperties.HisuMngSvr;
+import cn.highsuccess.data.JavaDataSet;
+import cn.highsuccess.transform.HisuTransform;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.*;
+import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -17,6 +21,7 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 @Configuration
 @EnableWebMvc
 @ComponentScan("cn.highsuccess.web")
+@ImportResource("classpath:/dataGroupResources/HisuMngDataGroup.xml")
 public class WebConfig extends WebMvcConfigurerAdapter{
 
 

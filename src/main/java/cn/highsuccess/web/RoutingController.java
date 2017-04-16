@@ -8,28 +8,27 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 
 /**
  * Created by showt on 2017/4/15.
  */
-@Controller
-@RequestMapping("/")
 public class RoutingController extends HisuBaseControllerAdapter{
 
-    @Autowired
-    private HisuMngDataGroupAndId hisuMngDataGroupAndId;
-    protected RoutingController(JavaDataSet jds, HisuMngDataGroupAndId hisuMngDataGroupAndId) {
-        super(jds, hisuMngDataGroupAndId);
+
+    protected RoutingController(JavaDataSet jds, HisuMngDataGroupAndId hisuMngDataGroupAndId, String viewPath) {
+        super(jds, hisuMngDataGroupAndId, viewPath);
     }
 
-    @RequestMapping(value = "/{path}",method = RequestMethod.GET)
-    public String getProcess(@PathVariable String path,Model model){
-        return "register";
-    }
 
-    @RequestMapping(value = "/${system.path}",method = RequestMethod.POST)
-    public String postProcess(Model model){
-        return "/register";
+    @Override
+    protected ModelAndView handleRequestInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName(this.viewPath);
+        return modelAndView;
     }
 }

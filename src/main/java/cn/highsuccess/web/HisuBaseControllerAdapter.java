@@ -5,6 +5,7 @@ import cn.highsuccess.data.JavaDataSet;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
+import org.springframework.web.servlet.mvc.AbstractController;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -14,7 +15,8 @@ import java.util.Map;
 /**
  * Created by prototype on 2017/3/24.
  */
-public abstract class HisuBaseControllerAdapter {
+public abstract class HisuBaseControllerAdapter extends AbstractController {
+    protected String viewPath;
     protected JavaDataSet jds;
     protected HisuMngDataGroupAndId hisuMngDataGroupAndId;
 
@@ -27,9 +29,10 @@ public abstract class HisuBaseControllerAdapter {
     }
 
 
-    protected  HisuBaseControllerAdapter(JavaDataSet jds,HisuMngDataGroupAndId hisuMngDataGroupAndId){
+    protected  HisuBaseControllerAdapter(JavaDataSet jds,HisuMngDataGroupAndId hisuMngDataGroupAndId,String viewPath){
         this.jds = jds;
         this.hisuMngDataGroupAndId = hisuMngDataGroupAndId;
+        this.viewPath = viewPath;
     }
 
     protected void handleError(Model model,Errors errors){
@@ -43,7 +46,4 @@ public abstract class HisuBaseControllerAdapter {
         model.addAttribute("errorMsg", errorMap);
     }
 
-    protected void excute(Model model){
-
-    }
 }

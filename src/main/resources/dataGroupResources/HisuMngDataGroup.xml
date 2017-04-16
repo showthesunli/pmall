@@ -1,17 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
        <beans>
-              <bean name="memberDataGroup" class="cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId">
-                     <property name="dataId">
-                            <value>classpath:/dataGroupResources/memberDataGroup.properties</value>
+              <bean name="mapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+                     <!-- 注册url -->
+                     <property name="mappings" >
+                            <props>
+                                   <prop key="/index">index</prop>
+                                   <prop key="/register">index</prop>
+                            </props>
                      </property>
               </bean>
-
-              <bean name="memeber" class="cn.highsuccess.web.RoutingController">
-                     <constructor-arg index="0" ref="memberDataGroup"/>
+              <!-- 注册数据集 -->
+              <bean id="memberDataGroup" class="cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId">
+                     <property name="dataId">
+                            <map>
+                                   <entry key="jf_memberCenter" >
+                                          <list>
+                                                 <value>memberInfo</value>
+                                          </list>
+                                   </entry>
+                            </map>
+                     </property>
               </bean>
+              <bean id="index" class="cn.highsuccess.web.RoutingController">
+                     <constructor-arg index="0" ref="jds"/>
+                     <constructor-arg index="1" ref="memberDataGroup"/>
+                     <!-- 选择模板 -->
+                     <constructor-arg index="2" value="index"/>
+              </bean>
+
 
 
 

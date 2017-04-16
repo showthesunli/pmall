@@ -7,6 +7,7 @@ import cn.highsuccess.data.JavaDataSet;
 import cn.highsuccess.data.impl.UserRepositoryImpl;
 import cn.highsuccess.transform.HisuTransform;
 import cn.highsuccess.transform.impl.HisuTransformImpl;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.web.context.WebApplicationContext;
@@ -39,16 +40,6 @@ public class RootConfig {
         return new HisuTransformImpl(hisuMngSvr.getIp(),hisuMngSvr.getProt());
     }
 
-    /**
-     * 数据获取类实例，包含数据操作方法
-     * 实例生命周期为request,需要被代理注入controller
-     * @return
-     */
-    @Bean
-    @Scope(value = WebApplicationContext.SCOPE_REQUEST,proxyMode = ScopedProxyMode.TARGET_CLASS)
-    public JavaDataSet javaDataSet(HisuMngAttribute hmsi,HisuMngSvr hisuMngSvr,HisuTransform hisuTransform){
-        return new JavaDataSet(hmsi,hisuMngSvr,hisuTransform);
-    }
 
     /**
      * 用户操作类
@@ -59,4 +50,15 @@ public class RootConfig {
         return new UserRepositoryImpl();
     }
 
+
+    /**
+     * 数据获取类实例，包含数据操作方法
+     * 实例生命周期为request,需要被代理注入controller
+     * @return
+     */
+    @Bean(name = "jds")
+    @Scope(value = WebApplicationContext.SCOPE_REQUEST,proxyMode = ScopedProxyMode.TARGET_CLASS)
+    public JavaDataSet javaDataSet(HisuMngAttribute hmsi,HisuMngSvr hisuMngSvr,HisuTransform hisuTransform){
+        return new JavaDataSet(hmsi,hisuMngSvr,hisuTransform);
+    }
 }
