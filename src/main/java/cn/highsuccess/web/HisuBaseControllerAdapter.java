@@ -2,6 +2,8 @@ package cn.highsuccess.web;
 
 import cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId;
 import cn.highsuccess.data.JavaDataSet;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
@@ -19,6 +21,7 @@ public abstract class HisuBaseControllerAdapter extends AbstractController {
     protected String viewPath;
     protected JavaDataSet jds;
     protected HisuMngDataGroupAndId hisuMngDataGroupAndId;
+    protected final Log logger = LogFactory.getLog(this.getClass());
 
     protected JavaDataSet getJds() {
         return jds;

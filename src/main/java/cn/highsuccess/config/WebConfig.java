@@ -20,7 +20,7 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan("cn.highsuccess.web")
+//@ComponentScan("cn.highsuccess.web")
 @ImportResource("classpath:/dataGroupResources/HisuMngDataGroup.xml")
 public class WebConfig extends WebMvcConfigurerAdapter{
 

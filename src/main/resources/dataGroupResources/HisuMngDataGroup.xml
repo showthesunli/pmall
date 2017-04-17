@@ -12,6 +12,7 @@
                             </props>
                      </property>
               </bean>
+              <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>
               <!-- 注册数据集 -->
               <bean id="memberDataGroup" class="cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId">
                      <property name="dataId">
@@ -30,9 +31,6 @@
                      <!-- 选择模板 -->
                      <constructor-arg index="2" value="index"/>
               </bean>
-
-
-
 
        </beans>
 

@@ -17,7 +17,8 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
  * Created by prototype on 2017/3/17.
  */
 @Configuration
-@ComponentScan(basePackages = {"cn.highsuccess"},excludeFilters = {@ComponentScan.Filter(type= FilterType.ANNOTATION,value= EnableWebMvc.class)})
+//@ComponentScan(basePackages = {"cn.highsuccess"},excludeFilters = {@ComponentScan.Filter(type= FilterType.ANNOTATION,value= EnableWebMvc.class)})
+@ComponentScan(basePackages = {"cn.highsuccess"},excludeFilters = {@ComponentScan.Filter(type= FilterType.ASSIGNABLE_TYPE,value= cn.highsuccess.web.RoutingController.class)})
 public class RootConfig {
 
 

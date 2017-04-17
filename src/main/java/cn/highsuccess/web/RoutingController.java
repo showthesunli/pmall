@@ -17,11 +17,14 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Created by showt on 2017/4/15.
  */
+@Controller
 public class RoutingController extends HisuBaseControllerAdapter{
 
 
     protected RoutingController(JavaDataSet jds, HisuMngDataGroupAndId hisuMngDataGroupAndId, String viewPath) {
         super(jds, hisuMngDataGroupAndId, viewPath);
+        logger.info("info RoutingController");
+        logger.debug("debug RoutingController");
     }
 
 
