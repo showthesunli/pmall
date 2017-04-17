@@ -1,7 +1,8 @@
 package cn.highsuccess.web;
 
-import cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId;
 import cn.highsuccess.data.JavaDataSet;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
@@ -15,21 +16,17 @@ import java.util.Map;
  * Created by prototype on 2017/3/24.
  */
 public abstract class HisuBaseControllerAdapter {
+    protected final Log logger = LogFactory.getLog(this.getClass());
     protected JavaDataSet jds;
-    protected HisuMngDataGroupAndId hisuMngDataGroupAndId;
 
     protected JavaDataSet getJds() {
         return jds;
     }
 
-    public HisuMngDataGroupAndId getHisuMngDataGroupAndId() {
-        return hisuMngDataGroupAndId;
-    }
 
 
-    protected  HisuBaseControllerAdapter(JavaDataSet jds,HisuMngDataGroupAndId hisuMngDataGroupAndId){
+    protected  HisuBaseControllerAdapter(JavaDataSet jds){
         this.jds = jds;
-        this.hisuMngDataGroupAndId = hisuMngDataGroupAndId;
     }
 
     protected void handleError(Model model,Errors errors){
@@ -46,4 +43,5 @@ public abstract class HisuBaseControllerAdapter {
     protected void excute(Model model){
 
     }
+
 }
