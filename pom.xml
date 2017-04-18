@@ -137,6 +137,13 @@
             <version>3.1</version>
         </dependency>
 
+        <!-- 日志依赖 -->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.14</version>
+        </dependency>
+
         <!-- cn.highsucc 本地依赖 -->
         <dependency>
             <groupId>cn.highsuccess</groupId>

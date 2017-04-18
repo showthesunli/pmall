@@ -1,6 +1,5 @@
 package cn.highsuccess.web;
 
-import cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId;
 import cn.highsuccess.data.JavaDataSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,16 +19,29 @@ public class RoutingController extends HisuBaseControllerAdapter{
         super(jds);
     }
 
-    @GetMapping(value = "/{path}/**action")
-    public String processGet(@PathVariable String path,
+    @GetMapping(value = "/{path}/**?numPage=*&currentPage=*")
+    public String processGetWithParam(@PathVariable String path,
                              Model model,
-                             @RequestParam(required = false) Object numPage,
-                             @RequestParam(required = false) Object currentPage){
-        logger.info("path :"+path);
-        logger.info("numPage :"+numPage);
-        logger.info("currentPage :" + currentPage);
-
+                             @RequestParam(required = true) int numPage,
+                             @RequestParam(required = true) int currentPage){
+        logger.debug("path :" + path);
+        logger.debug("numPage :"+numPage);
+        logger.debug("currentPage :" + currentPage);
+        if (null == path || path.equals("")) return "index";
         return path;
+    }
+
+    @GetMapping(value = "/{path}")
+    public String processGetWithNoParam(@PathVariable String path,
+                                        Model model){
+        logger.debug("processGetWithNoParam path: "+path);
+        return path;
+    }
+
+    @GetMapping("/")
+    public String index(Model model){
+        logger.debug("/ path: index");
+        return processGetWithNoParam("index",model);
     }
 
 }
