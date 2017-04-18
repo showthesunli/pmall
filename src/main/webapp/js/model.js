@@ -40,7 +40,26 @@ $(document).ready(function(e) {
 		
 })
 
-
+function pupOpen(){
+		$("#loginBg").css("display","block");
+		$(".jf-register").css("display","none") ; 
+		$(".jf-login").css("display","block"); 
+	}
+function pupClose(){
+		$("#loginBg").css("display","none");
+		$(".jf-login").css("display","none") ; 
+	}
+		
+function regOpen(){
+		$("#loginBg").css("display","block");
+		$(".jf-login").css("display","none") ; 
+		$(".jf-register").css("display","block"); 
+	}
+function regClose(){
+		$("#loginBg").css("display","none");
+		$(".jf-register").css("display","none") ; 
+	}
+		
 function tipOpen(){
          $("#loginBg").css("display","block");
          $(".toolTip").css("display","block"); 
