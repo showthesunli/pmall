@@ -3,8 +3,14 @@
 <div class="jf-header-top">
     <div class="jf-width1200">
         <ul class="topNav">
+            <@sec.authorize access="isAuthenticated()">
+                <li style="background: url(images/ico1.png) no-repeat left center;"><a href="<@spring.url '/member'/>"><@sec.authentication property="principal.username"/></a></li>
+                <li style="background: url(images/ico2.png) no-repeat  left center;"><a href="<@spring.url '/logout'/>">注销</a></li>
+            </@sec.authorize>
+            <@sec.authorize access="isAnonymous()">
             <li style="background: url(images/ico1.png) no-repeat left center;"><a href="<@spring.url '/login'/>">登录</a></li>
             <li style="background: url(images/ico2.png) no-repeat  left center;"><a href="<@spring.url '/register'/>">注册</a></li>
+            </@sec.authorize>
             <li style="background: url(images/ico3.png) no-repeat  left center;"><a href="<@spring.url '/shoppingCart'/>">购物车</a></li>
             <li style="background: url(images/ico4.png) no-repeat  left center;"><a href="#" >帮助中心</a></li>
         </ul>
