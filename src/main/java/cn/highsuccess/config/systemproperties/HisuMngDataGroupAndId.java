@@ -7,13 +7,17 @@ import java.util.Map;
  * Created by prototype on 2017/4/14.
  */
 public class HisuMngDataGroupAndId {
-    protected Map<String,List<String>> dataId;
+    protected Map<String,List<HisuMngDataIdArgs>> dataId;
 
-    public Map<String, List<String>> getDataId() {
+    public HisuMngDataGroupAndId(Map<String, List<HisuMngDataIdArgs>> dataId) {
+        this.dataId = dataId;
+    }
+
+    public Map<String, List<HisuMngDataIdArgs>> getDataId() {
         return dataId;
     }
 
-    public void setDataId(Map<String, List<String>> dataId) {
+    public void setDataId(Map<String, List<HisuMngDataIdArgs>> dataId) {
         this.dataId = dataId;
     }
 }

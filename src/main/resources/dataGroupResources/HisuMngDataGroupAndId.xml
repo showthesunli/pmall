@@ -3,4 +3,32 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+       <bean id="showProductList" class="cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId">
+              <constructor-arg>
+                     <map>
+                            <entry key="jf_goodsList" >
+                                   <list>
+                                          <ref bean="queryPrdTypeByHeadType"/>
+                                          <ref bean="queryPrdListByPrdType"/>
+                                   </list>
+                            </entry>
+                     </map>
+              </constructor-arg>
+       </bean>
+       <bean id="queryPrdTypeByHeadType" class="cn.highsuccess.config.systemproperties.HisuMngDataIdArgs">
+              <constructor-arg index="0" value="queryPrdTypeByHeadType"/>
+              <constructor-arg index="1">
+                     <list>
+                     </list>
+              </constructor-arg>
+       </bean>
+       <bean id="queryPrdListByPrdType" class="cn.highsuccess.config.systemproperties.HisuMngDataIdArgs">
+              <constructor-arg index="0" value="queryPrdListByPrdType"/>
+              <constructor-arg index="1">
+                     <list>
+                            <value>mrkPrdCateID</value>
+                            <value>productName</value>
+                     </list>
+              </constructor-arg>
+       </bean>
 </beans>
