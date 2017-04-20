@@ -28,6 +28,8 @@
                      <list>
                             <value>mrkPrdCateID</value>
                             <value>productName</value>
+                            <value>currentPage</value>
+                            <value>numOfPerPage</value>
                      </list>
               </constructor-arg>
        </bean>

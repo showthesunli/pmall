@@ -3,10 +3,10 @@ package cn.highsuccess.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.context.annotation.ImportResource;
+import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 
@@ -16,9 +16,9 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
  */
 
 @Configuration
-@EnableWebMvc
 @ComponentScan("cn.highsuccess.web")
-public class WebConfig extends WebMvcConfigurerAdapter{
+@ImportResource("classpath:/dataGroupResources/HisuMngDataGroupAndId.xml")
+public class WebConfig extends DelegatingWebMvcConfiguration {
 
 
 //    @Bean(name = "viewReslover")
@@ -44,6 +44,14 @@ public class WebConfig extends WebMvcConfigurerAdapter{
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer){
         configurer.enable();
+    }
+
+    @Bean
+    @Override
+    public RequestMappingHandlerMapping requestMappingHandlerMapping() {
+        RequestMappingHandlerMapping requestMappingHandlerMapping = super.requestMappingHandlerMapping();
+        requestMappingHandlerMapping.setRemoveSemicolonContent(false);
+        return requestMappingHandlerMapping;
     }
 
 }

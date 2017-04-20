@@ -30,6 +30,9 @@ public abstract class BaseConnect {
         this.productName =  this.hmsi.getPRODUCTNAME();
         this.userDetails = (WebAuthenticationDetails)SecurityContextHolder.getContext().getAuthentication().getDetails();
         this.userName = SecurityContextHolder.getContext().getAuthentication().getName();
+        if (this.userName.equals("anonymousUser")){
+            this.userName = "guest";
+        }
     }
 
 

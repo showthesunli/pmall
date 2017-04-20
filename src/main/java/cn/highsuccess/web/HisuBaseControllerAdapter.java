@@ -1,16 +1,16 @@
 package cn.highsuccess.web;
 
+import cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId;
+import cn.highsuccess.config.systemproperties.HisuMngDataIdArgs;
 import cn.highsuccess.data.JavaDataSet;
+import com.alibaba.fastjson.JSON;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by prototype on 2017/3/24.
@@ -40,8 +40,28 @@ public abstract class HisuBaseControllerAdapter {
         model.addAttribute("errorMsg", errorMap);
     }
 
-    protected void excute(Model model){
 
+    protected void excute(Model model,Map<String,String> map,HisuMngDataGroupAndId hisuMngDataGroupAndId){
+        //获取groupID
+        Set<String> set = hisuMngDataGroupAndId.getDataId().keySet();
+        Iterator<String> iterator = set.iterator();
+        while (iterator.hasNext()){
+            String groupId = iterator.next();
+            List<HisuMngDataIdArgs> list = hisuMngDataGroupAndId.getDataId().get(groupId);
+            if (null != list && list.size()!=0){
+                for (int i=0;i<list.size();i++){
+                    StringBuffer condition = new StringBuffer();
+                    for (int l=0;l<list.get(i).getArgs().size();l++){
+                        //组装条件
+                        condition.append(list.get(i).getArgs().get(l));
+                        condition.append("=");
+                        condition.append(map.get(list.get(i).getArgs().get(l)));
+                        condition.append("|");
+                    }
+                    this.getJds().service(groupId,list.get(i).getId(),condition.toString());
+                    model.addAttribute(list.get(i).getId(), JSON.parseArray(this.getJds().getDataList().toString()));
+                }
+            }
+        }
     }
-
 }

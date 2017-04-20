@@ -23,6 +23,8 @@ public class JavaDataSet extends BaseConnect {
      * @return 如果无数据返回就为空
      */
     public JSONObject service(String pageID, String pageDataGrpID, String condition) {
+        this.pageID = pageID;
+        this.pageDataGrpID = pageDataGrpID;
 
         JSONObject responsedata = htf.getDataSet(this.getUserDetails().getRemoteAddress(),this.getUserName() , productName, pageID, pageDataGrpID, condition);
         data = responsedata;

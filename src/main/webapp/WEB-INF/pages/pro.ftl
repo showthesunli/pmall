@@ -20,125 +20,29 @@
 <!--头部-->
 <#include "/lib/template/header.ftl" encoding="UTF-8">
 <!--头部-->
-
 <!--主体-->
 <div class="jf-main">
         <!--分类-->
         <div class="jf-classify">
-
             <div class="jf-width1000">
                 <div class="jf-overflowH">
                     <h1 class="jf-classifyTitle">分类</h1>
                     <span class="jf-browse">浏览全部<b class="bgImgS"></b></span>
                 </div>
-
                 <div class="jf-classifyDrop">
-
-                   <div class="jf-classifyItem">
-                        <h2 class="jf-classifyItemTitle">保健品：</h2>
-                        
-                        <ul class="jf-classifyItemList">
-                            <li class="colorRed"><a href="#" index="0">全部</a></li>
-                            <li style=" text-align: left"><a href="#" index="0">鱼油</a></li>
-                            <li style=" text-align: left"><a href="#" index="0">护肝片</a></li>
-                        </ul>
-                        
-                    </div>
-                    
+                <#list queryPrdTypeByHeadType?keys as key>
                     <div class="jf-classifyItem">
-                        <h2 class="jf-classifyItemTitle">酒类：</h2>
-
+                        <h2 class="jf-classifyItemTitle">${key}：</h2>
                         <ul class="jf-classifyItemList">
-                            <li><a href="#" index="1">全部</a></li>
-                            <li style=" text-align: left"><a href="#" index="1">红葡萄酒</a></li>
+                            <li class=""><a href="#" index="0">全部</a></li>
+                            <#list queryPrdTypeByHeadType["${key}"] as type>
+                                <li style=" text-align: left"><a href="#" index="0">${type.attrID}</a></li>
+                            </#list>
                         </ul>
-                        
                     </div>
-                    
-                    <div class="jf-classifyItem">
-                        <h2 class="jf-classifyItemTitle">办公用品：</h2>
-
-                        <ul class="jf-classifyItemList">
-                            <li><a href="#" index="2">全部</a></li>
-                            <li style=" text-align: left"><a href="#" index="2">移动硬盘</a></li>
-                            <li style=" text-align: left"><a href="#" index="2">路由器</a></li>
-                        </ul>
-                        
-                    </div>
-                    
-                    <div class="jf-classifyItem">
-                        <h2 class="jf-classifyItemTitle">家用电器：</h2>
-
-                        <ul class="jf-classifyItemList">
-                            <li><a href="#" index="3">全部</a></li>
-                            <li style=" text-align: left"><a href="#" index="3">无人机</a></li>
-                            <li style=" text-align: left"><a href="#" index="3">机器人吸尘器</a></li>
-                            <li style=" text-align: left"><a href="#" index="3">美容剃毛器</a></li>
-                            <li style=" text-align: left"><a href="#" index="3">电动牙刷</a></li>
-                        </ul>
-                            
-                    </div>
-                    
-                    <div class="jf-classifyItem">
-                        <h2 class="jf-classifyItemTitle">厨具：</h2>
-
-                        <ul class="jf-classifyItemList">
-                            <li><a href="#" index="4">全部</a></li>
-                            <li style=" text-align: left"><a href="#" index="4">刀具</a></li>
-                        </ul>
-                            
-                    </div>
-                    
-                    <div class="jf-classifyItem">
-                        <h2 class="jf-classifyItemTitle">母婴：</h2>
-
-                        <ul class="jf-classifyItemList">
-                            <li><a href="#" index="5">全部</a></li>
-                            <li style=" text-align: left"><a href="#" index="5">吸奶器</a></li>
-                        </ul>
-                            
-                    </div>
-                    
-                    <div class="jf-classifyItem">
-                        <h2 class="jf-classifyItemTitle">购物卡/礼品卡：</h2>
-
-                        <ul class="jf-classifyItemList">
-                            <li><a href="#" index="6">全部</a></li>
-                            <li style=" text-align: left"><a href="#" index="6">购物卡</a></li>
-                            <li style=" text-align: left"><a href="#" index="6">现金券</a></li>                            
-                            <li style=" text-align: left"><a href="#" index="6">礼品卡</a></li>
-                            <li style=" text-align: left"><a href="#" index="6">现金卡</a></li>
-                        </ul>
-                            
-                    </div>
-                    
-                   <div class="jf-classifyItem">
-                        <h2 class="jf-classifyItemTitle">数码影音：</h2>
-
-                        <ul class="jf-classifyItemList">
-                            <li><a href="#" index="7">全部</a></li>
-                            <li style=" text-align: left"><a href="#" index="7">耳机</a></li>
-                            <li style=" text-align: left"><a href="#" index="7">智能监控</a></li>
-                            <li style=" text-align: left"><a href="#" index="7">智能手环</a></li>
-                        </ul>
-                            
-                    </div>
-                    
-                    <div class="jf-classifyItem">
-                        <h2 class="jf-classifyItemTitle">汽车用品：</h2>
-
-                        <ul class="jf-classifyItemList">
-                            <li><a href="#" index="8">全部</a></li>
-                            <li style=" text-align: left"><a href="#" index="8">行车记录仪
-                            </a></li>
-                        </ul>
-
-                    </div>
-                    
+                </#list>
                 </div>
-
             </div>
-
         </div>
         <!--分类 end-->
 
