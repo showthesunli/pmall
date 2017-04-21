@@ -12,9 +12,11 @@
 <link rel="stylesheet" type="text/css" href="<@spring.url '/css/model.css'/>"/>
 <script type="text/javascript" src="<@spring.url '/js/jquery.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/js/model.js'/>"></script>
+<script type="text/javascript" src="<@spring.url '/js/util.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/js/gd_Index.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/js/banner.js'/>"></script>
-<script language="javascript" src="<@spring.url '/js/menu.js'/>" ></script>
+<script type="text/javascript" src="<@spring.url '/js/menu.js'/>" ></script>
+<script type="text/javascript" src="<@spring.url '/js/jquery.SuperSlide.2.1.1.js'/>" ></script>
 </head>
 <body>
 <!--头部-->
@@ -48,85 +50,17 @@
 
         <!--产品-->
         <div class="jf-product jf-width1000" style=" padding-bottom:30px;">
-            
-            <div class="jf-productList">
-                <a href="proshowXMWRJ.html" target="_blank"><img src="images/proImg/1.jpg" onerror="downloadErrImg(this,&#39;389-2-8&#39;)" width="280" height="182"></a>
-                <p><a href="proshowXMWRJ.html" target="_blank" class="jf-productName">小米无人机4K版</a></p>
-                <p><span class="jf-productPrice">￥2999.00</span></p>
-            </div>
-            
-            <div class="jf-productList">
-                <a href="proshowXMPHC.html" target="_blank"><img src="images/proImg/2.jpg" onerror="downloadErrImg(this,&#39;389-2-8&#39;)" width="280" height="182"></a>
-                <p><a href="proshowXMPHC.html" target="_blank" class="jf-productName">小米9号平衡车</a></p>
-                <p><span class="jf-productPrice">￥1999.00</span></p>
-            </div>
-            
-            <div class="jf-productList">
-                <a href="proshowJDC.html" target="_blank"><img src="images/proImg/JD1000.jpg" onerror="downloadErrImg(this,&#39;389-2-8&#39;)" width="280" height="182"></a>
-                <p><a href="proshowJDC.html" target="_blank" class="jf-productName">京东卡</a></p>
-                <p><span class="jf-productPrice">￥1000.00</span></p>
-            </div>
-
-            <div class="jf-productList">
-                <a href="proshowSNC.html" target="_blank"><img src="images/proImg/SNE1000.png" onerror="downloadErrImg(this,&#39;389-2-8&#39;)" width="280" height="182"></a>
-                <p><a href="proshowSNC.html" target="_blank" class="jf-productName">苏宁卡</a></p>
-                <p><span class="jf-productPrice">￥1000.00</span></p>
-            </div>
-            
-            <div class="jf-productList">
-                <a href="proshowGAPC.html" target="_blank"><img src="images/proImg/GAPC.png" onerror="downloadErrImg(this,&#39;389-2-8&#39;)" width="280" height="182"></a>
-                <p><a href="proshowGAPC.html" target="_blank" class="jf-productName">GAP礼品卡</a></p>
-                <p><span class="jf-productPrice">￥1000.00</span></p>
-            </div>
-                        
-            <div class="jf-productList">
-                <a href="proshowCarrefourC.html" target="_blank"><img src="images/proImg/CarrefourCard.png" onerror="downloadErrImg(this,&#39;389-2-8&#39;)" width="280" height="182"></a>
-                <p><a href="proshowCarrefourC.html" target="_blank" class="jf-productName">家乐福购物卡</a></p>
-                <p><span class="jf-productPrice">￥1000.00</span></p>
-            </div>
-            
-            <div class="jf-productList">
-                <a href="proshowSTC.html" target="_blank"><img src="images/proImg/STC.jpg" onerror="downloadErrImg(this,&#39;389-2-8&#39;)" width="280" height="182"></a>
-                <p><a href="proshowSTC.html" target="_blank" class="jf-productName">资和信商通卡</a></p>
-                <p><span class="jf-productPrice">￥1000.00</span></p>
-            </div>
-            
-             <div class="jf-productList">
-                <a href="proshowCtripC.html" target="_blank"><img src="images/proImg/CtripC.png" onerror="downloadErrImg(this,&#39;389-2-8&#39;)" width="280" height="182"></a>
-                <p><a href="proshowCtripC.html" target="_blank" class="jf-productName">携程礼品卡</a></p>
-                <p><span class="jf-productPrice">￥5000.00</span></p>
-            </div>
-            
-            <div class="jf-productList">
-                <a href="proshowDDCXlq.html" target="_blank"><img src="images/proImg/DDCXLQ.png" onerror="downloadErrImg(this,&#39;389-2-8&#39;)" width="280" height="182"></a>
-                <p><a href="proshowDDCXlq.html" target="_blank" class="jf-productName">滴滴出行礼券</a></p>
-                <p><span class="jf-productPrice">￥50.00</span></p>
-            </div>
-            
-             <div class="jf-productList">
-                <a href="proshowIQiYiC.html" target="_blank"><img src="images/proImg/IQiYiC.png" onerror="downloadErrImg(this,&#39;389-2-8&#39;)" width="280" height="182"></a>
-                <p><a href="proshowIQiYiC.html" target="_blank" class="jf-productName">爱奇艺礼券</a></p>
-                <p><span class="jf-productPrice">￥199.00</span></p>
-            </div>
-            
-            <div class="jf-productList">
-                <a href="proshowYouKuC.html" target="_blank"><img src="images/proImg/youkuC.png" onerror="downloadErrImg(this,&#39;389-2-8&#39;)" width="280" height="182"></a>
-                <p><a href="proshowYouKuC.html" target="_blank" class="jf-productName">优酷网会员卡</a></p>
-                <p><span class="jf-productPrice">￥169.00</span></p>
-            </div>
-            
-             <div class="jf-productList">
-                <a href="proshowIKangC.html" target="_blank"><img src="images/proImg/IKangC.png" onerror="downloadErrImg(this,&#39;389-2-8&#39;)" width="280" height="182"></a>
-                <p><a href="proshowIKangC.html" target="_blank" class="jf-productName">爱康国宾体检卡</a></p>
-                <p><span class="jf-productPrice">￥5000.00</span></p>
-            </div>
-            
+            <#list queryPrdListByPrdType as queryPrdListByPrdTypeItem>
+                <div class="jf-productList">
+                    <a href="proshowXMWRJ.html" target="_blank"><img src="<@spring.url '/imgsrc/${queryPrdListByPrdTypeItem.iconFileName}'/>" onerror="downloadErrImg(this,'${queryPrdListByPrdTypeItem.iconFileName}')" width="280" height="182"></a>
+                    <p><a href="proshowXMWRJ.html" target="_blank" class="jf-productName">${queryPrdListByPrdTypeItem.productInfo}</a></p>
+                    <p><span class="jf-productPrice">￥${queryPrdListByPrdTypeItem.prdPrice}</span></p>
+                </div>
+            </#list>
         </div>
         <!--产品 end-->
 <!--end 主体-->
 
- 
- 
 <div class="cp_boxtt">
  <script language="javascript" type="text/javascript">
     function myfunctions1(ids1, left1, right1) {
@@ -147,55 +81,8 @@
 <h2 class="h-h2">合作伙伴</h2>
 	</article>
 
-
 <#--footer-->
 <#include "/lib/template/footer.ftl" encoding="UTF-8">
-
-	<div id="loginBg"></div>
-	<!--登录-->
-	<div class="jf-login">
-		<h2 class="jf-loginTitle">登录</h2>
-		<a href="#"  onclick="pupClose()" class="loginCloseBtn"><img src="images/closeImg.png" width="30" height="30" /></a>
-		<form class="loginForm">
-			<p><b class="bgImgS" style="background-position:0 -30px;"></b><input  class="loginTxt" type="text" placeholder="用户名/手机/邮箱"  /></p>
-			<p>
-				<b class="bgImgS" style="background-position:0 -52px;"></b>
-				<input class="loginTxt" id="password-text" type="password" placeholder="请输入密码" />
-			</p>
-			<p><input name="" type="checkbox" value="" /><label>自动登录</label><a href="#" class="forgotPsd">忘记密码？</a></p> 
-			<p style="margin-bottom:10px;"><input type="submit" value="登录" class="loginBtn btnBgS" /></p>
-			<p class="toRegister">还没有账号<a href="#" onclick="regOpen()">请注册</a></p>
-		</form>
-	</div>
-	<!--登录 end-->
-        
-	<!--注册-->
-	<div class="jf-register">
-		<div class="jf-overflowH">
-			<h2 class="jf-registerTitle titlePitch" id="phoneForm">手机注册</h2>
-			<h2 class="jf-registerTitle" id="emialForm" style=" border-left:1px solid #ccc; border-radius:0 10px 0 0; width:249px;">邮箱注册</h2>
-		</div>
-		<a href="#"  onclick="regClose()" class="registerCloseBtn"><img src="images/closeImg.png" width="30" height="30" /></a>
-		<form class="registerForm">
-			<p><label>手机号码</label><input name="registerPhone"  class="registerTxt" type="text" placeholder="建议使用常用手机" /></p>
-			<p><label style="letter-spacing:6px;">验证码</label><input type="button" value="发验证码" class="sendCode" /><input name="registerCode" type="text" class="registerTxt" placeholder="请输入验证码"  style="width:118px;"  /></p>
-			<p><label>设置密码</label><input name="registerPsd" type="password" class="registerTxt" placeholder="请输入密码，密码至少6位"  /></p>
-			<p><label>确认密码</label><input name="registerConPsd" type="password" class="registerTxt" placeholder="再次输入您的密码"  /></p>
-			<p><input name="" type="checkbox" value=""  checked="checked"/><label style="line-height:20px;">我已阅读并同意</label><a href="#" style="color:#0099ff">《注册协议》</a></p> 
-			<p style="margin-bottom:10px;"><input type="submit" value="注册" class="registerBtn btnBgS" /></p>
-			<p class="toLogin">已有账号<a href="#" onclick="pupOpen()">请登录</a></p>
-		</form>
-		<form class="registerFormForEmial" style="display:none;">
-			<p><label>邮箱账号</label><input name="registerEmail"  class="registerTxt" type="text" placeholder="建议使用常用邮箱" /></p>
-			<p><label>设置密码</label><input name="registerEPsd" type="password" class="registerTxt" placeholder="请输入密码，密码至少6位"  /></p>
-			<p><label>确认密码</label><input name="registerEConPsd" type="password" class="registerTxt" placeholder="再次输入您的密码"  /></p>
-			<p><label style="letter-spacing:6px;">验证码</label><input name="registerECode" type="text" class="registerTxt" placeholder="请输入验证码"  /></p>
-			<p><input name="" type="checkbox" value=""  checked="checked"/><label style="line-height:20px;">我已阅读并同意</label><a href="#" style="color:#0099ff">《注册协议》</a></p> 
-			<p style="margin-bottom:10px;"><input type="submit" value="注册" class="registerBtn btnBgS" /></p>
-			<p class="toLogin">已有账号<a href="#" onclick="pupOpen()">请登录</a></p>
-		</form>
-	</div>
-	<!--注册 end-->
 
 </body>
 </html>

@@ -12,7 +12,7 @@
             <li style="background: url(images/ico2.png) no-repeat  left center;"><a href="<@spring.url '/register'/>">注册</a></li>
             </@sec.authorize>
             <li style="background: url(images/ico3.png) no-repeat  left center;"><a href="<@spring.url '/shoppingCart'/>">购物车</a></li>
-            <li style="background: url(images/ico4.png) no-repeat  left center;"><a href="#" >帮助中心</a></li>
+            <li style="background: url(images/ico4.png) no-repeat  left center;"><a href="javascript:void(0);" >帮助中心</a></li>
         </ul>
     </div>
 </div>
@@ -43,8 +43,8 @@
             <li><a href="about.html">公司简介</a></li>
             <!--<li><a href="anli.html">案例介绍</a></li>-->
             <li><a href="news.html">公司新闻</a></li>
-            <li><a href="#">加入途皓</a></li>
-            <li><a href="#">联系我们</a></li>
+            <li><a href="javascript:void(0);">加入途皓</a></li>
+            <li><a href="javascript:void(0);">联系我们</a></li>
         </ul>
     </div>
 </div>
@@ -60,15 +60,15 @@
 <div class="menu-list" id="menu3" onmouseover="_mouseover()" onmouseout="_mouseout()" >
     <div class="hd">
         <ul>
-            <li><a href="#">保健品</a></li>
-            <li><a href="#">酒类</a></li>
-            <li><a href="#">办公用品</a></li>
-            <li><a href="#">家用电器</a></li>
-            <li><a href="#">厨具</a></li>
-            <li><a href="#">母婴</a></li>
-            <li><a href="#">购物卡/礼品卡</a></li>
-            <li><a href="#">数码影音</a></li>
-            <li><a href="#">汽车用品</a></li>
+            <li><a href="javascript:void(0);">保健品</a></li>
+            <li><a href="javascript:void(0);">酒类</a></li>
+            <li><a href="javascript:void(0);">办公用品</a></li>
+            <li><a href="javascript:void(0);">家用电器</a></li>
+            <li><a href="javascript:void(0);">厨具</a></li>
+            <li><a href="javascript:void(0);">母婴</a></li>
+            <li><a href="javascript:void(0);">购物卡/礼品卡</a></li>
+            <li><a href="javascript:void(0);">数码影音</a></li>
+            <li><a href="javascript:void(0);">汽车用品</a></li>
         </ul>
     </div>
 </div>

@@ -14,10 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.MatrixVariable;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by prototype on 2017/4/20.
@@ -34,10 +31,23 @@ public class ProductListController extends HisuBaseControllerAdapter{
     }
 
     @GetMapping(value = "/pro{matrix}")
-    public String showProductList(Model model,@MatrixVariable(required = false) Map<String,String> map) throws JSONException {
-        logger.debug(map.get("mrkPrdCateID"));
-        logger.debug(map.get("productName"));
-        excute(model, map);
+    public String showProductList(Model model,
+                                  @MatrixVariable(required = false,defaultValue = "1") String currentPage,
+                                  @MatrixVariable(required = false,defaultValue = "12") String numOfPerPage,
+                                  @MatrixVariable(required = false) Map<String,String> map) throws JSONException {
+        logger.debug("showProductList process");
+        logger.debug("mrkPrdCateID :"+map.get("mrkPrdCateID"));
+        logger.debug("productName :" + map.get("productName"));
+        logger.debug("currentPage :" + currentPage);
+        logger.debug("numOfPerPage :" + numOfPerPage);
+        Map<String,String> param = new HashMap<>(map);
+        if (param.get("currentPage") == null){
+            param.put("currentPage",currentPage);
+        }
+        if (param.get("numOfPerPage") == null){
+            param.put("numOfPerPage",numOfPerPage);
+        }
+        excute(model, param);
         return "/pro";
     }
 
@@ -53,6 +63,9 @@ public class ProductListController extends HisuBaseControllerAdapter{
                     StringBuffer condition = new StringBuffer();
                     for (int l=0;l<list.get(i).getArgs().size();l++){
                         //组装条件
+                        if (map.get(list.get(i).getArgs().get(l)) == null){
+                            continue;
+                        }
                         condition.append(list.get(i).getArgs().get(l));
                         condition.append("=");
                         condition.append(map.get(list.get(i).getArgs().get(l)));
