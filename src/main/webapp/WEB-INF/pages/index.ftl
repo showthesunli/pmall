@@ -21,11 +21,11 @@
 
     <!--全屏滚动-->
     <!--[if lt IE 9]>
-    <script src="js/html5.js"></script>
+    <script src="<@spring.url '/js/html5.js'/>"></script>
     <![endif]-->
-    <script src="js/jquery-1.7.2.min.js"></script>
-    <script src="js/jquery.caroufredsel.js"></script>
-    <script src="js/jquery.touchswipe.min.js"></script>
+    <script src="<@spring.url '/js/jquery-1.7.2.min.js'/>"></script>
+    <script src="<@spring.url '/js/jquery.caroufredsel.js'/>"></script>
+    <script src="<@spring.url '/js/jquery.touchswipe.min.js'/>"></script>
     <script type="text/javascript">
     $(window).load(function(){
         $("#responsive-289748").carouFredSel({
@@ -45,13 +45,13 @@
 
     <div class="responsive-carousel carousel clearfix">
         <div id="responsive-289748">
-            <div class="carousel-item" style=""><div class="carousel-img"><a href="javascript:void(0);" target=""><img src="images/index12.jpg" alt=""/></a></div></div>
-            <div class="carousel-item" style=""><div class="carousel-img"><a href="javascript:void(0);" target=""><img src="images/index1.jpg" alt=""/></a></div></div>
-            <!--<div class="carousel-item" style=""><div class="carousel-img"><a href="javascript:void(0);" target=""><img src="images/index3.jpg" alt=""/></a></div></div>
-            <div class="carousel-item" style=""><div class="carousel-img"><a href="javascript:void(0);" target=""><img src="images/index5.jpg" alt=""/></a></div></div>-->
-            <div class="carousel-item" style=""><div class="carousel-img"><a href="javascript:void(0);" target=""><img src="images/index6.jpg" alt=""/></a></div></div>
-            <div class="carousel-item" style=""><div class="carousel-img"><a href="javascript:void(0);" target=""><img src="images/index4.jpg" alt=""/></a></div></div>
-            <div class="carousel-item" style=""><div class="carousel-img"><a href="javascript:void(0);" target=""><img src="images/index2.jpg" alt=""/></a></div></div>
+            <div class="carousel-item"><div class="carousel-img"><a href="javascript:void(0);" target=""><img src="<@spring.url '/images/index12.jpg'/>" alt=""/></a></div></div>
+            <div class="carousel-item"><div class="carousel-img"><a href="javascript:void(0);" target=""><img src="<@spring.url '/images/index1.jpg'/>" alt=""/></a></div></div>
+            <!--<div class="carousel-item"><div class="carousel-img"><a href="javascript:void(0);" target=""><img src="<@spring.url '/images/index3.jpg'/>" alt=""/></a></div></div>
+            <div class="carousel-item"><div class="carousel-img"><a href="javascript:void(0);" target=""><img src="<@spring.url '/images/index5.jpg'/>" alt=""/></a></div></div>-->
+            <div class="carousel-item"><div class="carousel-img"><a href="javascript:void(0);" target=""><img src="<@spring.url '/images/index6.jpg'/>" alt=""/></a></div></div>
+            <div class="carousel-item"><div class="carousel-img"><a href="javascript:void(0);" target=""><img src="<@spring.url '/images/index4.jpg'/>" alt=""/></a></div></div>
+            <div class="carousel-item"><div class="carousel-img"><a href="javascript:void(0);" target=""><img src="<@spring.url '/images/index2.jpg'/>" alt=""/></a></div></div>
 	   </div>
 	   <div class="carousel-btn carousel-btn-fixed" id="carousel-page-289748"></div>
     </div>

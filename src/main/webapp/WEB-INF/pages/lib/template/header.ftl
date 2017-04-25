@@ -25,13 +25,13 @@
             <li class='dhjt' style="width:130px;"><a href="<@spring.url '/fuwu'/>" onmouseover="mouseover(this, 2)" onmouseout="mouseout()">我们的服务</a></li>
             <li class='dhjt'><a href="<@spring.url '/pro'/>" onmouseover="mouseover(this, 3)" onmouseout="mouseout()">积分商城</a></li>
             <li ><a href="<@spring.url '/shangjia'/>" onmouseover="mouseover(this, 4)" onmouseout="mouseout()">合作商家</a></li>
-            <li><a href="#" onmouseover="mouseover(this, 5)" onmouseout="mouseout()">在线购卡</a></li>
+            <li><a href="javascript:void(0);" onmouseover="mouseover(this, 5)" onmouseout="mouseout()">在线购卡</a></li>
             <li><a href="<@spring.url '/jifen'/>" onmouseover="mouseover(this, 5)" onmouseout="mouseout()">积分查询</a></li>
         </ul>
     </div>
     <div class="top_right">
         <form action="#" method="get" name="myform" id="myform"   >
-            <input type="text" class="input"   style="color: rgb(102, 102, 102);" onfocus="if(this.value=='Search here ...')this.value=''" onblur="if(this.value=='')this.value='Search here ...'" value="Search here ..." ><input type="image" src="images/ss.png" width="18" class="button"  />
+            <input type="text" class="input"   style="color: rgb(102, 102, 102);" onfocus="if(this.value=='Search here ...')this.value=''" onblur="if(this.value=='')this.value='Search here ...'" value="Search here ..." ><input type="image" src="<@spring.url '/images/ss.png'/>" width="18" class="button"  />
         </form>
     </div>
 </div>
@@ -40,9 +40,9 @@
 <div class="menu-list" id="menu1" onmouseover="_mouseover()" onmouseout="_mouseout()" >
     <div class="hd">
         <ul>
-            <li><a href="about.html">公司简介</a></li>
-            <!--<li><a href="anli.html">案例介绍</a></li>-->
-            <li><a href="news.html">公司新闻</a></li>
+            <li><a href="<@spring.url '/about'/>">公司简介</a></li>
+            <!--<li><a href="<@spring.url '/anli'/>">案例介绍</a></li>-->
+            <li><a href="<@spring.url '/news'/>">公司新闻</a></li>
             <li><a href="javascript:void(0);">加入途皓</a></li>
             <li><a href="javascript:void(0);">联系我们</a></li>
         </ul>
@@ -51,9 +51,9 @@
 <div class="menu-list2" id="menu2" onmouseover="_mouseover()" onmouseout="_mouseout()" >
     <div class="hd">
         <ul>
-            <li><a href="fuwu.html#pointsForSer">积分兑换服务</a></li>
-            <li><a href="fuwu.html#equityForSer">优惠权益服务</a></li>
-            <li><a href="fuwu.html#digitalMarketingSer">创新支付服务</a></li>
+            <li><a href="<@spring.url '/fuwu#pointsForSer'/>">积分兑换服务</a></li>
+            <li><a href="<@spring.url '/fuwu#equityForSer'/>">优惠权益服务</a></li>
+            <li><a href="<@spring.url '/fuwu#digitalMarketingSer'/>">创新支付服务</a></li>
         </ul>
     </div>
 </div>

@@ -26,32 +26,32 @@
 	<!--主体-->
 	<div class="main">
 		<div class="ny_nav">
-			<div class="ny_nav1">当前位置：<a href='index.html'>首页</a> > <a href="jifen.html">积分查询</a></div>
+			<div class="ny_nav1">当前位置：<a href='<@spring.url "/index"/>'>首页</a> > <a href='<@spring.url "/jifen"/>'>积分查询</a></div>
 			<div class="clearfix"></div>
 		</div>
 
 		<div class='prospList'>
 			<dl>
-				<div class="icons"><a class="icon_link" href="javascript:void(0);" target="_blank"><img src="images/icon_link.png"></a></div>
-				<dt><a href='javascript:void(0);'><img src='images/sj1.jpg' /></a></dt>
+				<div class="icons"><a class="icon_link" href="javascript:void(0);" target="_blank"><img src="<@spring.url '/images/icon_link.png'/>"></a></div>
+				<dt><a href='javascript:void(0);'><img src="<@spring.url '/images/sj1.jpg'/>" /></a></dt>
 				<dd><h3><a href='javascript:void(0);'>京东</a></h3></dd>
 			</dl> 
 
 			<dl>
-				<div class="icons"><a class="icon_link" href="javascript:void(0);" target="_blank"><img src="images/icon_link.png"></a></div>
-				<dt><a href='javascript:void(0);'><img src='images/sj1.jpg' /></a></dt>
+				<div class="icons"><a class="icon_link" href="javascript:void(0);" target="_blank"><img src="<@spring.url '/images/icon_link.png'/>"></a></div>
+				<dt><a href='javascript:void(0);'><img src="<@spring.url '/images/sj1.jpg'/>" /></a></dt>
 				<dd><h3><a href='javascript:void(0);'>京东</a></h3></dd>
 			</dl> 
 
 			<dl>
-				<div class="icons"><a class="icon_link" href="javascript:void(0);" target="_blank"><img src="images/icon_link.png"></a></div>
-				<dt><a href='javascript:void(0);'><img src='images/sj1.jpg' /></a></dt>
+				<div class="icons"><a class="icon_link" href="javascript:void(0);" target="_blank"><img src="<@spring.url '/images/icon_link.png'/>"></a></div>
+				<dt><a href='javascript:void(0);'><img src="<@spring.url '/images/sj1.jpg'/>" /></a></dt>
 				<dd><h3><a href='javascript:void(0);'>京东</a></h3></dd>
 			</dl> 
 
 			<dl>
-				<div class="icons"><a class="icon_link" href="javascript:void(0);" target="_blank"><img src="images/icon_link.png"></a></div>
-				<dt><a href='javascript:void(0);'><img src='images/sj1.jpg' /></a></dt>
+				<div class="icons"><a class="icon_link" href="javascript:void(0);" target="_blank"><img src="<@spring.url '/images/icon_link.png'/>"></a></div>
+				<dt><a href='javascript:void(0);'><img src="<@spring.url '/images/sj1.jpg'/>" /></a></dt>
 				<dd><h3><a href='javascript:void(0);'>京东</a></h3></dd>
 			</dl>
 		</div>

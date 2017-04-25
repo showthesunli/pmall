@@ -26,7 +26,7 @@
 	<!--主体-->
 	<div class="main">
 		<div class="ny_nav">
-			<div class="ny_nav1">当前位置：<a href='index.html'>首页</a> > <a href="about.html">关于公司</a> > 公司新闻</div>
+			<div class="ny_nav1">当前位置：<a href='<@spring.url "/index"/>'>首页</a> > <a href='<@spring.url "/about"/>'>关于公司</a> > 公司新闻</div>
 			<div class="clearfix"></div>
 		</div>
 

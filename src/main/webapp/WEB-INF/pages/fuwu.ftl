@@ -26,13 +26,13 @@
 	<!--主体-->
 	<div class="main">
 		<div class="ny_nav">
-			<div class="ny_nav1">当前位置：<a href='index.html'>首页</a> > <a href="fuwu.html">我们的服务</a> </div>
+			<div class="ny_nav1">当前位置：<a href='<@spring.url "/index"/>'>首页</a> > <a href='<@spring.url "/fuwu"/>'>我们的服务</a> </div>
 			<div class="clearfix"></div>
 		</div>
 
 		<div class="mainCon" id="pointsForSer">
 			<div class="textCon">
-				<img src="images/fuwu1.jpg" align="left" style="margin-right:40px;">
+				<img src="<@spring.url '/images/fuwu1.jpg'/>" align="left" style="margin-right:40px;">
 				<h2>积分兑换服务</h2>
 				<p>途皓已经与家乐福中国签署了协议，该协议意味着，途皓可以通过家乐福的中国区门店（全国236家）来为积分提供商客户进行服务。</p>
 				<p>途皓的服务通过家乐福的门店目前可以覆盖上海、江苏、浙江、安徽、北京、天津、河北、山西、山东、内蒙古、广东、福建、海南、湖北、江西、湖南、河南、吉林、辽宁、黑龙江、新疆、贵州、云南、重庆、四川。</p>
@@ -42,7 +42,7 @@
 
 		<div class="mainCon2" id="equityForSer">
 			<div class="textCon2">
-				<img src="images/fuwu2.jpg" align="right" style="margin-left:40px;">
+				<img src="<@spring.url '/images/fuwu2.jpg'/>" align="right" style="margin-left:40px;">
 				<h2>权益兑换服务</h2>
 				<p>目前途皓与中信银行信用卡中心、中国移动云南省公司的积分兑换业务量已经维持在一个稳定的水平线上，每月的积分兑换以及订制的个性化产品达到了每月XXX，并且还在通过新的产品逐步递增。</p>
 				<p>途皓在目前与家乐福中国的合作业务模式下，将会开发更多的供应商为积分提供商客户提供更多元化的选择。</p>
@@ -52,7 +52,7 @@
 		
 		<div class="mainCon" id="digitalMarketingSer">
 			<div class="textCon">
-				<img src="images/fuwu3.jpg" align="left" style="margin-right:40px;">
+				<img src="<@spring.url '/images/fuwu3.jpg'/>" align="left" style="margin-right:40px;">
 				<h2>创新支付服务</h2>
 				<p>全新的线下POS自助兑换服务体验（电子支付号、条码、二维码、手机号、会员号等）。</p>
 				<p>联合线下商家对客户的会员服务进行市场营销。</p>

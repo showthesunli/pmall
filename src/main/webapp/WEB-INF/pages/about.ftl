@@ -26,13 +26,13 @@
 	<!--主体-->
 	<div class="main">
 		<div class="ny_nav">
-			<div class="ny_nav1">当前位置：<a href='index.html'>首页</a> > <a href="about.html">关于公司</a> > 公司简介</div>
+			<div class="ny_nav1">当前位置：<a href='<@spring.url "/index"/>'>首页</a> > <a href='<@spring.url "/about"/>'>关于公司</a> > 公司简介</div>
 			<div class="clearfix"></div>
 		</div>
 
 		<div class="mainCon">
 			<div class="textCon">
-				<img src="images/about3.jpg" align="left" style="margin-right:40px;">
+				<img src="<@spring.url '/images/about3.jpg'/>" align="left" style="margin-right:40px;">
 				<h2>公司介绍</h2>
 				<p>途皓，由北京总部和上海分公司辐射全国，业务覆盖华南、华北、华东、中西四个大区，并在全国大部分一、二线城市布有主要业务骨干团队和运营团队，以新兴的移动互联网平台紧密联合线下各大型连锁商业企业，为各类公司提供“会员忠诚度”的一揽子增值服务方案。</p>
 				<p>途皓以各类客户的会员为主要服务对象，利用综合性的积分兑换平台为客户提供高质量、低成本的会员忠诚度方案。平台通过先进的网络平台、便捷的线下POS、24小时的电话服务，满足不同层次会员的兑换方式喜好；通过不定期、多样性的市场活动持续刺激会员，增强会员粘性度，并激活存量休眠客户；通过积分汇集功能将孤立小积分汇集成商户联盟大积分，增强会员积分价值感；通过商户联盟，为积分兑换打通衣、食、住、行、教育、培训及娱乐等各行业，形成全方位的、线上线下的全覆盖服务；在帮助客户消化积分、提高会员满意度的同时，导入其他中高端客户群的积分消费，为客户带来额外业务收入。</p>
@@ -42,7 +42,7 @@
 
 		<div class="mainCon2">
 			<div class="textCon2">
-				<img src="images/about2.jpg" align="right" style="margin-left:40px;">
+				<img src="<@spring.url '/images/about2.jpg'/>" align="right" style="margin-left:40px;">
 				<!--<h2>我们的承诺 Our Commitment</h2>-->
 				<p>目前公司的主要客户为各大银行信用卡中心、各大移动通讯公司、成品油零售企业及各类全国连锁酒店等，年兑换权益和积分量逾十亿人民币。积分和权益活动所覆盖的线上及线下商户多达几十家，涵盖全国性大型超市、百货公司、影院、知名餐饮、游乐场、教育、培训等不同服务范围。客户可以通过登陆途皓网站或微信平台轻松查询、兑换积分和权益。公司提供线上实时推送和线下自助提取的方式将客户心仪的产品快速、便捷送达至客户手中，提高客户的满意度。</p>
 				<h2>我们公司的服务宗旨</h2>
