@@ -3,6 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+       <!--产品列表 pro.ftl ProductListController-->
        <bean id="showProductList" class="cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId">
               <constructor-arg>
                      <map>
@@ -30,6 +31,45 @@
                             <value>productName</value>
                             <value>currentPage</value>
                             <value>numOfPerPage</value>
+                     </list>
+              </constructor-arg>
+       </bean>
+
+       <!-- 产品详情页面 proshow.ftl ProShowController-->
+       <bean id="showProdetail" class="cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId">
+              <constructor-arg>
+                     <map>
+                            <entry key="jf_goodsDetail" >
+                                   <list>
+                                          <ref bean="queryPrdDetail"/>
+                                          <ref bean="queryPrdAllSpecByPrdNo"/>
+                                          <ref bean="querySingleProuctImageGrp"/>
+                                   </list>
+                            </entry>
+                     </map>
+              </constructor-arg>
+       </bean>
+       <bean id="queryPrdDetail" class="cn.highsuccess.config.systemproperties.HisuMngDataIdArgs">
+              <constructor-arg index="0" value="queryPrdDetail"/>
+              <constructor-arg index="1">
+                     <list>
+                            <value>prdNo</value>
+                     </list>
+              </constructor-arg>
+       </bean>
+       <bean id="queryPrdAllSpecByPrdNo" class="cn.highsuccess.config.systemproperties.HisuMngDataIdArgs">
+              <constructor-arg index="0" value="queryPrdAllSpecByPrdNo"/>
+              <constructor-arg index="1">
+                     <list>
+                            <value>keyWordsFld</value>
+                     </list>
+              </constructor-arg>
+       </bean>
+       <bean id="querySingleProuctImageGrp" class="cn.highsuccess.config.systemproperties.HisuMngDataIdArgs">
+              <constructor-arg index="0" value="querySingleProuctImageGrp"/>
+              <constructor-arg index="1">
+                     <list>
+                            <value>prdNo</value>
                      </list>
               </constructor-arg>
        </bean>

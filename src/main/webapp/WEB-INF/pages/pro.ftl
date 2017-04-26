@@ -54,7 +54,7 @@
         <div class="jf-product jf-width1000" style=" padding-bottom:30px;">
             <#list queryPrdListByPrdType as queryPrdListByPrdTypeItem>
                 <div class="jf-productList">
-                    <a href="proshowXMWRJ.html" target="_blank"><img src="<@spring.url '/imgsrc/${queryPrdListByPrdTypeItem.iconFileName}'/>" onerror="downloadErrImg(this,'${queryPrdListByPrdTypeItem.iconFileName}')" width="280" height="182"></a>
+                    <a href="<@spring.url '/proshow;prdNo=${queryPrdListByPrdTypeItem.prdNo}'/>" target="_blank"><img src="<@spring.url '/imgsrc/${queryPrdListByPrdTypeItem.iconFileName}'/>" onerror="downloadErrImg(this,'${queryPrdListByPrdTypeItem.iconFileName}')" width="280" height="182"></a>
                     <p><a href="proshowXMWRJ.html" target="_blank" class="jf-productName">${queryPrdListByPrdTypeItem.productInfo}</a></p>
                     <p><span class="jf-productPrice">￥${queryPrdListByPrdTypeItem.prdPrice}</span></p>
                 </div>
@@ -62,6 +62,7 @@
         </div>
         <!--产品 end-->
 
+    <#--分页 当前页，参与分页的总记录数，每页记录数-->
     <#if queryPrdListByPrdType_totalRecNum??>
         <@sf.pageset currentPage queryPrdListByPrdType_totalRecNum numOfPerPage></@sf.pageset>
     </#if>

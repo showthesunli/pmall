@@ -36,7 +36,7 @@ public class WebConfig extends DelegatingWebMvcConfiguration {
     @Bean
     public FreeMarkerConfigurer freeMarkerConfigurer(){
         FreeMarkerConfigurer freeMarkerConfigurer = new FreeMarkerConfigurer();
-        freeMarkerConfigurer.setTemplateLoaderPath("/WEB-INF/pages");
+        freeMarkerConfigurer.setTemplateLoaderPaths("/WEB-INF/pages","/htmlsrc");
         freeMarkerConfigurer.setDefaultEncoding("UTF-8");
 //        freeMarkerConfigurer.getConfiguration().setURLEscapingCharset("UTF-8");
         return freeMarkerConfigurer;

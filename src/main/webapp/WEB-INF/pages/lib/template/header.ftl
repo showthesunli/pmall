@@ -43,8 +43,8 @@
             <li><a href="<@spring.url '/about'/>">公司简介</a></li>
             <!--<li><a href="<@spring.url '/anli'/>">案例介绍</a></li>-->
             <li><a href="<@spring.url '/news'/>">公司新闻</a></li>
-            <li><a href="javascript:void(0);">加入途皓</a></li>
-            <li><a href="javascript:void(0);">联系我们</a></li>
+            <li><a href="<@spring.url '/join'/>">加入途皓</a></li>
+            <li><a href="<@spring.url '/contact'/>">联系我们</a></li>
         </ul>
     </div>
 </div>
