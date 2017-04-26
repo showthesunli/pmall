@@ -32,15 +32,15 @@ public class ProductListController extends HisuBaseControllerAdapter{
 
     @GetMapping(value = "/pro{matrix}")
     public String showProductList(Model model,
-                                  @MatrixVariable(required = false,defaultValue = "1") String currentPage,
-                                  @MatrixVariable(required = false,defaultValue = "12") String numOfPerPage,
+                                  @MatrixVariable(required = false,defaultValue = "1") int currentPage,
+                                  @MatrixVariable(required = false,defaultValue = "12") int numOfPerPage,
                                   @MatrixVariable(required = false) Map<String,String> map) throws JSONException {
         logger.debug("showProductList process");
-        logger.debug("mrkPrdCateID :"+map.get("mrkPrdCateID"));
+        logger.debug("mrkPrdCateID :" + map.get("mrkPrdCateID"));
         logger.debug("productName :" + map.get("productName"));
         logger.debug("currentPage :" + currentPage);
         logger.debug("numOfPerPage :" + numOfPerPage);
-        Map<String,String> param = new HashMap<>(map);
+        Map<String,Object> param = new HashMap<>(map);
         if (param.get("currentPage") == null){
             param.put("currentPage",currentPage);
         }
@@ -48,10 +48,12 @@ public class ProductListController extends HisuBaseControllerAdapter{
             param.put("numOfPerPage",numOfPerPage);
         }
         excute(model, param);
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("numOfPerPage",numOfPerPage);
         return "/pro";
     }
 
-    protected void excute(Model model,Map<String,String> map) throws JSONException {
+    protected void excute(Model model,Map<String,Object> map) throws JSONException {
         //获取groupID
         Set<String> set = this.hisuMngDataGroupAndId.getDataId().keySet();
         Iterator<String> iterator = set.iterator();
@@ -72,12 +74,16 @@ public class ProductListController extends HisuBaseControllerAdapter{
                         condition.append("|");
                     }
                     this.getJds().service(groupId, list.get(i).getId(), condition.toString());
+                    //返回数据
                     String retVal = this.getJds().getDataList().toString();
                     if (list.get(i).getId().equals("queryPrdTypeByHeadType")){
                         retVal = parseString(this.getJds().getDataList());
-                        logger.debug(retVal);
                     }
                     model.addAttribute(list.get(i).getId(), JSON.parse(retVal));
+
+                    //返回数据记录数
+                    int totalRecNum = this.getJds().getRecordCount();
+                    model.addAttribute(list.get(i).getId()+"_totalRecNum",totalRecNum);
                 }
             }
         }

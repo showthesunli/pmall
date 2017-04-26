@@ -1,4 +1,6 @@
 ﻿<#import "/spring.ftl" as spring/>
+<#import "/lib/macro/hisuMacro.ftl" as sf />
+<#setting url_escaping_charset = "UTF-8"/>
 <!doctype html>
 <html lang="zh-cn">
 <head>
@@ -13,7 +15,7 @@
 <script type="text/javascript" src="<@spring.url '/js/jquery.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/js/model.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/js/util.js'/>"></script>
-<script type="text/javascript" src="<@spring.url '/js/gd_Index.js'/>"></script>
+<#--<script type="text/javascript" src="<@spring.url '/js/gd_Index.js'/>"></script>-->
 <script type="text/javascript" src="<@spring.url '/js/banner.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/js/menu.js'/>" ></script>
 <script type="text/javascript" src="<@spring.url '/js/jquery.SuperSlide.2.1.1.js'/>" ></script>
@@ -36,9 +38,9 @@
                     <div class="jf-classifyItem">
                         <h2 class="jf-classifyItemTitle">${key}：</h2>
                         <ul class="jf-classifyItemList">
-                            <li class=""><a href="#" index="0">全部</a></li>
+                            <li class=""><a href="<@spring.url '/pro;mrkPrdCateID=${key?url}'/>" index="0">全部</a></li>
                             <#list queryPrdTypeByHeadType["${key}"] as type>
-                                <li style=" text-align: left"><a href="#" index="0">${type.attrID}</a></li>
+                                <li style=" text-align: left"><a href="<@spring.url '/pro;mrkPrdCateID=${key?url};productName=${type.attrID?url};'/>" index="0">${type.attrID}</a></li>
                             </#list>
                         </ul>
                     </div>
@@ -59,28 +61,15 @@
             </#list>
         </div>
         <!--产品 end-->
-<!--end 主体-->
 
-<div class="cp_boxtt">
- <script language="javascript" type="text/javascript">
-    function myfunctions1(ids1, left1, right1) {
-        var ads = new ScrollPicleft();
-        ads.scrollContId = ids1; // 内容容器ID""
-        ads.arrLeftId = left1; //左箭头ID
-        ads.arrRightId = right1; //右箭头ID
-        ads.frameWidth = 1155;  //显示框宽度
-        ads.pageWidth =1155; //翻页宽度
-        ads.speed = 10; //移动速度(单位毫秒，越小越快)
-        ads.space = 10; //每次移动像素(单位px，越大越快)
-        ads.autoPlay = true; //自动播放
-        ads.autoPlayTime = 3; //自动播放间隔时间(秒)
-        ads.initialize(); //初始化
-    }
-</script>
-	<article class="container text-center">
-<h2 class="h-h2">合作伙伴</h2>
-	</article>
+    <#if queryPrdListByPrdType_totalRecNum??>
+        <@sf.pageset currentPage queryPrdListByPrdType_totalRecNum numOfPerPage></@sf.pageset>
+    </#if>
 
+    <!--end 主体-->
+
+    <#--合作伙伴-->
+<#--<#include "/lib/template/partner.ftl" encoding="UTF-8">-->
 <#--footer-->
 <#include "/lib/template/footer.ftl" encoding="UTF-8">
 

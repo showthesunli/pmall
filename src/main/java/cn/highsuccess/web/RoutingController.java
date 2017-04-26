@@ -51,7 +51,7 @@ public class RoutingController extends HisuBaseControllerAdapter{
 
 
     @ResponseBody
-    @GetMapping("/ajaxGetimg")
+    @RequestMapping(value = "/ajaxGetimg")
     public String getImg(String dataGrpJson,HttpServletRequest request) throws JSONException {
         logger.debug("/ajaxGetimg");
         String path=request.getSession().getServletContext().getRealPath("/imgsrc/");

@@ -58,6 +58,7 @@
     </div>
 </div>
 <div class="menu-list" id="menu3" onmouseover="_mouseover()" onmouseout="_mouseout()" >
+    <!--
     <div class="hd">
         <ul>
             <li><a href="javascript:void(0);">保健品</a></li>
@@ -71,6 +72,7 @@
             <li><a href="javascript:void(0);">汽车用品</a></li>
         </ul>
     </div>
+    -->
 </div>
 <script type="text/javascript">jQuery(".menu-list").slide(0); </script>
 <!-- 下拉nav over -->

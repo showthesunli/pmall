@@ -20,7 +20,8 @@ xtyGetData.prototype.ajax = function (callBack) {
         async: true,
         data: "dataGrpJson=" + JSON.stringify(this.data),
         cache: false,
-        type: "POST",
+        //type: "POST",
+        type: "GET",
         dataType: "json",
         success: function (data) {
             callBack.call($this, data);
@@ -47,6 +48,8 @@ function downloadErrImg(obj, imgName, imgPath) {
         obj.onerror = null;//结束，以防止无限循环的下载
     });
 }
+
+
 function displayNoImg(obj) {
     obj.src = 'images/default.gif';
 }
@@ -486,3 +489,143 @@ $.extend(
         return f
     }
 })(jQuery);
+
+//首页发送留言
+function IndexsendLeaveword(src) {
+
+    var PTN_EMAIL = /\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
+    var PTN_FLOAT = /\d+(\.\d+)?/;
+
+    var verName = $j("txtName").val();
+    var verCode = $j("txtVerCode").val();
+    var verPhone = $j("txtPhone").val();
+    var verEmail = $j("txtEmail").val();
+    var verContent = $j("txtContent").val();
+    var vergsmc = $j("txtgsmc").val();
+    var verAddress = $j("txtAddress").val();
+    var qtcl = document.getElementsByName("qtcl");
+    var bhkg = false;
+    var vercldx = "处理对象:";
+
+
+    for (i = 0; i < qtcl.length; i++) {
+        if (qtcl[i].checked) {
+            bhkg = true;
+            vercldx += qtcl[i].value;
+        }
+    }
+
+    var err = "";
+    var reg = /^\s*$/;
+
+    if (!bhkg) {
+        err += "<p>请勾选处理对象</p>";
+    }
+    if (reg.test(verName)) {
+        err += "<p>姓名不可为空</p>";
+    }
+    if (reg.test(verPhone)) {
+        err += "<p>手机不能为空</p>";
+    }
+    if (reg.test(verEmail)) {
+        err += "<p>邮箱不为空</p>";
+    }
+    if (reg.test(verAddress)) {
+        err += "<p>地址不为空</p>";
+    }
+    if (verCode == undefined || verCode.length == 0) {
+        err += "<p>请输入验证码</p>";
+    }
+    if (err.length > 0) {
+
+        $a(err);
+
+        return;
+    }
+    showProc(src);
+    $.post("/ajax.ashx?action=IndexsendLeaveword&t=" + Math.random(), {
+        verName: verName,
+        verContent: verContent,
+        verCode: verCode,
+        verPhone: verPhone,
+        verEmail: verEmail,
+        vercldx: vercldx,
+        verAddress: verAddress
+
+    }, function (msg) {
+        var sta = gav(msg, "state");
+        var sMsg = gav(msg, "msg");
+        if (sta == "1") {
+            emptyText('sylytj');
+            $a(sMsg, 1);
+
+        } else {
+            $a(sMsg);
+
+        }
+        showProc(src, false);
+    });
+}
+
+
+//首页申请加盟
+function IndexsendLeaveword(src) {
+
+    var PTN_EMAIL = /\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
+    var PTN_FLOAT = /\d+(\.\d+)?/;
+
+    var verName = $j("txtName").val();
+    var verCode = $j("txtVerCode").val();
+    var verPhone = $j("txtPhone").val();
+    var verEmail = $j("txtEmail").val();
+    var verContent = $j("txtContent").val();
+    var verAddress = $j("txtAddress").val();
+    var verGsmc = $j("txtGsmc").val();
+    var err = "";
+    var reg = /^\s*$/;
+    //    if (reg.test(verAddress)) {
+    //        err += "<p>公司行业不为空</p>";
+    //    }
+//    if (reg.test(verGsmc)) {
+//        err += "<p>公司名称不为空</p>";
+//    }
+    if (reg.test(verName)) {
+        err += "<p>联系人不可为空</p>";
+    }
+    if (reg.test(verPhone)) {
+        err += "<p>联系电话不能为空</p>";
+    }
+    //    if (reg.test(verEmail)) {
+    //        err += "<p>邮箱不为空</p>";
+    //    }
+
+    if (verCode == undefined || verCode.length == 0) {
+        err += "<p>请输入验证码</p>";
+    }
+    if (err.length > 0) {
+
+        $a(err);
+
+        return;
+    }
+    showProc(src);
+    $.post("/ajax.ashx?action=IndexsendAgentApply&t=" + Math.random(), {
+        verName: verName,
+        verContent: verContent,
+        verCode: verCode,
+        verPhone: verPhone,
+        verEmail: verEmail,
+        verAddress: verAddress
+    }, function (msg) {
+        var sta = gav(msg, "state");
+        var sMsg = gav(msg, "msg");
+        if (sta == "1") {
+            emptyText('sylytj');
+            $a(sMsg, 1);
+
+        } else {
+            $a(sMsg);
+        }
+        showProc(src, false);
+    });
+}
