@@ -99,11 +99,11 @@
             </div>
 
             <div class="productInfro">
-                <h1>暴风魔镜 VR眼镜 四代黄金版</h1>
+                <h1>${queryPrdDetail[0].productInfo}</h1>
 
                 <div class="prodBgRed">
                     <span class="marginR10">现金价格：</span>
-                    <span class="prodPriceRed">￥500.00</span>
+                    <span class="prodPriceRed">￥${queryPrdDetail[0].prdPrice}</span>
                 </div>
 
                 <div style="position:relative; margin:15px; width:100%; height:22px;">
@@ -150,13 +150,18 @@
                 <div class="borderD"></div>
 
                 <div class="margin15" style="margin-bottom:0;">
-                    <span class="marginR10" style="float:left; line-height:24px; margin-right:0;">选择面额：</span>
+                    <span class="marginR10" style="float:left; line-height:24px; margin-right:0;">选择型号：</span>
 
                     <div class="priceList">
-                        
-                        <a class="priceItemBRed" href="./productDetial-p03.htm">黑色
-                        </a>
-                        
+                        <#list queryPrdAllSpecByPrdNo as queryPrdAllSpecByPrdNoItem>
+                            <#if queryPrdAllSpecByPrdNoItem.prdNo == queryPrdDetail[0].prdNo>
+                                <a  class="priceItemBRed" href="<@spring.url '/proshow;prdNo=${queryPrdAllSpecByPrdNoItem.prdNo};keyWordsFld=${queryPrdAllSpecByPrdNoItem.prdNo};'/>">${queryPrdAllSpecByPrdNoItem.productSpec}</a>
+                            <#else >
+                                <a  href="<@spring.url '/proshow;prdNo=${queryPrdAllSpecByPrdNoItem.prdNo};keyWordsFld=${queryPrdAllSpecByPrdNoItem.prdNo};'/>">${queryPrdAllSpecByPrdNoItem.productSpec}</a>
+                            </#if>
+
+                        </#list>
+
                     </div>
                 </div>
 
@@ -168,7 +173,7 @@
                         <input type="text" value="1" name="pNum" id="prdnum" class="prodNum">
                         <b class="prodAdd">+</b>
                     </div>
-                    <span style="float:left; line-height:24px; margin-left:10px;">(库存 6 件)</span>
+                    <span style="float:left; line-height:24px; margin-left:10px;">(库存 ${queryPrdDetail[0].prdWareNum} 件)</span>
                 </div>
 
                 <div class="margin15">
@@ -185,7 +190,7 @@
                 <span style="width:898px; border-right:none;"></span>
             </div>
             <div class="margin15">
-                <#include "/a" parse=false ignore_missing=true>
+                <#include "/${queryPrdDetail[0].fileName}" parse=false ignore_missing=true>
             </div>
         </div>
         <!--产品详情 end-->
@@ -197,7 +202,7 @@
 
 
 <#--合作伙伴-->
-<#include "/lib/template/partner.ftl" encoding="UTF-8">
+<#--<#include "/lib/template/partner.ftl" encoding="UTF-8">-->
 
 <#--footer-->
 <#include "/lib/template/footer.ftl" encoding="UTF-8">

@@ -142,7 +142,7 @@
     </div>
 
     <div class="clear"></div>
-    <div class="page"><a class="a1">22条</a> <a href="javascript:void(0);" class="a1">上一页</a> <span>1</span> <a href="javascript:void(0);">2</a> <a href="/h/khxx/3.html">3</a> <a href="javascript:void(0);" class="a1">下一页</a></div>
+    <!--<div class="page"><a class="a1">22条</a> <a href="javascript:void(0);" class="a1">上一页</a> <span>1</span> <a href="javascript:void(0);">2</a> <a href="/h/khxx/3.html">3</a> <a href="javascript:void(0);" class="a1">下一页</a></div>-->
     	
   </div> 
   <!--end 主体-->

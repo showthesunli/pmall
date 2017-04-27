@@ -15,7 +15,7 @@
     </properties>
 
     <dependencies>
-        <!-- 开发依赖 -->
+        <!-- 开发依赖,暂时无用 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
@@ -83,7 +83,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- 验证依赖 -->
+        <!-- 验证依赖 java vailde jsr303-->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
@@ -136,11 +136,17 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.1</version>
         </dependency>
+        <!-- json字符串序列化为java对象或java对象序列化为json字符串-->
         <dependency>
-            <!-- json字符串序列化为java对象或java对象序列化为json字符串-->
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>1.2.21</version>
+        </dependency>
+        <!-- jsonpath 解析-->
+        <dependency>
+            <groupId>com.jayway.jsonpath</groupId>
+            <artifactId>json-path</artifactId>
+            <version>2.2.0</version>
         </dependency>
 
         <!-- 日志依赖 -->
@@ -150,7 +156,7 @@
             <version>1.2.14</version>
         </dependency>
 
-        <!-- cn.highsucc 本地依赖 -->
+        <!-- cn.highsuccess 本地依赖 -->
         <dependency>
             <groupId>cn.highsuccess</groupId>
             <artifactId>hisu-jar-dbservice</artifactId>
@@ -230,8 +236,6 @@
             <name>Nexus aliyun</name>
             <url>http://maven.aliyun.com/nexus/content/groups/public</url>
         </repository>
-
-
     </repositories>
 
 </project>

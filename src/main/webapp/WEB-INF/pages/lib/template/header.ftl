@@ -11,8 +11,8 @@
             <li style="background: url(images/ico1.png) no-repeat left center;"><a href="<@spring.url '/login'/>">登录</a></li>
             <li style="background: url(images/ico2.png) no-repeat  left center;"><a href="<@spring.url '/register'/>">注册</a></li>
             </@sec.authorize>
-            <li style="background: url(images/ico3.png) no-repeat  left center;"><a href="<@spring.url '/shoppingCart'/>">购物车</a></li>
-            <li style="background: url(images/ico4.png) no-repeat  left center;"><a href="javascript:void(0);" >帮助中心</a></li>
+            <li style="background: url(images/ico3.png) no-repeat  left center;"><a href="javascript:void(0);">购物车</a></li>
+            <li style="background: url(images/ico4.png) no-repeat  left center;"><a href="<@spring.url '/help'/>" >帮助中心</a></li>
         </ul>
     </div>
 </div>
@@ -25,7 +25,7 @@
             <li class='dhjt' style="width:130px;"><a href="<@spring.url '/fuwu'/>" onmouseover="mouseover(this, 2)" onmouseout="mouseout()">我们的服务</a></li>
             <li class='dhjt'><a href="<@spring.url '/pro'/>" onmouseover="mouseover(this, 3)" onmouseout="mouseout()">积分商城</a></li>
             <li ><a href="<@spring.url '/shangjia'/>" onmouseover="mouseover(this, 4)" onmouseout="mouseout()">合作商家</a></li>
-            <li><a href="javascript:void(0);" onmouseover="mouseover(this, 5)" onmouseout="mouseout()">在线购卡</a></li>
+            <li><a href="<@spring.url '/onlinePurchase'/>" onmouseover="mouseover(this, 5)" onmouseout="mouseout()">在线购卡</a></li>
             <li><a href="<@spring.url '/jifen'/>" onmouseover="mouseover(this, 5)" onmouseout="mouseout()">积分查询</a></li>
         </ul>
     </div>

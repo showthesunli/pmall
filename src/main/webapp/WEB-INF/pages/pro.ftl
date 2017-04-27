@@ -54,8 +54,8 @@
         <div class="jf-product jf-width1000" style=" padding-bottom:30px;">
             <#list queryPrdListByPrdType as queryPrdListByPrdTypeItem>
                 <div class="jf-productList">
-                    <a href="<@spring.url '/proshow;prdNo=${queryPrdListByPrdTypeItem.prdNo}'/>" target="_blank"><img src="<@spring.url '/imgsrc/${queryPrdListByPrdTypeItem.iconFileName}'/>" onerror="downloadErrImg(this,'${queryPrdListByPrdTypeItem.iconFileName}')" width="280" height="182"></a>
-                    <p><a href="proshowXMWRJ.html" target="_blank" class="jf-productName">${queryPrdListByPrdTypeItem.productInfo}</a></p>
+                    <a href="<@spring.url '/proshow;prdNo=${queryPrdListByPrdTypeItem.prdNo};keyWordsFld=${queryPrdListByPrdTypeItem.prdNo};'/>" target="_blank"><img src="<@spring.url '/imgsrc/${queryPrdListByPrdTypeItem.iconFileName}'/>" onerror="downloadErrImg(this,'${queryPrdListByPrdTypeItem.iconFileName}')" width="280" height="182"></a>
+                    <p><a href="<@spring.url '/proshow;prdNo=${queryPrdListByPrdTypeItem.prdNo};keyWordsFld=${queryPrdListByPrdTypeItem.prdNo};'/>" target="_blank" class="jf-productName">${queryPrdListByPrdTypeItem.productInfo}</a></p>
                     <p><span class="jf-productPrice">￥${queryPrdListByPrdTypeItem.prdPrice}</span></p>
                 </div>
             </#list>
@@ -66,7 +66,6 @@
     <#if queryPrdListByPrdType_totalRecNum??>
         <@sf.pageset currentPage queryPrdListByPrdType_totalRecNum numOfPerPage></@sf.pageset>
     </#if>
-
     <!--end 主体-->
 
     <#--合作伙伴-->

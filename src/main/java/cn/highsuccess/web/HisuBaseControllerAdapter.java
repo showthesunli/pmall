@@ -58,6 +58,7 @@ public abstract class HisuBaseControllerAdapter {
                         condition.append(map.get(list.get(i).getArgs().get(l)));
                         condition.append("|");
                     }
+                    condition.deleteCharAt(condition.length()-1);
                     this.getJds().service(groupId,list.get(i).getId(),condition.toString());
                     model.addAttribute(list.get(i).getId(), JSON.parseArray(this.getJds().getDataList().toString()));
                 }
