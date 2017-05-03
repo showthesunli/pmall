@@ -7,7 +7,7 @@
 <title>积分查询-逸乐生活网</title>
 <meta name="description" content="途皓（北京）商务服务有限公司" />
 <meta name="keywords" content="途皓（北京）商务服务有限公司" />
-<link rel="stylesheet" type="text/css" href="css/css.css"/>
+<link rel="stylesheet" type="text/css" href="<@spring.url '/css/css.css'/>"/>
 <script type="text/javascript" src="<@spring.url '/js/gd_Index.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/js/jquery.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/js/banner.js'/>"></script>
@@ -31,6 +31,12 @@
 		</div>
 
 		<div class='prospList'>
+			<dl>
+				<div class="icons"><a class="icon_link" href="<@spring.url "/login"/>"><img src="<@spring.url '/images/icon_link.png'/>"></a></div>
+				<dt><a href='<@spring.url "/login"/>' target="_blank"><img src="<@spring.url '/images/merchant/mTH.jpg'/>" /></a></dt>
+				<dd><h3><a href='<@spring.url "/login"/>' target="_blank">逸乐生活</a></h3></dd>
+			</dl>
+
 			<dl>
 				<div class="icons"><a class="icon_link" href="https://cardsonline.spdbccc.com.cn/icard/icardlogin.do?_locale=zh_CN" target="_blank"><img src="<@spring.url '/images/icon_link.png'/>"></a></div>
 				<dt><a href='https://cardsonline.spdbccc.com.cn/icard/icardlogin.do?_locale=zh_CN' target="_blank"><img src="<@spring.url '/images/merchant/mPF.jpg'/>" /></a></dt>
