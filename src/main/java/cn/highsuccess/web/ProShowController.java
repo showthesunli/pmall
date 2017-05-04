@@ -3,6 +3,7 @@ package cn.highsuccess.web;
 import cn.highsuccess.config.systemproperties.HisuMngAttribute;
 import cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId;
 import cn.highsuccess.data.JavaDataSet;
+import cn.highsuccess.data.JavaOperate;
 import cn.highsuccess.transform.HisuTransform;
 import com.jayway.jsonpath.JsonPath;
 import org.json.JSONArray;
@@ -34,12 +35,12 @@ public class ProShowController extends HisuBaseControllerAdapter {
     private HisuTransform hisuTransform;
 
     @Autowired
-    protected ProShowController(JavaDataSet jds) {
-        super(jds);
+    protected ProShowController(JavaDataSet jds,JavaOperate javaOperate) {
+        super(jds,javaOperate);
     }
 
     @GetMapping(value = "/proshow{matrix}")
-    public String proDetailShow(Model model,@MatrixVariable Map<String,String> map,HttpServletRequest request){
+    public String proDetailShow(Model model,@MatrixVariable Map<String,Object> map,HttpServletRequest request){
         excute(model, map, hisuMngDataGroupAndId);
         parseFile(model.asMap().get("queryPrdDetail"),"$[*].fileName",request);
         return "/proshow";

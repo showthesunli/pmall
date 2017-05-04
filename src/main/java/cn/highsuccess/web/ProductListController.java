@@ -3,6 +3,7 @@ package cn.highsuccess.web;
 import cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId;
 import cn.highsuccess.config.systemproperties.HisuMngDataIdArgs;
 import cn.highsuccess.data.JavaDataSet;
+import cn.highsuccess.data.JavaOperate;
 import com.alibaba.fastjson.JSON;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,8 +27,8 @@ public class ProductListController extends HisuBaseControllerAdapter{
     private HisuMngDataGroupAndId hisuMngDataGroupAndId;
 
     @Autowired
-    protected ProductListController(JavaDataSet jds) {
-        super(jds);
+    protected ProductListController(JavaDataSet jds,JavaOperate javaOperate) {
+        super(jds,javaOperate);
     }
 
     @GetMapping(value = "/pro{matrix}")

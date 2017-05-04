@@ -1,15 +1,26 @@
 package cn.highsuccess.web;
 
+import cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId;
+import cn.highsuccess.config.systemproperties.HisuMngDataIdArgs;
 import cn.highsuccess.data.JavaDataSet;
+import cn.highsuccess.data.JavaOperate;
+import cn.highsuccess.sms.SendSms;
 import cn.highsuccess.transform.HisuTransform;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by prototype on 2017/4/17.
@@ -20,8 +31,11 @@ public class RoutingController extends HisuBaseControllerAdapter{
     private HisuTransform htf;
 
     @Autowired
-    protected RoutingController(JavaDataSet jds) {
-        super(jds);
+    private SendSms sendSms;
+
+    @Autowired
+    protected RoutingController(JavaDataSet jds,JavaOperate javaOperate) {
+        super(jds, javaOperate);
     }
 
     @GetMapping(value = "/{path}/**?numPage=*&currentPage=*")
@@ -46,9 +60,8 @@ public class RoutingController extends HisuBaseControllerAdapter{
     @GetMapping("/")
     public String index(Model model){
         logger.debug("/ path: index");
-        return processGetWithNoParam("index",model);
+        return processGetWithNoParam("index", model);
     }
-
 
     @ResponseBody
     @RequestMapping(value = "/ajaxGetimg")
@@ -56,7 +69,7 @@ public class RoutingController extends HisuBaseControllerAdapter{
         logger.debug("/ajaxGetimg");
         logger.debug("dataGrpJson :"+dataGrpJson);
         String path=request.getSession().getServletContext().getRealPath("/imgsrc/");
-        logger.debug("path :"+path);
+        logger.debug("path :" + path);
         JSONObject jo = new JSONObject(dataGrpJson);
         String fileName = jo.optString("fileName");
         boolean flag = this.htf.downloadImages(this.getJds().getUserDetails().getRemoteAddress(), this.getJds().getUserName(), path, fileName);
@@ -65,4 +78,27 @@ public class RoutingController extends HisuBaseControllerAdapter{
         jsonResponse.put("responseRemark", "");
         return jsonResponse.toString();
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/sendMcode")
+    public String sendMcode(Model model,
+                            HttpServletRequest req,
+                            @MatrixVariable Map<String,String> map,
+                            @RequestParam(defaultValue = "30") int effectiveTimeLong,
+                            @RequestParam  String mobile) throws Exception {
+        logger.debug("/sendMcode");
+        logger.debug("mobile :" + mobile);
+//        handleError(model, errors);
+        Map<String,Object> param = new HashMap<>(map);
+        param.put("mobile",mobile);
+        param.put("effectiveTimeLong",effectiveTimeLong);
+        ApplicationContext ac = WebApplicationContextUtils.getWebApplicationContext(req.getServletContext());
+        HisuMngDataGroupAndId hisuMngDataGroupAndId = (HisuMngDataGroupAndId) ac.getBean("sendMcode");
+//        excute(model, param, hisuMngDataGroupAndId);
+        excuteOperate(model, param, hisuMngDataGroupAndId);
+        
+        this.sendSms.sendMcode(mobile, "您本次的验证码为 ："+((Map<String,String>)model.asMap().get("mobileAuthcode")).get("authCode"));
+        return  this.getJavaOperate().getResponseData().toString();
+    }
+
 }

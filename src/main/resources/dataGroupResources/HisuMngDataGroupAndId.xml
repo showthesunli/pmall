@@ -73,4 +73,26 @@
                      </list>
               </constructor-arg>
        </bean>
+
+
+       <bean id="sendMcode" class="cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId">
+              <constructor-arg>
+                     <map>
+                            <entry key="w_mainPage" >
+                                   <list>
+                                          <ref bean="mobileAuthcode"/>
+                                   </list>
+                            </entry>
+                     </map>
+              </constructor-arg>
+       </bean>
+       <bean id="mobileAuthcode" class="cn.highsuccess.config.systemproperties.HisuMngDataIdArgs">
+              <constructor-arg index="0" value="mobileAuthcode"/>
+              <constructor-arg index="1">
+                     <list>
+                            <value>mobile</value>
+                            <value>effectiveTimeLong</value>
+                     </list>
+              </constructor-arg>
+       </bean>
 </beans>

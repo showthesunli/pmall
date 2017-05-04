@@ -221,7 +221,7 @@ $(document).ready(function(e) {
 								<td>除以上两种原因之外，如个人原因导致的退换货，在商品完好、附件齐全的前提下。</td>
 								<td style="text-align:center;">是</td>
 								<td style="text-align:center;">否</td>
-								<td style="text-align:center;">是（钻石级别、PLUS会员客户免运费）</td>
+								<td style="text-align:center;">是（由您承担商品返回逸乐的运费取件收费标准）</td>
 								<td>由您承担商品返回逸乐的运费取件收费标准。钻石级别、PLUS会员客户免运费运费标准。退换货运费常见问题</td>
 							</tr>
 						</table>

@@ -33,8 +33,10 @@
 		<div class="mainCon">
 			<div class="textCon">
 				<img src="<@spring.url '/images/about3.jpg'/>" align="left" style="margin-right:40px;">
+                以下是各个空缺岗位具体职责与要求，有意者请详阅，并发简历、相应作品及个人阐述至：HR@happypoints.cn
 			</div>
-			<div class="clear"></div>
+			<div class="clear">
+			</div>
 		</div> 
 	</div>
 	<!--end 主体-->

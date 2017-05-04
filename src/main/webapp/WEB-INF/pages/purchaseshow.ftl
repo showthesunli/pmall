@@ -40,12 +40,12 @@
         <div class="jf-width1000 jf-overflowH">
             <div class="cIntroImg con-FangDa" id="fangdajing">
                 <div class="picBig con-fangDaIMg">
-                    <a href="#" class="bImg"><img src="<@spring.url '/images/proImg/pointCard1.png'/>" onerror="downloadErrImg(this,&#39;447-1-55&#39;)" width="430" height="280" id="bigimg"></a>
+                    <a href="#" class="bImg"><img src="<@spring.url '/images/proImg/onlinePImg1.png'/>" onerror="downloadErrImg(this,&#39;447-1-55&#39;)" width="430" height="280" id="bigimg"></a>
 
                     <!-- 滑块-->
                     <div class="magnifyingBegin" style="display: none; left: 215px; top: 140px; "></div>
                     <!-- 放大镜显示的图片 -->
-                    <div class="magnifyingShow" style="display: none; "><img src="<@spring.url '/images/proImg/pointCard1.png'/>" onerror="downloadErrImg(this,&#39;447-1-55&#39;)" id="bigimg1" style="margin-left: -516px; margin-top: -336px; "></div>
+                    <div class="magnifyingShow" style="display: none; "><img src="<@spring.url '/images/proImg/onlinePImg1.png'/>" onerror="downloadErrImg(this,&#39;447-1-55&#39;)" id="bigimg1" style="margin-left: -516px; margin-top: -336px; "></div>
 
                 </div>
                 <div class="jf-overflowH" style=" width:430px; margin-top:10px;">
@@ -53,7 +53,9 @@
                     <div class="cImglist">
                         <ul class="sImgList" id="list">
                             
-                            <li class="imgPitch"><img src="<@spring.url '/images/proImg/pointCard1.png'/>" width="110" height="72" onerror="downloadErrImg(this,&#39;447-1-55&#39;)"></li>
+                            <li class="imgPitch"><img src="<@spring.url '/images/proImg/onlinePImg1.png'/>" width="110" height="72" onerror="downloadErrImg(this,&#39;447-1-55&#39;)"></li>
+                            <li><img src="<@spring.url '/images/proImg/onlinePImg2.png'/>" width="110" height="72" onerror="downloadErrImg(this,&#39;447-1-55&#39;)"></li>
+                            <li><img src="<@spring.url '/images/proImg/onlinePImg3.png'/>" width="110" height="72" onerror="downloadErrImg(this,&#39;447-1-55&#39;)"></li>
                             
                         </ul>
                     </div>
@@ -119,11 +121,11 @@
 
                     <div class="priceList">
                         
-                        <a class="priceItemBRed" href="javascript:void(0);" style="height:30px; line-height:30px; padding:5px 10px;"><img src="<@spring.url '/images/proImg/pointCard1.png'/>" width="47" height="30" style="float:left" /><span style="float:left; margin-left:5px;">1000</span></a>
+                        <a class="priceItemBRed" href="javascript:void(0);" style="height:30px; line-height:30px; padding:5px 10px;"><img src="<@spring.url '/images/proImg/onlinePImg1.png'/>" width="47" height="30" style="float:left" /><span style="float:left; margin-left:5px;">1000</span></a>
 
-                        <a href="javascript:void(0);" style="height:30px;line-height:30px; padding:5px 10px"><img src="<@spring.url '/images/proImg/pointCard1.png'/>" width="47" height="30" style="float:left" /><span style="float:left; margin-left:5px;">500</span></a>
+                        <a href="javascript:void(0);" style="height:30px;line-height:30px; padding:5px 10px"><img src="<@spring.url '/images/proImg/onlinePImg2.png'/>" width="47" height="30" style="float:left" /><span style="float:left; margin-left:5px;">500</span></a>
 
-                        <a href="javascript:void(0);" style="height:30px;line-height:30px; padding:5px 10px"><img src="<@spring.url '/images/proImg/pointCard1.png'/>" width="47" height="30" style="float:left" /><span style="float:left; margin-left:5px;">100</span></a>
+                        <a href="javascript:void(0);" style="height:30px;line-height:30px; padding:5px 10px"><img src="<@spring.url '/images/proImg/onlinePImg3.png'/>" width="47" height="30" style="float:left" /><span style="float:left; margin-left:5px;">100</span></a>
                         
                     </div>
                 </div>
@@ -136,7 +138,7 @@
                         <input type="text" value="1" name="pNum" id="prdnum" class="prodNum">
                         <b class="prodAdd">+</b>
                     </div>
-                    <span style="float:left; line-height:24px; margin-left:10px;">(库存 6 件)</span>
+                    <span style="float:left; line-height:24px; margin-left:10px;">(库存 <b class="stock">6</b> 件)</span>
                 </div>
 
                 <div class="margin15">
@@ -153,7 +155,9 @@
                 <span style="width:898px; border-right:none;"></span>
             </div>
             <div class="margin15">
-                <p><img src="<@spring.url '/images/proImg/pointCard1.png'/>"></p>
+                <p><img src="<@spring.url '/images/proImg/onlinePImg1.png'/>"></p>
+                <p><img src="<@spring.url '/images/proImg/onlinePImg2.png'/>"></p>
+                <p><img src="<@spring.url '/images/proImg/onlinePImg3.png'/>"></p>
             </div>
         </div>
         <!--产品详情 end-->
@@ -172,5 +176,65 @@
     <#include "/lib/template/footer.ftl" encoding="UTF-8">
     <!--end 底部-->
     
+<script type="text/javascript">
+$(document).ready(function(){
+    //卡图片左右移动
+    var lilength = $('#list li').length;
+    var currImg = 1;
+    $("#imgNext").click(function(){
+        var inner = $("#list");
+        var i, j = 0;
+        for (i = currImg; i <= lilength - 3; i++, j++) {
+            if (j == 3)break;
+        }
+        if (j == 0)return;
+        var len = j * 120;
+        currImg += j;
+        inner.animate({left: '-=' + len + 'px'}, 1000);
+    });
+    $("#imgPrevious").click(function(){
+        var inner = $("#list");
+        var i, j = 0;
+        for (i = currImg; i > 1; i--, j++) {
+            if (j == 3)break;
+        }
+        if (j == 0)return;
+        var len = j * 120;
+        currImg -= j;
+        inner.animate({left: '+=' + len + 'px'}, 1000);
+    })
+    //选择卡图片
+    $('#list li').click(function () {
+        var picSrc = $(this).children("img").attr('src');
+        $('#bigimg').attr('src', picSrc);
+        $('#bigimg1').attr('src', picSrc);
+        $('.sImgList  li').removeClass('imgPitch');
+        $(this).addClass('imgPitch');
+    });
+    //选择面额
+    $(".priceList a").click(function () {
+        var price = $(this).find('span').html();
+        $(".priceList a").removeClass("priceItemBRed");
+        $(this).addClass("priceItemBRed");
+        $(".prodPriceRed").html('￥' + price);
+    })
+    //数量减
+    $(".prodMin").click(function () {
+        var v = $(this).next(".prodNum").attr("value");
+        var num = parseInt(v) - 1;
+        if (parseInt(v) == 1) {$(this).next(".prodNum").val(1);}
+        else {$(this).next(".prodNum").val(num);}
+    });
+    //数量加
+    $(".prodAdd").click(function () {
+        var v = $(this).prev(".prodNum").attr("value");
+        var s = $('.stock').text();
+        var num;
+        if(v < parseInt(s)){num = parseInt(v) + 1;}
+        else{num = parseInt(s);}
+        $(this).prev(".prodNum").val(num);
+    });
+})
+</script>
 </body>
 </html>

@@ -32,10 +32,10 @@
 
 		<div class="mainCon">
 			<div class="textCon">
-				<img src="<@spring.url '/images/about3.jpg'/>" align="left" style="margin-right:40px;">
-				<h2>途皓北京总部</h2>
-				<p>中国北京市</p>
-				<p>邮编区码：100000<br/>联系电话：<br/>传真号码：<br/>服务时间：7*24小时</p>
+				<img src="<@spring.url '/images/contact.jpg'/>" align="left" style="margin-right:40px;">
+				<h2 style="padding-top:10px;">途皓北京总部</h2>
+				<p style="font-size:16px;">中国北京市朝阳区建国门外大街22号赛特大厦2104室</p>
+				<p style="line-height:40px;">邮编区码：100004<br/>联系电话：+86 010-8282-6865<br/>传真号码：+86 010-8282-6865<br/>服务时间：周一至周五 上午9 点–下午6点</p>
 			</div>
 			<div class="clear"></div>
 		</div> 
