@@ -49,6 +49,7 @@ public class SendSmsImpl implements SendSms{
 
     @Override
     public boolean sendMcode(String mobile, String text) throws Exception {
+        register();
         if (isRegister){
             JSONObject smsJson = new JSONObject();
             smsJson.put("businessType", "注册");		//业务类型，用于统计

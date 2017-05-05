@@ -6,6 +6,7 @@ import cn.highsuccess.data.JavaOperate;
 import cn.highsuccess.data.UserRepository;
 import cn.highsuccess.data.JavaDataSet;
 import cn.highsuccess.data.impl.UserRepositoryImpl;
+import cn.highsuccess.service.util.HisuOperatePasswd;
 import cn.highsuccess.sms.SendSms;
 import cn.highsuccess.sms.SendSmsImpl;
 import cn.highsuccess.transform.HisuTransform;
@@ -77,4 +78,5 @@ public class RootConfig {
     public SendSms sendSms(){
         return new SendSmsImpl();
     }
+
 }

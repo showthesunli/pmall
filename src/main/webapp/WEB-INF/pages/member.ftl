@@ -14,7 +14,7 @@
 .main{ width: 100%;}
 .memberMain{ width: 1200px; min-height: 300px; margin: 0 auto; overflow: hidden;}
 .overflowH{ overflow: hidden;}
-.memberMain-Left{ float: left; padding: 20px 30px; border-top: 3px solid #f60;}
+.memberMain-Left{ float: left; padding: 20px 30px; border-top: 3px solid #f60;font-size:16px;}
 .iconLBgGray span{-webkit-filter: grayscale(100%); -moz-filter: grayscale(100%); -ms-filter: grayscale(100%); -o-filter: grayscale(100%); filter: grayscale(100%); filter: gray;}
 .iconLBgGray:hover span{-webkit-filter: grayscale(0%); -moz-filter: grayscale(0%); -ms-filter: grayscale(0%); -o-filter: grayscale(0%); filter: none;}
 .fontColorO a{ color: #ff6600;}

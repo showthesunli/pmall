@@ -7,10 +7,11 @@
 <title>注册-逸乐生活网</title>
 <link rel="stylesheet" type="text/css" href="<@spring.url '/css/css.css'/>"/>
 <link rel="stylesheet" type="text/css" href="<@spring.url '/css/style.css'/>"/>
-<script type="text/javascript" src="<@spring.url '/js/jquery.js'/>"></script>
+<script type="text/javascript" src="<@spring.url '/js/jquery-1.7.2.min.js'/>"></script>
 <script language="javascript" src="<@spring.url '/js/menu.js'/>" ></script>
 <script language="javascript" src="<@spring.url '/js/jquery.validate.min.js'/>" ></script>
 <script language="javascript" src="<@spring.url '/js/jquery.metadata.js'/>"></script>
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 <style>
 .topNav a{ line-height:37px;}
 .titlePitch{ background:#ffefe5;}
@@ -18,11 +19,10 @@
 .regFTitle h2{ float:left; padding:0 20px; cursor:pointer; font-size:14px; font-weight:bold; color:#ff6600; line-height:40px;}
 .registerForm p{ position:relative;}
 .txtLabel{width:48px;}
-#userName-error,#phone-error,#password-error,#confirm_password-error{ position:absolute; left:305px; top:4px; color:#f00; padding:0 10px; background:#ffebe7; line-height:30px; border:1px solid #f00; border-radius:5px;}
+#id-error,#phone-error,#password-error,#confirm_password-error{ position:absolute; left:305px; top:4px; color:#f00; padding:0 10px; background:#ffebe7; line-height:30px; border:1px solid #f00; border-radius:5px;}
 </style>
 <script type="text/javascript">
 $(document).ready(function(){
-    /**
     jQuery.validator.addMethod("phone", function(val, element) {
         var tel = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
         return this.optional(element) || (tel.test(val));
@@ -38,7 +38,7 @@ $(document).ready(function(){
         },   
 
         rules:{
-            userName:{
+            id:{
                 rangelength:[4,20]
             },
             phone:{
@@ -52,7 +52,7 @@ $(document).ready(function(){
             }
         },
         messages:{
-            userName:{
+            id:{
                 rangelength: $.validator.format("长度只能在4-20个字符之间")
             },
             password:{
@@ -66,23 +66,18 @@ $(document).ready(function(){
 
     var btn = document.getElementById("second");
     //调用监听
-    monitor($(btn));
-    //点击click
-    btn.onclick = function() {
-        countDown($(this));
-    };
-     **/
+    monitor($(btn));    
 
     $("#second").click(function (){
+        countDown($(this));
         var phoneNumber = $("#phone").val();
-        alert(phoneNumber);
         $.ajax({
             url:"<@spring.url '/sendMcode'/>",
             data:"mobile="+phoneNumber,
             type:"GET",
             dataType: "json",
             success: function (data) {
-                //这里调用禁用button并启动倒计时的方法
+               //countDown($(this));
             }
         })
 
@@ -93,7 +88,7 @@ function monitor(obj) {
     var LocalDelay = getLocalDelay();
     var timeLine = parseInt((new Date().getTime() - LocalDelay.time) / 1000);
     if (timeLine > LocalDelay.delay) {
-        console.log("过期");
+        //console.log("过期");
     } else {
         _delay = LocalDelay.delay - timeLine;
         obj.text(_delay + 'S').addClass("btn-disabled");
@@ -101,10 +96,10 @@ function monitor(obj) {
             if (_delay > 1) {
                 _delay--;
                 obj.text(_delay + 'S');
-                setLocalDelay(_delay);
+                setLocalDelay(_delay).attr('disabled','disabled');
             } else {
                 clearInterval(timer);
-                obj.text("获取验证码").removeClass("btn-disabled");
+                obj.text("获取验证码").removeAttr('disabled').removeClass("btn-disabled");
             }
         }, 1000);
     }
@@ -121,11 +116,11 @@ function countDown(obj) {
             var timer = setInterval(function() {
                 if (delay > 1) {
                     delay--;
-                    obj.text(delay + 'S');
+                    obj.attr('disabled','disabled').text(delay + 'S');
                     setLocalDelay(delay);
                 } else {
                     clearInterval(timer);
-                    obj.text("获取验证码").removeClass("btn-disabled");
+                    obj.removeAttr('disabled').text("获取验证码").removeClass("btn-disabled");
                 }
             }, 1000);
         }
@@ -179,7 +174,7 @@ function isPhoneNum(){
 	<!--头部-->
 
 	<!--banner--> 
-    <div style="background:url('images/titleTag/b_register.jpg') no-repeat center top;height:150px;"></div>
+    <div style="background:url('<@spring.url '/images/titleTag/b_register.jpg'/>) no-repeat center top;height:150px;"></div>
     <!--endbanner-->
         
 
@@ -189,12 +184,12 @@ function isPhoneNum(){
             <div class="clearfix"></div>
         </div>
 
-        <div class="jf-width1200">                  
-            <form class="registerForm">
+        <div class="jf-width1200">
+            <form class="registerForm" method="post" action="<@spring.url '/register'/>">
                 <p>
-                    <label class="txtLabel" for="userName">用<span style="width:6px; display:inline-block"></span>户<span style="width:6px; display:inline-block"></span>名</label>
-                    <input id="userName" name="userName" type="text" class="{required:true,rangelength:[4,20]} registerTxt" maxlength="20" placeholder="您的账户名和登录名"  />
-                    <@sf.error field="userName"></@sf.error>
+                    <label class="txtLabel" for="id">用<span style="width:6px; display:inline-block"></span>户<span style="width:6px; display:inline-block"></span>名</label>
+                    <input id="id" name="id" type="text" class="{required:true,rangelength:[4,20]} registerTxt" maxlength="20" placeholder="您的账户名和登录名"  />
+                    <@sf.error field="id"></@sf.error>
                 </p>
 
                 <p>
@@ -214,12 +209,13 @@ function isPhoneNum(){
 
                 <p>
                     <label class="txtLabel">验<span style="width:6px; display:inline-block"></span>证<span style="width:6px; display:inline-block"></span>码</label>
-                    <input name="registerCode" id="registerCode" type="text" class="registerTxt" maxlength="6" placeholder="请输入验证码"  style="width:118px;"  />
+                    <input name="mCode" id="registerCode" type="text" class="registerTxt" maxlength="6" placeholder="请输入验证码"  style="width:118px;"  />
                     <button type="button" class="sendCode"  id="second">获取验证码</button>
                 </p>
 
 
                 <p>
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                     <input name="" type="checkbox" value=""  checked="checked"/>
                     <label style="line-height:20px;">我已阅读并同意</label>
                     <a href="javascript:void(0);" onclick="proOpen()" style="color:#0099ff">《注册协议》</a>

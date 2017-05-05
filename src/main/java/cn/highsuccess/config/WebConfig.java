@@ -28,7 +28,8 @@ public class WebConfig extends DelegatingWebMvcConfiguration {
         freeMarkerViewResolver.setPrefix("");
         freeMarkerViewResolver.setSuffix(".ftl");
         freeMarkerViewResolver.setContentType("text/html;");
-        freeMarkerViewResolver.setCache(false);
+//        freeMarkerViewResolver.setCache(false);
+        freeMarkerViewResolver.setCache(true);
         return freeMarkerViewResolver;
     }
 

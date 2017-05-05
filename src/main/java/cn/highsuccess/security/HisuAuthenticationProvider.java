@@ -26,7 +26,7 @@ public class HisuAuthenticationProvider extends AbstractUserDetailsAuthenticatio
     @Override
     protected void additionalAuthenticationChecks(UserDetails userDetails, UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken) throws AuthenticationException {
         WebAuthenticationDetails de = (WebAuthenticationDetails)usernamePasswordAuthenticationToken.getDetails();
-        JSONObject obj = htf.login(de.getRemoteAddress()+"|logonType=1|",userDetails.getUsername(),userDetails.getPassword());
+        JSONObject obj = htf.login(de.getRemoteAddress()+"|logonType=0",userDetails.getUsername(),userDetails.getPassword());
         if (null != obj){
             if(0 > obj.optInt("responseCode")){
                 this.logger.info("Authentication failed: " + obj.optJSONObject("responseObj").optString("错误原因"));

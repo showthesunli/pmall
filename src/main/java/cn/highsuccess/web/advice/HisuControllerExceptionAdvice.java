@@ -21,9 +21,4 @@ public class HisuControllerExceptionAdvice {
         return "/reigster";
     }
 
-    @ExceptionHandler(ServletException.class)
-    public String servletExceptionHandler(){
-        logger.debug("500 error");
-        return null;
-    }
 }
