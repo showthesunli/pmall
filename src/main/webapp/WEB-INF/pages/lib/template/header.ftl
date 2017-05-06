@@ -11,7 +11,7 @@
             <li style="background: url(images/ico1.png) no-repeat left center;"><a href="<@spring.url '/login'/>">登录</a></li>
             <li style="background: url(images/ico2.png) no-repeat  left center;"><a href="<@spring.url '/register'/>">注册</a></li>
             </@sec.authorize>
-            <li style="background: url(images/ico3.png) no-repeat  left center;"><a href="javascript:void(0);">购物车</a></li>
+            <li style="background: url(images/ico3.png) no-repeat  left center;"><a href="<@spring.url "/shoppingCart"/>">购物车</a></li>
             <li style="background: url(images/ico4.png) no-repeat  left center;"><a href="<@spring.url '/help'/>" >帮助中心</a></li>
         </ul>
     </div>

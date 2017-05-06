@@ -8,10 +8,10 @@ import javax.validation.constraints.Size;
  */
 public class User {
     @NotNull
-    @Size(min = 2,max = 16,message = "账号必须在2-16位之间")
+    @Size(min = 6,max = 16,message = "账号必须在2-16位之间")
     private String id;
     @NotNull
-    @Size(min = 2,max = 16,message = "密码必须在2-16位之间")
+    @Size(min = 6,max = 16,message = "密码必须在2-16位之间")
     private String password;
 
     public User(){

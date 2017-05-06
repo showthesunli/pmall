@@ -6,6 +6,7 @@ import cn.highsuccess.data.JavaOperate;
 import cn.highsuccess.data.UserRepository;
 import cn.highsuccess.data.JavaDataSet;
 import cn.highsuccess.data.impl.UserRepositoryImpl;
+import cn.highsuccess.module.ShoppingCart;
 import cn.highsuccess.service.util.HisuOperatePasswd;
 import cn.highsuccess.sms.SendSms;
 import cn.highsuccess.sms.SendSmsImpl;
@@ -79,4 +80,10 @@ public class RootConfig {
         return new SendSmsImpl();
     }
 
+
+    @Bean
+    @Scope(value = WebApplicationContext.SCOPE_SESSION,proxyMode = ScopedProxyMode.TARGET_CLASS)
+    public ShoppingCart shoppingCart(){
+        return new ShoppingCart();
+    }
 }
