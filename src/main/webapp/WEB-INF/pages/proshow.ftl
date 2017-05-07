@@ -58,6 +58,12 @@
                 $(this).addClass('imgPitch');
             });
 
+            $("#addTo").click(function (){
+                var money = ${queryPrdDetail[0].prdPrice};
+                var amount = $("#prdnum").val();
+                var prdNo = "${queryPrdDetail[0].prdNo}";
+                window.location.href = "<@spring.url '/shoppingCart/addCart'/>" + "?prdNo="+prdNo+"&amount="+amount+"&money="+money;
+            })
 
         })
     </script>
@@ -103,7 +109,7 @@
 
                 <div class="prodBgRed">
                     <span class="marginR10">现金价格：</span>
-                    <span class="prodPriceRed">￥${queryPrdDetail[0].prdPrice}</span>
+                    <span class="prodPriceRed" >￥${queryPrdDetail[0].prdPrice}</span>
                 </div>
 
                 <div style="position:relative; margin:15px; width:100%; height:22px;">
@@ -177,7 +183,7 @@
                 </div>
 
                 <div class="margin15">
-                    <input name="" type="button" value="购买" class="btnBgS prodBuyBtn"><input name="" type="button" value="加入购物车" onclick="addTo()" class="btnBgS prodCartBtn">
+                    <input name="" type="button" value="购买" class="btnBgS prodBuyBtn"><input name="" type="button" value="加入购物车" id="addTo" class="btnBgS prodCartBtn">
                 </div>
 
             </div>

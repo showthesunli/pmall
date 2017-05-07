@@ -98,7 +98,7 @@
        </bean>
 
        <!--通过产品编号获取产品名称 -->
-       <bean id="shoppingCartController" class="cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId">
+       <bean id="findPrdNameBuPrdNo" class="cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId">
               <constructor-arg>
                      <map>
                             <entry key="jf_mainPage" >
@@ -114,6 +114,26 @@
               <constructor-arg index="1">
                      <list>
                             <value>keyWordsFld</value>
+                     </list>
+              </constructor-arg>
+       </bean>
+       <!--confirmOrder 查询用户地址 -->
+       <bean id="queryAddr" class="cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId">
+              <constructor-arg>
+                     <map>
+                            <entry key="jf_memberCenter" >
+                                   <list>
+                                          <ref bean="queryMemberAddress"/>
+                                   </list>
+                            </entry>
+                     </map>
+              </constructor-arg>
+       </bean>
+       <bean id="queryMemberAddress" class="cn.highsuccess.config.systemproperties.HisuMngDataIdArgs">
+              <constructor-arg index="0" value="queryMemberAddress"/>
+              <constructor-arg index="1">
+                     <list>
+                            <value>memberID</value>
                      </list>
               </constructor-arg>
        </bean>

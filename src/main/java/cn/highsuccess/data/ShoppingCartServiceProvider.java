@@ -19,6 +19,4 @@ public interface ShoppingCartServiceProvider {
     //计算购物车商品总数
     public int countProNum();
 
-    //购物车下单
-    public boolean placeOrder();
 }

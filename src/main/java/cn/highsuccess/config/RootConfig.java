@@ -3,11 +3,8 @@ package cn.highsuccess.config;
 import cn.highsuccess.config.systemproperties.HisuMngAttribute;
 import cn.highsuccess.config.systemproperties.HisuMngSvr;
 import cn.highsuccess.data.JavaOperate;
-import cn.highsuccess.data.UserRepository;
 import cn.highsuccess.data.JavaDataSet;
-import cn.highsuccess.data.impl.UserRepositoryImpl;
 import cn.highsuccess.module.ShoppingCart;
-import cn.highsuccess.service.util.HisuOperatePasswd;
 import cn.highsuccess.sms.SendSms;
 import cn.highsuccess.sms.SendSmsImpl;
 import cn.highsuccess.transform.HisuTransform;
@@ -64,15 +61,6 @@ public class RootConfig {
     @Scope(value = WebApplicationContext.SCOPE_REQUEST,proxyMode = ScopedProxyMode.TARGET_CLASS)
     public JavaOperate javaOperate(HisuMngAttribute hisuMngAttribute,HisuMngSvr hisuMngSvr,HisuTransform hisuTransform){
         return new JavaOperate(hisuMngAttribute,hisuMngSvr,hisuTransform);
-    }
-
-    /**
-     * 用户操作类
-     * @return
-     */
-    @Bean
-    public UserRepository userRepository(){
-        return new UserRepositoryImpl();
     }
 
     @Bean

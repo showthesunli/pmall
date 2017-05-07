@@ -20,6 +20,9 @@ public class BuyerItem {
     //产品单价
     private double money;
 
+    //产品图片
+    private String fileName;
+
     public BuyerItem(){}
 
     public BuyerItem(String prdNo,double money){
@@ -30,6 +33,30 @@ public class BuyerItem {
         this.prdNo = prdNo;
         this.money = money;
         this.amount = amount;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public void setPrdNo(String prdNo) {
+        this.prdNo = prdNo;
+    }
+
+    public void setMoney(double money) {
+        this.money = money;
+    }
+
+    public String getPrdName() {
+        return prdName;
+    }
+
+    public void setPrdName(String prdName) {
+        this.prdName = prdName;
     }
 
     public String getPrdNo() {
@@ -49,10 +76,10 @@ public class BuyerItem {
     }
 
     public boolean equals(Object that){
-        return EqualsBuilder.reflectionEquals(this,that,"amount","money","prdName");
+        return EqualsBuilder.reflectionEquals(this,that,"amount","money","prdName","fileName");
     }
 
     public int hashCode(){
-        return HashCodeBuilder.reflectionHashCode(this,"amount","money","prdName");
+        return HashCodeBuilder.reflectionHashCode(this,"amount","money","prdName","fileName");
     }
 }

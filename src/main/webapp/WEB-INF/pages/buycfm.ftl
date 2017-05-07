@@ -40,7 +40,7 @@
                     <p>支付金额：<span style="font-weight:bold; font-size:16px; color:#f60">￥200.00</span></p>
                 </div>
                 
-                <div class="jf-overflowH" style="border:2px solid #f60; padding:20px; margin:10px 0;">
+                <!--<div class="jf-overflowH" style="border:2px solid #f60; padding:20px; margin:10px 0;">
 					<p style=" font-size:14px; font-weight:bold; line-height:35px;">请选择支付方式：</p>
                   	<ul class="industryItem jf-overflowH">
                         <li id="i1"class="borderColorW">银行</li>
@@ -78,10 +78,13 @@
                         </div>
                     </div>
                 	
-                    <p style="text-align:center; margin:20px 0 0; float:right"><input type="button" value="下一步" class="sureBtn"  /></p>
                     
-                </div>
-                
+                </div>-->
+                    
+                <p style="text-align:center; margin:20px 0 0; float:right">
+                    <input type="button" value="取消订单" class="sureBtn" style="background: #eee; color:#666; margin-right:10px; border:1px solid #ccc;""  />
+                    <input type="button" value="下一步" class="sureBtn"  />
+                </p>
             </div>
             
     </div>
