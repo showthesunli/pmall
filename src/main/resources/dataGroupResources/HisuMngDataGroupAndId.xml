@@ -75,6 +75,7 @@
        </bean>
 
 
+       <!-- 获取手机验证校验码 -->
        <bean id="sendMcode" class="cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId">
               <constructor-arg>
                      <map>
@@ -92,6 +93,27 @@
                      <list>
                             <value>mobile</value>
                             <value>effectiveTimeLong</value>
+                     </list>
+              </constructor-arg>
+       </bean>
+
+       <!--通过产品编号获取产品名称 -->
+       <bean id="shoppingCartController" class="cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId">
+              <constructor-arg>
+                     <map>
+                            <entry key="jf_mainPage" >
+                                   <list>
+                                          <ref bean="queryPhyPrdInfoByPrdNoList"/>
+                                   </list>
+                            </entry>
+                     </map>
+              </constructor-arg>
+       </bean>
+       <bean id="queryPhyPrdInfoByPrdNoList" class="cn.highsuccess.config.systemproperties.HisuMngDataIdArgs">
+              <constructor-arg index="0" value="queryPhyPrdInfoByPrdNoList"/>
+              <constructor-arg index="1">
+                     <list>
+                            <value>keyWordsFld</value>
                      </list>
               </constructor-arg>
        </bean>

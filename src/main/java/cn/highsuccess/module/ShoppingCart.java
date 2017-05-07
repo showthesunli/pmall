@@ -1,5 +1,11 @@
 package cn.highsuccess.module;
 
+import com.alibaba.fastjson.JSON;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -8,6 +14,7 @@ import java.util.List;
  * 购物车实体类
  */
 public class ShoppingCart {
+    private final Log logger = LogFactory.getLog(ShoppingCart.class);
     //商品总金额
     private double prdMoney;
     //商品总数量
@@ -15,8 +22,12 @@ public class ShoppingCart {
 
     private List<BuyerItem> buyerItemList;
 
-    public ShoppingCart(){
-        this.buyerItemList = new LinkedList<BuyerItem>();
+    public void initShoppingCart(String itemsStr){
+        this.buyerItemList = JSON.parseArray(itemsStr, BuyerItem.class );
+    }
+
+    public void initShoppingCart(){
+        this.buyerItemList = new ArrayList<BuyerItem>();
     }
 
     public List<BuyerItem> getBuyerItemList() {

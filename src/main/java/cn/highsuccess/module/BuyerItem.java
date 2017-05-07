@@ -10,10 +10,17 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 public class BuyerItem {
     //产品编号
     private String prdNo;
+
+    //产品名称
+    private String prdName;
+
     //产品数量
     private int amount;
+
     //产品单价
     private double money;
+
+    public BuyerItem(){}
 
     public BuyerItem(String prdNo,double money){
         this(prdNo,money, 1);
@@ -42,10 +49,10 @@ public class BuyerItem {
     }
 
     public boolean equals(Object that){
-        return EqualsBuilder.reflectionEquals(this,that,"amount","money");
+        return EqualsBuilder.reflectionEquals(this,that,"amount","money","prdName");
     }
 
     public int hashCode(){
-        return HashCodeBuilder.reflectionHashCode(this,"amount","money");
+        return HashCodeBuilder.reflectionHashCode(this,"amount","money","prdName");
     }
 }
