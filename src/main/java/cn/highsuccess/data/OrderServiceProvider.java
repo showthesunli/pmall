@@ -7,11 +7,12 @@ import cn.highsuccess.module.Order;
  */
 public interface OrderServiceProvider {
 
-    public boolean initOrder(Order order);
+    public void initOrder(Order order);
 
-    //下单
     public boolean placeOrder();
 
-    //订单支付
     public void payOrder();
+
+    public String generateCondition();
+
 }

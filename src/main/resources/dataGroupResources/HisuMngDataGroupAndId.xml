@@ -137,4 +137,67 @@
                      </list>
               </constructor-arg>
        </bean>
+       
+       
+       <!--personal center 查询个人信息,订单 -->
+       <bean id="queryPersonalCenter" class="cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId">
+              <constructor-arg>
+                     <map>
+                            <entry key="jf_memberCenter" >
+                                   <list>
+                                          <ref bean="memberInfo"/>
+                                          <ref bean="queryMemberOrder"/>
+                                          <ref bean="queryMemberAddress"/>
+                                   </list>
+                            </entry>
+                     </map>
+              </constructor-arg>
+       </bean>
+       <bean id="memberInfo" class="cn.highsuccess.config.systemproperties.HisuMngDataIdArgs">
+              <constructor-arg index="0" value="memberInfo"/>
+              <constructor-arg index="1">
+                     <list>
+                            <value>memberID</value>
+                     </list>
+              </constructor-arg>
+       </bean>
+       
+       <bean id="queryMemberOrder" class="cn.highsuccess.config.systemproperties.HisuMngDataIdArgs">
+              <constructor-arg index="0" value="queryMemberOrder"/>
+              <constructor-arg index="1">
+                     <list>
+                            <value>memberID</value>
+                            <value>currentPage</value>
+                            <value>numOfPerPage</value>
+                     </list>
+              </constructor-arg>
+       </bean>
+       
+       <!--personal center 查询个人信息 -->
+       <bean id="queryPersonalCenterInfo" class="cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId">
+              <constructor-arg>
+                     <map>
+                            <entry key="jf_memberCenter" >
+                                   <list>
+                                          <ref bean="memberInfo"/>
+                                          <ref bean="queryMemberAddress"/>
+                                   </list>
+                            </entry>
+                     </map>
+              </constructor-arg>
+       </bean>
+       
+       <!--personal center 查询个人订单 -->
+       <bean id="queryPensonalCenterOrder" class="cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId">
+              <constructor-arg>
+                     <map>
+                            <entry key="jf_memberCenter" >
+                                   <list>
+                                          <ref bean="queryMemberOrder"/>
+                                   </list>
+                            </entry>
+                     </map>
+              </constructor-arg>
+       </bean>
+       
 </beans>

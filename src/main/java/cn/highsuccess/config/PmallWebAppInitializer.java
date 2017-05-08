@@ -26,19 +26,4 @@ public class PmallWebAppInitializer extends AbstractAnnotationConfigDispatcherSe
     protected String[] getServletMappings() {
         return new String[]{"/"};
     }
-
-
-    @Override
-    protected Filter[] getServletFilters(){
-        return new Filter[]{
-                getCharacterEncodingFilter()
-        };
-    }
-
-    private Filter getCharacterEncodingFilter(){
-        CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
-        characterEncodingFilter.setEncoding("UTF-8");
-        characterEncodingFilter.setForceEncoding(true);
-        return characterEncodingFilter;
-    }
 }

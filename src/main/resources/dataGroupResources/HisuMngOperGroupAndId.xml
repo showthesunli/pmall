@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+       <!--下单操作 -->
+       <bean id="placeOrder" class="cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId">
+              <constructor-arg>
+                     <map>
+                            <entry key="jf_memberCenter" >
+                                   <list>
+                                          <ref bean="btnGenPhyPrdOrder"/>
+                                   </list>
+                            </entry>
+                     </map>
+              </constructor-arg>
+       </bean>
+       <bean id="btnGenPhyPrdOrder" class="cn.highsuccess.config.systemproperties.HisuMngDataIdArgs">
+              <constructor-arg index="0" value="btnGenPhyPrdOrder"/>
+              <constructor-arg index="1">
+                     <list>
+                            <value>prdList</value>
+                            <value>receiverName</value>
+                            <value>addr</value>
+                            <value>mobile</value>
+                            <value>payToolIDList</value>
+                     </list>
+              </constructor-arg>
+       </bean>
+</beans>

@@ -16,7 +16,7 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 
 @Configuration
 @ComponentScan("cn.highsuccess.web")
-@ImportResource("classpath:/dataGroupResources/HisuMngDataGroupAndId.xml")
+@ImportResource({"classpath:/dataGroupResources/HisuMngDataGroupAndId.xml","classpath:/dataGroupResources/HisuMngOperGroupAndId.xml"})
 public class WebConfig extends DelegatingWebMvcConfiguration {
 
 
@@ -27,8 +27,8 @@ public class WebConfig extends DelegatingWebMvcConfiguration {
         freeMarkerViewResolver.setPrefix("");
         freeMarkerViewResolver.setSuffix(".ftl");
         freeMarkerViewResolver.setContentType("text/html;");
-//        freeMarkerViewResolver.setCache(false);
-        freeMarkerViewResolver.setCache(true);
+        freeMarkerViewResolver.setCache(false);
+//        freeMarkerViewResolver.setCache(true);
         return freeMarkerViewResolver;
     }
 
@@ -54,6 +54,5 @@ public class WebConfig extends DelegatingWebMvcConfiguration {
         requestMappingHandlerMapping.setRemoveSemicolonContent(false);
         return requestMappingHandlerMapping;
     }
-
 
 }

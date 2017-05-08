@@ -50,8 +50,8 @@
         <div class="memberMain">
             <div class="memberMain-Left">
                 <div class="leftMenu">
-                    <div class="overflowH iconLBgGray"><a href=""><span class="iconLBg iconLInfor"></span>个人信息</a></div>
-                    <div class="overflowH iconLBgGray"><a href=""><span class="iconLBg iconLOrder"></span>我的订单</a></div>
+                    <div class="overflowH iconLBgGray"><a href="<@spring.url '/myInformation'/>"><span class="iconLBg iconLInfor"></span>个人信息</a></div>
+                    <div class="overflowH iconLBgGray"><a href="<@spring.url '/myOrder'/>"><span class="iconLBg iconLOrder"></span>我的订单</a></div>
                     <div class="overflowH iconLBgGray"><a href=""><span class="iconLBg iconLPoint"></span>我的积分</a></div>
                 </div>
             </div>
@@ -60,10 +60,10 @@
                 <div class="memberMainR-Baseinfo">
                     <img src="<@spring.url '/images/fuwu1.jpg'/>" width="120" height="120">
                     <div class="baseinfo-Account">
-                        <p>我的账号：<span>会员账号</span></p>
-                        <p>我的积分：<span>1000</span></p>
-                        <p>我的手机：<span>12345678910</span></p>
-                        <p>我的邮箱：<span>12345678910@111.com</span></p>
+                        <p>我的账号：<span>${memberInfo[0].memberID}</span></p>
+                        <p>我的积分：<span>${memberInfo[0].memberID}</span></p>
+                        <p>我的手机：<span>${memberInfo[0].mobile}</span></p>
+                        <p>我的邮箱：<span>${memberInfo[0].email}</span></p>
                         <p><input type="button" value="修改资料" style=" color: #3897d7; border: 1px solid #3897d7; margin-left:70px;" /></p>
                     </div>
                     <div class="baseinfo-Tip">
@@ -82,62 +82,16 @@
                             <th width="10%">合计</th>
                             <th>操作</th>
                         </tr>
+                        <#list queryMemberOrder as key>
                         <tr>
-                            <td><a href="">商品名称商品名称商品名称商品名称商品名称商品名称</a></td>
+                            <td><a href="">${key.remark}</a></td>
                             <td>￥200.00</td>
                             <td>2</td>
-                            <td style="color:#f60;">￥400</td>
+                            <td style="color:#f60;">￥${key.totalPrice}</td>
                             <td><a href="" style="color:#3897d7;">删除</a></td>
                         </tr>
-                        <tr>
-                            <td><a href="">商品名称商品名称商品名称商品名称商品名称商品名称</a></td>
-                            <td>￥200.00</td>
-                            <td>2</td>
-                            <td style="color:#f60;">￥400</td>
-                            <td><a href="" style="color:#3897d7;">删除</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="">商品名称商品名称商品名称商品名称商品名称商品名称</a></td>
-                            <td>￥200.00</td>
-                            <td>2</td>
-                            <td style="color:#f60;">￥400</td>
-                            <td><a href="" style="color:#3897d7;">删除</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="">商品名称商品名称商品名称商品名称商品名称商品名称</a></td>
-                            <td>￥200.00</td>
-                            <td>2</td>
-                            <td style="color:#f60;">￥400</td>
-                            <td><a href="" style="color:#3897d7;">删除</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="">商品名称商品名称商品名称商品名称商品名称商品名称</a></td>
-                            <td>￥200.00</td>
-                            <td>2</td>
-                            <td style="color:#f60;">￥400</td>
-                            <td><a href="" style="color:#3897d7;">删除</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="">商品名称商品名称商品名称商品名称商品名称商品名称</a></td>
-                            <td>￥200.00</td>
-                            <td>2</td>
-                            <td style="color:#f60;">￥400</td>
-                            <td><a href="" style="color:#3897d7;">删除</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="">商品名称商品名称商品名称商品名称商品名称商品名称</a></td>
-                            <td>￥200.00</td>
-                            <td>2</td>
-                            <td style="color:#f60;">￥400</td>
-                            <td><a href="" style="color:#3897d7;">删除</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="">商品名称商品名称商品名称商品名称商品名称商品名称</a></td>
-                            <td>￥200.00</td>
-                            <td>2</td>
-                            <td style="color:#f60;">￥400</td>
-                            <td><a href="" style="color:#3897d7;">删除</a></td>
-                        </tr>
+                        </#list>
+                       
                         <tr>
                             <td colspan="5" style="text-align:right"><a href="" style="color:#f60; text-decoration:underline;">查看更多 >></a></td>
                         </tr>

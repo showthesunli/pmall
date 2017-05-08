@@ -116,29 +116,4 @@ public class ShoppingCartController extends HisuBaseControllerAdapter {
         return "/shoppingCart";
     }
 
-    /*
-    //初始化购物车
-    protected void  initShoppingCart(String str) throws UnsupportedEncodingException {
-        if (str == null){
-            //cookie中不存在购物车
-            this.shoppingCartService.getShoppingCart().initShoppingCart();
-        }else {
-            //cookie中存在购物车
-            byte[] byteStr = Base64.getUrlDecoder().decode(str);
-            this.shoppingCartService.getShoppingCart().initShoppingCart(new String(byteStr,"UTF-8"));
-        }
-    }
-
-    //将购物车内商品条目写入cookie
-    protected void writBuyerItemsToCookie(HttpServletResponse rsp) throws UnsupportedEncodingException {
-        String base64Items = Base64.getUrlEncoder().encodeToString(JSON.toJSONString(shoppingCartService.getShoppingCart().getBuyerItemList()).getBytes("UTF-8"));
-        Cookie cookie = new Cookie("SHOPPINGCART-ITEMS", base64Items);
-        //设置path是可以共享cookie
-        cookie.setPath("/");
-        //设置Cookie过期时间: -1 表示关闭浏览器失效  0: 立即失效  >0: 单位是秒, 多少秒后失效
-        cookie.setMaxAge(10*24*60*60);
-        //5,Cookie写会浏览器
-        rsp.addCookie(cookie);
-    }
-    */
 }

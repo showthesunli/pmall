@@ -14,7 +14,6 @@ import java.util.List;
  * 购物车实体类
  */
 public class ShoppingCart {
-    private final Log logger = LogFactory.getLog(ShoppingCart.class);
     //商品总金额
     private double prdMoney;
     //商品总数量

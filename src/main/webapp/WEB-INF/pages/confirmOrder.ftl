@@ -7,9 +7,10 @@
 <link rel="stylesheet" type="text/css" href="<@spring.url '/css/css.css'/>"/>
 <link rel="stylesheet" type="text/css" href="<@spring.url '/css/style.css'/>"/>
 <link rel="stylesheet" type="text/css" href="<@spring.url '/css/model.css'/>"/>
-<script type="text/javascript" src="<@spring.url '/js/gd_Index.js'/>"></script>
+<#--<script type="text/javascript" src="<@spring.url '/js/gd_Index.js'/>"></script>-->
 <script type="text/javascript" src="<@spring.url '/js/jquery-1.7.2.min.js'/>"></script>
 <script language="javascript" src="<@spring.url '/js/menu.js'/>" ></script>
+    <script type="text/javascript" src="<@spring.url '/js/util.js'/>"></script>
 <style>
 .jf-productList{ width:323px; margin:0 10px 10px 0; background:none;}
 .jf-productList:hover{ background:#faecec;}
@@ -38,7 +39,7 @@
     <!--头部-->
     <#include "/lib/template/header.ftl" encoding="UTF-8">
     <!--end 头部-->
-        
+
     <div class="jf-main">
         <div class="ny_nav">
             <div class="ny_nav1">当前位置：<a href='<@spring.url "/index"/>'>首页</a> > 购物车</div>
@@ -50,7 +51,7 @@
         <div class="orderItem jf-width1000 jf-overflowH">
             <div class="orderItemTitel jf-overflowH">
                 <h4>收货信息</h4>
-                <div class="defaultDiv jf-overflowH">
+                <div class="defaultDiv jf-overflowH" id="selectDiv">
                     <#if queryMemberAddress[0]??>
                         <label class="addrName">${queryMemberAddress[0].name}</label>
                         <label class="addrPhone">${queryMemberAddress[0].phone}</label>
@@ -147,8 +148,8 @@
                 <div class="jf-cartItem">
                     <#list buyerItemList as item>
                         <div class="width200 cartItemTitle" style="width:680px;">
-                            <a href="#"><img src="<@spring.url '/imgsrc/${item.fileName}'/>" width="80" height="50" /></a>
-                            <a href="#" style="width:555px; margin-left:10px;">${item.prdName}</a>
+                            <a href="<@spring.url '/proshow;prdNo=${item.prdNo};keyWordsFld=${item.prdNo};'/>"><img src="<@spring.url '/imgsrc/${item.fileName}'/>" width="80" height="50" /></a>
+                            <a href="<@spring.url '/proshow;prdNo=${item.prdNo};keyWordsFld=${item.prdNo};'/>" style="width:555px; margin-left:10px;">${item.prdName}</a>
                         </div>
 
                         <div class="width100 jf-exchange" style="line-height:40px;">${item.money}分</div>
@@ -182,19 +183,27 @@
         </div>
         <!--end订单信息-->
              
-        <p class="jf-overflowH jf-width1000"><input type="button" value="确定下单"  class="btnBgS cartExBtn" style="margin:10px 10px 30px 0;" onclick="window.location='<@spring.url "/buycfm"/>'" /></p>
-                   
+        <#--<p class="jf-overflowH jf-width1000"><input type="button" value="确定下单"  class="btnBgS cartExBtn" style="margin:10px 10px 30px 0;" onclick="window.location='<@spring.url "/buycfm"/>'" /></p>-->
+        <p class="jf-overflowH jf-width1000"><input type="button" value="确定下单"  class="btnBgS cartExBtn" style="margin:10px 10px 30px 0;" id="go" /></p>
+
         <!--确认订单列表 end-->
             
     </div>
         
     <!--合作伙伴-->
-    <#include "/lib/template/partner.ftl" encoding="UTF-8">
+    <#--<#include "/lib/template/partner.ftl" encoding="UTF-8">-->
     <!--end 合作伙伴-->
 
     <!--底部-->
     <#include "/lib/template/footer.ftl" encoding="UTF-8">
     <!--end 底部-->
+<form action="<@spring.url '/buycfm'/>" method="post" id="formGo">
+    <input name="addr" type="hidden"/>
+    <input name="receiverName" type="hidden"/>
+    <input name="mobile" type="hidden"/>
+    <input name="payToolIDList" type="hidden"/>
+    <input name="_csrf" value="${_csrf.token}" type="hidden"/>
+</form>
 
 </body>
 
@@ -216,6 +225,22 @@ $(document).ready(function(e) {
             $(".defaultDiv .address").text(addr);
         }
     });
+    //点击下单按钮
+    $("#go").click(function(){
+        var action="<@spring.url '/buycfm'/>";
+        var receiverName = $("#selectDiv").find(".addrName").html();
+        $("input[name='receiverName']").val(receiverName)
+        var addr = $("#selectDiv").find(".address").html();
+        $("input[name='addr']").val(addr)
+        var mobile = $("#selectDiv").find(".addrPhone").html();
+        $("input[name='mobile']").val(mobile)
+        var payToolIDList = "东方航空-积分支付";
+        $("input[name='payToolIDList']").val(payToolIDList)
+        var str ="payToolIDList="+payToolIDList+"&receiverName="+receiverName+"&addr="+addr+"&mobile="+mobile+"&_csrf=${_csrf.token}";
+        alert(str)
+        $("#formGo").submit();
+//        p2fSubmit(str,action);
+    })
 
     //发票修改
     $(".invoiceDiv").click(function () {
