@@ -609,7 +609,7 @@ function IndexsendLeaveword(src) {
         return;
     }
     showProc(src);
-    $.post("/ajax.ashx?action=IndexsendAgentApply&t=" + Math.random(), {
+    $.post("/pmall/modifyMemberInfo&t=" + Math.random(), {
         verName: verName,
         verContent: verContent,
         verCode: verCode,
@@ -628,4 +628,71 @@ function IndexsendLeaveword(src) {
         }
         showProc(src, false);
     });
+}
+
+
+//个人中心修改
+function postMyInformation() {
+	var memberID = $("#myInformation #memberID").val();
+	//alert(memberID);
+	var email = $("#myInformation #email").val();
+	var mobile = $("#myInformation #mobile").val();
+	var gender = $("#myInformation #gender").val();
+	var token = $("#myInformation #_csrf").val();
+	var jsonStr = "{";
+	jsonStr += "\"_csrf\" : \"" + token + "\",";
+	jsonStr += "\"memberID\" : \"" + memberID + "\",";
+	jsonStr += "\"mobile\" : \"" + mobile + "\",";
+	jsonStr += "\"email\" : \"" + email + "\",";
+	jsonStr += "\"gender\" : \"" + gender + "\"";
+	jsonStr +="}";
+	var urlParams = $.parseJSON(jsonStr);
+	
+	$.ajax({
+        url : "/pmall/modifyMemberInfo",
+        type : "POST",
+        data : urlParams,
+        cache : false,
+        async : false,
+        dataType : "json",
+        success : function(json){
+           alert("修改成功");
+        },
+        error : function(){
+        	//$a("修改成功");
+        	alert("修改成功!");
+	    }
+    }).done(function() {
+       
+    });
+}
+
+//删除收货地址
+function deleteAddr(token, objectID) {
+    var jsonStr = "{";
+	jsonStr += "\"_csrf\" : \"" + token + "\",";
+	jsonStr += "\"objectID\" : \"" + objectID + "\"";
+	jsonStr +="}";
+	
+	var urlParams = $.parseJSON(jsonStr);
+	
+	$.ajax({
+        url : "/pmall/deleteAddr",
+        type : "POST",
+        data : urlParams,
+        cache : false,
+        async : false,
+        dataType : "json",
+        success : function(json){
+           alert("删除成功");
+        },
+        error : function(){
+        	//$a("修改成功");
+        	alert("删除成功!");
+	    }
+    }).done(function() {
+       
+    });
+    
+    
 }

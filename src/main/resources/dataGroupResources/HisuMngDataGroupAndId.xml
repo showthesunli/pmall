@@ -199,5 +199,48 @@
                      </map>
               </constructor-arg>
        </bean>
-       
+
+       <!-- 查询订单信息 -->
+       <bean id="queryOrder" class="cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId">
+              <constructor-arg>
+                     <map>
+                            <entry key="jf_memberCenter" >
+                                   <list>
+                                          <ref bean="queryOrderByBillNo"/>
+                                   </list>
+                            </entry>
+                     </map>
+              </constructor-arg>
+       </bean>
+       <bean id="queryOrderByBillNo" class="cn.highsuccess.config.systemproperties.HisuMngDataIdArgs">
+              <constructor-arg index="0" value="queryMemberOrder"/>
+              <constructor-arg index="1">
+                     <list>
+                            <value>billNo</value>
+                     </list>
+              </constructor-arg>
+       </bean>
+
+       <!--personal center 查询个人卡片 -->
+       <bean id="queryPensonalCenterCard" class="cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId">
+              <constructor-arg>
+                     <map>
+                            <entry key="jf_memberCenter" >
+                                   <list>
+                                          <ref bean="queryPensonalCard"/>
+                                   </list>
+                            </entry>
+                     </map>
+              </constructor-arg>
+       </bean>
+       <bean id="queryPensonalCard" class="cn.highsuccess.config.systemproperties.HisuMngDataIdArgs">
+              <constructor-arg index="0" value="queryPensonalCard"/>
+              <constructor-arg index="1">
+                     <list>
+                            <value>memberID</value>
+                            <value>currentPage</value>
+                            <value>numOfPerPage</value>
+                     </list>
+              </constructor-arg>
+       </bean>
 </beans>

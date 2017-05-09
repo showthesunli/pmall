@@ -69,7 +69,6 @@ public class RootConfig {
         return new SendSmsImpl();
     }
 
-
     @Bean
     @Scope(value = WebApplicationContext.SCOPE_SESSION,proxyMode = ScopedProxyMode.TARGET_CLASS)
     public ShoppingCart shoppingCart(){

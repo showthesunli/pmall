@@ -33,11 +33,11 @@
             
             <div class="jf-cart jf-width1000">
             	<div class="orderDtl">
-                	<p>订单号码：216541231543521</p>
+                	<p>订单号码：${queryMemberOrder[0].billNo}</p>
                     <p>订单产品：</p>
-                    <p>下单时间：2016-06-16 15:00:00</p>
-                    <p>订单状态：等待支付</p>
-                    <p>支付金额：<span style="font-weight:bold; font-size:16px; color:#f60">￥200.00</span></p>
+                    <p>下单时间：${queryMemberOrder[0].saleDateTime}</p>
+                    <p>订单状态：${queryMemberOrder[0].orderStatus}</p>
+                    <p>支付金额：<span style="font-weight:bold; font-size:16px; color:#f60">￥${queryMemberOrder[0].totalPrice}</span></p>
                 </div>
                 
                 <!--<div class="jf-overflowH" style="border:2px solid #f60; padding:20px; margin:10px 0;">
@@ -116,5 +116,51 @@ $(document).ready(function(e) {
 		$(this).addClass("exPoint");
 		})
 });
+
+    var useTime = 0;
+    var statusMsg = {
+    doStatus: function (billNo) {
+        if (billNo == null || billNo == "null" || billNo == "") {
+            statusMsg.printText(2, "订单号无效！");
+            return;
+        }
+        $.post("member/orderStatus.jsp?billNo=" + billNo, function (data) {
+            var statusStr = data.substr(data.indexOf("=") + 1);
+            var status = parseInt(statusStr.split("*-*")[0]);
+            var msg = statusStr.split("*-*")[1];
+            if (status == 0) {
+                statusMsg.printText(0);
+                setTimeout(function () {
+                    statusMsg.doStatus(billNo);
+                }, 500);
+            } else if (status == 1) {
+                //statusMsg.printText(1);
+                location.href = "member/buycfm.jsp?billNo=<%=billNo%>";
+            } else if (status > 1) {
+                statusMsg.printText(2, msg);
+            }
+        }, "text");
+    },
+    printText: function (type, msg) {
+        if (type == 0) {
+            var text = "<span style='font-size:16px;'><img src='images/loading.gif' style='vertical-align:middle;'> 正在提交订单，请稍后......</span>";
+            $("#orderMsg").html(text);
+        } else if (type == 1) {
+            $("#orderMsg").css({
+                "padding-top": "10px",
+                "height": "50px"
+            }).html("票券分配成功，请点击“查看订单”来完成支。<br/>如订单在45分钟内未支付，则会自动撤销！");
+        } else if (type == 2) {
+            $("#orderMsg").css("color", "#d51a6d").html("分配票券失败，因为：" + msg);
+        }
+    },
+    initStatus: function (billNo) {
+        statusMsg.printText(0);
+        setTimeout(function () {
+            statusMsg.doStatus(billNo);
+        }, 100);
+    }
+}
+statusMsg.initStatus("${queryMemberOrder[0].billNo}")
 </script>
 </html>

@@ -11,6 +11,7 @@
 <link rel="stylesheet" type="text/css" href="<@spring.url '/css/style.css'/>"/>
 <script type="text/javascript" src="<@spring.url '/js/jquery.js'/>"></script>
 <script language="javascript" src="<@spring.url '/js/menu.js'/>" ></script>
+<script language="javascript" src="<@spring.url '/js/util.js'/>" ></script>
 <style>
 .myAddress .myAddressItem{ border:2px solid #eee; padding:10px 15px; margin-top:10px;}
 .myAddressItem div{ margin-bottom:0;}
@@ -47,18 +48,18 @@
                 <h1 class="baseinfo-Title">个人信息</h1>
                 <div class="myDetial">
                     <div class="myDetial-Title"><h2 class="bgOcoF myBase">基本信息</h2><h2 class="myAddr">收货地址</h2></div>
-                    <div class="myDetialList myBaseInfor">
+                    <div id="myInformation" class="myDetialList myBaseInfor">
                         <div>
                             <label class="detialLabel">我的账号：</label>
-                            <input type="text" value="${memberInfo[0].memberID}" class="myDetialTxt inputRO" readOnly="true"  />
+                            <input id="memberID" type="text" value="${memberInfo[0].memberID}" class="myDetialTxt inputRO" readOnly="true"  />
                         </div>
                         <div>
                             <label class="detialLabel">手机号码：</label>
-                            <input type="text" value="${memberInfo[0].mobile}" class="myDetialTxt inputRO" readOnly="true" />
+                            <input id="mobile" type="text" value="${memberInfo[0].mobile}" class="myDetialTxt inputRO" readOnly="true" />
                         </div>
                         <div>
                             <label class="detialLabel">我的邮箱：</label>
-                            <input type="text" value="${memberInfo[0].email}" class="myDetialTxt inputRO" readOnly="true" />
+                            <input id="email" type="text" value="${memberInfo[0].email}" class="myDetialTxt inputRO" readOnly="true" />
                         </div>
                         <div>
                             <label class="detialLabel">性<span class="lwidth"></span>别：</label>
@@ -93,7 +94,9 @@
                             <p>
                         </div>
                         <div>
-                            <input type="submit" value="提交" class="detialBtn" />
+                        	<input type="hidden" id="${_csrf.parameterName}" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                        	
+                            <input type="button" value="提交" onclick="postMyInformation()" class="detialBtn" />
                         </div>
                     </div>
 
@@ -109,13 +112,15 @@
                                 <div class="addrOperBtn">
                                     <span class="setToDefAddr" style="display:none;">设为默认</span>
                                     <span class="modifyAddr">编辑</span>
-                                    <span onclick="openTipDiv('tipDiv','确认要删除？')">删除</span>
+                                    <span class="deleteAddr" ttoken="${_csrf.token}" objId="${key.objectID}">删除</span>
                                 </div>
                             </div>
                             <div><label>收货人：</label><span class="addrN">${key.name}</span></div>
                             <div><label>收货地址：</label><span class="addrA">${key.addr}</span></div>
                             <div><label>手机号码：</label><span class="addrP">${key.phone}</span></div>
+                            <div><label>收货地址ID：</label><span class="addrID">${key.objectID}</span></div>
                         </div>
+                        
 						</#list>
                         
                     </div>
@@ -178,6 +183,16 @@ $(document).ready(function(e) {
         $('#addressAddr').val('');
         $('#addressPhone').val('');
     });
+
+    //打开文本编辑框点击a标签
+	$(".deleteAddr").each(function(){
+		$(this).click(function(event){
+			var $this = $(this);
+			deleteAddr($this.attr("ttoken"),$this.attr("objId"));
+			return false;
+		});
+	});
+    
     //编辑地址
     $('.modifyAddr').click(function(){
         var a = $(this).parent().parent().parent();

@@ -67,13 +67,14 @@ public class OrderService implements OrderServiceProvider{
         if (this.getJavaOperate().getReturnCode() < 0 ){
             return false;
         }else {
+            this.getOrder().setOrderNo(this.getJavaOperate().getResponseData().optString("billNo"));
             return true;
         }
     }
 
     @Override
     public void payOrder() {
-
+        this.getJavaOperate().service("w_mmbCenterPage","btnGenOrderPaySsn","billNo=201705091640040003240001|payer=00000001");
     }
 
     @Override

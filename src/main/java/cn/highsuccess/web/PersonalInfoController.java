@@ -58,21 +58,23 @@ public class PersonalInfoController extends HisuBaseControllerAdapter{
     
     //修改个人信息
     @RequestMapping(value = "/modifyMemberInfo",method = RequestMethod.POST)
-    public String registerProcess(Model model,
+    public String modifyMemberInfo(Model model,
                                   @RequestParam String memberID,
                                   @RequestParam String mobile,
                                   @RequestParam String email,
-                                  @RequestParam String gender,
-                                  Errors errors){
+                                  @RequestParam String gender
+                                  ){
         logger.debug("/modifyMemberInfo : post");
         logger.debug("memberID :" + memberID);
         logger.debug("mobile :" + mobile);
-        if (errors.hasErrors()){
-            handleError(model,errors);
-            return "/myInformation";
-        }
-        this.getJavaOperate().service("w_mainPage","mobileRegister","memberID="+memberID+"|mobile=" + mobile + "|email="+email+"|gender=" + gender + "|");
-        return "/myInformation";
+        StringBuilder condition = new StringBuilder();
+        condition.append("memberID=").append(memberID).append("|");
+        condition.append("mobile=").append(mobile).append("|");
+        condition.append("email=").append(email).append("|");
+        condition.append("gender=").append(gender).append("|");
+        this.getJavaOperate().service("w_mmbCenterPage","cytModMmbInfo",condition.toString());
+
+        return "redirect:/myInformation";
     }
 
 }

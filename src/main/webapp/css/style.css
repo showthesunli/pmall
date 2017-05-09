@@ -65,6 +65,7 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input
 .iconLInfor{ background-position: 0 0;}
 .iconLOrder{ background-position: 0 -22px;}
 .iconLPoint{ background-position: 0 -44px;}
+.iconLCard{ background-position: 0 -64px;}
 .memberMain-Right{ width: 970px; float: right; padding: 20px;}
 .memberMainR-Baseinfo{ overflow: hidden; border-bottom: 3px solid #eee; padding:10px 30px 20px;}
 .memberMainR-Baseinfo img{ border-radius:50%; float: left;}
