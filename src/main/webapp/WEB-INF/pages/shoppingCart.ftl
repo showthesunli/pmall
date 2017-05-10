@@ -48,8 +48,13 @@
                             </div>
                             -->
                             <div class="width200 cartItemTitle" style="width:500px;">
-                                <a href="<@spring.url '/proshow;prdNo=${item.prdNo};keyWordsFld=${item.prdNo};'/>"><img src="<@spring.url '/imgsrc/${item.fileName}'/>" width="60" height="40" onerror="downloadErrImg(this,'${item.fileName}','../imgsrc')"/></a>
-                                <a href="<@spring.url '/proshow;prdNo=${item.prdNo};keyWordsFld=${item.prdNo};'/>" style="width:435px;">${item.prdName}</a>
+								<#if item.fileName != "">
+                                    <a href="<@spring.url '/proshow;prdNo=${item.prdNo};keyWordsFld=${item.prdNo};'/>"><img src="<@spring.url '/imgsrc/${item.fileName?if_exists}'/>" width="60" height="40" onerror="downloadErrImg(this,'${item.fileName?if_exists}','../imgsrc')"/></a>
+                                    <a href="<@spring.url '/proshow;prdNo=${item.prdNo};keyWordsFld=${item.prdNo};'/>" style="width:435px;">${item.prdName?if_exists}</a>
+									<#else >
+                                        <a href="<@spring.url '/proshow;prdNo=${item.prdNo};keyWordsFld=${item.prdNo};'/>"><img src="<@spring.url '/imgsrc/${item.fileName?if_exists}'/>" width="60" height="40" /></a>
+                                        <a href="<@spring.url '/proshow;prdNo=${item.prdNo};keyWordsFld=${item.prdNo};'/>" style="width:435px;">${item.prdName?if_exists}</a>
+								</#if>
                             </div>
                             <div class="width200 jf-exchange" style="line-height:40px;">${item.money}分</div>
                             <#--<div class="width100" style="line-height:40px;">1/1000</div>-->

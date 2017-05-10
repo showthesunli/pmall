@@ -80,7 +80,7 @@ public class RoutingController extends HisuBaseControllerAdapter{
     }
 
     @ResponseBody
-    @RequestMapping(value = "/sendMcode")
+    @RequestMapping(value = "/sendMcode",produces = "application/json;charset=UTF-8;")
     public String sendMcode(Model model,
                             HttpServletRequest req,
                             @MatrixVariable Map<String,String> map,
@@ -96,8 +96,12 @@ public class RoutingController extends HisuBaseControllerAdapter{
         HisuMngDataGroupAndId hisuMngDataGroupAndId = (HisuMngDataGroupAndId) ac.getBean("sendMcode");
 //        excute(model, param, hisuMngDataGroupAndId);
         excuteOperate(model, param, hisuMngDataGroupAndId);
-        
-        this.sendSms.sendMcode(mobile, "您本次的验证码为 ："+((Map<String,String>)model.asMap().get("mobileAuthcode")).get("authCode"));
+
+        if (((Map<String,String>)model.asMap().get("mobileAuthcode")).get("authCode") != null){
+            this.sendSms.sendMcode(mobile, "您本次的验证码为 ："+((Map<String,String>)model.asMap().get("mobileAuthcode")).get("authCode"));
+            return ((Map<String,String>)model.asMap().get("mobileAuthcode")).get("authCode");
+
+        }
         return  this.getJavaOperate().getResponseData().toString();
     }
 

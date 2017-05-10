@@ -87,7 +87,7 @@ public class confirmOrder extends HisuBaseControllerAdapter{
             return "/buycfm";
         }else {
             //返回下单出错页面
-            return "redirect:/";
+            return "redirect:/placeOrderFailed";
         }
     }
 

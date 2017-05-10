@@ -81,7 +81,11 @@
         <div class="jf-width1000 jf-overflowH">
             <div class="cIntroImg con-FangDa" id="fangdajing">
                 <div class="picBig con-fangDaIMg">
-                    <#assign filename=querySingleProuctImageGrp[0].fileName>
+                    <#if querySingleProductImageGrp??>
+                        <#assign filename=querySingleProuctImageGrp[0].fileName>
+                    <#else >
+                        <#assign filename=''>
+                    </#if>
                     <a href="#" class="bImg"><img src="<@spring.url '/imgsrc/${filename}'/>" onerror="downloadErrImg(this,'${filename}');" width="430" height="280" id="bigimg"></a>
 
                     <!-- 滑块-->
@@ -94,10 +98,15 @@
                     <div class="imgClickBg" id="imgPrevious" ></div>
                     <div class="cImglist">
                         <ul class="sImgList" id="list">
+                            <#if querySingleProuctImageGrp??>
                             <#list querySingleProuctImageGrp as item>
                                 <li><img src="<@spring.url '/imgsrc/${item.fileName}'/>" width="110" height="72" onerror="downloadErrImg(this,'${item.fileName}')";)">
                                 </li>
                             </#list>
+                            <#else >
+                                <li><img src="<@spring.url '/images/default.gif'/>" width="110" height="72" >
+                                </li>
+                            </#if>
                         </ul>
                     </div>
                     <div class="imgClickBg" id="imgNext" ></div>

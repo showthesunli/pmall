@@ -203,15 +203,26 @@
 
         //ajax发送验证码
         var phoneNumber = $("#phone").val();
+        var mcode = "";
+        var $this = this;
         $.ajax({
             url:"<@spring.url '/sendMcode'/>",
             data:"mobile="+phoneNumber,
             type:"GET",
             dataType: "json",
             success: function (data) {
-               
+                if(data['错误原因']){
+                    if ($("#phone-error").length == 0) {
+                        $('#phone').after('<label id="phone-error" class="error" for="phone">手机号码重复</label>');
+                    } else{
+                        $("#phone-error").css('display','block').text("手机号码重复");
+                    }
+//                        $("#phone-error").css('display','block');
+                }else{
+                    time($this);
+                }
             }
         })
-        time(this);
+//        time(this);
     });
 </script>

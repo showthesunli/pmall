@@ -78,7 +78,7 @@
                         </tr>
                         <#list queryMemberOrder as key>
                         <tr>
-                            <td><a href="">${key.billNo}</a></td>
+                            <td><a href="<@spring.url '/buycfm;billNo=${key.billNo};'/>">${key.billNo}</a></td>
                             <td>￥${key.totalPrice}</td>
                             <td>${key.deliveryStatus}</td>
                             <td>${key.orderStatus}</td>

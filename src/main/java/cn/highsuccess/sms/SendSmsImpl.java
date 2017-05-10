@@ -77,7 +77,7 @@ public class SendSmsImpl implements SendSms{
             JSONObject resJson = JSONObject.fromObject(resStr);
             JSONObject resultJson = resJson.getJSONObject("result");
             if(resultJson.getBoolean("result")){
-                return resJson.getBoolean("result");
+                return resultJson.getBoolean("result");
             }
             return false;
         }else {
