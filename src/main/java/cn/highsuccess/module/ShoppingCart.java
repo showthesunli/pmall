@@ -26,7 +26,7 @@ public class ShoppingCart {
     }
 
     public void initShoppingCart(){
-        this.buyerItemList = new ArrayList<BuyerItem>();
+        this.buyerItemList = new LinkedList<BuyerItem>();
     }
 
     public List<BuyerItem> getBuyerItemList() {

@@ -6,6 +6,8 @@ import cn.highsuccess.module.ShoppingCart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Iterator;
+
 /**
  * Created by prototype on 2017/5/6.
  */
@@ -37,6 +39,7 @@ public class ShoppingCartService implements ShoppingCartServiceProvider {
 
     @Override
     public boolean delProduct(BuyerItem buyerItem) {
+        /**
         if (shoppingCart.getBuyerItemList().contains(buyerItem)){
             for (BuyerItem item : shoppingCart.getBuyerItemList()){
                 if (item.equals(buyerItem)){
@@ -46,6 +49,19 @@ public class ShoppingCartService implements ShoppingCartServiceProvider {
                     }else {
                         item.setAmount(amount);
                     }
+                }
+            }
+        }
+         **/
+        Iterator<BuyerItem> it = shoppingCart.getBuyerItemList().iterator();
+        while (it.hasNext()){
+            BuyerItem item = it.next();
+            if (item.equals(buyerItem)){
+                int amount = item.getAmount() - buyerItem.getAmount();
+                if (amount <= 0){
+                    it.remove();
+                }else {
+                    item.setAmount(amount);
                 }
             }
         }

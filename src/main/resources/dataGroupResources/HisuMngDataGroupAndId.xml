@@ -243,4 +243,43 @@
                      </list>
               </constructor-arg>
        </bean>
+
+       <!-- 在线购卡详情页 purchaseshow.ftl PurchaseShowController-->
+       <bean id="purchaseshow" class="cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId">
+              <constructor-arg>
+                     <map>
+                            <entry key="jf_cardList" >
+                                   <list>
+                                          <ref bean="queryPrdDetail"/>
+                                          <ref bean="queryPrdAllSpecByPrdNo"/>
+                                          <ref bean="querySingleProuctImageGrp"/>
+                                   </list>
+                            </entry>
+                     </map>
+              </constructor-arg>
+       </bean>
+       <bean id="queryCrdDetail" class="cn.highsuccess.config.systemproperties.HisuMngDataIdArgs">
+              <constructor-arg index="0" value="jf_cardList"/>
+              <constructor-arg index="1">
+                     <list>
+                            <value>prdNo</value>
+                     </list>
+              </constructor-arg>
+       </bean>
+       <bean id="queryCrdAllSpecByPrdNo" class="cn.highsuccess.config.systemproperties.HisuMngDataIdArgs">
+              <constructor-arg index="0" value="jf_cardList"/>
+              <constructor-arg index="1">
+                     <list>
+                            <value>keyWordsFld</value>
+                     </list>
+              </constructor-arg>
+       </bean>
+       <bean id="querySingleCardImageGrp" class="cn.highsuccess.config.systemproperties.HisuMngDataIdArgs">
+              <constructor-arg index="0" value="jf_cardList"/>
+              <constructor-arg index="1">
+                     <list>
+                            <value>prdNo</value>
+                     </list>
+              </constructor-arg>
+       </bean>
 </beans>

@@ -32,23 +32,12 @@ public class PersonalCenterController extends HisuBaseControllerAdapter{
     }
 
     @GetMapping(value = "/member{matrix}")
-    public String showProductList(Model model,
-                                 /* @MatrixVariable(required = false,defaultValue = "1") int currentPage,
-                                  @MatrixVariable(required = false,defaultValue = "12") int numOfPerPage,*/
-                                  @MatrixVariable(required = false) Map<String,String> map) throws JSONException {
+    public String membershow(Model model,
+                             @MatrixVariable(required = false) Map<String,String> map) throws JSONException {
         logger.debug("personalCenterInfo process");
-       Map<String,Object> param = new HashMap<>(map);
-       param.put("memberID", this.getJds().getUserName());
-       /* if (param.get("currentPage") == null){
-            param.put("currentPage",currentPage);
-        }
-        if (param.get("numOfPerPage") == null){
-            param.put("numOfPerPage",numOfPerPage);
-        }*/
+        Map<String,Object> param = new HashMap<>(map);
+        param.put("memberID", this.getJds().getUserName());
         excute(model, param, hisuMngDataGroupAndId);
-        /*model.addAttribute("currentPage", currentPage);
-        model.addAttribute("numOfPerPage",numOfPerPage);*/
         return "/member";
     }
-
 }

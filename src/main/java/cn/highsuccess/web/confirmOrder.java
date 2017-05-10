@@ -6,6 +6,9 @@ import cn.highsuccess.data.JavaOperate;
 import cn.highsuccess.data.serivce.OrderService;
 import cn.highsuccess.data.serivce.ShoppingCartService;
 import cn.highsuccess.module.Order;
+import com.alibaba.fastjson.JSON;
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -98,7 +101,6 @@ public class confirmOrder extends HisuBaseControllerAdapter{
             param.put("billNo",orderService.getOrder().getOrderNo());
             excute(model,param,queryOrder);
         }
-        orderService.payOrder();
         //返回购买确认页面
         return "/buycfm";
     }
@@ -106,12 +108,29 @@ public class confirmOrder extends HisuBaseControllerAdapter{
     @RequestMapping(value = "/queryorder{matrix}",produces = "application/json;charset=UTF-8;")
     @ResponseBody
     public String queryOrderInfo(Model model,
-                               @MatrixVariable Map<String,Object> map){
-        excute(model,map,queryOrder);
+                               @MatrixVariable Map<String,Object> map) throws JSONException {
+        excute(model, map, queryOrder);
         Map<String,Object> retMap = new HashMap<>(model.asMap());
-        JSONObject jo = new JSONObject(retMap);
-        logger.debug(jo.toString());
-        return jo.toString();
+        String retString = JSON.toJSONString(retMap);
+        logger.debug(JSON.toJSONString(retMap));
+        JSONObject jsonObject = new JSONObject(retString);
+        JSONArray ja = jsonObject.optJSONArray("queryMemberOrder");
+        JSONObject jo = ja.optJSONObject(0);
+        String orderStatus = jo.optString("orderStatus");
+//        JSONObject jo = new JSONObject(retMap);
+//        JSONArray ja = (JSONArray)retMap.get("queryMemberOrder");
+//        logger.debug(jo.optJSONObject("queryMemberOrder").optString("orderStatus"));
+//        logger.debug(ja.optJSONObject(0).optString("orderStatus"));
+
+        String status="";
+        String errorMsg="";
+        switch (orderStatus){
+            case "等待支付": status="1";break;
+            case "提交失败": status="2";errorMsg=jo.optString("remark");break;
+            case "已提交": status="0";break;
+            default: status="3";
+        }
+        return "status=" + status + "*-*" + errorMsg;
     }
 
     //删除送货地址
@@ -127,25 +146,34 @@ public class confirmOrder extends HisuBaseControllerAdapter{
 
         return "redirect:/myInformation";
     }
-    
     //增加送货地址
     @RequestMapping(value = "/addAddr",method = RequestMethod.POST)
     public String addAddr(Model model,
-                                  @RequestParam String memberID,
-                                  @RequestParam String mobile,
-                                  @RequestParam String email,
-                                  @RequestParam String gender
+    							  @RequestParam String operType,
+    							  @RequestParam String province,
+                                  @RequestParam String city,
+                                  @RequestParam String area,
+                                  @RequestParam String addr,
+                                  @RequestParam String zip,
+                                  @RequestParam String name,
+                                  @RequestParam String phone,
+                                  @RequestParam String isDefault
                                   ){
-        logger.debug("/deleteAddr : post");
-        logger.debug("memberID :" + memberID);
-        logger.debug("mobile :" + mobile);
+        logger.debug("/addAddr : post");
         StringBuilder condition = new StringBuilder();
-        condition.append("memberID=").append(memberID).append("|");
-        condition.append("mobile=").append(mobile).append("|");
-        condition.append("email=").append(email).append("|");
-        condition.append("gender=").append(gender).append("|");
-        this.getJavaOperate().service("jf_memberCenter","btnAddUserAddr",condition.toString());
-
+        condition.append("province=").append(province).append("|");
+        condition.append("city=").append(city).append("|");
+        condition.append("area=").append(area).append("|");
+        condition.append("addr=").append(addr).append("|");
+        condition.append("zip=").append(zip).append("|");
+        condition.append("name=").append(name).append("|");
+        condition.append("phone=").append(phone).append("|");
+        condition.append("isDefault=").append(isDefault);
+        if("0".equals(operType)){//增加
+        	this.getJavaOperate().service("jf_memberCenter","btnAddUserAddr",condition.toString());
+        }else{//修改
+        	this.getJavaOperate().service("jf_memberCenter","btnModUserAddr",condition.toString());
+        }
         return "redirect:/myInformation";
     }
 }

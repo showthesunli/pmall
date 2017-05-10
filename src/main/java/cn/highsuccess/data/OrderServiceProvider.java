@@ -11,7 +11,7 @@ public interface OrderServiceProvider {
 
     public boolean placeOrder();
 
-    public void payOrder();
+    public boolean payOrder();
 
     public String generateCondition();
 

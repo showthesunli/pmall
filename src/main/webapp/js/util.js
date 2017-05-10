@@ -693,6 +693,60 @@ function deleteAddr(token, objectID) {
     }).done(function() {
        
     });
+}
+
+//增加收货地址
+function saveAddr() {
+	
+	var jsonStr = "{";
+	var token = $('#_csrf').val();
+	jsonStr += "\"_csrf\" : \"" + token + "\",";
+	//operType用于判断：增加or更新操作  0：增加；1：更新
+	var operType = $('#operType').val();
+	jsonStr += "\"operType\" : \"" + operType + "\",";
+	
+	
+	var addrName = $('#addressName').val();
+	jsonStr += "\"addrName\" : \"" + addrName + "\",";
+	
+    var addressAddr = $('#addressAddr').val();
+    jsonStr += "\"addr\" : \"" + addressAddr + "\",";
     
+    var addressPhone = $('#addressPhone').val();
+    jsonStr += "\"phone\" : \"" + addressPhone + "\",";
     
+    jsonStr += "\"province\" : \"广东省\",";
+    jsonStr += "\"city\" : \"广州\",";
+    jsonStr += "\"area\" : \"天河区\",";
+    jsonStr += "\"zip\" : \"510510\",";
+    jsonStr += "\"name\" : \"sa\",";
+    jsonStr += "\"isDefault\" : \"1\"";
+    
+	jsonStr +="}";
+
+	var urlParams = $.parseJSON(jsonStr);
+	
+	$.ajax({
+        url : "/pmall/addAddr",
+        type : "POST",
+        data : urlParams,
+        cache : false,
+        async : false,
+        dataType : "json",
+        success : function(json){
+        	if(operType=="0")
+        		alert("新增成功");
+        	else
+        		alert("修改成功");
+        },
+        error : function(){
+        	//$a("修改成功");
+        	if(operType=="0")
+        		alert("新增成功");
+        	else
+        		alert("修改成功");
+	    }
+    }).done(function() {
+       
+    });
 }

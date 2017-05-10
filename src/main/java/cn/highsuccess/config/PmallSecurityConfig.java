@@ -33,20 +33,19 @@ public class PmallSecurityConfig extends WebSecurityConfigurerAdapter{
         filter.setForceEncoding(true);
         http.addFilterBefore(filter, CsrfFilter.class);
 
-        http.formLogin().loginPage("/login")
+        http.formLogin().loginPage("/login").defaultSuccessUrl("/member")
             .and()
                 .authorizeRequests()
-                .antMatchers("/member")
-                .authenticated()
-                .antMatchers("/confirmOrder")
-                .authenticated()
+                .antMatchers("/member").authenticated()
+                .antMatchers("/confirmOrder").authenticated()
+                .antMatchers("/buycfm**").authenticated()
             .and()
                 .rememberMe()
-                .tokenValiditySeconds(2419200)
+                .tokenValiditySeconds(4*7*24*60*60)
                 .key("pmallKey")
             .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/");
+                .logoutSuccessUrl("/login");
     }
 }

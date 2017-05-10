@@ -96,12 +96,6 @@
 </html>
 
 <script>
-    //提交表单
-    $.validator.setDefaults({
-        submitHandler: function () {
-            
-        }
-    });
     $().ready(function () {
         // 在键盘按下并释放及提交后验证提交表单
         $("#signupForm").validate({

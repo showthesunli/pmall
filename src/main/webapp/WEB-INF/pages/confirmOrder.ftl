@@ -236,9 +236,7 @@ $(document).ready(function(e) {
         $("input[name='mobile']").val(mobile)
         var payToolIDList = "东方航空-积分支付";
         $("input[name='payToolIDList']").val(payToolIDList)
-        var str ="payToolIDList="+payToolIDList+"&receiverName="+receiverName+"&addr="+addr+"&mobile="+mobile+"&_csrf=${_csrf.token}";
         $("#formGo").submit();
-//        p2fSubmit(str,action);
     })
 
     //发票修改

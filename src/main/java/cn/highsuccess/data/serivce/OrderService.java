@@ -73,8 +73,16 @@ public class OrderService implements OrderServiceProvider{
     }
 
     @Override
-    public void payOrder() {
-        this.getJavaOperate().service("w_mmbCenterPage","btnGenOrderPaySsn","billNo=201705091640040003240001|payer=00000001");
+    public boolean payOrder() {
+        this.getJavaOperate().service("w_mmbCenterPage", "btnGenOrderPaySsn", "billNo=" + this.getOrder().getOrderNo() + "|payer=00000001");
+        String paySsn = this.getJavaOperate().getResponseData().optString("paySsn");
+        if (this.getJavaOperate().getReturnCode() < 0){
+            this.getJavaOperate().service("w_mmbCenterPage","starExprFailPayDeal","payerTransSsn="+paySsn+"|payer=00000001");
+            return false;
+        }else {
+            this.getJavaOperate().service("w_mmbCenterPage","starExprSuccPayDeal","payerTransSsn="+paySsn+"|payer=00000001");
+            return true;
+        }
     }
 
     @Override

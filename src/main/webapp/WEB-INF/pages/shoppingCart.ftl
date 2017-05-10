@@ -32,13 +32,14 @@
             	<div class="jf-cart">
                 	<ul class="jf-cartItemTitle">
                     	<#--<li class="width50"><input id="Checkbox1" type="checkbox"  class="allselect" />全选</li>-->
-                        <li class="width200" style="width:520px;">商品名称</li>
-                        <li class="width200">金额</li>
+                        <li class="width200" style="width:500px;">商品名称</li>
+                        <li class="width200">所需积分</li>
                         <#--<li class="width100">最小/最大购买数量</li>-->
-                        <li class="width200">商品数量</li>
+                        <li class="width100">商品数量</li>
                         <li class="width200">小计</li>
-                        <#--<li class="width100">操作</li>-->
+                        <li class="width100">操作</li>
                     </ul>
+					<#if buyerItemList??>
 					<#list buyerItemList as item>
                         <div class="jf-cartItem">
 							<!--
@@ -46,20 +47,21 @@
                                 <input type="checkbox" value="" name="newslist" style="margin-top:13px;" />
                             </div>
                             -->
-                            <div class="width200 cartItemTitle" style="width:520px;">
+                            <div class="width200 cartItemTitle" style="width:500px;">
                                 <a href="<@spring.url '/proshow;prdNo=${item.prdNo};keyWordsFld=${item.prdNo};'/>"><img src="<@spring.url '/imgsrc/${item.fileName}'/>" width="60" height="40" onerror="downloadErrImg(this,'${item.fileName}','../imgsrc')"/></a>
-                                <a href="<@spring.url '/proshow;prdNo=${item.prdNo};keyWordsFld=${item.prdNo};'/>" style="width:455px;">${item.prdName}</a>
+                                <a href="<@spring.url '/proshow;prdNo=${item.prdNo};keyWordsFld=${item.prdNo};'/>" style="width:435px;">${item.prdName}</a>
                             </div>
-                            <div class="width200 jf-exchange" style="line-height:40px;">￥${item.money}</div>
+                            <div class="width200 jf-exchange" style="line-height:40px;">${item.money}分</div>
                             <#--<div class="width100" style="line-height:40px;">1/1000</div>-->
                             <#--<div class="width100"><span class="cartNumL bgImgS" style="margin-left:15px;"></span><input name="cartNum" type="text" value="${item.amount}" class="cartNum" /><span class="cartNumR bgImgS"></span></div>-->
-                            <div class="width200" style="line-height: 40px">${item.amount}</div>
+                            <div class="width100" style="line-height: 40px">${item.amount}</div>
                             <div class="width200">
-                                <p>￥<span class="exchangeCount" style=" line-height:40px;">${item.money * item.amount}</span></p>
+                                <p><span class="exchangeCount" style=" line-height:40px;">${item.money * item.amount}</span>分</p>
                             </div>
-                            <#--<div class="cartDlt width100" style="line-height:40px;"><a href="#" onclick="tipOpen()">删除</a></div>-->
+                            <div class="cartDlt width100" style="line-height:40px;"><a href="javascript:delItem('${item.prdNo}','${item.money?c}','${item.amount}')" >删除</a></div>
                         </div>
 					</#list>
+					</#if>
 
 
                                        
@@ -203,6 +205,12 @@ function getVal(){
 		$(".cartBanBtn").removeClass("btnGrey");
 		}
 	}
+
+function delItem(prdNo,money,amount){
+	var url = "<@spring.url '/shoppingCart/delCart'/>";
+	window.location.href = url + "?prdNo=" + prdNo + "&money=" + money +"&amount=" + amount;
+	return false;
+}
 </script>
 
 </html>

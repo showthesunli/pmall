@@ -47,31 +47,36 @@ public class ShoppingCartController extends HisuBaseControllerAdapter {
                            @CookieValue(value = "SHOPPINGCART-ITEMS",required = false)String shoppingCartStr) throws UnsupportedEncodingException {
         //初始化shoppingCart
         this.initShoppingCart(shoppingCartStr,this.shoppingCartService);
-//        model.addAttribute(shoppingCartService.getShoppingCart());
+
+        if (this.shoppingCartService.getShoppingCart().getBuyerItemList().size() != 0){
 
         //根据产品编号查询产品名称
-        StringBuilder sb = new StringBuilder();
-        for (BuyerItem item : shoppingCartService.getShoppingCart().getBuyerItemList()){
-            sb.append(item.getPrdNo()+",");
-        }
-        sb.deleteCharAt(sb.length()-1);
-        this.getJds().service("jf_mainPage","queryPhyPrdInfoByPrdNoList","keyWordsFld="+sb.toString());
-        JSONArray arr = this.getJds().getDataList();
-        for (BuyerItem item : shoppingCartService.getShoppingCart().getBuyerItemList()){
-            for (int i=0;i<arr.length();i++){
-                if (arr.optJSONObject(i).optString("prdNo").equals(item.getPrdNo())){
-                    item.setPrdName(arr.optJSONObject(i).optString("productInfo"));
-                    item.setFileName(arr.optJSONObject(i).optString("iconFileName"));
+        if (shoppingCartStr != null){
+            StringBuilder sb = new StringBuilder();
+            for (BuyerItem item : shoppingCartService.getShoppingCart().getBuyerItemList()){
+                sb.append(item.getPrdNo()+",");
+            }
+            sb.deleteCharAt(sb.length()-1);
+            this.getJds().service("jf_mainPage","queryPhyPrdInfoByPrdNoList","keyWordsFld="+sb.toString());
+            JSONArray arr = this.getJds().getDataList();
+            for (BuyerItem item : shoppingCartService.getShoppingCart().getBuyerItemList()){
+                for (int i=0;i<arr.length();i++){
+                    if (arr.optJSONObject(i).optString("prdNo").equals(item.getPrdNo())){
+                        item.setPrdName(arr.optJSONObject(i).optString("productInfo"));
+                        item.setFileName(arr.optJSONObject(i).optString("iconFileName"));
+                    }
                 }
             }
+        }
         }
 
         model.addAttribute(shoppingCartService.getShoppingCart().getBuyerItemList());
         model.addAttribute(shoppingCartService.countProMoney());
         model.addAttribute(shoppingCartService.countProNum());
         //将购物车商品条目重新写入cookie
-        this.writBuyerItemsToCookie(rsp,this.shoppingCartService);
-
+        if (shoppingCartService.getShoppingCart().getBuyerItemList().size() != 0){
+            this.writBuyerItemsToCookie(rsp,this.shoppingCartService);
+        }
         return "/shoppingCart";
     }
 
@@ -84,36 +89,23 @@ public class ShoppingCartController extends HisuBaseControllerAdapter {
                                 BuyerItem buyerItem) throws UnsupportedEncodingException {
         //初始化shoppingCart
         this.initShoppingCart(shoppingCartStr,this.shoppingCartService);
-
         //添加商品进入购物车
         this.shoppingCartService.addProduct(buyerItem);
-
-
-        //根据产品编号查询产品名称
-        StringBuilder sb = new StringBuilder();
-        for (BuyerItem item : shoppingCartService.getShoppingCart().getBuyerItemList()){
-            sb.append(item.getPrdNo()+",");
-        }
-        sb.deleteCharAt(sb.length()-1);
-        this.getJds().service("jf_mainPage","queryPhyPrdInfoByPrdNoList","keyWordsFld="+sb.toString());
-        JSONArray arr = this.getJds().getDataList();
-        for (BuyerItem item : shoppingCartService.getShoppingCart().getBuyerItemList()){
-            for (int i=0;i<arr.length();i++){
-                if (arr.optJSONObject(i).optString("prdNo").equals(item.getPrdNo())){
-                    item.setPrdName(arr.optJSONObject(i).optString("productInfo"));
-                    item.setFileName(arr.optJSONObject(i).optString("iconFileName"));
-                }
-            }
-        }
-
-        model.addAttribute(shoppingCartService.getShoppingCart().getBuyerItemList());
-        model.addAttribute(shoppingCartService.countProMoney());
-        model.addAttribute(shoppingCartService.countProNum());
-
         //将购物车商品条目重新写入cookie
         this.writBuyerItemsToCookie(rsp,this.shoppingCartService);
-
-        return "/shoppingCart";
+        return "redirect:/shoppingCart";
     }
 
+    //从购物车删除商品
+    @RequestMapping(value = "/delCart")
+    public String delItemFromCart(HttpServletRequest req,
+                                  HttpServletResponse rsp,
+                                  Model model,
+                                  @CookieValue(value = "SHOPPINGCART-ITEMS",required = false)String shoppingCartStr,
+                                  BuyerItem buyerItem) throws UnsupportedEncodingException {
+        this.initShoppingCart(shoppingCartStr,this.shoppingCartService);
+        this.shoppingCartService.delProduct(buyerItem);
+        this.writBuyerItemsToCookie(rsp,this.shoppingCartService);
+        return "redirect:/shoppingCart";
+    }
 }

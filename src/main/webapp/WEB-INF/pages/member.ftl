@@ -48,13 +48,7 @@
     <div class="main">
         <div style="width:100%; background: #f3f3f3; height:30px;"></div>
         <div class="memberMain">
-            <div class="memberMain-Left">
-                <div class="leftMenu">
-                    <div class="overflowH iconLBgGray"><a href="<@spring.url '/myInformation'/>"><span class="iconLBg iconLInfor"></span>个人信息</a></div>
-                    <div class="overflowH iconLBgGray"><a href="<@spring.url '/myOrder'/>"><span class="iconLBg iconLOrder"></span>我的订单</a></div>
-                    <div class="overflowH iconLBgGray"><a href="<@spring.url '/myCard'/>"><span class="iconLBg iconLPoint"></span>我的卡片</a></div>
-                </div>
-            </div>
+            <#include "/lib/template/left.ftl" encoding="UTF-8">
             <div class="memberMain-Right">
                 <!--<h1 class="baseinfo-Title">我的个人中心</h1>-->
                 <div class="memberMainR-Baseinfo">
@@ -64,7 +58,7 @@
                         <p>我的积分：<span>${memberInfo[0].memberID}</span></p>
                         <p>我的手机：<span>${memberInfo[0].mobile}</span></p>
                         <p>我的邮箱：<span>${memberInfo[0].email}</span></p>
-                        <p><input type="button" value="修改资料" style=" color: #3897d7; border: 1px solid #3897d7; margin-left:70px;" /></p>
+                        <p><input type="button" value="修改资料" onclick="javascript:window.location.href='<@spring.url '/myInformation'/>'" style=" color: #3897d7; border: 1px solid #3897d7; margin-left:70px;" /></p>
                     </div>
                     <div class="baseinfo-Tip">
                         <p>账户余额：<span style="font-size:20px; margin:0 10px;">789.50</span>元</p>
@@ -76,22 +70,21 @@
                     <h2>我的订单</h2>
                     <table width="100%" border="0" cellpadding="0" cellspacing="0" class="orderTable">
                         <tr>
-                            <th width="50%">商品名称</th>
+                            <th width="40%">订单编号</th>
                             <th width="10%">价格</th>
-                            <th width="10%">数量</th>
-                            <th width="10%">合计</th>
+                            <th width="10%">配送状态</th>
+                            <th width="10%">订单状态</th>
                             <th>操作</th>
                         </tr>
                         <#list queryMemberOrder as key>
                         <tr>
-                            <td><a href="">${key.remark}</a></td>
-                            <td>￥200.00</td>
-                            <td>2</td>
-                            <td style="color:#f60;">￥${key.totalPrice}</td>
+                            <td><a href="">${key.billNo}</a></td>
+                            <td>￥${key.totalPrice}</td>
+                            <td>${key.deliveryStatus}</td>
+                            <td>${key.orderStatus}</td>
                             <td><a href="" style="color:#3897d7;">删除</a></td>
                         </tr>
                         </#list>
-                       
                         <tr>
                             <td colspan="5" style="text-align:right"><a href="" style="color:#f60; text-decoration:underline;">查看更多 >></a></td>
                         </tr>

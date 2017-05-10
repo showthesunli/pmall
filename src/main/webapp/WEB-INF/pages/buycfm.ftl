@@ -78,12 +78,21 @@
                         </div>
                     </div>
                 	
-                    
+
                 </div>-->
+                <div style=" text-align:center; font-size:12px; background:#eee; width:1200px; margin:30px auto; padding:30px 0; overflow:hidden;">
+
+                    <div style=" margin:20px auto; line-height:20px; height:80px;">
+                        <div style="padding:10px; padding-top:25px; text-align:center; height:35px;  line-height:35px; color:#f60; font-size: 16px; font-weight: bold;"
+                             id="orderMsg">
+                        </div>
+
+                    </div>
+                </div>
                     
                 <p style="text-align:center; margin:20px 0 0; float:right">
                     <input type="button" value="取消订单" class="sureBtn" style="background: #eee; color:#666; margin-right:10px; border:1px solid #ccc;""  />
-                    <input type="button" value="下一步" class="sureBtn"  />
+                    <input type="button" value="支付" onclick="pay()" class="sureBtn"  />
                 </p>
             </div>
             
@@ -118,13 +127,15 @@ $(document).ready(function(e) {
 });
 
     var useTime = 0;
+    var billNo = "${queryMemberOrder[0].billNo}";
+    var urlStr = "<@spring.url '/queryorder;billNo='/>"+billNo+";";
     var statusMsg = {
     doStatus: function (billNo) {
         if (billNo == null || billNo == "null" || billNo == "") {
             statusMsg.printText(2, "订单号无效！");
             return;
         }
-        $.post("member/orderStatus.jsp?billNo=" + billNo, function (data) {
+        $.get(urlStr, function (data) {
             var statusStr = data.substr(data.indexOf("=") + 1);
             var status = parseInt(statusStr.split("*-*")[0]);
             var msg = statusStr.split("*-*")[1];
@@ -134,8 +145,8 @@ $(document).ready(function(e) {
                     statusMsg.doStatus(billNo);
                 }, 500);
             } else if (status == 1) {
-                //statusMsg.printText(1);
-                location.href = "member/buycfm.jsp?billNo=<%=billNo%>";
+                statusMsg.printText(1);
+                <#--location.href = "<@spring.url '/buycfm;billNo='/>"+billNo;-->
             } else if (status > 1) {
                 statusMsg.printText(2, msg);
             }
@@ -143,15 +154,15 @@ $(document).ready(function(e) {
     },
     printText: function (type, msg) {
         if (type == 0) {
-            var text = "<span style='font-size:16px;'><img src='images/loading.gif' style='vertical-align:middle;'> 正在提交订单，请稍后......</span>";
+            var text = "<span style='font-size:16px; color:#666;'><img src='images/loading.gif' style='vertical-align:middle; margin-right:5px;'> 正在提交订单，请稍后......</span>";
             $("#orderMsg").html(text);
         } else if (type == 1) {
             $("#orderMsg").css({
-                "padding-top": "10px",
-                "height": "50px"
-            }).html("票券分配成功，请点击“查看订单”来完成支。<br/>如订单在45分钟内未支付，则会自动撤销！");
+                "padding-top": "5px",
+                "height": "70px"
+            }).html("下单成功，请立即支付。<br/>如订单在45分钟内未支付，则会自动撤销！");
         } else if (type == 2) {
-            $("#orderMsg").css("color", "#d51a6d").html("分配票券失败，因为：" + msg);
+            $("#orderMsg").css("color", "#00b050").html("分配票券失败，因为：" + msg);
         }
     },
     initStatus: function (billNo) {
@@ -162,5 +173,9 @@ $(document).ready(function(e) {
     }
 }
 statusMsg.initStatus("${queryMemberOrder[0].billNo}")
+
+    function pay(){
+        window.location.href = "<@spring.url '/pay'/>";
+    }
 </script>
 </html>

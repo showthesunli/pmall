@@ -111,7 +111,7 @@
                                 </div>
                                 <div class="addrOperBtn">
                                     <span class="setToDefAddr" style="display:none;">设为默认</span>
-                                    <span class="modifyAddr">编辑</span>
+                                    <span class="modifyAddr" ttoken="${_csrf.token}" objId="${key.objectID}">编辑</span>
                                     <span class="deleteAddr" ttoken="${_csrf.token}" objId="${key.objectID}">删除</span>
                                 </div>
                             </div>
@@ -142,7 +142,7 @@
         <div><label><span class="colorRed">*</span>收货人：</label><input type="text" id="addressName" value="" /></div>
         <div><label><span class="colorRed">*</span>收货地址：</label><input type="text" id="addressAddr" value="" style="width:477px" /></div>
         <div><label><span class="colorRed">*</span>手机号码：</label><input type="text" id="addressPhone" value="" /></div>
-        <p style="margin:10px 0 0 90px;"><input type="button" value="保存" class="sureBtn" onclick="closeTipDiv('addressDiv')" /><input type="button" value="取消" class="cancleBtn"  onclick="closeTipDiv('addressDiv')" /></p>
+        <p style="margin:10px 0 0 90px;"><input type="hidden" id="operType" name="operType" value="0"/><input type="hidden" id="${_csrf.parameterName}" name="${_csrf.parameterName}" value="${_csrf.token}"/><input type="button" value="保存" class="sureBtn" onclick="saveAddr()" /><input type="button" value="取消" class="cancleBtn"  onclick="closeTipDiv('addressDiv')" /></p>
     </div>
     <!--地址 end-->
     <!--提示框-->
@@ -182,6 +182,7 @@ $(document).ready(function(e) {
         $('#addressName').val('');
         $('#addressAddr').val('');
         $('#addressPhone').val('');
+        $('#operType').val("0"); 
     });
 
     //打开文本编辑框点击a标签
@@ -204,6 +205,7 @@ $(document).ready(function(e) {
             $('#addressName').val(name);
             $('#addressAddr').val(addr);
             $('#addressPhone').val(phone);
+            $('#operType').val("1"); 
         }
     })
 })

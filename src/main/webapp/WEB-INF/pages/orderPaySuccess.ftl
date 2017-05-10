@@ -34,13 +34,13 @@
         
     <div class="jf-main">
         <div class="ny_nav">
-            <div class="ny_nav1">当前位置：<a href='<@spring.url "/index"/>'>首页</a> > <a href='<@spring.url "/shoppingCart"/>'>购物车</a> > 支付错误</div>
+            <div class="ny_nav1">当前位置：<a href='<@spring.url "/index"/>'>首页</a> > <a href='<@spring.url "/shoppingCart"/>'>购物车</a> > 支付成功</div>
             <div class="clearfix"></div>
         </div>
         	            
 		<div class="jf-width1000 jf-overflowH" style="background:#fff; margin:10px auto;">
             <div class="addToSucc jf-overflowH">
-                <p class="addToSTitle">支付错误！</p>
+                <p class="addToSTitle">支付成功</p>
                 <div class="showText">
                     <p><span style="width:70px;">订单产品：</span><span style="width:490px;">订单产品信息</span></p>
                 </div>
