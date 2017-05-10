@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import java.io.UnsupportedEncodingException;
@@ -66,6 +68,7 @@ public class confirmOrder extends HisuBaseControllerAdapter{
 
     @RequestMapping(value = "/buycfm",method = RequestMethod.POST)
     public String processOrder(Model model,
+                               HttpServletResponse rsp,
                                @Valid Order order,
                                Errors errors) throws UnsupportedEncodingException {
 
@@ -80,6 +83,8 @@ public class confirmOrder extends HisuBaseControllerAdapter{
         orderService.initOrder(order);
         boolean ordFlag = orderService.placeOrder();
         if (ordFlag){
+            shoppingCartService.delAllFromShoppingCart();
+            writBuyerItemsToCookie(rsp,shoppingCartService);
             Map<String,Object> param = new HashMap<>();
             param.put("billNo",orderService.getOrder().getOrderNo());
             excute(model,param,queryOrder);

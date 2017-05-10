@@ -19,4 +19,7 @@ public interface ShoppingCartServiceProvider {
     //计算购物车商品总数
     public int countProNum();
 
+
+    //删除购物车中所有内容
+    public boolean delAllFromShoppingCart();
 }

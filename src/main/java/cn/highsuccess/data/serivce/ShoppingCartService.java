@@ -88,4 +88,10 @@ public class ShoppingCartService implements ShoppingCartServiceProvider {
         return shoppingCart.getPrdSum();
     }
 
+    @Override
+    public boolean delAllFromShoppingCart() {
+        shoppingCart.getBuyerItemList().clear();
+        return true;
+    }
+
 }
