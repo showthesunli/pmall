@@ -9,9 +9,13 @@
 <meta name="keywords" content="途皓（北京）商务服务有限公司" />
 <link rel="stylesheet" type="text/css" href="<@spring.url '/css/css.css'/>"/>
 <link rel="stylesheet" type="text/css" href="<@spring.url '/css/style.css'/>"/>
-<script type="text/javascript" src="<@spring.url '/js/jquery.js'/>"></script>
-<script language="javascript" src="<@spring.url '/js/menu.js'/>" ></script>
-<script language="javascript" src="<@spring.url '/js/util.js'/>" ></script>
+<link rel="stylesheet" type="text/css" href="<@spring.url '/css/jquery-ui.css'/>"/>
+<script type="text/javascript" src="<@spring.url '/js/jquery-1.7.2.min.js'/>"></script>
+<script type="text/javascript" src="<@spring.url '/js/menu.js'/>" ></script>
+<script type="text/javascript" src="<@spring.url '/js/util.js'/>" ></script>
+<script type="text/javascript" src="<@spring.url '/js/jquery-ui-datepicker.js'/>"></script>
+<script language="javascript" src="<@spring.url '/js/jquery.validate.min.js'/>" ></script>
+<script language="javascript" src="<@spring.url '/js/jquery.validate.addMethod.js'/>" ></script>
 <style>
 .myAddress .myAddressItem{ border:2px solid #eee; padding:10px 15px; margin-top:10px;}
 .myAddressItem div{ margin-bottom:0;}
@@ -24,11 +28,17 @@
 .addrOperBtn span{ color:#3897d7; margin-left:10px; cursor:pointer;}
 .addrOperBtn span:hover{ text-decoration: underline;}
 
-.addressDiv{ height:250px;}
+.addressDiv{ height:350px;}
 .addressDiv div{ padding:10px; color:#666; font-size:14px;}
 .addressDiv .tipDivTitle{ padding:0; margin-bottom:10px;}
 .addressDiv input[type=text]{ padding:0 5px;}
 .colorRed{color:red;}
+.myDetialTxt{padding:0 5px; margin-left: 5px;}
+.detialLabel{ width:80px; text-align: right;}
+.myAddressItem label{ width: 90px;}
+.birthD{ height:25px; line-height: 25px;}
+#informationOfMy div{ position:relative;}
+#memberName-error,#identityCardNo-error,#email-error,#gender-error,#birthdayDate-error{ position:absolute; left:305px; top:0; color:#f00; padding:0 10px; background:#ffebe7; line-height:25px; border:1px solid #f00; border-radius:5px;}
 </style>
 </head>
 
@@ -49,55 +59,53 @@
                 <div class="myDetial">
                     <div class="myDetial-Title"><h2 class="bgOcoF myBase">基本信息</h2><h2 class="myAddr">收货地址</h2></div>
                     <div id="myInformation" class="myDetialList myBaseInfor">
+                    	<form id="informationOfMy">
                         <div>
-                            <label class="detialLabel">我的账号：</label>
-                            <input id="memberID" type="text" value="${memberInfo[0].memberID}" class="myDetialTxt inputRO" readOnly="true"  />
+                            <label class="detialLabel"><span class="colorRed">*</span> 我的账号：</label>
+                            <span id="memberID" name="memberID" style="padding: 0 5px;">${memberInfo[0].memberID}</span>
                         </div>
                         <div>
-                            <label class="detialLabel">手机号码：</label>
-                            <input id="mobile" type="text" value="${memberInfo[0].mobile}" class="myDetialTxt inputRO" readOnly="true" />
+                            <label class="detialLabel"><span class="colorRed">*</span> 我的手机：</label>
+                            <span id="mobile" name="mobile" style="padding: 0 5px;">${memberInfo[0].mobile}</span>
                         </div>
                         <div>
-                            <label class="detialLabel">我的邮箱：</label>
-                            <input id="email" type="text" value="${memberInfo[0].email}" class="myDetialTxt inputRO" readOnly="true" />
+                            <label class="detialLabel">真实姓名：</label>
+                            <input id="memberName" name="memberName" type="text" value="${memberInfo[0].memberName}" class="myDetialTxt inputRO" readOnly="true"  maxlength="10" />
                         </div>
                         <div>
-                            <label class="detialLabel">性<span class="lwidth"></span>别：</label>
-                            <p>
-                                <label style="margin:0 20px 0 10px;"><input type="radio" name="RadioGroup1" value="男" id="RadioGroup1_0"/>男</label>
-                                <label style="margin-right:20px;"><input type="radio" name="RadioGroup1" value="女" id="RadioGroup1_1" />女</label>
-                                <label><input type="radio" name="RadioGroup1" value="保密" id="RadioGroup1_2" checked="checked" />保密</label>
+                            <label class="detialLabel">身份证：</label>
+                            <input id="identityCardNo" name="identityCardNo" type="text" value="${memberInfo[0].identityCardNo}" class="myDetialTxt inputRO" readOnly="true" maxlength="22" />
+                        </div>
+                        <div>
+                            <label class="detialLabel">邮箱：</label>
+                            <input id="email" name="email" type="text" value="${memberInfo[0].email}" class="myDetialTxt inputRO" readOnly="true" maxlength="20" />
+                        </div>
+                        <div>
+                            <label class="detialLabel">性别：</label>
+                            <input id="gender" name="gender" type="text" value="" class="myDetialTxt inputRO" readOnly="true" maxlength="20" />
+                            <p style="display: none; height: 17px; padding:5px 0;">
+                                <label style="margin:0 20px 0 5px;"><input type="radio" name="RadioGroup1" value="保密" id="RadioGroup1_0" checked="checked" />保密</label>
+                                <label style="margin-right:20px;"><input type="radio" name="RadioGroup1" value="男" id="RadioGroup1_1"/>男</label>
+                                <label><input type="radio" name="RadioGroup1" value="女" id="RadioGroup1_2" />女</label>
                             </p>
                         </div>
                         <div>
-                            <label class="detialLabel">生<span class="lwidth"></span>日：</label>
-                            <p style=" margin-left:10px;">
-                                <select id="birthYear">
-                                    <option value="0" disabled="" selected="selected">请选择：</option>
-                                    <option value="1990">1990</option>
-                                    <option value="1990">1991</option>
-                                </select>
-                                <label>年</label>
-                                <select id="birthMonth">
-                                    <option value="0" disabled="" selected="selected">请选择：</option>
-                                    <option value="01">01</option>
-                                    <option value="02">02</option>
-                                    <option value="03">03</option>
-                                </select>
-                                <label>月</label>
-                                <select id="birthDay">
-                                    <option value="0" disabled="" selected="selected">请选择：</option>
-                                    <option value="01">01</option>
-                                    <option value="02">02</option>
-                                </select>
-                                <label>日</label>
+                            <label class="detialLabel">生日：</label>
+                            <input id="birthday" name="birthday" type="text" value="${memberInfo[0].birthday}" class="myDetialTxt inputRO" readOnly="true" maxlength="20" />
+                            <input id="birthdayDate" name="birthdayDate" type="text" value="${memberInfo[0].birthday}" class="myDetialTxt" readOnly="true" style="display: none;" />
+                            <p style=" margin-left:5px; height: 27px;display: none;">
+                                <select id="idYear" name="idYear" data="" class="birthD"></select> 年 
+                                <select id="idMonth" name="idMonth" data="" class="birthD"></select> 月 
+                                <select id="idDay" name="idDay" data="" class="birthD"></select> 日
                             <p>
                         </div>
                         <div>
                         	<input type="hidden" id="${_csrf.parameterName}" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                         	
-                            <input type="button" value="提交" onclick="postMyInformation()" class="detialBtn" />
+                            <input type="button" value="修改" onclick="modifyInfor()" class="detialBtn modBtn" style="margin-left: 85px;" />
+                            <input type="button" value="保存" onclick="updateInfor()" class="detialBtn updBtn" style="margin-left: 85px; display: none;" />
                         </div>
+                    	</form>
                     </div>
 
                     <div class="myDetialList myAddress" style="display:none;">
@@ -106,19 +114,26 @@
                         <div class="myAddressItem">
                             <div class="addrDefaultInforTop">
                                 <div class="addrDefaultInfor">
-                                    <span class="addrName">收货人名字</span>
+                                    <span class="addrName">${key.name} ${key.province}</span>
                                     <span class="defStyle">默认地址</span>
                                 </div>
-                                <div class="addrOperBtn">
+                            	<div class="addrOperBtn">
                                     <span class="setToDefAddr" style="display:none;">设为默认</span>
                                     <span class="modifyAddr" ttoken="${_csrf.token}" objId="${key.objectID}">编辑</span>
                                     <span class="deleteAddr" ttoken="${_csrf.token}" objId="${key.objectID}">删除</span>
                                 </div>
                             </div>
                             <div><label>收货人：</label><span class="addrN">${key.name}</span></div>
-                            <div><label>收货地址：</label><span class="addrA">${key.addr}</span></div>
                             <div><label>手机号码：</label><span class="addrP">${key.phone}</span></div>
-                            <div><label>收货地址ID：</label><span class="addrID">${key.objectID}</span></div>
+                            <div><label>邮政编号：</label><span class="addrZ">${key.zip}</span></div>
+                            <div>
+                            	<label>所在地区：</label>
+                            	<span class="addrProvince">${key.province}</span>
+                            	<span class="addrCity">${key.city}</span>
+                            	<span class="addrArea">${key.area}</span>
+                            </div>
+                            <div><label>收货地址：</label><span class="addrA">${key.addr}</span></div>
+                            <div style="display: none"><label>收货地址ID：</label><span class="addrID">${key.objectID}</span></div>
                         </div>
                         
 						</#list>
@@ -139,9 +154,32 @@
     <!--地址-->
     <div class="addressDiv">
         <div class="jf-overflowH tipDivTitle"><h3 style="float:left;">收货地址</h3><span onclick="closeTipDiv('addressDiv')" style="float:right; cursor:pointer; color:#999;font-size:25px;">×</span></div>
-        <div><label><span class="colorRed">*</span>收货人：</label><input type="text" id="addressName" value="" /></div>
-        <div><label><span class="colorRed">*</span>收货地址：</label><input type="text" id="addressAddr" value="" style="width:477px" /></div>
-        <div><label><span class="colorRed">*</span>手机号码：</label><input type="text" id="addressPhone" value="" /></div>
+        <div><label><span class="colorRed">*</span> 收货人：</label><input type="text" id="addressName" value="" /></div>
+        <div><label><span class="colorRed">*</span> 邮编：</label><input type="text" id="addressZip" value="" /></div>
+        <div style="overflow: hidden; height: 27px;">
+        	<label style=" float: left;"><span class="colorRed">*</span> 所在地区：</label>
+        	<div style="width:477px; float: left; padding: 0;">
+        		<select id="idProvnice" name="idProvnice" data="" class="birthD">
+        			<option value="0" disabled="disabled" selected="selected">-请选择-</option>
+        			<option value="广东">广东</option>
+        		</select>
+	            <select id="idCity" name="idCity" data="" class="birthD">
+	            	<option value="0" disabled="disabled" selected="selected">-请选择-</option>
+        			<option value="广州">广州</option>
+        			<option value="深圳">深圳</option>
+	            </select>
+	            <select id="idArea" name="idArea" data="" class="birthD">
+	            	<option value="0" disabled="disabled" selected="selected">-请选择-</option>
+        			<option value="天河区">天河区</option>
+        			<option value="罗湖区">罗湖区</option>
+	            </select>       	
+        	</div>
+        </div>
+        <div style="overflow: hidden;">
+        	<label style=" float: left;"><span class="colorRed">*</span> 详细地址：</label>
+        	<input type="text" id="addressAddr" value="" style="width:477px; line-height: 25px;" />
+        </div>
+        <div><label><span class="colorRed">*</span> 手机号码：</label><input type="text" id="addressPhone" value="" /></div>
         <p style="margin:10px 0 0 90px;"><input type="hidden" id="operType" name="operType" value="0"/><input type="hidden" id="${_csrf.parameterName}" name="${_csrf.parameterName}" value="${_csrf.token}"/><input type="button" value="保存" class="sureBtn" onclick="saveAddr()" /><input type="button" value="取消" class="cancleBtn"  onclick="closeTipDiv('addressDiv')" /></p>
     </div>
     <!--地址 end-->
@@ -157,6 +195,12 @@
 </html>
 <script language="javascript">
 $(document).ready(function(e) {
+	$(".defStyle").css("display","none");
+	$('.myAddressItem').eq(0).find(".defStyle").css("display","inline-block");
+	$(".setToDefAddr").css("display","inline-block");
+	$('.myAddressItem').eq(0).find(".setToDefAddr").css("display","none");
+
+	//基本信息和地址点击切换
     $('.myBase').click(function(){
         $('.myDetial-Title h2').removeClass('bgOcoF');
         $(this).addClass('bgOcoF');
@@ -177,13 +221,6 @@ $(document).ready(function(e) {
         $(a).find(".setToDefAddr").css("display","none");
         openTipDiv('tipDiv','设置成功！');
     })
-    //新增地址
-    $('.newAddress').click(function(){
-        $('#addressName').val('');
-        $('#addressAddr').val('');
-        $('#addressPhone').val('');
-        $('#operType').val("0"); 
-    });
 
     //打开文本编辑框点击a标签
 	$(".deleteAddr").each(function(){
@@ -198,16 +235,37 @@ $(document).ready(function(e) {
     $('.modifyAddr').click(function(){
         var a = $(this).parent().parent().parent();
         var name = a.find('.addrN').text();
+        var zip = a.find('.addrZ').text();
         var addr = a.find('.addrA').text();
         var phone = a.find('.addrP').text();
+        var addrProvince = a.find('.addrProvince').text();
+        var addrCity = a.find('.addrCity').text();
+        var addrArea = a.find('.addrArea').text();
         openTipDiv('addressDiv');
         if(name!=""){
             $('#addressName').val(name);
+            $('#addressZip').val(zip);
             $('#addressAddr').val(addr);
             $('#addressPhone').val(phone);
             $('#operType').val("1"); 
+            
+            $("#idProvnice").val(addrProvince);
+            $("#idCity").val(addrCity);
+            $("#idArea").val(addrArea);
         }
-    })
+    });
+    //新增地址
+    $('.newAddress').click(function(){
+        $('#addressName').val('');
+        $('#addressZip').val('');
+        $('#addressAddr').val('');
+        $('#addressPhone').val('');
+        $('#idProvnice').val('0');
+        $('#idCity').val('0');
+        $('#idArea').val('0');
+        $('#operType').val("0"); 
+    });
+
 })
 function showDiv(obj) {
     $(".myDetialList").css("display","none");
@@ -221,5 +279,65 @@ function openTipDiv(obj,txt) {
 function closeTipDiv(obj) {
     $("#loginBg").css("display","none");
     $("." + obj).css("display","none");
+}
+</script>
+<script>
+$(function () {
+	//性别
+	var g = ${memberInfo[0].gender};
+	switch(g){
+		case 0:
+		$('#gender').val('保密');
+		break;
+		case 1:
+		$('#gender').val('男');
+		break;
+		case 2 :
+		$('#gender').val('女');
+		break;
+	};
+	$('#RadioGroup1_' + g).attr('checked','checked');
+	//生日
+	$("#birthdayDate").datepicker({
+		dateFormat: 'yy-mm-dd'
+	});
+	//生日日期不能大于当前日期
+	$("#birthdayDate").change(function(){
+		var now = new Date;
+		var d = new Date($(this).val());
+		
+		if(d > now){
+			$(this).after('<label id="birthdayDate-error" class="error" for="birthdayDate">日期不能大于当前日期</label>');
+		}
+	})
+	// 在键盘按下并释放及提交后验证提交表单
+    $("#informationOfMy").validate({
+		rules: {
+			email:{email:true},
+			birthdayDate:{date:true},
+			identityCardNo:{isIdCardNo:true},
+		},
+		messages: {
+			email: {email:"请输入正确格式的邮箱"},
+			birthdayDate: {date:"请输入合法的日期"},
+			identityCardNo:{isIdCardNo:"请输入正确的身份证号"},
+        }
+    });
+});
+//点击修改按钮
+function modifyInfor(){
+	$('.inputRO').addClass('inputRW').removeAttr('readonly').removeClass('inputRO');
+	$('#gender').css('display','none').next('p').css('display','block');
+	$('#birthday').css('display','none').next('input').css('display','block');
+	$('.modBtn').hide();
+	$('.updBtn').show();
+}
+//点击保存按钮
+function updateInfor(){
+	$('.inputRW').addClass('inputRO').attr('readonly','ture').removeClass('inputRW');
+	$('#gender').css('display','block').next('p').css('display','none');
+	$('#birthday').css('display','block').next('input').css('display','none');
+	$('.updBtn').hide();
+	$('.modBtn').show();
 }
 </script>

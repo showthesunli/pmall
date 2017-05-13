@@ -1,5 +1,5 @@
 ﻿html{margin:0;padding:0}
-body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td{margin:0;padding:0}
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td,option,select{margin:0;padding:0}
 
 .clear{clear:both;visibility:hidden;display:block;font-size:0;line-height:0;}
 .clearfix:after{visibility:hidden;display:block;font-size:0;content:" ";clear:both;height:0;}
@@ -65,7 +65,7 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input
 .iconLInfor{ background-position: 0 0;}
 .iconLOrder{ background-position: 0 -22px;}
 .iconLPoint{ background-position: 0 -44px;}
-.iconLCard{ background-position: 0 -64px;}
+.leftMenu .iconLCard{ background-position: 0 -64px;}
 .memberMain-Right{ width: 970px; float: right; padding: 20px;}
 .memberMainR-Baseinfo{ overflow: hidden; border-bottom: 3px solid #eee; padding:10px 30px 20px;}
 .memberMainR-Baseinfo img{ border-radius:50%; float: left;}

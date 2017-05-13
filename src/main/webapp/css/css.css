@@ -1,6 +1,6 @@
 @charset "utf-8";
 
-body, div, dl, dt, dd, ul, ol, li, pre, code, form, fieldset, legend, input, button, textarea, p, blockquote, h1, h2, h3, h4 {	margin: 0;padding: 0;	 font:14px/1.5 arial,"Microsoft Yahei", sans-serif;color:#333}
+body, div, dl, dt, dd, ul, ol, li, pre, code, form, fieldset, legend, input, button, textarea, p, blockquote, h1, h2, h3, h4 ,select,option{	margin: 0;padding: 0;	 font:14px/1.5 arial,"Microsoft Yahei", sans-serif;color:#333}
 
 input, button, textarea, select, optgroup, option {	font-family: inherit;font-size: 100%;	font-style: inherit;	font-weight: inherit;}
 
@@ -429,108 +429,56 @@ body{ min-width: 1200px;}
 /*=====login=====*/
 
 .jf-width1000{ width:1200px; margin:0 auto;}
-
 .jf-classify{ overflow:hidden; width:100%; background:#f6f6f6; padding-bottom:10px;}
-
 .jf-classifyTitle{ font-weight:bold; font-family:"微软雅黑"; font-size:16px; line-height:45px; color:#666; float:left;}
-
 .jf-overflowH{ overflow:hidden;}
-
 .bgImgS{ background:url(../images/bgImg.png) no-repeat;}
-
 .btnBgS{ background:url(../images/btnBg.png) no-repeat;}
-
 #loginBg{ width:100%; height:100%; top:0px; left:0px; filter: Alpha(opacity=50); opacity:0.5; background:#000000; display:none; position: fixed; z-index:101;}
-
 .jf-login,.jf-register{ width:480px; height:412px; padding:10px; background:#fff; border:1px solid #cccccc; border-radius:10px; box-shadow:0 0 15px rgba(102,102,102,0.5); left:50%; top:50%; margin:-216px 0 0 -250px; display:none; position: fixed; z-index:102; font-size:12px;}
-
 .jf-loginTitle,.jf-registerTitle{ line-height:55px; font-size:16px; text-indent:10px; font-weight:bold; border-bottom:1px solid #ccc; color:#666;}
-
-.loginForm{ width:300px; margin:60px auto; color:#666;  font-size:12px;}
+.loginForm{ margin: 60px 0 60px 450px; color:#666;  font-size:12px;}
 .registerFormForEmial,.registerForm{ margin:60px 0 60px 450px; color:#666;  font-size:12px;}
 .loginForm p,.registerForm p,.registerFormForEmial p{ position:relative; overflow:hidden; margin-bottom:20px;}
-
 .loginForm b{ display:inline-block; width:16px; height:20px; position:absolute; left:10px; top:10px;}
-
 .loginForm label,.registerForm label,.registerFormForEmial label{ line-height:25px; float:left; line-height:20px;}
-
 .forgotPsd{ float:right; color:#666; line-height:20px;}
-
 .loginForm input[type=checkbox],.registerForm input[type=checkbox],.registerFormForEmial input[type=checkbox]{ margin-top:3px; float:left;}
-
 .loginTxt,.registerTxt{ width:260px; padding:10px 10px 10px 30px; height:20px; line-height:20px; color:#999; background:#f6f6f6; border:1px solid #ccc; border-radius:10px; font-size:12px;}
-
 ::-webkit-input-placeholder { color: #ccc;}
 
-
-
 .loginTxt:focus,.registerTxt:focus{ outline:none; color:#666; font-size:12px;}
-
 .loginBtn,.registerBtn{ background-position:0 -33px; width:300px; height:40px; border:1px solid #ff6600; border-radius:5px; color:#fff; font-size:16px; font-weight:bold; text-align:center; letter-spacing:10px; cursor:pointer;}
-
 .toRegister,.toLogin{ margin-left:200px;}
-
 .toRegister a,.toLogin a{ margin-left:10px; color:#ff6600;}
 
-
-
 .loginCloseBtn,.registerCloseBtn{  display:inline-block; width:30px; height:30px; position:absolute; right:-15px; top:-15px;
-
 -moz-transition: all 0.8s ease-in-out; 
-
 -webkit-transition: all 0.8s ease-in-out; 
-
 -o-transition: all 0.8s ease-in-out; 
-
 -ms-transition: all 0.8s ease-in-out; 
-
 transition: all 0.8s ease-in-out; z-index:101;}
-
 .loginCloseBtn:hover,.registerCloseBtn:hover{ 
-
 -moz-transform: rotate(360deg); 
-
 -webkit-transform: rotate(360deg); 
-
 -o-transform: rotate(360deg); 
-
 -ms-transform: rotate(360deg); 
-
 transform: rotate(360deg); 
-
 } 
 
-
-
 .jf-register{ height:560px; margin:-270px 0 0 -250px; padding:0; width:500px;}
-
 .registerForm label,.registerFormForEmial label{ float:left; line-height:40px;}
-
 .registerTxt{ width:225px; float:left; padding:10px; margin-left:5px;} 
-
 .jf-registerTitle{ width:250px; border-radius:10px 0 0 0; text-align:center; text-indent:0; float:left; background:#f6f6f6; cursor:pointer;}
-
 .titlePitch{ background:#fff; border:#fff; border-radius:10px;}
-
 .sendCode{float:left; height:40px; line-height:40px; margin-left:10px; width:95px; cursor:pointer; color:#666; display:inline-block}
 
-
-
 .tipDiv,.addressDiv{ background:#fff; border:1px solid #ccc; border-radius:5px; width:280px; height:164px; padding:0 10px 30px; line-height:25px; display:none; left:50%; top:50%; margin:-82px 0 0 -140px; display:none; position: fixed; z-index:102;}
-
 .tipDivTitle{ border-bottom:1px solid #ccc;}
-
 .tipDivTitle h3{ text-indent:10px; font-size:16px; font-weight:bold; line-height:40px;}
-
 .tipDiv p{ margin-top:20px; text-align:center;}
-
 .sureBtn,.cancleBtn{ width:50px; height:25px; border:1px solid #ff6600; border-radius:3px; background:#ff6600; text-align:center; line-height:25px; color:#fff; cursor:pointer;}
-
 .cancleBtn{ background:#f6f6f6; border:1px solid #ccc; color:#666; margin-left:10px;}
-
-
-
-
 
 /*=====shoppingCart=====*/
 

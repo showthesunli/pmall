@@ -8,6 +8,7 @@
 <meta name="description" content="途皓（北京）商务服务有限公司" />
 <meta name="keywords" content="途皓（北京）商务服务有限公司" />
 <link rel="stylesheet" type="text/css" href="<@spring.url '/css/css.css'/>"/>
+<link rel="stylesheet" type="text/css" href="<@spring.url '/css/style.css'/>"/>
 <script type="text/javascript" src="<@spring.url '/js/jquery.js'/>"></script>
 <script language="javascript" src="<@spring.url '/js/menu.js'/>" ></script>
 <style>
