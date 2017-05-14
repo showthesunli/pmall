@@ -64,6 +64,9 @@ public class ShoppingCartController extends HisuBaseControllerAdapter {
                     if (arr.optJSONObject(i).optString("prdNo").equals(item.getPrdNo())){
                         item.setPrdName(arr.optJSONObject(i).optString("productInfo"));
                         item.setFileName(arr.optJSONObject(i).optString("iconFileName"));
+                        if (arr.optJSONObject(i).optString("isCard")!=""){
+                            item.setPrdType(arr.optJSONObject(i).optString("isCard"));
+                        }
                     }
                 }
             }
@@ -71,8 +74,10 @@ public class ShoppingCartController extends HisuBaseControllerAdapter {
         }
 
         model.addAttribute(shoppingCartService.getShoppingCart().getBuyerItemList());
-        model.addAttribute(shoppingCartService.countProMoney());
-        model.addAttribute(shoppingCartService.countProNum());
+        model.addAttribute("prdMoney",shoppingCartService.countProMoney());
+        model.addAttribute("prdNum",shoppingCartService.countProNum());
+        model.addAttribute("cardMoney",shoppingCartService.countCardMoney());
+        model.addAttribute("cardNum",shoppingCartService.countCardNum());
         //将购物车商品条目重新写入cookie
         if (shoppingCartService.getShoppingCart().getBuyerItemList().size() != 0){
             this.writBuyerItemsToCookie(rsp,this.shoppingCartService);

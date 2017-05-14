@@ -26,6 +26,10 @@ public class Order {
     //订单商品总数
     private int orderPrdNum;
 
+    //订单类型，0为实体商品订单，1为卡订单
+    @NotNull
+    private String OrderType;
+
     //收件人姓名
     @NotNull
     private String receiverName;
@@ -41,6 +45,14 @@ public class Order {
     //支付工具
     @NotNull
     private String payToolIDList;
+
+    public String getOrderType() {
+        return OrderType;
+    }
+
+    public void setOrderType(String orderType) {
+        OrderType = orderType;
+    }
 
     public String getOrderNo() {
         return orderNo;

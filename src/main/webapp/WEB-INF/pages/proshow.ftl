@@ -62,7 +62,8 @@
                 var money = ${queryPrdDetail[0].prdPrice};
                 var amount = $("#prdnum").val();
                 var prdNo = "${queryPrdDetail[0].prdNo}";
-                window.location.href = "<@spring.url '/shoppingCart/addCart'/>" + "?prdNo="+prdNo+"&amount="+amount+"&money="+money;
+                var isCard = "${queryPrdDetail[0].isCard}"
+                window.location.href = "<@spring.url '/shoppingCart/addCart'/>" + "?prdNo="+prdNo+"&amount="+amount+"&money="+money+"&prdType="+isCard;
             })
 
         })

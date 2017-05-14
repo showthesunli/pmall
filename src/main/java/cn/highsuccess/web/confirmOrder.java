@@ -60,7 +60,7 @@ public class confirmOrder extends HisuBaseControllerAdapter{
         parm.put("memberID", this.getJds().getUserName());
         excute(model, parm, hisuMngDataGroupAndId);
 
-        model.addAttribute(shoppingCartService.getShoppingCart().getBuyerItemList());
+        model.addAttribute(shoppingCartService.getShoppingCart().getBuyerItemList("0"));
         model.addAttribute(shoppingCartService.countProMoney());
         model.addAttribute(shoppingCartService.countProNum());
         return "/confirmOrder";
@@ -78,7 +78,7 @@ public class confirmOrder extends HisuBaseControllerAdapter{
             return "redirect:/confirmOrder";
         }
 
-        order.setItemList(shoppingCartService.getShoppingCart().getBuyerItemList());
+        order.setItemList(shoppingCartService.getShoppingCart().getBuyerItemList(order.getOrderType()));
 
         orderService.initOrder(order);
         boolean ordFlag = orderService.placeOrder();

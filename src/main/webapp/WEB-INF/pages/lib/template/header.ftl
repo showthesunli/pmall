@@ -6,6 +6,7 @@
             <@sec.authorize access="isAuthenticated()">
                 <li style="background: url(<@spring.url '/images/ico1.png'/>) no-repeat left center;"><a href="<@spring.url '/member'/>"><@sec.authentication property="principal.username"/></a></li>
                 <li style="background: url(<@spring.url '/images/ico2.png'/>) no-repeat  left center;"><a href="<@spring.url '/logout'/>">注销</a></li>
+                <li style="background: url(<@spring.url '/images/ico1.png'/>) no-repeat left center;"><a href="<@spring.url '/myOrder'/>">我的订单</a></li>
             </@sec.authorize>
             <@sec.authorize access="isAnonymous()">
             <li style="background: url(<@spring.url '/images/ico1.png'/>) no-repeat left center;"><a href="<@spring.url '/login'/>">登录</a></li>
@@ -30,8 +31,9 @@
         </ul>
     </div>
     <div class="top_right">
-        <form action="#" method="get" name="myform" id="myform"   >
-            <input type="text" class="input"   style="color: rgb(102, 102, 102);" onfocus="if(this.value=='Search here ...')this.value=''" onblur="if(this.value=='')this.value='Search here ...'" value="Search here ..." ><input type="image" src="<@spring.url '/images/ss.png'/>" width="18" class="button"  />
+        <form action="<@spring.url '/search'/>" method="get" name="myform" id="myform"   >
+            <input type="text" class="input" name="keyWordsFld"  style="color: rgb(102, 102, 102);" onfocus="if(this.value=='Search here ...')this.value=''" onblur="if(this.value=='')this.value='Search here ...'" value="Search here ..." >
+            <input type="image" src="<@spring.url '/images/ss.png'/>" width="18" class="button"  />
         </form>
     </div>
 </div>

@@ -19,6 +19,11 @@ public interface ShoppingCartServiceProvider {
     //计算购物车商品总数
     public int countProNum();
 
+    //计算购物车卡总额
+    public double countCardMoney();
+
+    //计算购物车卡总数
+    public int countCardNum();
 
     //删除购物车中所有内容
     public boolean delAllFromShoppingCart();

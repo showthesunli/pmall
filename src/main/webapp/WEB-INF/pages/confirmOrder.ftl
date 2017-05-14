@@ -202,6 +202,7 @@
     <input name="receiverName" type="hidden"/>
     <input name="mobile" type="hidden"/>
     <input name="payToolIDList" type="hidden"/>
+    <input name="OrderType" value="0" type="hidden"/>
     <input name="_csrf" value="${_csrf.token}" type="hidden"/>
 </form>
 

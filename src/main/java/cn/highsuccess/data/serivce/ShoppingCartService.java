@@ -39,20 +39,6 @@ public class ShoppingCartService implements ShoppingCartServiceProvider {
 
     @Override
     public boolean delProduct(BuyerItem buyerItem) {
-        /**
-        if (shoppingCart.getBuyerItemList().contains(buyerItem)){
-            for (BuyerItem item : shoppingCart.getBuyerItemList()){
-                if (item.equals(buyerItem)){
-                    int amount = item.getAmount() - buyerItem.getAmount();
-                    if (amount <= 0){
-                        shoppingCart.getBuyerItemList().remove(item);
-                    }else {
-                        item.setAmount(amount);
-                    }
-                }
-            }
-        }
-         **/
         Iterator<BuyerItem> it = shoppingCart.getBuyerItemList().iterator();
         while (it.hasNext()){
             BuyerItem item = it.next();
@@ -72,7 +58,10 @@ public class ShoppingCartService implements ShoppingCartServiceProvider {
     public double countProMoney() {
         double money = 0;
         for (BuyerItem item : shoppingCart.getBuyerItemList()){
-            money = money + item.getMoney()*item.getAmount();
+            //类型为1的产品条目是卡
+            if (!item.getPrdType().equals("1")){
+                money = money + item.getMoney()*item.getAmount();
+            }
         }
         shoppingCart.setPrdMoney(money);
         return shoppingCart.getPrdMoney();
@@ -82,7 +71,36 @@ public class ShoppingCartService implements ShoppingCartServiceProvider {
     public int countProNum() {
         int prdNum = 0;
         for (BuyerItem item : shoppingCart.getBuyerItemList()){
-            prdNum = prdNum + item.getAmount();
+            //类型为0的产品条目是商品
+            if (item.getPrdType().equals("0")) {
+                prdNum = prdNum + item.getAmount();
+            }
+        }
+        shoppingCart.setPrdSum(prdNum);
+        return shoppingCart.getPrdSum();
+    }
+
+    @Override
+    public double countCardMoney() {
+        double money = 0;
+        for (BuyerItem item : shoppingCart.getBuyerItemList()){
+            //类型不为0的产品条目是卡
+            if (!item.getPrdType().equals("0")){
+                money = money + item.getMoney()*item.getAmount();
+            }
+        }
+        shoppingCart.setPrdMoney(money);
+        return shoppingCart.getPrdMoney();
+    }
+
+    @Override
+    public int countCardNum() {
+        int prdNum = 0;
+        for (BuyerItem item : shoppingCart.getBuyerItemList()){
+            //类型不为0的产品条目是卡
+            if (!item.getPrdType().equals("0")) {
+                prdNum = prdNum + item.getAmount();
+            }
         }
         shoppingCart.setPrdSum(prdNum);
         return shoppingCart.getPrdSum();

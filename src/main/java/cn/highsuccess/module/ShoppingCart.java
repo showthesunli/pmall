@@ -19,6 +19,12 @@ public class ShoppingCart {
     //商品总数量
     private int prdSum;
 
+    //卡总金额
+    private int cardMoney;
+
+    //商品总金额
+    private int cardSum;
+
     private List<BuyerItem> buyerItemList;
 
     public void initShoppingCart(String itemsStr){
@@ -31,6 +37,33 @@ public class ShoppingCart {
 
     public List<BuyerItem> getBuyerItemList() {
         return buyerItemList;
+    }
+
+    /**
+     * TODO 根据类型返回商品项目
+     * itemType 为0时为实物商品项，为1时为卡项
+     * @param itemType
+     * @return
+     */
+    public List<BuyerItem> getBuyerItemList(String itemType) {
+
+        return buyerItemList;
+    }
+
+    public int getCardMoney() {
+        return cardMoney;
+    }
+
+    public void setCardMoney(int cardMoney) {
+        this.cardMoney = cardMoney;
+    }
+
+    public int getCardSum() {
+        return cardSum;
+    }
+
+    public void setCardSum(int cardSum) {
+        this.cardSum = cardSum;
     }
 
     public double getPrdMoney() {

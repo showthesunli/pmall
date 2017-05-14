@@ -20,6 +20,9 @@ public class BuyerItem {
     //产品单价
     private double money;
 
+    //商品分类，区分卡和商品,分别下单,卡为1
+    private String prdType;
+
     //产品图片
     private String fileName;
 
@@ -33,6 +36,14 @@ public class BuyerItem {
         this.prdNo = prdNo;
         this.money = money;
         this.amount = amount;
+    }
+
+    public String getPrdType() {
+        return prdType;
+    }
+
+    public void setPrdType(String prdType) {
+        this.prdType = prdType;
     }
 
     public String getFileName() {
@@ -76,10 +87,10 @@ public class BuyerItem {
     }
 
     public boolean equals(Object that){
-        return EqualsBuilder.reflectionEquals(this,that,"amount","money","prdName","fileName");
+        return EqualsBuilder.reflectionEquals(this,that,"amount","money","prdName","fileName","prdType");
     }
 
     public int hashCode(){
-        return HashCodeBuilder.reflectionHashCode(this,"amount","money","prdName","fileName");
+        return HashCodeBuilder.reflectionHashCode(this,"amount","money","prdName","fileName","prdType");
     }
 }

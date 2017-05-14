@@ -43,7 +43,7 @@ td{ overflow:hidden; height:30px;}
                         <h2>积分商城订单</h2>
                         <table width="100%" border="0" cellpadding="0" cellspacing="0" class="orderTable">
                             <tr>
-                                <th width="50%">商品名称</th>
+                                <th width="50%">订单编号</th>
                                 <th width="10%">价格</th>
                                 <th width="10%">数量</th>
                                 <th width="10%">合计</th>
@@ -66,6 +66,7 @@ td{ overflow:hidden; height:30px;}
                         <div class="page"><a class="a1">22条</a> <a href="#" class="a1">上一页</a> <span>1</span> <a href="#">2</a> <a href="#">3</a> <a href="#" class="a1">下一页</a></div>
                     </div>
 
+                    <!--
                     <div>
                         <h2>逸乐积分卡订单</h2>
                         <table width="100%" border="0" cellpadding="0" cellspacing="0" class="orderTable">
@@ -167,6 +168,7 @@ td{ overflow:hidden; height:30px;}
                         </table>
                         <div class="page"><a class="a1">22条</a> <a href="#" class="a1">上一页</a> <span>1</span> <a href="#">2</a> <a href="/h/khxx/3.html">3</a> <a href="#" class="a1">下一页</a></div>
                     </div>
+                    -->
                 </div>
 
             </div>

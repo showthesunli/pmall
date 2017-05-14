@@ -282,4 +282,32 @@
                      </list>
               </constructor-arg>
        </bean>
+
+       <!--按关键字搜索产品列表 -->
+       <bean id="querPrdListByKeyWords" class="cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId">
+              <constructor-arg>
+                     <map>
+                            <entry key="jf_goodsList" >
+                                   <list>
+                                          <ref bean="queryPrdTypeByHeadType"/>
+                                   </list>
+                            </entry>
+                            <entry key="w_mainPage" >
+                                   <list>
+                                          <ref bean="searchPrdListByKeyWord"/>
+                                   </list>
+                            </entry>
+                     </map>
+              </constructor-arg>
+       </bean>
+       <bean id="searchPrdListByKeyWord" class="cn.highsuccess.config.systemproperties.HisuMngDataIdArgs">
+              <constructor-arg index="0" value="searchPrdListByKeyWord"></constructor-arg>
+              <constructor-arg index="1" >
+                     <list>
+                            <value>keyWordsFld</value>
+                            <value>currentPage</value>
+                            <value>numOfPerPage</value>
+                     </list>
+              </constructor-arg>
+       </bean>
 </beans>

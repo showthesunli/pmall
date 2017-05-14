@@ -27,7 +27,7 @@
             <div class="clearfix"></div>
         </div>
             
-            <!--购物车列表-->
+            <!--商品购物车列表-->
             <div class="jf-cart jf-width1000">
             	<div class="jf-cart">
                 	<ul class="jf-cartItemTitle">
@@ -41,6 +41,8 @@
                     </ul>
 					<#if buyerItemList??>
 					<#list buyerItemList as item>
+					<#if item.prdType == "0">
+
                         <div class="jf-cartItem">
 							<!--
                             <div class="width50">
@@ -65,6 +67,7 @@
                             </div>
                             <div class="cartDlt width100" style="line-height:40px;"><a href="javascript:delItem('${item.prdNo}','${item.money?c}','${item.amount}')" >删除</a></div>
                         </div>
+					</#if>
 					</#list>
 					</#if>
 
@@ -72,15 +75,80 @@
                                        
                     <div class="cartBanlance">
                     	<div class="bgGrey">
-                            <p style="line-height:50px; margin-right:20px;">共<span id="shuliang">${integer}</span><span style="margin-right:20px;">件</span>合计:<span id="exchangeTotal">${double}</span>分</p>
+                            <p style="line-height:50px; margin-right:20px;">共<span id="shuliang">${prdNum}</span><span style="margin-right:20px;">件</span>合计:<span id="exchangeTotal">${prdMoney}</span>分</p>
                         </div>
-                        <p class="jf-overflowH"><input type="button" value="继续购物"  class="btnBgS cartShopBtn"  onclick="window.location='<@spring.url "/pro"/>'" /><input type="button" value="下单"  class="btnBgS cartBanBtn" onclick="window.location='<@spring.url "/confirmOrder"/>'" /></p>
                     </div>
                     
                 </div>
             </div>
-            <!--购物车列表 end-->
-            
+            <!--商品购物车列表 end-->
+
+        <!--卡购物车列表-->
+        <div class="jf-cart jf-width1000">
+            <div class="jf-cart">
+                <ul class="jf-cartItemTitle">
+				<#--<li class="width50"><input id="Checkbox1" type="checkbox"  class="allselect" />全选</li>-->
+                    <li class="width200" style="width:300px;">商品名称</li>
+                    <li class="width100">卡类型</li>
+                    <li class="width200">单价</li>
+				<#--<li class="width100">最小/最大购买数量</li>-->
+                    <li class="width100">商品数量</li>
+                    <li class="width200">小计</li>
+                    <li class="width100">操作</li>
+                </ul>
+			<#if buyerItemList??>
+				<#list buyerItemList as item>
+				<#if item.prdType != "0">
+                    <div class="jf-cartItem">
+                        <!--
+                        <div class="width50">
+                            <input type="checkbox" value="" name="newslist" style="margin-top:13px;" />
+                        </div>
+                        -->
+                        <div class="width200 cartItemTitle" style="width:300px;">
+							<#if item.fileName != "">
+                                <a href="<@spring.url '/proshow;prdNo=${item.prdNo};keyWordsFld=${item.prdNo};'/>"><img src="<@spring.url '/imgsrc/${item.fileName?if_exists}'/>" width="60" height="40" onerror="downloadErrImg(this,'${item.fileName?if_exists}','../imgsrc')"/></a>
+                                <a href="<@spring.url '/proshow;prdNo=${item.prdNo};keyWordsFld=${item.prdNo};'/>" style="width:435px;">${item.prdName?if_exists}</a>
+							<#else >
+                                <a href="<@spring.url '/proshow;prdNo=${item.prdNo};keyWordsFld=${item.prdNo};'/>"><img src="<@spring.url '/imgsrc/${item.fileName?if_exists}'/>" width="60" height="40" /></a>
+                                <a href="<@spring.url '/proshow;prdNo=${item.prdNo};keyWordsFld=${item.prdNo};'/>" style="width:435px;">${item.prdName?if_exists}</a>
+							</#if>
+                        </div>
+                        <div class="width100" style="line-height: 40px">${item.prdType}</div>
+                        <div class="width200 jf-exchange" style="line-height:40px;">￥${item.money}</div>
+					<#--<div class="width100" style="line-height:40px;">1/1000</div>-->
+					<#--<div class="width100"><span class="cartNumL bgImgS" style="margin-left:15px;"></span><input name="cartNum" type="text" value="${item.amount}" class="cartNum" /><span class="cartNumR bgImgS"></span></div>-->
+                        <div class="width100" style="line-height: 40px">${item.amount}</div>
+                        <div class="width200">
+                            <p><span class="exchangeCount" style=" line-height:40px;">￥${item.money * item.amount}</span></p>
+                        </div>
+                        <div class="cartDlt width100" style="line-height:40px;"><a href="javascript:delItem('${item.prdNo}','${item.money?c}','${item.amount}')" >删除</a></div>
+                    </div>
+				</#if>
+				</#list>
+			</#if>
+
+
+
+                <div class="cartBanlance">
+                    <div class="bgGrey">
+                        <p style="line-height:50px; margin-right:20px;">共<span id="shuliang">${cardNum}</span><span style="margin-right:20px;">件</span>合计:<span id="exchangeTotal">${cardMoney}</span>分</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!--卡购物车列表 end-->
+        <div class="jf-cart jf-width1000">
+			<div class="cartBanlance">
+        		<p class="jf-overflowH">
+					<input type="button" value="继续购物"  class="btnBgS cartShopBtn"  onclick="window.location='<@spring.url "/pro"/>'" />
+                    <input type="button" value="商品下单"  class="btnBgS cartBanBtn" onclick="window.location='<@spring.url "/confirmOrder"/>'" />
+					<input type="button" value="卡下单"  class="btnBgS cartBanBtn" onclick="window.location='<@spring.url "/confirmCardOrder"/>'" />
+				</p>
+        	</div>
+		</div>
+
     </div>
         
     <!--合作伙伴-->
