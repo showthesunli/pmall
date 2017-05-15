@@ -12,8 +12,8 @@
 <script language="javascript" src="<@spring.url '/js/menu.js'/>" ></script>
     <script type="text/javascript" src="<@spring.url '/js/util.js'/>"></script>
 <style>
+.addrDiv:hover,.invoiceDiv:hover{ background: #ffefe5;}
 .jf-productList{ width:323px; margin:0 10px 10px 0; background:none;}
-.jf-productList:hover{ background:#faecec;}
 .orderItem,.jf-cartItem,.cartBanlance{ font-size:14px;}
 .orderItem div{ line-height:25px;}
 .orderItemTitel{ padding:0 10px;}
@@ -26,12 +26,18 @@
 .width100{ width:130px;}
 .orderItem .defaultDiv {  margin-left: 30px;  float: left;  line-height: 30px;  }
 .defaultDiv .addrDefault {  color: #cc0000;  cursor: default;  }
-.addrModifyBtn,.invoiceModifyBtn {  margin-left: 30px;  }
-.addrModSureBtn,.addrModCBtn ,.invoiceModSureBtn{  display: inline-block;  padding: 0 20px;  margin-top: 10px;  color: #fff;  background: #f60;  height: 30px;  line-height: 30px;  cursor: pointer;  }
+.addrModifyBtn,.invoiceModifyBtn,.payTypeModifyBtn{  margin-left: 30px;  }
+.addrModSureBtn,.addrModCBtn ,.invoiceModSureBtn,.payTypeModSureBtn{  display: inline-block;  padding: 0 20px;  margin-top: 10px;  color: #fff;  background: #f60;  height: 30px;  line-height: 30px;  cursor: pointer;}
 .addrModCBtn{ background:#eee; color: #666; margin-left: 10px; }
 .bgCO,.bgCOIn {  background: #ffefe5;  }
 .addForN{ font-size: 12px; margin-left: 20px;}
 .addForN a{ color:#f60; text-decoration: underline;}
+
+.payTypeItem{ padding: 5px; border: 1px solid #eee; cursor: pointer; float: left; margin-right: 10px;}
+.payTypeItemBO{border-color:#f60;}
+.payTypeDiv h5{ padding:2px 0; color: #f60; margin-bottom: 10px; font-size: 12px;}
+.payTypeDiv img{ vertical-align: middle;}
+.payTypeDiv input[type=radio]{ vertical-align: middle;}
 </style>
 </head>
 
@@ -60,7 +66,7 @@
                         <span class="addrDefault" style="float: none;">默认地址</span>
                         <span class="addrModifyBtn" onclick="divHeightA('addrSlide')">修改</span>
                     </#if>
-                        <span class="addrDefault" style="float: none;">仅购买虚拟卡时需要配送</span>
+                        <span class="addrDefault" style="float: none;">仅购买实体卡时需要配送</span>
                 </div>
             </div>
 
@@ -121,8 +127,44 @@
             <div class="orderItemTitel jf-overflowH">
                 <h4>支付方式</h4>
                 <div class="defaultDiv jf-overflowH" style="float:left;">
-                    <label>余额支付方式：</label>
-                    <label>账户余额</label>
+                	<label class="payTypeT">积分支付：</label>
+                    <label class="payTypeA">账户余额</label>
+                    <span class="payTypeModifyBtn" onclick="divHeightA('payTypeSlide')">修改</span>
+                </div>
+            </div>
+            <div class="jf-overflowH payTypeSlide" style="height:0;">
+                <div class="payTypeDiv jf-overflowH" style="padding:0 10px;">
+                    <!--
+                	<div><h5>积分支付</h5></div>
+                	<div class="jf-overflowH" style="margin-bottom: 10px;">
+	                    <label class="payTypeItem payTypeItemBO">
+	                    	<input type="radio" name="RadioGroup1" value="逸乐生活" checked="checked" />
+	                    	<img src="<@spring.url '/images/bankLogo/payTypeYL.png'/>" width="100" height="33" />
+	                    </label>
+	                    <label class="payTypeItem">
+	                    	<input type="radio" name="RadioGroup1" value="中信银行" />
+	                    	<img src="<@spring.url '/images/bankLogo/payTypeZX.png'/>" width="100" height="33" />
+	                    </label>
+                    </div>
+                    -->
+                    <div><h5>资金支付</h5></div>
+                    <div class="jf-overflowH" style="margin-bottom: 10px;">
+	                    <label class="payTypeItem">
+	                    	<input type="radio" name="RadioGroup1" value="支付宝" />
+	                    	<img src="<@spring.url '/images/bankLogo/payTypeZFB.png'/>" width="100" height="33" />
+	                    </label>
+	                    <label class="payTypeItem">
+	                    	<input type="radio" name="RadioGroup1" value="微信" />
+	                    	<img src="<@spring.url '/images/bankLogo/payTypeWX.png'/>" width="100" height="33" />
+	                    </label>
+                    </div>
+                    
+                </div>
+
+                <div style="margin-left: 10px;">
+                    <span class="payTypeModSureBtn">确定</span>
+                    <span class="addrModCBtn" onclick="divHeightZ('payTypeSlide')">取消</span>
+                    
                 </div>
             </div>
 
@@ -141,18 +183,18 @@
             <div class="orderItemTitel jf-overflowH"><h4>订单信息</h4></div>
 			<div class="jf-cart" style="padding:0 10px;">
                 <ul class="jf-cartItemTitle">
-                    <li class="width200" style="width:480px;">卡名称</li>
+                    <li class="width200" style="width:560px;">卡名称</li>
                     <li class="width100">卡类型</li>
                     <li class="width100">金额</li>
                     <li class="width100">数量</li>
                     <li class="width100">小计</li>
                 </ul>
-                    
-                <div class="jf-cartItem">
-                    <#list buyerItemList as item>
-                        <div class="width200 cartItemTitle" style="width:480px;">
-                            <a href="<@spring.url '/proshow;prdNo=${item.prdNo};keyWordsFld=${item.prdNo};'/>"><img src="<@spring.url '/imgsrc/${item.fileName}'/>" width="80" height="50" /></a>
-                            <a href="<@spring.url '/proshow;prdNo=${item.prdNo};keyWordsFld=${item.prdNo};'/>" style="width:555px; margin-left:10px;">${item.prdName}</a>
+
+                <#list buyerItemList as item>
+                	<div class="jf-cartItem">                   
+                        <div class="width200 cartItemTitle" style="width:560px;">
+                            <a href="<@spring.url '/proshow;prdNo=${item.prdNo};keyWordsFld=${item.prdNo};'/>"><img src="<@spring.url '/imgsrc/${item.fileName}'/>" width="80" height="50" onerror="downloadErrImg(this,'${item.fileName}')" /></a>
+                            <a href="<@spring.url '/proshow;prdNo=${item.prdNo};keyWordsFld=${item.prdNo};'/>" style="width:455px; margin-left:10px;">${item.prdName}</a>
                         </div>
                         <div class="width100" style="line-height:40px; ">${item.prdType}</div>
 
@@ -163,8 +205,8 @@
                         <div class="width100">
                             <p><span class="exchangeCount" style=" line-height:40px;">￥${item.money * item.amount}</span></p>
                         </div>
-                    </#list>
-                </div>
+                	</div>
+                </#list>
                 <div class="cartBanlance">
                     <div class="bgGrey">
                         <p style="line-height:50px; margin-right:20px;">共<span id="shuliang">${integer}</span><span style="margin-right:20px;">件</span>合计:<span id="exchangeTotal">￥${double}</span></p>
@@ -260,6 +302,20 @@ $(document).ready(function(e) {
             $(".defaultDiv .invoiceTxt").text(txt);
         }
     });
+    //支付方式修改
+    $('.payTypeItem').click(function(){
+    	$('.payTypeItem').removeClass('payTypeItemBO');
+    	$(this).addClass('payTypeItemBO');
+    	$(this).parent().parent().find('input').removeAttr('checked');
+    	$(this).find('input').attr('checked','checked');
+    })
+    $('.payTypeModSureBtn').click(function(){
+    	var pay = $('.payTypeDiv').find('input:checked').val();
+    	var type = $('.payTypeDiv').find('input:checked').parent().parent().prev().find('h5').text();
+    	$('.payTypeT').text(type + '：');
+    	$('.payTypeA').text(pay);
+    	divHeightZ('payTypeSlide');
+    })
         
 })
 function divHeightZ(obj) {

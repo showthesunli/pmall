@@ -83,7 +83,11 @@ public class confirmOrder extends HisuBaseControllerAdapter{
         orderService.initOrder(order);
         boolean ordFlag = orderService.placeOrder();
         if (ordFlag){
-            shoppingCartService.delAllFromShoppingCart();
+            if (order.getOrderType().equals("0")){
+                shoppingCartService.delPrdItemFromShoppingCart();
+            }else {
+                shoppingCartService.delCardItemFromShoppingCart();
+            }
             writBuyerItemsToCookie(rsp,shoppingCartService);
             Map<String,Object> param = new HashMap<>();
             param.put("billNo",orderService.getOrder().getOrderNo());

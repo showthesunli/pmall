@@ -27,11 +27,11 @@ public class ShoppingCart {
 
     private List<BuyerItem> buyerItemList;
 
-    public void initShoppingCart(String itemsStr){
-        this.buyerItemList = JSON.parseArray(itemsStr, BuyerItem.class );
+    public void initShoppingCart(String itemsStr) {
+        this.buyerItemList = JSON.parseArray(itemsStr, BuyerItem.class);
     }
 
-    public void initShoppingCart(){
+    public void initShoppingCart() {
         this.buyerItemList = new LinkedList<BuyerItem>();
     }
 
@@ -40,14 +40,19 @@ public class ShoppingCart {
     }
 
     /**
-     * TODO 根据类型返回商品项目
      * itemType 为0时为实物商品项，为1时为卡项
+     *
      * @param itemType
      * @return
      */
     public List<BuyerItem> getBuyerItemList(String itemType) {
-
-        return buyerItemList;
+        List<BuyerItem> list = new LinkedList<BuyerItem>();
+        for (BuyerItem item : this.buyerItemList) {
+            if (item.getPrdType().equals(itemType)){
+                list.add(item);
+            }
+        }
+        return list;
     }
 
     public int getCardMoney() {

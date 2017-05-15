@@ -9,6 +9,18 @@ $.validator.addMethod("isPhone", function (value, element) {
             return false;
         return true;
     }, "ignore");
+
+//真实姓名
+$.validator.addMethod("isRealName", function (value, element) {
+        var name = $("#memberName").val();// 手机号码
+        var nameRule=/^[\u4e00-\u9fa5]{1,10}|[a-zA-Z]{1,20}$/;
+
+        // 姓名错误
+        if (!nameRule.test(name) && name != '')
+            return false;
+        return true;
+    }, "ignore");
+    
     
 //QQ验证
 $.validator.addMethod("isQQ", function (value, element) {

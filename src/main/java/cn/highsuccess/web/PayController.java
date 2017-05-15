@@ -3,10 +3,17 @@ package cn.highsuccess.web;
 import cn.highsuccess.data.JavaDataSet;
 import cn.highsuccess.data.JavaOperate;
 import cn.highsuccess.data.serivce.OrderService;
+import cn.highsuccess.data.serivce.PayService;
+import cn.highsuccess.module.OrderPaySsn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by prototype on 2017/5/10.
@@ -17,18 +24,45 @@ public class PayController extends HisuBaseControllerAdapter{
     private OrderService orderService;
 
     @Autowired
+    private PayService payService;
+
+    @Autowired
     protected PayController(JavaDataSet jds, JavaOperate javaOperate) {
         super(jds, javaOperate);
     }
 
 
     @RequestMapping("/pay")
-    public String pay(Model model){
-        boolean flag =  orderService.payOrder();
-        if (flag){
-            return "/orderPaySuccess";
-        }else {
+    public String pay(Model model,
+                      @Valid OrderPaySsn orderPaySsn,
+                      Errors errors){
+        if (errors.hasErrors()){
+            handleError(model,errors);
+        }
+        //初始化paySsn
+        payService.perPayInitPaySsn(orderPaySsn.getOrderNo(),orderPaySsn.getPayer());
+
+        //支付订单
+//        payService.payOrder();
+
+        model.addAttribute("paySsn",this.payService.getOrderPaySsn().getPaySsn());
+        model.addAttribute("noticeurl", "http://localhost:8080/pmall");
+        return "/payToGateWay";
+    }
+
+    @RequestMapping(value = "/notice")
+    public String notice(Model model,
+                         @RequestParam @Valid @NotNull String orderNumber,
+                         @RequestParam @Valid @NotNull int retCode,
+                         @RequestParam String retMsg){
+
+        payService.perNoticInitPaySsn(orderNumber, "00000001");
+        if (retCode<0){
+            payService.noticeOrder(false);
             return "/orderPayFailed";
+        }else {
+            payService.noticeOrder(true);
+            return "/orderPaySuccess";
         }
     }
 }

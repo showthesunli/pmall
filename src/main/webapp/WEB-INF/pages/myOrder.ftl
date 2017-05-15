@@ -44,21 +44,19 @@ td{ overflow:hidden; height:30px;}
                         <table width="100%" border="0" cellpadding="0" cellspacing="0" class="orderTable">
                             <tr>
                                 <th width="50%">订单编号</th>
+                                <th width="10%">订单状态</th>
+                                <th width="10%">配送状态</th>
                                 <th width="10%">价格</th>
-                                <th width="10%">数量</th>
-                                <th width="10%">合计</th>
                                 <th>操作</th>
                             </tr>
                             <#list queryMemberOrder as key>
                             <tr>
-                                <td><a href="<@spring.url '/myOrderDetial'/>">${key.billNo}</a></td>
-                                <td>￥200.00</td>
-                                <td>2</td>
+                                <td><a href="<@spring.url '/buycfm'/>;billNo=${key.billNo}">${key.billNo}</a></td>
+                                <td>${key.orderStatus}</td>
+                                <td>${key.deliveryStatus}</td>
                                 <td style="color:#f60;">￥${key.totalPrice}</td>
                                 <td class="orderBtn">
                                     <a href="<@spring.url '/myOrderDetial'/>" style="margin-left:0;">详情</a>
-                                    <a href="javascript:volid(0);" class="orderPaid">已支付</a>
-                                    <a href="#">删除</a>
                                 </td>
                             </tr>
                             </#list>

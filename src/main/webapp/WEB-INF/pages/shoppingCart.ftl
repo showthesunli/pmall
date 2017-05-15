@@ -13,6 +13,8 @@
 <style>
 .jf-productList{ width:323px; margin:0 10px 10px 0; background:none;}
 .jf-productList:hover{ background:#faecec;}
+.cartTitle{ color:#f60; font-size: 16px; font-weight: bold; line-height: 30px;}
+.jf-cart{ margin-top: 0;}
 </style>
 </head>
 
@@ -28,6 +30,7 @@
         </div>
             
             <!--商品购物车列表-->
+            <div class="jf-width1000"><h2 class="cartTitle">商品购物车</h2></div>
             <div class="jf-cart jf-width1000">
             	<div class="jf-cart">
                 	<ul class="jf-cartItemTitle">
@@ -84,11 +87,12 @@
             <!--商品购物车列表 end-->
 
         <!--卡购物车列表-->
+        <div class="jf-width1000"><h2 class="cartTitle">卡购物车</h2></div>
         <div class="jf-cart jf-width1000">
             <div class="jf-cart">
                 <ul class="jf-cartItemTitle">
 				<#--<li class="width50"><input id="Checkbox1" type="checkbox"  class="allselect" />全选</li>-->
-                    <li class="width200" style="width:300px;">商品名称</li>
+                    <li class="width200" style="width:380px;">商品名称</li>
                     <li class="width100">卡类型</li>
                     <li class="width200">单价</li>
 				<#--<li class="width100">最小/最大购买数量</li>-->
@@ -105,13 +109,13 @@
                             <input type="checkbox" value="" name="newslist" style="margin-top:13px;" />
                         </div>
                         -->
-                        <div class="width200 cartItemTitle" style="width:300px;">
+                        <div class="width200 cartItemTitle" style="width:380px;">
 							<#if item.fileName != "">
                                 <a href="<@spring.url '/proshow;prdNo=${item.prdNo};keyWordsFld=${item.prdNo};'/>"><img src="<@spring.url '/imgsrc/${item.fileName?if_exists}'/>" width="60" height="40" onerror="downloadErrImg(this,'${item.fileName?if_exists}','../imgsrc')"/></a>
-                                <a href="<@spring.url '/proshow;prdNo=${item.prdNo};keyWordsFld=${item.prdNo};'/>" style="width:435px;">${item.prdName?if_exists}</a>
+                                <a href="<@spring.url '/proshow;prdNo=${item.prdNo};keyWordsFld=${item.prdNo};'/>" style="width:315px;">${item.prdName?if_exists}</a>
 							<#else >
                                 <a href="<@spring.url '/proshow;prdNo=${item.prdNo};keyWordsFld=${item.prdNo};'/>"><img src="<@spring.url '/imgsrc/${item.fileName?if_exists}'/>" width="60" height="40" /></a>
-                                <a href="<@spring.url '/proshow;prdNo=${item.prdNo};keyWordsFld=${item.prdNo};'/>" style="width:435px;">${item.prdName?if_exists}</a>
+                                <a href="<@spring.url '/proshow;prdNo=${item.prdNo};keyWordsFld=${item.prdNo};'/>" style="width:315px;">${item.prdName?if_exists}</a>
 							</#if>
                         </div>
                         <div class="width100" style="line-height: 40px">${item.prdType}</div>
@@ -143,7 +147,7 @@
 			<div class="cartBanlance">
         		<p class="jf-overflowH">
 					<input type="button" value="继续购物"  class="btnBgS cartShopBtn"  onclick="window.location='<@spring.url "/pro"/>'" />
-                    <input type="button" value="商品下单"  class="btnBgS cartBanBtn" onclick="window.location='<@spring.url "/confirmOrder"/>'" />
+                    <input type="button" value="商品下单"  class="btnBgS cartBanBtn" onclick="window.location='<@spring.url "/confirmOrder"/>'" style="margin-left:10px;" />
 					<input type="button" value="卡下单"  class="btnBgS cartBanBtn" onclick="window.location='<@spring.url "/confirmCardOrder"/>'" />
 				</p>
         	</div>

@@ -51,7 +51,7 @@ public class searchPrdListController extends HisuBaseControllerAdapter{
     }
 
     protected void excute(Model model,Map<String,Object> map) throws JSONException {
-        //»ñÈ¡groupID
+        //ï¿½ï¿½È¡groupID
         Set<String> set = this.hisuMngDataGroupAndId.getDataId().keySet();
         Iterator<String> iterator = set.iterator();
         while (iterator.hasNext()){
@@ -61,7 +61,7 @@ public class searchPrdListController extends HisuBaseControllerAdapter{
                 for (int i=0;i<list.size();i++){
                     StringBuffer condition = new StringBuffer();
                     for (int l=0;l<list.get(i).getArgs().size();l++){
-                        //×é×°Ìõ¼þ
+                        //ï¿½ï¿½×°ï¿½ï¿½ï¿½ï¿½
                         if (map.get(list.get(i).getArgs().get(l)) == null){
                             continue;
                         }
@@ -70,16 +70,18 @@ public class searchPrdListController extends HisuBaseControllerAdapter{
                         condition.append(map.get(list.get(i).getArgs().get(l)));
                         condition.append("|");
                     }
-//                    condition.deleteCharAt(condition.length()-1);
+                    if (condition.length() != 0){
+                        condition.deleteCharAt(condition.length()-1);
+                    }
                     this.getJds().service(groupId, list.get(i).getId(), condition.toString());
-                    //·µ»ØÊý¾Ý
+                    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                     String retVal = this.getJds().getDataList().toString();
                     if (list.get(i).getId().equals("queryPrdTypeByHeadType")){
                         retVal = parseString(this.getJds().getDataList());
                     }
                     model.addAttribute(list.get(i).getId(), JSON.parse(retVal));
 
-                    //·µ»ØÊý¾Ý¼ÇÂ¼Êý
+                    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¼ï¿½Â¼ï¿½ï¿½
                     int totalRecNum = this.getJds().getRecordCount();
                     model.addAttribute(list.get(i).getId()+"_totalRecNum",totalRecNum);
                 }

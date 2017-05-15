@@ -5,6 +5,7 @@ import cn.highsuccess.config.systemproperties.HisuMngSvr;
 import cn.highsuccess.data.JavaOperate;
 import cn.highsuccess.data.JavaDataSet;
 import cn.highsuccess.module.Order;
+import cn.highsuccess.module.OrderPaySsn;
 import cn.highsuccess.module.ShoppingCart;
 import cn.highsuccess.sms.SendSms;
 import cn.highsuccess.sms.SendSmsImpl;
@@ -79,5 +80,11 @@ public class RootConfig {
     @Scope(value = WebApplicationContext.SCOPE_SESSION,proxyMode = ScopedProxyMode.TARGET_CLASS)
     public Order getOrder(){
         return new Order();
+    }
+
+    @Bean
+    @Scope(value = WebApplicationContext.SCOPE_REQUEST,proxyMode = ScopedProxyMode.TARGET_CLASS)
+    public OrderPaySsn getOrderPaySsn(){
+        return new OrderPaySsn();
     }
 }

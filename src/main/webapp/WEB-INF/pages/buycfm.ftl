@@ -92,7 +92,7 @@
                     
                 <p style="text-align:center; margin:20px 0 0; float:right">
                     <input type="button" value="取消订单" class="sureBtn" style="background: #eee; color:#666; margin-right:10px; border:1px solid #ccc;""  />
-                    <input type="button" value="支付" onclick="pay()" class="sureBtn"  />
+                    <input type="button" value="支付" id="pay" class="sureBtn"  />
                 </p>
             </div>
             
@@ -105,6 +105,15 @@
     <!--底部-->
     <#include "/lib/template/footer.ftl" encoding="UTF-8">
     <!--end 底部-->
+
+    <div id="loginBg"></div>
+    <!--提示框-->
+    <div class="tipDiv">
+        <div class="jf-overflowH tipDivTitle"><h3 style="float:left;">提示</h3></div>
+        <p style="margin-top: 55px;"><input type="button" value="订单支付成功" class="sureBtn" id="paySuccess" style="width: 120px;" />
+        <input type="button" value="订单支付失败" class="sureBtn"  id="payFail" style="width: 120px; background: #eee; color: #666; border-color:#999; margin-left:10px;" /></p>
+    </div>
+    <!--提示框 end-->
         
 </body>
 <script language="javascript">
@@ -124,6 +133,29 @@ $(document).ready(function(e) {
 		$(this).parent().children("li").removeClass("exPoint");
 		$(this).addClass("exPoint");
 		})
+
+
+    $("#pay").click(function(){
+        tipOpen();
+        window.open( "<@spring.url '/pay'/>"+"?orderNo=${queryMemberOrder[0].billNo}&payer=00000001");
+    })
+
+    function tipOpen(){
+        $('#loginBg').show();
+        $('.tipDiv').show();
+    }
+    function tipClose(){
+        $('#loginBg').hide();
+        $('.tipDiv').hide();
+    }
+    $("#paySuccess").click(function(){
+        window.location.href="<@spring.url '/myOrder'/>"
+        tipClose();
+    })
+    $("#payFail").click(function(){
+        window.location.href="<@spring.url '/myOrder'/>"
+        tipClose();
+    })
 });
 
     var useTime = 0;
@@ -174,8 +206,5 @@ $(document).ready(function(e) {
 }
 statusMsg.initStatus("${queryMemberOrder[0].billNo}")
 
-    function pay(){
-        window.location.href = "<@spring.url '/pay'/>";
-    }
 </script>
 </html>

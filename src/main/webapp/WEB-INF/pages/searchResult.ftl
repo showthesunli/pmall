@@ -52,9 +52,9 @@
 
         <!--产品-->
         <div class="jf-product jf-width1000" style=" padding-bottom:30px;">
-            <#if searchPrdListByKeyWord_totalRecNum != 0>
+            <#if searchPrdListByKeyWords_totalRecNum != 0>
 
-            <#list searchPrdListByKeyWord as queryPrdListByPrdTypeItem>
+            <#list searchPrdListByKeyWords as queryPrdListByPrdTypeItem>
                 <div class="jf-productList">
                     <a href="<@spring.url '/proshow;prdNo=${queryPrdListByPrdTypeItem.prdNo};keyWordsFld=${queryPrdListByPrdTypeItem.prdNo};'/>" target="_blank"><img src="<@spring.url '/imgsrc/${queryPrdListByPrdTypeItem.iconFileName}'/>" onerror="downloadErrImg(this,'${queryPrdListByPrdTypeItem.iconFileName}')" width="280" height="182"></a>
                     <p><a href="<@spring.url '/proshow;prdNo=${queryPrdListByPrdTypeItem.prdNo};keyWordsFld=${queryPrdListByPrdTypeItem.prdNo};'/>" target="_blank" class="jf-productName">${queryPrdListByPrdTypeItem.productInfo}</a></p>

@@ -84,26 +84,22 @@
                             <label class="detialLabel">性别：</label>
                             <input id="gender" name="gender" type="text" value="" class="myDetialTxt inputRO" readOnly="true" maxlength="20" />
                             <p style="display: none; height: 17px; padding:5px 0;">
-                                <label style="margin:0 20px 0 5px;"><input type="radio" name="RadioGroup1" value="保密" id="RadioGroup1_0" checked="checked" />保密</label>
-                                <label style="margin-right:20px;"><input type="radio" name="RadioGroup1" value="男" id="RadioGroup1_1"/>男</label>
-                                <label><input type="radio" name="RadioGroup1" value="女" id="RadioGroup1_2" />女</label>
+                                <label style="margin:0 20px 0 5px;"><input type="radio" name="RadioGroup1" value="0" id="RadioGroup1_0" checked="checked" />保密</label>
+                                <label style="margin-right:20px;"><input type="radio" name="RadioGroup1" value="1" id="RadioGroup1_1"/>男</label>
+                                <label><input type="radio" name="RadioGroup1" value="2" id="RadioGroup1_2" />女</label>
                             </p>
                         </div>
                         <div>
                             <label class="detialLabel">生日：</label>
                             <input id="birthday" name="birthday" type="text" value="${memberInfo[0].birthday}" class="myDetialTxt inputRO" readOnly="true" maxlength="20" />
-                            <input id="birthdayDate" name="birthdayDate" type="text" value="${memberInfo[0].birthday}" class="myDetialTxt" readOnly="true" style="display: none;" />
-                            <p style=" margin-left:5px; height: 27px;display: none;">
-                                <select id="idYear" name="idYear" data="" class="birthD"></select> 年 
-                                <select id="idMonth" name="idMonth" data="" class="birthD"></select> 月 
-                                <select id="idDay" name="idDay" data="" class="birthD"></select> 日
-                            <p>
+                            <input id="birthdayDate" name="birthdayDate" type="text" value="${memberInfo[0].birthday}" class="myDetialTxt" readOnly="true" style="display: none;" oninput="oninputB()" />                           
                         </div>
                         <div>
                         	<input type="hidden" id="${_csrf.parameterName}" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                         	
                             <input type="button" value="修改" onclick="modifyInfor()" class="detialBtn modBtn" style="margin-left: 85px;" />
-                            <input type="button" value="保存" onclick="updateInfor()" class="detialBtn updBtn" style="margin-left: 85px; display: none;" />
+                            <input type="submit" value="保存" onclick="updateInfor()" class="detialBtn updBtn" style="margin-left: 85px; display: none;" />
+                            <input type="button" value="取消" onclick="closeInfor()" class="detialBtn canBtn" style="margin-left: 10px; display: none; color: #666; border-color:#666;" />
                         </div>
                     	</form>
                     </div>
@@ -193,6 +189,75 @@
 
 </body>
 </html>
+<script>
+$(function () {
+	//性别
+	var g = ${memberInfo[0].gender};
+	switch(g){
+		case 0:
+		$('#gender').val('保密');
+		break;
+		case 1:
+		$('#gender').val('男');
+		break;
+		case 2 :
+		$('#gender').val('女');
+		break;
+	};
+	$('#RadioGroup1_' + g).attr('checked','checked');
+	//生日
+	$("#birthdayDate").datepicker({
+		dateFormat: 'yy-mm-dd'
+	});
+
+	// 在键盘按下并释放及提交后验证提交表单
+    $("#informationOfMy").validate({
+		rules: {
+			memberName:{isRealName:true},
+			email:{email:true},
+			identityCardNo:{isIdCardNo:true},
+		},
+		messages: {
+			memberName:{isRealName:"最多输入20个英文或10个汉字"},
+			email: {email:"请输入正确格式的邮箱"},
+			identityCardNo:{isIdCardNo:"请输入正确的身份证号"},
+        }
+    });
+});
+function openTipDiv(obj,txt) {
+    $("#loginBg").css("display","block");
+    $("." + obj).css("display","block");
+    $('.tipShow').text(txt);
+}
+function closeTipDiv(obj) {
+    $("#loginBg").css("display","none");
+    $("." + obj).css("display","none");
+}
+//点击修改按钮
+function modifyInfor(){
+	$('.inputRO').addClass('inputRW').removeAttr('readonly').removeClass('inputRO');
+	$('#gender').css('display','none').next('p').css('display','block');
+	$('#birthday').css('display','none').next('input').css('display','block');
+	$('.modBtn').hide();
+	$('.updBtn').show();
+	$('.canBtn').show();
+}
+//点击保存按钮
+function updateInfor(){
+	if($('.error').css('display')=='none' || $('.error').length == 0){	
+		closeInfor();
+		openTipDiv('tipDiv','保存成功！');
+	}
+}
+function closeInfor(){
+	$('.inputRW').addClass('inputRO').attr('readonly','ture').removeClass('inputRW');
+	$('#gender').css('display','block').next('p').css('display','none');
+	$('#birthday').css('display','block').next('input').css('display','none');
+	$('.updBtn').hide();
+	$('.canBtn').hide();
+	$('.modBtn').show();
+}
+</script>
 <script language="javascript">
 $(document).ready(function(e) {
 	$(".defStyle").css("display","none");
@@ -270,74 +335,5 @@ $(document).ready(function(e) {
 function showDiv(obj) {
     $(".myDetialList").css("display","none");
     $("." + obj).css("display","block");
-}
-function openTipDiv(obj,txt) {
-    $("#loginBg").css("display","block");
-    $("." + obj).css("display","block");
-    $('.tipShow').text(txt);
-}
-function closeTipDiv(obj) {
-    $("#loginBg").css("display","none");
-    $("." + obj).css("display","none");
-}
-</script>
-<script>
-$(function () {
-	//性别
-	var g = ${memberInfo[0].gender};
-	switch(g){
-		case 0:
-		$('#gender').val('保密');
-		break;
-		case 1:
-		$('#gender').val('男');
-		break;
-		case 2 :
-		$('#gender').val('女');
-		break;
-	};
-	$('#RadioGroup1_' + g).attr('checked','checked');
-	//生日
-	$("#birthdayDate").datepicker({
-		dateFormat: 'yy-mm-dd'
-	});
-	//生日日期不能大于当前日期
-	$("#birthdayDate").change(function(){
-		var now = new Date;
-		var d = new Date($(this).val());
-		
-		if(d > now){
-			$(this).after('<label id="birthdayDate-error" class="error" for="birthdayDate">日期不能大于当前日期</label>');
-		}
-	})
-	// 在键盘按下并释放及提交后验证提交表单
-    $("#informationOfMy").validate({
-		rules: {
-			email:{email:true},
-			birthdayDate:{date:true},
-			identityCardNo:{isIdCardNo:true},
-		},
-		messages: {
-			email: {email:"请输入正确格式的邮箱"},
-			birthdayDate: {date:"请输入合法的日期"},
-			identityCardNo:{isIdCardNo:"请输入正确的身份证号"},
-        }
-    });
-});
-//点击修改按钮
-function modifyInfor(){
-	$('.inputRO').addClass('inputRW').removeAttr('readonly').removeClass('inputRO');
-	$('#gender').css('display','none').next('p').css('display','block');
-	$('#birthday').css('display','none').next('input').css('display','block');
-	$('.modBtn').hide();
-	$('.updBtn').show();
-}
-//点击保存按钮
-function updateInfor(){
-	$('.inputRW').addClass('inputRO').attr('readonly','ture').removeClass('inputRW');
-	$('#gender').css('display','block').next('p').css('display','none');
-	$('#birthday').css('display','block').next('input').css('display','none');
-	$('.updBtn').hide();
-	$('.modBtn').show();
 }
 </script>

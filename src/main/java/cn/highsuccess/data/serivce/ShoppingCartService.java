@@ -58,7 +58,7 @@ public class ShoppingCartService implements ShoppingCartServiceProvider {
     public double countProMoney() {
         double money = 0;
         for (BuyerItem item : shoppingCart.getBuyerItemList()){
-            //类型为1的产品条目是卡
+            //锟斤拷锟斤拷为1锟侥诧拷品锟斤拷目锟角匡拷
             if (!item.getPrdType().equals("1")){
                 money = money + item.getMoney()*item.getAmount();
             }
@@ -71,7 +71,7 @@ public class ShoppingCartService implements ShoppingCartServiceProvider {
     public int countProNum() {
         int prdNum = 0;
         for (BuyerItem item : shoppingCart.getBuyerItemList()){
-            //类型为0的产品条目是商品
+            //锟斤拷锟斤拷为0锟侥诧拷品锟斤拷目锟斤拷锟斤拷品
             if (item.getPrdType().equals("0")) {
                 prdNum = prdNum + item.getAmount();
             }
@@ -84,7 +84,6 @@ public class ShoppingCartService implements ShoppingCartServiceProvider {
     public double countCardMoney() {
         double money = 0;
         for (BuyerItem item : shoppingCart.getBuyerItemList()){
-            //类型不为0的产品条目是卡
             if (!item.getPrdType().equals("0")){
                 money = money + item.getMoney()*item.getAmount();
             }
@@ -97,7 +96,6 @@ public class ShoppingCartService implements ShoppingCartServiceProvider {
     public int countCardNum() {
         int prdNum = 0;
         for (BuyerItem item : shoppingCart.getBuyerItemList()){
-            //类型不为0的产品条目是卡
             if (!item.getPrdType().equals("0")) {
                 prdNum = prdNum + item.getAmount();
             }
@@ -109,6 +107,30 @@ public class ShoppingCartService implements ShoppingCartServiceProvider {
     @Override
     public boolean delAllFromShoppingCart() {
         shoppingCart.getBuyerItemList().clear();
+        return true;
+    }
+
+    @Override
+    public boolean delCardItemFromShoppingCart(){
+        Iterator<BuyerItem> it = shoppingCart.getBuyerItemList().iterator();
+        while (it.hasNext()){
+            BuyerItem item = it.next();
+            if (!item.getPrdType().equals("0")){
+                it.remove();
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean delPrdItemFromShoppingCart(){
+        Iterator<BuyerItem> it = shoppingCart.getBuyerItemList().iterator();
+        while (it.hasNext()){
+            BuyerItem item = it.next();
+            if (item.getPrdType().equals("0")){
+                it.remove();
+            }
+        }
         return true;
     }
 

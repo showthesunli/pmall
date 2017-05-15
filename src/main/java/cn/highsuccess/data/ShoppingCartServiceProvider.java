@@ -27,4 +27,10 @@ public interface ShoppingCartServiceProvider {
 
     //删除购物车中所有内容
     public boolean delAllFromShoppingCart();
+
+    //删除商品购物车中的内容
+    public boolean delCardItemFromShoppingCart();
+
+    //删除卡购物车中的内容
+    public boolean delPrdItemFromShoppingCart();
 }

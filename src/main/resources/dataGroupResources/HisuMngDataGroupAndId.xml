@@ -292,16 +292,16 @@
                                           <ref bean="queryPrdTypeByHeadType"/>
                                    </list>
                             </entry>
-                            <entry key="w_mainPage" >
+                            <entry key="jf_headPage" >
                                    <list>
-                                          <ref bean="searchPrdListByKeyWord"/>
+                                          <ref bean="searchPrdListByKeyWords"/>
                                    </list>
                             </entry>
                      </map>
               </constructor-arg>
        </bean>
-       <bean id="searchPrdListByKeyWord" class="cn.highsuccess.config.systemproperties.HisuMngDataIdArgs">
-              <constructor-arg index="0" value="searchPrdListByKeyWord"></constructor-arg>
+       <bean id="searchPrdListByKeyWords" class="cn.highsuccess.config.systemproperties.HisuMngDataIdArgs">
+              <constructor-arg index="0" value="searchPrdListByKeyWords"></constructor-arg>
               <constructor-arg index="1" >
                      <list>
                             <value>keyWordsFld</value>
