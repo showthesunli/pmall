@@ -139,7 +139,7 @@
        </bean>
        
        
-       <!--personal center 查询个人信息,订单 -->
+       <!--personal center 查询个人信息,个人账户信息,订单,查询收货地址 -->
        <bean id="queryPersonalCenter" class="cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId">
               <constructor-arg>
                      <map>
@@ -148,9 +148,17 @@
                                           <ref bean="memberInfo"/>
                                           <ref bean="queryMemberOrder"/>
                                           <ref bean="queryMemberAddress"/>
+                                          <ref bean="queryMmbAccInfo"/>
                                    </list>
                             </entry>
                      </map>
+              </constructor-arg>
+       </bean>
+       <bean id="queryMmbAccInfo" class="cn.highsuccess.config.systemproperties.HisuMngDataIdArgs">
+              <constructor-arg index="0" value="queryMmbAccInfo"/>
+              <constructor-arg index="1">
+                     <list>
+                     </list>
               </constructor-arg>
        </bean>
        <bean id="memberInfo" class="cn.highsuccess.config.systemproperties.HisuMngDataIdArgs">

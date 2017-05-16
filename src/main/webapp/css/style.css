@@ -62,6 +62,7 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input
 .fontColorO a{ color: #ff6600;}
 .memberMain-Left a{ line-height: 40px; height: 40px; display: inline-block; width: 100px;}
 .iconLBg{ background: url(../images/member/leftIcon.png); display: inline-block; width: 20px; height: 20px; margin-top: 10px; margin-right: 10px; vertical-align: top;}
+.iconLAll{ background-position: 0 -87px;}
 .iconLInfor{ background-position: 0 0;}
 .iconLOrder{ background-position: 0 -22px;}
 .iconLPoint{ background-position: 0 -44px;}

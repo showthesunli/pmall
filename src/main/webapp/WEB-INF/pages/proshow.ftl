@@ -13,61 +13,21 @@
 <link rel="stylesheet" type="text/css" href="<@spring.url '/css/common.css'/>"/>
 <link rel="stylesheet" type="text/css" href="<@spring.url '/css/model.css'/>"/>
 
-<script type="text/javascript" src="<@spring.url '/js/jquery.js'/>"></script>
+<script type="text/javascript" src="<@spring.url '/js/jquery-1.7.2.min.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/js/model.js'/>"></script>
-<#--<script type="text/javascript" src="<@spring.url '/js/gd_Index.js'/>"></script>-->
-<script type="text/javascript" src="<@spring.url '/js/banner.js'/>"></script>
-<#--<script type="text/javascript" src="<@spring.url '/js/menu.js'/>" ></script>-->
-    <script type="text/javascript" src="<@spring.url '/js/util.js'/>"></script>
-    <script type="text/javascript">
-        $(document).ready(function(){
-            var lilength = $('#list li').length;
-            var currImg = 1;
-            $("#imgNext").click(function(){
-                var inner = $("#list");
-                var i, j = 0;
-                for (i = currImg; i <= lilength - 3; i++, j++) {
-                    if (j == 3)break;
-                }
-                if (j == 0)return;
-                var len = j * 120;
-                currImg += j;
-                inner.animate(
-                        {left: '-=' + len + 'px'}
-                        , 1000);
-            });
-            $("#imgPrevious").click(function(){
-                var inner = $("#list");
-                var i, j = 0;
-                for (i = currImg; i > 1; i--, j++) {
-                    if (j == 3)break;
-                }
-                if (j == 0)return;
-                var len = j * 120;
-                currImg -= j;
-                inner.animate(
-                        {left: '+=' + len + 'px'}
-                        , 1000);
-            })
+<script type="text/javascript" src="<@spring.url '/js/menu.js'/>" ></script>
+<script type="text/javascript" src="<@spring.url '/js/util.js'/>"></script>
 
-            $('#list li').click(function () {
-                var picSrc = $(this).children("img").attr('src');
-                $('#bigimg').attr('src', picSrc);
-                $('#bigimg1').attr('src', picSrc);
-                $('.sImgList  li').removeClass('imgPitch');
-                $(this).addClass('imgPitch');
-            });
-
-            $("#addTo").click(function (){
-                var money = ${queryPrdDetail[0].prdPrice};
-                var amount = $("#prdnum").val();
-                var prdNo = "${queryPrdDetail[0].prdNo}";
-                var isCard = "${queryPrdDetail[0].isCard}"
-                window.location.href = "<@spring.url '/shoppingCart/addCart'/>" + "?prdNo="+prdNo+"&amount="+amount+"&money="+money+"&prdType="+isCard;
-            })
-
-        })
-    </script>
+<style>
+ .exchangeDiv{ width: 550px; min-height: 100px;}
+ .exchangeDivList{width:530px;}
+ .exchangeDivItem b{ font-weight: normal;}
+ .exCDivH i{font-style: normal;}
+ .exCDivH b{ background: url(images/bgTop.png) no-repeat 20px center; }
+ .exchangeDivPoint li{ margin-bottom: 0;}
+ .exchangeDivItem{ margin-top: 10px;}
+ .pointInt{ display: none;}
+</style>
 </head>
 <body>
 <!--头部-->
@@ -76,13 +36,13 @@
  
 
 <!--主体-->
-<div class="jf-main">
+<div class="jf-main" style="margin-bottom: 20px;">
 
         <!--产品详情-->
         <div class="jf-width1000 jf-overflowH">
             <div class="cIntroImg con-FangDa" id="fangdajing">
                 <div class="picBig con-fangDaIMg">
-                    <#if querySingleProductImageGrp??>
+                    <#if querySingleProuctImageGrp[0]??>
                         <#assign filename=querySingleProuctImageGrp[0].fileName>
                     <#else >
                         <#assign filename=''>
@@ -99,7 +59,7 @@
                     <div class="imgClickBg" id="imgPrevious" ></div>
                     <div class="cImglist">
                         <ul class="sImgList" id="list">
-                            <#if querySingleProuctImageGrp??>
+                            <#if querySingleProuctImageGrp[0]??>
                             <#list querySingleProuctImageGrp as item>
                                 <li><img src="<@spring.url '/imgsrc/${item.fileName}'/>" width="110" height="72" onerror="downloadErrImg(this,'${item.fileName}')";)">
                                 </li>
@@ -125,36 +85,41 @@
                 <div style="position:relative; margin:15px; width:100%; height:22px;">
                     <span class="marginR10" style="float:left; line-height:22px;">积分来源：</span>
 
-                    <div class="exchangeFrom" onclick="exchangeDivOpen()">--请选择--<b class="bgImgS"></b></div>
+                    <div class="exchangeFrom" onclick="exchangeDivOpen()"><span>--请选择--</span><b class="bgImgS"></b></div>
                     <div class="exchangeDiv" style="z-index:9; display:none;">
                         <img src="images/closeImgS.png" width="18" height="17" style="position:absolute; right:-9px; top:-8px; cursor:pointer;" onclick="exchangeDivClose()">
 
                         <ul class="exchangeDivChassify">
-                            <li id="c0" class="exDivChassifyP">航空业</li>
+                            <li class="exDivChassifyP">航空业</li>
+                            <li>银行业</li>
                         </ul>
                         
-                        <div class="exchangeDivList" id="l-c0">
+                        <div class="exchangeDivList">
                             <ul class="exchangeDivPoint jf-overflowH">
-                                <li class="exPoint">12000-18000
+                                <li>
+                                	<span class="pointComp">南方航空</span>
+                                	<span class="pointInt">1000-2000</span>
                                 </li>
-                            </ul>
-                            <ul class="exchangeDivItem">
-                                
-                                <li>南方航空
-                                    <div class="exCDivH"><b></b>
-                                        <span>会员账户：5000分</span>
-                                    </div>
+                                <li>
+                                	<span class="pointComp">东方航空</span>
+                                	<span class="pointInt">2000-3000</span>
                                 </li>
-                                
-                                <li>东方航空
-                                    <div class="exCDivH"><b></b>
-                                        <span>会员账户：500000分</span>
-                                    </div>
-                                </li>
-                                
                             </ul>
                         </div>
                         
+                        <div class="exchangeDivList">
+                            <ul class="exchangeDivPoint jf-overflowH">
+                                <li>
+                                	<span class="pointComp">中信银行</span>
+                                	<span class="pointInt">3000-4000</span>
+                                </li>
+                                <li>
+                                	<span class="pointComp">中国银行</span>
+                                	<span class="pointInt">4000-5000</span>
+                                </li>
+                            </ul>
+                        </div>
+                         
                     </div>
                 </div>
 
@@ -199,7 +164,7 @@
             </div>
         </div>
 
-        <div class="jf-width1000 jf-overflowH" style="border:1px solid #ddd; border-top:none; margin-top:10px;">
+        <div class="jf-width1000 jf-overflowH" style="border:1px solid #ddd; border-top:none; margin-top:10px; min-height: 100px;">
             <div class="prodTitel">
                 <span class="sapnPitch">商品简介</span>
                 <span>商品参数</span>
@@ -225,3 +190,90 @@
 
 </body>
 </html>
+<script>
+$(document).ready(function(){
+	//卡/商品图片左右移动
+	var lilength = $('#list li').length;
+	var currImg = 1;
+	$("#imgNext").click(function(){
+		var inner = $("#list");
+		var i, j = 0;
+		for (i = currImg; i <= lilength - 3; i++, j++) {
+			if (j == 3)break;
+		}
+		if (j == 0)return;
+		var len = j * 120;
+		currImg += j;
+		inner.animate({left: '-=' + len + 'px'}, 1000);
+	});
+	$("#imgPrevious").click(function(){
+		var inner = $("#list");
+		var i, j = 0;
+		for (i = currImg; i > 1; i--, j++) {
+			if (j == 3)break;
+		}
+		if (j == 0)return;
+		var len = j * 120;
+		currImg -= j;
+		inner.animate({left: '+=' + len + 'px'}, 1000);
+	})
+	//选择卡/商品图片
+	$('#list').find('li').eq(0).addClass('imgPitch');
+	$('#list li').click(function () {
+		var picSrc = $(this).children("img").attr('src');
+		$('#bigimg').attr('src', picSrc);
+		$('#bigimg1').attr('src', picSrc);
+		$('.sImgList  li').removeClass('imgPitch');
+		$(this).addClass('imgPitch');
+	});
+
+	$("#addTo").click(function (){
+		var money = ${queryPrdDetail[0].prdPrice};
+		var amount = $("#prdnum").val();
+		var prdNo = "${queryPrdDetail[0].prdNo}";
+		window.location.href = "<@spring.url '/shoppingCart/addCart'/>" + "?prdNo="+prdNo+"&amount="+amount+"&money="+money;
+	})
+
+})
+</script>
+<script>
+$(document).ready(function (e) {
+	$("#addTo").click(function (){
+		var money = ${queryPrdDetail[0].prdPrice};
+		var amount = $("#prdnum").val();
+		var prdNo = "${queryPrdDetail[0].prdNo}";
+		var isCard = "${queryPrdDetail[0].isCard}"
+		window.location.href = "<@spring.url '/shoppingCart/addCart'/>" + "?prdNo="+prdNo+"&amount="+amount+"&money="+money+"&prdType="+isCard;
+	})
+	
+	//选择积分来源
+	$(".exchangeDivList").eq(0).show();	
+	$(".exchangeDivChassify li").click(function () {
+        $(".exchangeDivList").eq(0).show();
+		var index = $(".exchangeDivChassify li").index(this);
+		$(".exchangeDivList").hide();
+		$(".exchangeDivList").eq(index).show();		
+		$(".exchangeDivChassify li").removeClass("exDivChassifyP");
+		$(this).addClass("exDivChassifyP");
+	})
+    $(".exchangeDivPoint li").click(function () {
+        $(".exchangeDivPoint li").removeClass("exPoint");
+        $(this).addClass("exPoint");
+        
+        var t = $('.exchangeDivChassify .exDivChassifyP').text();//行业
+        var c = $(this).children('.pointComp').text();//公司
+        var i = $(this).children('.pointInt').text();//积分区间        
+        $('.exchangeFrom span').text(t + ' ' + c + ' ' + i);
+        exchangeDivClose();
+    })
+
+})
+function exchangeDivOpen() {
+	$(".exchangeFrom").addClass("exFromClick");
+	$(".exchangeDiv").css("display", "block");
+}
+function exchangeDivClose() {
+	$(".exchangeFrom").removeClass("exFromClick");
+	$(".exchangeDiv").css("display", "none");
+}
+</script>

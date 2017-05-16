@@ -92,6 +92,7 @@ public class confirmOrder extends HisuBaseControllerAdapter{
             Map<String,Object> param = new HashMap<>();
             param.put("billNo",orderService.getOrder().getOrderNo());
             excute(model,param,queryOrder);
+            model.addAttribute("payer",orderService.getOrder().getPayToolIDList());
             //返回购买确认页面
             return "/buycfm";
         }else {
@@ -111,7 +112,7 @@ public class confirmOrder extends HisuBaseControllerAdapter{
             excute(model,param,queryOrder);
         }
         //返回购买确认页面
-        return "/buycfm";
+        return "/paytoolsBuycfm";
     }
 
     @RequestMapping(value = "/queryorder{matrix}",produces = "application/json;charset=UTF-8;")

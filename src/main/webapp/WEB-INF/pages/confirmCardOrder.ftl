@@ -281,7 +281,8 @@ $(document).ready(function(e) {
         $("input[name='addr']").val(addr)
         var mobile = $("#selectDiv").find(".addrPhone").html();
         $("input[name='mobile']").val(mobile)
-        var payToolIDList = "东方航空-积分支付";
+//        var payToolIDList = "东方航空-积分支付";
+        var payToolIDList = $(".payTypeA").text();
         $("input[name='payToolIDList']").val(payToolIDList)
         $("#formGo").submit();
     })

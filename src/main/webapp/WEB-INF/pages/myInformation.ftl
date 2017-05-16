@@ -82,9 +82,16 @@
                         </div>
                         <div>
                             <label class="detialLabel">性别：</label>
-                            <input id="gender" name="gender" type="text" value="" class="myDetialTxt inputRO" readOnly="true" maxlength="20" />
+                            <#if memberInfo[0].gender == '0'>
+		                        <#assign gen='保密'>
+		                    <#elseif memberInfo[0].gender == '1'>
+		                        <#assign gen='男'>
+		                    <#else>
+		                    	<#assign gen='女'>
+		                    </#if>
+                            <input id="gender" name="gender" type="text" value="${gen}" class="myDetialTxt inputRO" readOnly="true" maxlength="20" />
                             <p style="display: none; height: 17px; padding:5px 0;">
-                                <label style="margin:0 20px 0 5px;"><input type="radio" name="RadioGroup1" value="0" id="RadioGroup1_0" checked="checked" />保密</label>
+                                <label style="margin:0 20px 0 5px;"><input type="radio" name="RadioGroup1" value="0" id="RadioGroup1_0" />保密</label>
                                 <label style="margin-right:20px;"><input type="radio" name="RadioGroup1" value="1" id="RadioGroup1_1"/>男</label>
                                 <label><input type="radio" name="RadioGroup1" value="2" id="RadioGroup1_2" />女</label>
                             </p>
@@ -183,7 +190,7 @@
     <div class="tipDiv">
         <div class="jf-overflowH tipDivTitle"><h3 style="float:left;">提示</h3><span onclick="closeTipDiv('tipDiv')" style="float:right; cursor:pointer; color:#999;font-size:25px;">×</span></div>
         <p class="tipShow" style="font-size:14px; font-weight:bold; color:#f60"></p>
-        <p><input type="button" value="确定" class="sureBtn" onclick="closeTipDiv('tipDiv')" /><input type="button" value="取消" class="cancleBtn"  onclick="closeTipDiv('tipDiv')" /></p>
+        <p><input type="button" value="确定" class="sureBtn" onclick="closeTipDiv('tipDiv')" /></p>
     </div>
     <!--提示框 end-->
 
@@ -191,20 +198,7 @@
 </html>
 <script>
 $(function () {
-	//性别
-	var g = ${memberInfo[0].gender};
-	switch(g){
-		case 0:
-		$('#gender').val('保密');
-		break;
-		case 1:
-		$('#gender').val('男');
-		break;
-		case 2 :
-		$('#gender').val('女');
-		break;
-	};
-	$('#RadioGroup1_' + g).attr('checked','checked');
+		
 	//生日
 	$("#birthdayDate").datepicker({
 		dateFormat: 'yy-mm-dd'
@@ -241,6 +235,8 @@ function modifyInfor(){
 	$('.modBtn').hide();
 	$('.updBtn').show();
 	$('.canBtn').show();
+	var g = ${memberInfo[0].gender};
+	$('#RadioGroup1_' + g).attr('checked','checked');
 }
 //点击保存按钮
 function updateInfor(){

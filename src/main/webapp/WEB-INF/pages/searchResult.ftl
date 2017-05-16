@@ -62,7 +62,7 @@
                 </div>
             </#list>
                 <#else>
-                查无记录
+                	<div style=" text-align: center; width: 500px; height:100px; line-height: 100px; font-size: 16px; font-weight: bold; color: #f60; background: #ffebe7; margin: 50px auto 30px;">查无记录</div>
 
             </#if>
         </div>

@@ -16,9 +16,14 @@
 .industryItem li{ font-weight:bold;}
 .industryList li{ padding:3px 20px;}
 .sureBtn{width: 150px; height: 40px; border: 1px solid #f60; color: #fff; font-size: 16px; font-weight: bold; background:url(images/btnBg.png) no-repeat; background-position: 0 -75px;}
-.payTypeChoice{float: left; width: 578px; text-align: center; margin-top:42px;}
-.payTypeChoice span{ color:#333; line-height: 42px; display: inline-block;}
-.payTypeChoice img{ vertical-align: top; border:1px solid #f60; margin-left: 5px;}
+
+.payTypeChoice{float: left; width: 538px; padding: 0 20px; border-left:2px solid #ccc; min-height: 126px;}
+.payTypeItem{ padding: 5px; border: 1px solid #eee; background: #fff; cursor: pointer; float: left; margin-right: 10px;}
+.payTypeItemBO{border-color:#f60;}
+.payTypeChoice h5,.payTypeChoice span{ padding:2px 0; color: #333; margin-bottom: 10px; text-align: left; float: left;}
+.payTypeItem{ margin-bottom: 10px;}
+.payTypeItem img{ vertical-align: middle;}
+.payTypeItem input[type=radio]{ vertical-align: middle;}
 </style>
 </head>
 
@@ -36,59 +41,32 @@
             
             <div class="jf-cart jf-width1000">
             	<div class="orderDtl jf-overflowH">
-                	<div style="float: left; width: 580px; border-right:2px solid #ccc;">
+            		
+                	<div style="float: left; width: 580px;">
                 		<p>订单号码：${queryMemberOrder[0].billNo}</p>
                     	<p>订单产品：</p>
                     	<p>下单时间：${queryMemberOrder[0].saleDateTime}</p>
                     	<p>订单状态：${queryMemberOrder[0].orderStatus}</p>
                     	<p>支付金额：<span style="font-weight:bold; font-size:16px; color:#f60">￥${queryMemberOrder[0].totalPrice}</span></p>
                 	</div>
+                	
                 	<div class="payTypeChoice">
-                		<#--<p><span>支付方式：</span><img src="<@spring.url '/images/bankLogo/payTypeYL.png'/>" width="120" height="40" /></p>-->
-                        <p><span>支付方式：</span><span class="cPayType">${payer}</span></p>
+                		<div class="jf-overflowH"><h5>支付方式：</h5><span class="cPayType"></span></div>
+	                	<div class="jf-overflowH" style="margin-bottom: 10px;">
+		                    <label class="payTypeItem payTypeItemBO">
+		                    	<input type="radio" name="RadioGroup1" value="逸乐生活" checked="checked" />
+		                    	<img src="<@spring.url '/images/bankLogo/payTypeYL.png'/>" width="100" height="33" />
+		                    </label>
+		                    <label class="payTypeItem">
+		                    	<input type="radio" name="RadioGroup1" value="中信银行" />
+		                    	<img src="<@spring.url '/images/bankLogo/payTypeZX.png'/>" width="100" height="33" />
+		                    </label>		                    
+	                    </div>
                 	</div>
+                	
                 </div>
                 
-                <!--<div class="jf-overflowH" style="border:2px solid #f60; padding:20px; margin:10px 0;">
-					<p style=" font-size:14px; font-weight:bold; line-height:35px;">请选择支付方式：</p>
-                  	<ul class="industryItem jf-overflowH">
-                        <li id="i1"class="borderColorW">银行</li>
-                        <li id="i2">通讯行业</li>
-                        <li  id="i3">航空公司</li>
-                    </ul>
-                    <div id="l-i1" class="industryList jf-overflowH">
-                        <ul class="jf-overflowH">
-                            <li id="l1" class="exPoint">储蓄卡</li>
-                            <li id="l2">信用卡</li>
-                        </ul>
-                        <div class="jf-overflowH" id="l-l1" style="border:none; padding:0; margin:0;">
-                            <div><input name="radioG1" type="radio" value="中信" /><img src="<@spring.url '/images/bankLogo/bank02.png'/>" width="150" height="25" /></div>
-                            <div><input name="radioG1" type="radio" value="建设" /><img src="<@spring.url '/images/bankLogo/bank01.png'/>" width="150" height="25" /></div>
-                            <div><input name="radioG1" type="radio" value="工商" /><img src="<@spring.url '/images/bankLogo/bank02.png'/>" width="150" height="25" /></div>
-                        </div>
-                        <div class="jf-overflowH" id="l-l2" style=" display:none;border:none; padding:0; margin:0;">
-                            <div><input name="radioG1" type="radio" value="建设" /><img src="<@spring.url '/images/bankLogo/bank01.png'/>" width="150" height="25" /></div>
-                            <div><input name="radioG1" type="radio" value="中信" /><img src="<@spring.url '/images/bankLogo/bank02.png'/>" width="150" height="25" /></div>
-                            <div><input name="radioG1" type="radio" value="工商" /><img src="<@spring.url '/images/bankLogo/bank03.png'/>" width="150" height="25" /></div>
-                        </div>
-                    </div>
                 
-                    <div class="jf-overflowH industryList" id="l-i2" style="display:none;">
-                        <div class="jf-overflowH" style="border:none; padding:0; margin:0;">
-                            <div><input name="radioG1" type="radio" value="移动" /><img src="<@spring.url '/images/bankLogo/bank01.png'/>" width="150" height="25" /></div>
-                            <div><input name="radioG1" type="radio" value="联通" /><img src="<@spring.url '/images/bankLogo/bank02.png'/>" width="150" height="25" /></div>
-                        </div>
-                    </div>
-                    
-                    <div class="jf-overflowH industryList" id="l-i3" style="display:none;">
-                        <div class="jf-overflowH" style="border:none; padding:0; margin:0;">
-                            <div><input name="radioG2" type="radio" value="东航" /><img src="<@spring.url '/images/bankLogo/bank02.png'/>" width="150" height="25" /></div>
-                            <div><input name="radioG1" type="radio" value="国际" /><img src="<@spring.url '/images/bankLogo/bank03.png'/>" width="150" height="25" /></div>
-                        </div>
-                    </div>
-                	
-
-                </div>-->
                 <div style=" text-align:center; font-size:12px; background:#eee; width:1200px; margin:30px auto; padding:30px 0; overflow:hidden;">
 
                     <div style=" margin:20px auto; line-height:20px; height:80px;">
@@ -127,6 +105,18 @@
 </body>
 <script language="javascript">
 $(document).ready(function(e) {
+	
+	//支付方式修改
+    $('.payTypeItem').click(function(){
+    	$('.payTypeItem').removeClass('payTypeItemBO');
+    	$(this).addClass('payTypeItemBO');
+    	$(this).parent().parent().find('input').removeAttr('checked');
+    	$(this).find('input').attr('checked','checked');
+    	
+    	var p = $(this).find('input').val();
+    	$('.cPayType').text(p);
+    })
+    
     $(".industryItem li").click(function(){
 		var name = $(this).attr('id');
 		$(".industryList").css("display","none");
