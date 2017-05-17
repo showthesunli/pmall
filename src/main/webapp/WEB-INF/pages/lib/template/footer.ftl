@@ -58,6 +58,14 @@
     <!--end注册协议-->
 
 <script type="text/javascript">
+$(document).ready(function(){
+	var windowH = $(window).height();
+	var bodyH = $('body').height();
+	if(windowH > bodyH){
+		var h = windowH - bodyH;
+		$('.bottom').css('margin-top',h + 'px');
+	}
+})
 function proOpen(){
     $("#loginBg").css("display","block");
     $(".resProtocol").css("display","block"); 

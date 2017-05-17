@@ -4,6 +4,7 @@ import cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId;
 import cn.highsuccess.config.systemproperties.HisuMngDataIdArgs;
 import cn.highsuccess.data.JavaDataSet;
 import cn.highsuccess.data.JavaOperate;
+import cn.highsuccess.module.UserInfo;
 import com.alibaba.fastjson.JSON;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -12,9 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.MatrixVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.validation.Valid;
 import java.util.*;
 
 /**
@@ -38,6 +43,25 @@ public class PersonalCenterController extends HisuBaseControllerAdapter{
         Map<String,Object> param = new HashMap<>(map);
         param.put("memberID", this.getJds().getUserName());
         excute(model, param, hisuMngDataGroupAndId);
+        return "/member";
+    }
+
+    /**
+     * TODO修改个人信息按钮
+     * @param model
+     * @param userInfo
+     * @param errors
+     * @return
+     */
+    @RequestMapping(value = "/updateUserInfo",method = RequestMethod.POST)
+    public String modifyUserInfo(Model model,
+                                 @Valid UserInfo userInfo,
+                                 Errors errors){
+        if (errors.hasErrors()){
+            handleError(model,errors);
+        }
+        this.getJavaOperate().service("w_mmbCenterPage","cytModMmbInfo","");
+
         return "/member";
     }
 }

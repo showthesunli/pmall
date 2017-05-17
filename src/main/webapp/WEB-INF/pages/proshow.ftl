@@ -266,7 +266,40 @@ $(document).ready(function (e) {
         $('.exchangeFrom span').text(t + ' ' + c + ' ' + i);
         exchangeDivClose();
     })
+	//数量减
+	$(".prodMin").click(function () {
+		var v = $(this).next(".prodNum").attr("value");
+		var num = parseInt(v) - 1;
 
+		if (parseInt(v) == 1) {
+			$(this).next(".prodNum").val(1);
+		}
+		else {
+			$(this).next(".prodNum").val(num);
+		}
+	});
+	//数量加
+	$(".prodAdd").click(function () {
+		var v = $(this).prev(".prodNum").attr("value");
+		var num = parseInt(v) + 1;
+		var stock = ${queryPrdDetail[0].prdWareNum};
+		
+		if(num <= stock){
+			$(this).prev(".prodNum").val(num);
+		}
+		else{
+			$(this).prev(".prodNum").val(stock);
+		}
+	});	
+	//数量手输判断
+	$("#prdnum").keyup(function () {
+		var v = $.trim($(this).attr("value"));
+		var stock = ${queryPrdDetail[0].prdWareNum};
+		
+		if(v > stock){$(this).val(stock);}
+		else if(v <= stock && v > 0){$(this).val(v);}
+		else{$(this).val(1);}
+	});
 })
 function exchangeDivOpen() {
 	$(".exchangeFrom").addClass("exFromClick");

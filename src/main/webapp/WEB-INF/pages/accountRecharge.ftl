@@ -9,6 +9,7 @@
 <meta name="keywords" content="途皓（北京）商务服务有限公司" />
 <link rel="stylesheet" type="text/css" href="<@spring.url '/css/css.css'/>"/>
 <link rel="stylesheet" type="text/css" href="<@spring.url '/css/style.css'/>"/>
+<script type="text/javascript" src="<@spring.url '/js/gd_Index.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/js/jquery-1.7.2.min.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/js/menu.js'/>" ></script>
 <script type="text/javascript" src="<@spring.url '/js/jquery.validate.min.js'/>" ></script>
@@ -18,7 +19,7 @@
 .rechargeForm label{ width: 80px; text-align: right; display: inline-block; font-size: 14px;}
 .rechargeForm h2{ font-weight: bold; color: #f60; line-height: 40px; margin-bottom: 20px;}
 .recTxt{ width: 300px; border: 1px solid #ccc; border-radius: 5px; line-height: 35px; padding: 0 10px; font-size: 14px;}
-.rechargeBtn{width: 150px; height: 40px; border: 1px solid #f60; color: #fff; font-size: 16px; font-weight: bold; background:url(images/btnBg.png) no-repeat; background-position: 0 -75px; border-radius: 5px; cursor: pointer; margin-left: 5px;}
+.rechargeBtn{width: 150px; height: 40px; border: 1px solid #f60; color: #fff; font-size: 16px; font-weight: bold; background:url(images/btnBg.png) no-repeat; background-position: 0 -75px; border-radius: 5px; cursor: pointer;}
 #cardNo-error,#cardPsw-error{ position:absolute; left:420px; top:0; color:#f00; padding:0 10px 0 0; background:#ffebe7; line-height:35px; border:1px solid #f00; border-radius:5px;}
 </style>
 </head>
@@ -69,7 +70,10 @@
         
     </div>
 
-
+    <!--合作伙伴-->
+    <#include "/lib/template/partner.ftl" encoding="UTF-8">
+    <!--end 合作伙伴-->
+    
     <!--底部-->
     <#include "/lib/template/footer.ftl" encoding="UTF-8">
     <!--end 底部-->

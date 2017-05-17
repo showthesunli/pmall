@@ -9,6 +9,7 @@
 <meta name="keywords" content="途皓（北京）商务服务有限公司" />
 <link rel="stylesheet" type="text/css" href="<@spring.url '/css/css.css'/>"/>
 <link rel="stylesheet" type="text/css" href="<@spring.url '/css/style.css'/>"/>
+<script type="text/javascript" src="<@spring.url '/js/gd_Index.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/js/jquery.js'/>"></script>
 <script language="javascript" src="<@spring.url '/js/menu.js'/>" ></script>
 <style>
@@ -40,7 +41,6 @@ td{ overflow:hidden; height:30px;}
                 <h1 class="baseinfo-Title">我的订单</h1>
                 <div class="rightOrder">
                     <div>
-                        <h2>积分商城订单</h2>
                         <table width="100%" border="0" cellpadding="0" cellspacing="0" class="orderTable">
                             <tr>
                                 <th width="50%">订单编号</th>
@@ -172,6 +172,10 @@ td{ overflow:hidden; height:30px;}
             </div>
         </div>
     </div>
+
+    <!--合作伙伴-->
+    <#include "/lib/template/partner.ftl" encoding="UTF-8">
+    <!--end 合作伙伴-->
 
 
     <!--底部-->

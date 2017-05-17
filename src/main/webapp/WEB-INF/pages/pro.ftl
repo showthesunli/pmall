@@ -19,6 +19,10 @@
 <script type="text/javascript" src="<@spring.url '/js/banner.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/js/menu.js'/>" ></script>
 <script type="text/javascript" src="<@spring.url '/js/jquery.SuperSlide.2.1.1.js'/>" ></script>
+<style>
+.jf-classifyItem .lineH87{ line-height: 87px;}
+.classifyItemImg{ line-height: 25px; width: 102px;}	
+</style>
 </head>
 <body>
 <!--头部-->
@@ -34,6 +38,26 @@
                     <span class="jf-browse">浏览全部<b class="bgImgS"></b></span>
                 </div>
                 <div class="jf-classifyDrop">
+                	
+                	<div class="jf-classifyItem">
+                        <h2 class="jf-classifyItemTitle lineH87">卡：</h2>
+                        <ul class="jf-classifyItemList">
+                            <li><a href="#" index="0" class="lineH87">全部</a></li>
+                            <li style=" text-align: left">
+                            	<a href="#" index="0" class="classifyItemImg">
+                            		<img src="<@spring.url '/images/about3.jpg'/>" width="100" height="60" />
+                            		<span>逸乐积分卡</span>
+                            	</a>
+                            </li>
+                            <li style=" text-align: left">
+                            	<a href="#" index="0" class="classifyItemImg">
+                            		<img src="<@spring.url '/images/about3.jpg'/>" width="100" height="60" />
+                            		<span>逸乐积分卡</span>
+                            	</a>
+                            </li>
+                        </ul>
+                    </div>
+                    
                 <#list queryPrdTypeByHeadType?keys as key>
                     <div class="jf-classifyItem">
                         <h2 class="jf-classifyItemTitle">${key}：</h2>

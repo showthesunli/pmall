@@ -146,8 +146,7 @@ public class confirmOrder extends HisuBaseControllerAdapter{
     //删除送货地址
     @RequestMapping(value = "/deleteAddr",method = RequestMethod.POST)
     public String deleteAddr(Model model,
-                                  @RequestParam String objectID
-                                  ){
+                                  @RequestParam String objectID){
         logger.debug("/deleteAddr : post");
         logger.debug("objectID :" + objectID);
         StringBuilder condition = new StringBuilder();

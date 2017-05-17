@@ -10,6 +10,7 @@
 <link rel="stylesheet" type="text/css" href="<@spring.url '/css/css.css'/>"/>
 <link rel="stylesheet" type="text/css" href="<@spring.url '/css/style.css'/>"/>
 <link rel="stylesheet" type="text/css" href="<@spring.url '/css/jquery-ui.css'/>"/>
+<script type="text/javascript" src="<@spring.url '/js/gd_Index.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/js/jquery-1.7.2.min.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/js/menu.js'/>" ></script>
 <script type="text/javascript" src="<@spring.url '/js/util.js'/>" ></script>
@@ -59,7 +60,8 @@
                 <div class="myDetial">
                     <div class="myDetial-Title"><h2 class="bgOcoF myBase">基本信息</h2><h2 class="myAddr">收货地址</h2></div>
                     <div id="myInformation" class="myDetialList myBaseInfor">
-                    	<form id="informationOfMy">
+                    	<form id="informationOfMy" action="<@spring.url '/updateUserInfo'/>" method="post">
+                            <input name="${_csrf.parameterName}" value="${_csrf.token}">
                         <div>
                             <label class="detialLabel"><span class="colorRed">*</span> 我的账号：</label>
                             <span id="memberID" name="memberID" style="padding: 0 5px;">${memberInfo[0].memberID}</span>
@@ -68,6 +70,7 @@
                             <label class="detialLabel"><span class="colorRed">*</span> 我的手机：</label>
                             <span id="mobile" name="mobile" style="padding: 0 5px;">${memberInfo[0].mobile}</span>
                         </div>
+                            <#--
                         <div>
                             <label class="detialLabel">真实姓名：</label>
                             <input id="memberName" name="memberName" type="text" value="${memberInfo[0].memberName}" class="myDetialTxt inputRO" readOnly="true"  maxlength="10" />
@@ -80,6 +83,7 @@
                             <label class="detialLabel">邮箱：</label>
                             <input id="email" name="email" type="text" value="${memberInfo[0].email}" class="myDetialTxt inputRO" readOnly="true" maxlength="20" />
                         </div>
+                        -->
                         <div>
                             <label class="detialLabel">性别：</label>
                             <#if memberInfo[0].gender == '0'>
@@ -148,6 +152,9 @@
         </div>
     </div>
 
+    <!--合作伙伴-->
+    <#include "/lib/template/partner.ftl" encoding="UTF-8">
+    <!--end 合作伙伴-->
 
     <!--底部-->
     <#include "/lib/template/footer.ftl" encoding="UTF-8">
@@ -230,8 +237,8 @@ function closeTipDiv(obj) {
 //点击修改按钮
 function modifyInfor(){
 	$('.inputRO').addClass('inputRW').removeAttr('readonly').removeClass('inputRO');
-	$('#gender').css('display','none').next('p').css('display','block');
-	$('#birthday').css('display','none').next('input').css('display','block');
+	$('#gender').css('display','none').next('p').css('display','inline-block');
+	$('#birthday').css('display','none').next('input').css('display','inline-block');
 	$('.modBtn').hide();
 	$('.updBtn').show();
 	$('.canBtn').show();
@@ -243,12 +250,17 @@ function updateInfor(){
 	if($('.error').css('display')=='none' || $('.error').length == 0){	
 		closeInfor();
 		openTipDiv('tipDiv','保存成功！');
+		var memberID = $('#memberID').val();
+		var mobile = $('#mobile').val();
+		var identityCardNo = $('#identityCardNo').val();
+		var email = $('#email').val();
+		var  gender = $('input:radio:checked').val();
 	}
 }
 function closeInfor(){
 	$('.inputRW').addClass('inputRO').attr('readonly','ture').removeClass('inputRW');
-	$('#gender').css('display','block').next('p').css('display','none');
-	$('#birthday').css('display','block').next('input').css('display','none');
+	$('#gender').css('display','inline-block').next('p').css('display','none');
+	$('#birthday').css('display','inline-block').next('input').css('display','none');
 	$('.updBtn').hide();
 	$('.canBtn').hide();
 	$('.modBtn').show();

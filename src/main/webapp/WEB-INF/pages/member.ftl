@@ -9,8 +9,9 @@
 <meta name="keywords" content="途皓（北京）商务服务有限公司" />
 <link rel="stylesheet" type="text/css" href="<@spring.url '/css/css.css'/>"/>
 <link rel="stylesheet" type="text/css" href="<@spring.url '/css/style.css?t=20170516'/>"/>
+<script type="text/javascript" src="<@spring.url '/js/gd_Index.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/js/jquery.js'/>"></script>
-<script language="javascript" src="<@spring.url '/js/menu.js'/>" ></script>
+<script type="text/javascript" src="<@spring.url '/js/menu.js'/>" ></script>
 </head>
 
 <body>
@@ -68,6 +69,9 @@
         </div>
     </div>
 
+    <!--合作伙伴-->
+    <#include "/lib/template/partner.ftl" encoding="UTF-8">
+    <!--end 合作伙伴-->
 
     <!--底部-->
     <#include "/lib/template/footer.ftl" encoding="UTF-8">
