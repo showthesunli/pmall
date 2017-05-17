@@ -53,83 +53,20 @@ td{ overflow:hidden; height:30px;}
                         <table width="100%" border="0" cellpadding="0" cellspacing="0" class="orderTable">
                             <tr>
                                 <th width="30%">卡号</th>
-                                <th width="20%">卡类型</th>
-                                <th width="10%">金额</th>
-                                <th width="20%">支付时间</th>
+                                <th width="30%">卡类型</th>
+                                <th width="20%">金额</th>
                                 <th>操作</th>
                             </tr>
-                            <tr>
-                                <td class="cardNo"><a href="">111111111111</a></td>
-                                <td class="cardType">虚拟卡</td>
-                                <td>￥1000.00</td>
-                                <td>2017-05-09 10:00:00</td>
-                                <td class="orderBtn"><a href="#" style="margin-left:0;">详情</a></td>
-                            </tr>
-                            <tr>
-                                <td class="cardNo"><a href="">111111111111</a></td>
-                                <td class="cardType">虚拟卡</td>
-                                <td>￥1000.00</td>
-                                <td>2017-05-09 10:00:00</td>
-                                <td class="orderBtn"><a href="#" style="margin-left:0;">详情</a></td>
-                            </tr>
-                            <tr>
-                                <td class="cardNo"><a href="">111111111111</a></td>
-                                <td class="cardType">虚拟卡</td>
-                                <td>￥1000.00</td>
-                                <td>2017-05-09 10:00:00</td>
-                                <td class="orderBtn"><a href="#" style="margin-left:0;">详情</a></td>
-                            </tr>
-                            <tr>
-                                <td class="cardNo"><a href="">111111111111</a></td>
-                                <td class="cardType">虚拟卡</td>
-                                <td>￥1000.00</td>
-                                <td>2017-05-09 10:00:00</td>
-                                <td class="orderBtn"><a href="#" style="margin-left:0;">详情</a></td>
-                            </tr>
-                            <tr>
-                                <td class="cardNo"><a href="">111111111111</a></td>
-                                <td class="cardType">虚拟卡</td>
-                                <td>￥1000.00</td>
-                                <td>2017-05-09 10:00:00</td>
-                                <td class="orderBtn"><a href="#" style="margin-left:0;">详情</a></td>
-                            </tr>
-                            <tr>
-                                <td class="cardNo"><a href="">111111111111</a></td>
-                                <td class="cardType">实体卡</td>
-                                <td>￥1000.00</td>
-                                <td>2017-05-09 10:00:00</td>
-                                <td class="orderBtn"><a href="#" style="margin-left:0;">详情</a></td>
-                            </tr>
-                           <tr>
-                                <td class="cardNo"><a href="">111111111111</a></td>
-                                <td class="cardType">实体卡</td>
-                                <td>￥1000.00</td>
-                                <td>2017-05-09 10:00:00</td>
-                                <td class="orderBtn"><a href="#" style="margin-left:0;">详情</a></td>
-                            </tr>
-                           <tr>
-                                <td class="cardNo"><a href="">111111111111</a></td>
-                                <td class="cardType">实体卡</td>
-                                <td>￥1000.00</td>
-                                <td>2017-05-09 10:00:00</td>
-                                <td class="orderBtn"><a href="#" style="margin-left:0;">详情</a></td>
-                            </tr>
-                           <tr>
-                                <td class="cardNo"><a href="">111111111111</a></td>
-                                <td class="cardType">实体卡</td>
-                                <td>￥1000.00</td>
-                                <td>2017-05-09 10:00:00</td>
-                                <td class="orderBtn"><a href="#" style="margin-left:0;">详情</a></td>
-                            </tr>
-                           <tr>
-                                <td class="cardNo"><a href="">111111111111</a></td>
-                                <td class="cardType">实体卡</td>
-                                <td>￥1000.00</td>
-                                <td>2017-05-09 10:00:00</td>
-                                <td class="orderBtn"><a href="#" style="margin-left:0;">详情</a></td>
-                            </tr>
+                            <#list selectPersonalCard as item>
+                                <tr>
+                                    <td class="cardNo"><a href="">${item.cardNo}</a></td>
+                                    <td class="cardType">${item.cardType}</td>
+                                    <td>￥${item.balanceAmount}</td>
+                                    <td class="orderBtn"><a href="#" style="margin-left:0;" psw="${item.cardPassword}">详情</a></td>
+                                </tr>
+                            </#list>
                          </table>
-                        <div class="page"><a class="a1">22条</a> <a href="#" class="a1">上一页</a> <span>1</span> <a href="#">2</a> <a href="#">3</a> <a href="#" class="a1">下一页</a></div>
+                        <#--<div class="page"><a class="a1">22条</a> <a href="#" class="a1">上一页</a> <span>1</span> <a href="#">2</a> <a href="#">3</a> <a href="#" class="a1">下一页</a></div>-->
                     </div>
 
                 </div>
@@ -167,7 +104,7 @@ $(document).ready(function(e) {
         var obj = 'tipDiv';
         var cardNo = $(this).parent().siblings('.cardNo').find('a').text();
         var cardType = $(this).parent().siblings('.cardType').text();
-        var cardPws = 'ssssss';
+        var cardPws = $(this).attr('psw');
 
         if(cardType == '实体卡'){
             cardPws = '*';

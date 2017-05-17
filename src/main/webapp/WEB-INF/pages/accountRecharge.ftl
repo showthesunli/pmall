@@ -39,10 +39,10 @@
                 <div class="memberMainR-Baseinfo">
                     <img src="<@spring.url '/images/fuwu1.jpg'/>" width="120" height="120">
                     <div class="baseinfo-Account">
-                        <p style="margin-top:5px;">我的账号：<span>aaaaa</span></p>
-                        <p>我的积分：<span>1234</span></p>
-                        <p>我的手机：<span>124678995442</span></p>
-                        <p>我的邮箱：<span>124124</span></p>                        
+                        <p style="margin-top:5px;">我的账号：<span>${memberInfo[0].memberID}</span></p>
+                        <p>我的积分：<span>${queryMmbAccInfo[0].balanceAmount}</span></p>
+                        <p>我的手机：<span>${memberInfo[0].mobile}</span></p>
+                        <p>我的邮箱：<span>${memberInfo[0].email}</span></p>
                     </div>
                 </div>
                 

@@ -166,10 +166,12 @@ public class confirmOrder extends HisuBaseControllerAdapter{
                                   @RequestParam String zip,
                                   @RequestParam String name,
                                   @RequestParam String phone,
-                                  @RequestParam String isDefault
+                                  @RequestParam String isDefault,
+                                  @RequestParam String objectID
                                   ){
         logger.debug("/addAddr : post");
         StringBuilder condition = new StringBuilder();
+        condition.append("objectID").append(objectID).append("!");
         condition.append("province=").append(province).append("|");
         condition.append("city=").append(city).append("|");
         condition.append("area=").append(area).append("|");

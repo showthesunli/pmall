@@ -54,6 +54,7 @@ public class OrderService implements OrderServiceProvider{
 
     @Override
     public void initOrder(Order order) {
+        this.getOrder().setOrderType(order.getOrderType());
         this.getOrder().setItemList(order.getItemList());
         this.getOrder().setAddr(order.getAddr());
         this.getOrder().setMobile(order.getMobile());
@@ -97,6 +98,11 @@ public class OrderService implements OrderServiceProvider{
         }
         sb.deleteCharAt(sb.length()-1);
         sb.append("|");
+        if (this.getOrder().getOrderType().equals("0")){
+            sb.append("saleOrderPrdType=").append(this.getOrder().getOrderType()).append("|");
+        }else {
+            sb.append("saleOrderPrdType=2|");
+        }
         sb.append("receiverName=" + this.getOrder().getReceiverName() + "|");
         sb.append("addr="+this.getOrder().getAddr());
         sb.append("|");

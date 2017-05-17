@@ -6,6 +6,7 @@ import cn.highsuccess.data.JavaDataSet;
 import cn.highsuccess.data.JavaOperate;
 import cn.highsuccess.module.BuyerItem;
 import cn.highsuccess.module.User;
+import cn.highsuccess.module.UserInfo;
 import cn.highsuccess.service.util.HisuOperatePasswd;
 
 import com.alibaba.fastjson.JSON;
@@ -59,21 +60,10 @@ public class PersonalInfoController extends HisuBaseControllerAdapter{
     //修改个人信息
     @RequestMapping(value = "/modifyMemberInfo",method = RequestMethod.POST)
     public String modifyMemberInfo(Model model,
-                                  @RequestParam String memberID,
-                                  @RequestParam String mobile,
-                                  @RequestParam String email,
-                                  @RequestParam String gender
-                                  ){
-        logger.debug("/modifyMemberInfo : post");
-        logger.debug("memberID :" + memberID);
-        logger.debug("mobile :" + mobile);
+                                   @Valid UserInfo userInfo){
         StringBuilder condition = new StringBuilder();
-        condition.append("memberID=").append(memberID).append("|");
-        condition.append("mobile=").append(mobile).append("|");
-        condition.append("email=").append(email).append("|");
-        condition.append("gender=").append(gender).append("|");
+        condition.append("gender=").append(userInfo.getGender());
         this.getJavaOperate().service("w_mmbCenterPage","cytModMmbInfo",condition.toString());
-
         return "redirect:/myInformation";
     }
 

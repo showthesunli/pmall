@@ -39,29 +39,11 @@ public class PersonalCenterController extends HisuBaseControllerAdapter{
     @GetMapping(value = "/member{matrix}")
     public String membershow(Model model,
                              @MatrixVariable(required = false) Map<String,String> map) throws JSONException {
-        logger.debug("personalCenterInfo process");
+        logger.debug("personalCenterInfo procs");
         Map<String,Object> param = new HashMap<>(map);
         param.put("memberID", this.getJds().getUserName());
         excute(model, param, hisuMngDataGroupAndId);
         return "/member";
     }
 
-    /**
-     * TODO修改个人信息按钮
-     * @param model
-     * @param userInfo
-     * @param errors
-     * @return
-     */
-    @RequestMapping(value = "/updateUserInfo",method = RequestMethod.POST)
-    public String modifyUserInfo(Model model,
-                                 @Valid UserInfo userInfo,
-                                 Errors errors){
-        if (errors.hasErrors()){
-            handleError(model,errors);
-        }
-        this.getJavaOperate().service("w_mmbCenterPage","cytModMmbInfo","");
-
-        return "/member";
-    }
 }

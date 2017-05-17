@@ -233,7 +233,7 @@
        <bean id="queryPensonalCenterCard" class="cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId">
               <constructor-arg>
                      <map>
-                            <entry key="jf_memberCenter" >
+                            <entry key="eShopMyCardPage" >
                                    <list>
                                           <ref bean="queryPensonalCard"/>
                                    </list>
@@ -242,10 +242,9 @@
               </constructor-arg>
        </bean>
        <bean id="queryPensonalCard" class="cn.highsuccess.config.systemproperties.HisuMngDataIdArgs">
-              <constructor-arg index="0" value="queryPensonalCard"/>
+              <constructor-arg index="0" value="selectPersonalCard"/>
               <constructor-arg index="1">
                      <list>
-                            <value>memberID</value>
                             <value>currentPage</value>
                             <value>numOfPerPage</value>
                      </list>

@@ -60,8 +60,7 @@
                 <div class="myDetial">
                     <div class="myDetial-Title"><h2 class="bgOcoF myBase">基本信息</h2><h2 class="myAddr">收货地址</h2></div>
                     <div id="myInformation" class="myDetialList myBaseInfor">
-                    	<form id="informationOfMy" action="<@spring.url '/updateUserInfo'/>" method="post">
-                            <input name="${_csrf.parameterName}" value="${_csrf.token}">
+                    	<form id="informationOfMy" action="modifyMemberInfo" method="post">
                         <div>
                             <label class="detialLabel"><span class="colorRed">*</span> 我的账号：</label>
                             <span id="memberID" name="memberID" style="padding: 0 5px;">${memberInfo[0].memberID}</span>
@@ -93,11 +92,11 @@
 		                    <#else>
 		                    	<#assign gen='女'>
 		                    </#if>
-                            <input id="gender" name="gender" type="text" value="${gen}" class="myDetialTxt inputRO" readOnly="true" maxlength="20" />
+                            <input id="gender"  type="text" value="${gen}" class="myDetialTxt inputRO" readOnly="true" maxlength="20" />
                             <p style="display: none; height: 17px; padding:5px 0;">
-                                <label style="margin:0 20px 0 5px;"><input type="radio" name="RadioGroup1" value="0" id="RadioGroup1_0" />保密</label>
-                                <label style="margin-right:20px;"><input type="radio" name="RadioGroup1" value="1" id="RadioGroup1_1"/>男</label>
-                                <label><input type="radio" name="RadioGroup1" value="2" id="RadioGroup1_2" />女</label>
+                                <label style="margin:0 20px 0 5px;"><input type="radio" name="gender" value="0" id="RadioGroup1_0" />保密</label>
+                                <label style="margin-right:20px;"><input type="radio" name="gender" value="1" id="RadioGroup1_1"/>男</label>
+                                <label><input type="radio" name="gender" value="2" id="RadioGroup1_2" />女</label>
                             </p>
                         </div>
                         <div>
@@ -163,6 +162,7 @@
     <div id="loginBg"></div>
     <!--地址-->
     <div class="addressDiv">
+        <form method="post" action="<@spring.url ''/>">
         <div class="jf-overflowH tipDivTitle"><h3 style="float:left;">收货地址</h3><span onclick="closeTipDiv('addressDiv')" style="float:right; cursor:pointer; color:#999;font-size:25px;">×</span></div>
         <div><label><span class="colorRed">*</span> 收货人：</label><input type="text" id="addressName" value="" /></div>
         <div><label><span class="colorRed">*</span> 邮编：</label><input type="text" id="addressZip" value="" /></div>
@@ -190,7 +190,8 @@
         	<input type="text" id="addressAddr" value="" style="width:477px; line-height: 25px;" />
         </div>
         <div><label><span class="colorRed">*</span> 手机号码：</label><input type="text" id="addressPhone" value="" /></div>
-        <p style="margin:10px 0 0 90px;"><input type="hidden" id="operType" name="operType" value="0"/><input type="hidden" id="${_csrf.parameterName}" name="${_csrf.parameterName}" value="${_csrf.token}"/><input type="button" value="保存" class="sureBtn" onclick="saveAddr()" /><input type="button" value="取消" class="cancleBtn"  onclick="closeTipDiv('addressDiv')" /></p>
+        <p style="margin:10px 0 0 90px;"><input type="hidden" id="operType" name="operType" value="0"/><input type="hidden" id="${_csrf.parameterName}" name="${_csrf.parameterName}" value="${_csrf.token}"/><input type="submit" value="保存" class="sureBtn"  /><input type="button" value="取消" class="cancleBtn"  onclick="closeTipDiv('addressDiv')" /></p>
+        </form>
     </div>
     <!--地址 end-->
     <!--提示框-->
@@ -249,7 +250,7 @@ function modifyInfor(){
 function updateInfor(){
 	if($('.error').css('display')=='none' || $('.error').length == 0){	
 		closeInfor();
-		openTipDiv('tipDiv','保存成功！');
+//		openTipDiv('tipDiv','保存成功！');
 		var memberID = $('#memberID').val();
 		var mobile = $('#mobile').val();
 		var identityCardNo = $('#identityCardNo').val();
