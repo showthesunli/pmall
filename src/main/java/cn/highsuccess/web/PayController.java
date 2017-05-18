@@ -45,8 +45,11 @@ public class PayController extends HisuBaseControllerAdapter{
         //支付订单
 //        payService.payOrder();
 
+        model.addAttribute("memberID",this.getJds().getUserName());
+        model.addAttribute("payer",this.getJds().getUserName());
         model.addAttribute("paySsn",this.payService.getOrderPaySsn().getPaySsn());
         model.addAttribute("noticeurl", "http://localhost:8080/pmall");
+        model.addAttribute("payAmt",payService.getOrderPaySsn().getTotalAmt());
         return "/payToGateWay";
     }
 

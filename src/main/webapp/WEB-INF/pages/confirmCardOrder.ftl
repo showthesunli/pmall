@@ -149,6 +149,7 @@
                     -->
                     <div><h5>资金支付</h5></div>
                     <div class="jf-overflowH" style="margin-bottom: 10px;">
+                        <#--
 	                    <label class="payTypeItem">
 	                    	<input type="radio" name="RadioGroup1" value="支付宝" />
 	                    	<img src="<@spring.url '/images/bankLogo/payTypeZFB.png'/>" width="100" height="33" />
@@ -157,6 +158,13 @@
 	                    	<input type="radio" name="RadioGroup1" value="微信" />
 	                    	<img src="<@spring.url '/images/bankLogo/payTypeWX.png'/>" width="100" height="33" />
 	                    </label>
+	                    -->
+                        <#list payerForCardsOrder as item>
+                            <label class="payTypeItem">
+                                <input type="radio" name="RadioGroup1" value="${item.payer}" />
+                                <img src="<@spring.url '/imgsrc/'/>${item.iconFileName}" alt="${item.payerName}" width="100" height="33" />
+                            </label>
+                        </#list>
                     </div>
                     
                 </div>

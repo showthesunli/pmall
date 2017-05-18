@@ -28,6 +28,10 @@ public class confirmCardOrder extends HisuBaseControllerAdapter{
     private HisuMngDataGroupAndId queryOrder;
 
     @Autowired
+    @Qualifier("queryPayerForCards")
+    private HisuMngDataGroupAndId queryPayerForCards;
+
+    @Autowired
     private ShoppingCartService shoppingCartService;
 
     @Autowired
@@ -46,6 +50,7 @@ public class confirmCardOrder extends HisuBaseControllerAdapter{
         parm.put("memberID", this.getJds().getUserName());
         excute(model, parm, hisuMngDataGroupAndId);
 
+        excute(model,parm,queryPayerForCards);
         model.addAttribute(shoppingCartService.getShoppingCart().getBuyerItemList("1"));
         model.addAttribute(shoppingCartService.countCardMoney());
         model.addAttribute(shoppingCartService.countCardNum());

@@ -46,7 +46,7 @@
                     </div>
                 </div>
                 
-                <form class="rechargeForm" autocomplete="off">
+                <form class="rechargeForm" autocomplete="off" method="post" action="<@spring.url '/recharge'/>">
                 	<h2>账户充值</h2>
                 	<p>
                 		<label>卡号：</label>
@@ -55,10 +55,11 @@
                 	<p>
                 		<label>卡密：</label>
                 		<input type="hidden" />
-                		<input type="text" onfocus="this.type='password'" autocomplete="off" id="cardPsw" name="cardPsw" value="" placeholder="请输入您的卡密" class="recTxt" />
+                		<input type="text" onfocus="this.type='password'" autocomplete="off" id="cardPsw" name="cardPinCiperUnderZPK" value="" placeholder="请输入您的卡密" class="recTxt" />
                 	</p>
                 	<p>
                 		<label></label>
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 		<input type="submit" id="" value="充 值" class="rechargeBtn" />
                 		<!--<input type="submit" id="" value="返 回" class="rechargeBtn" style="background-position: 0 -117px; border: 1px solid #ccc; color: #999; margin-left: 20px;" />-->
                 	</p>

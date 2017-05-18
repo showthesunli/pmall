@@ -62,7 +62,7 @@ td{ overflow:hidden; height:30px;}
                                     <td class="cardNo"><a href="">${item.cardNo}</a></td>
                                     <td class="cardType">${item.cardType}</td>
                                     <td>￥${item.balanceAmount}</td>
-                                    <td class="orderBtn"><a href="#" style="margin-left:0;" psw="${item.cardPassword}">详情</a></td>
+                                    <td class="orderBtn"><a href="#" style="margin-left:0;" psw="${item.cardPassword}">查询卡密</a></td>
                                 </tr>
                             </#list>
                          </table>

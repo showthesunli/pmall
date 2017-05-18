@@ -29,7 +29,7 @@
 .addrOperBtn span{ color:#3897d7; margin-left:10px; cursor:pointer;}
 .addrOperBtn span:hover{ text-decoration: underline;}
 
-.addressDiv{ height:350px;}
+.addressDiv{ height:300px;}
 .addressDiv div{ padding:10px; color:#666; font-size:14px;}
 .addressDiv .tipDivTitle{ padding:0; margin-bottom:10px;}
 .addressDiv input[type=text]{ padding:0 5px;}
@@ -40,6 +40,7 @@
 .birthD{ height:25px; line-height: 25px;}
 #informationOfMy div{ position:relative;}
 #memberName-error,#identityCardNo-error,#email-error,#gender-error,#birthdayDate-error{ position:absolute; left:305px; top:0; color:#f00; padding:0 10px; background:#ffebe7; line-height:25px; border:1px solid #f00; border-radius:5px;}
+.birthD{ color:#666;}
 </style>
 </head>
 
@@ -58,7 +59,6 @@
             <div class="memberMain-Right">
                 <h1 class="baseinfo-Title">个人信息</h1>
                 <div class="myDetial">
-                    <div class="myDetial-Title"><h2 class="bgOcoF myBase">基本信息</h2><h2 class="myAddr">收货地址</h2></div>
                     <div id="myInformation" class="myDetialList myBaseInfor">
                     	<form id="informationOfMy" action="modifyMemberInfo" method="post">
                         <div>
@@ -85,7 +85,7 @@
                         -->
                         <div>
                             <label class="detialLabel">性别：</label>
-                            <#if memberInfo[0].gender == '0'>
+                            <#if memberInfo[0].gender == '0' || memberInfo[0].gender == ''>
 		                        <#assign gen='保密'>
 		                    <#elseif memberInfo[0].gender == '1'>
 		                        <#assign gen='男'>
@@ -114,37 +114,6 @@
                     	</form>
                     </div>
 
-                    <div class="myDetialList myAddress" style="display:none;">
-                        <input type="button" value="新增收货地址" class="detialBtn newAddress" onclick="openTipDiv('addressDiv')" style="margin-left:0; margin-top:0;" />
-                        <#list queryMemberAddress as key>
-                        <div class="myAddressItem">
-                            <div class="addrDefaultInforTop">
-                                <div class="addrDefaultInfor">
-                                    <span class="addrName">${key.name} ${key.province}</span>
-                                    <span class="defStyle">默认地址</span>
-                                </div>
-                            	<div class="addrOperBtn">
-                                    <span class="setToDefAddr" style="display:none;">设为默认</span>
-                                    <span class="modifyAddr" ttoken="${_csrf.token}" objId="${key.objectID}">编辑</span>
-                                    <span class="deleteAddr" ttoken="${_csrf.token}" objId="${key.objectID}">删除</span>
-                                </div>
-                            </div>
-                            <div><label>收货人：</label><span class="addrN">${key.name}</span></div>
-                            <div><label>手机号码：</label><span class="addrP">${key.phone}</span></div>
-                            <div><label>邮政编号：</label><span class="addrZ">${key.zip}</span></div>
-                            <div>
-                            	<label>所在地区：</label>
-                            	<span class="addrProvince">${key.province}</span>
-                            	<span class="addrCity">${key.city}</span>
-                            	<span class="addrArea">${key.area}</span>
-                            </div>
-                            <div><label>收货地址：</label><span class="addrA">${key.addr}</span></div>
-                            <div style="display: none"><label>收货地址ID：</label><span class="addrID">${key.objectID}</span></div>
-                        </div>
-                        
-						</#list>
-                        
-                    </div>
                 </div>
 
             </div>
@@ -160,40 +129,6 @@
     <!--end 底部-->
 
     <div id="loginBg"></div>
-    <!--地址-->
-    <div class="addressDiv">
-        <form method="post" action="<@spring.url ''/>">
-        <div class="jf-overflowH tipDivTitle"><h3 style="float:left;">收货地址</h3><span onclick="closeTipDiv('addressDiv')" style="float:right; cursor:pointer; color:#999;font-size:25px;">×</span></div>
-        <div><label><span class="colorRed">*</span> 收货人：</label><input type="text" id="addressName" value="" /></div>
-        <div><label><span class="colorRed">*</span> 邮编：</label><input type="text" id="addressZip" value="" /></div>
-        <div style="overflow: hidden; height: 27px;">
-        	<label style=" float: left;"><span class="colorRed">*</span> 所在地区：</label>
-        	<div style="width:477px; float: left; padding: 0;">
-        		<select id="idProvnice" name="idProvnice" data="" class="birthD">
-        			<option value="0" disabled="disabled" selected="selected">-请选择-</option>
-        			<option value="广东">广东</option>
-        		</select>
-	            <select id="idCity" name="idCity" data="" class="birthD">
-	            	<option value="0" disabled="disabled" selected="selected">-请选择-</option>
-        			<option value="广州">广州</option>
-        			<option value="深圳">深圳</option>
-	            </select>
-	            <select id="idArea" name="idArea" data="" class="birthD">
-	            	<option value="0" disabled="disabled" selected="selected">-请选择-</option>
-        			<option value="天河区">天河区</option>
-        			<option value="罗湖区">罗湖区</option>
-	            </select>       	
-        	</div>
-        </div>
-        <div style="overflow: hidden;">
-        	<label style=" float: left;"><span class="colorRed">*</span> 详细地址：</label>
-        	<input type="text" id="addressAddr" value="" style="width:477px; line-height: 25px;" />
-        </div>
-        <div><label><span class="colorRed">*</span> 手机号码：</label><input type="text" id="addressPhone" value="" /></div>
-        <p style="margin:10px 0 0 90px;"><input type="hidden" id="operType" name="operType" value="0"/><input type="hidden" id="${_csrf.parameterName}" name="${_csrf.parameterName}" value="${_csrf.token}"/><input type="submit" value="保存" class="sureBtn"  /><input type="button" value="取消" class="cancleBtn"  onclick="closeTipDiv('addressDiv')" /></p>
-        </form>
-    </div>
-    <!--地址 end-->
     <!--提示框-->
     <div class="tipDiv">
         <div class="jf-overflowH tipDivTitle"><h3 style="float:left;">提示</h3><span onclick="closeTipDiv('tipDiv')" style="float:right; cursor:pointer; color:#999;font-size:25px;">×</span></div>
@@ -243,8 +178,9 @@ function modifyInfor(){
 	$('.modBtn').hide();
 	$('.updBtn').show();
 	$('.canBtn').show();
-	var g = ${memberInfo[0].gender};
-	$('#RadioGroup1_' + g).attr('checked','checked');
+	var g = '${memberInfo[0].gender}';
+	if( g == ''){$('#RadioGroup1_0').attr('checked','checked');}
+	else{$('#RadioGroup1_' + g).attr('checked','checked');}
 }
 //点击保存按钮
 function updateInfor(){
@@ -255,7 +191,7 @@ function updateInfor(){
 		var mobile = $('#mobile').val();
 		var identityCardNo = $('#identityCardNo').val();
 		var email = $('#email').val();
-		var  gender = $('input:radio:checked').val();
+		var gender = $('input:radio:checked').val();
 	}
 }
 function closeInfor(){
@@ -265,84 +201,5 @@ function closeInfor(){
 	$('.updBtn').hide();
 	$('.canBtn').hide();
 	$('.modBtn').show();
-}
-</script>
-<script language="javascript">
-$(document).ready(function(e) {
-	$(".defStyle").css("display","none");
-	$('.myAddressItem').eq(0).find(".defStyle").css("display","inline-block");
-	$(".setToDefAddr").css("display","inline-block");
-	$('.myAddressItem').eq(0).find(".setToDefAddr").css("display","none");
-
-	//基本信息和地址点击切换
-    $('.myBase').click(function(){
-        $('.myDetial-Title h2').removeClass('bgOcoF');
-        $(this).addClass('bgOcoF');
-        showDiv('myBaseInfor');
-    });
-    $('.myAddr').click(function(){
-        $('.myDetial-Title h2').removeClass('bgOcoF');
-        $(this).addClass('bgOcoF');
-        showDiv('myAddress');
-    });
-    //设为默认值
-    $('.setToDefAddr').click(function(){
-        var a = $(this).parent().parent().parent();
-        $(".newAddress").after(a);
-        $(".defStyle").css("display","none");
-        $(".setToDefAddr").css("display","inline-block");
-        $(a).find(".defStyle").css("display","inline-block");
-        $(a).find(".setToDefAddr").css("display","none");
-        openTipDiv('tipDiv','设置成功！');
-    })
-
-    //打开文本编辑框点击a标签
-	$(".deleteAddr").each(function(){
-		$(this).click(function(event){
-			var $this = $(this);
-			deleteAddr($this.attr("ttoken"),$this.attr("objId"));
-			return false;
-		});
-	});
-    
-    //编辑地址
-    $('.modifyAddr').click(function(){
-        var a = $(this).parent().parent().parent();
-        var name = a.find('.addrN').text();
-        var zip = a.find('.addrZ').text();
-        var addr = a.find('.addrA').text();
-        var phone = a.find('.addrP').text();
-        var addrProvince = a.find('.addrProvince').text();
-        var addrCity = a.find('.addrCity').text();
-        var addrArea = a.find('.addrArea').text();
-        openTipDiv('addressDiv');
-        if(name!=""){
-            $('#addressName').val(name);
-            $('#addressZip').val(zip);
-            $('#addressAddr').val(addr);
-            $('#addressPhone').val(phone);
-            $('#operType').val("1"); 
-            
-            $("#idProvnice").val(addrProvince);
-            $("#idCity").val(addrCity);
-            $("#idArea").val(addrArea);
-        }
-    });
-    //新增地址
-    $('.newAddress').click(function(){
-        $('#addressName').val('');
-        $('#addressZip').val('');
-        $('#addressAddr').val('');
-        $('#addressPhone').val('');
-        $('#idProvnice').val('0');
-        $('#idCity').val('0');
-        $('#idArea').val('0');
-        $('#operType').val("0"); 
-    });
-
-})
-function showDiv(obj) {
-    $(".myDetialList").css("display","none");
-    $("." + obj).css("display","block");
 }
 </script>

@@ -56,7 +56,7 @@ td{ overflow:hidden; height:30px;}
                                 <td>${key.deliveryStatus}</td>
                                 <td style="color:#f60;">￥${key.totalPrice}</td>
                                 <td class="orderBtn">
-                                    <a href="<@spring.url '/myOrderDetial'/>" style="margin-left:0;">详情</a>
+                                    <a href="<@spring.url '/myDetial'/>" style="margin-left:0;">详情</a>
                                 </td>
                             </tr>
                             </#list>

@@ -42,6 +42,10 @@ public class confirmOrder extends HisuBaseControllerAdapter{
     private HisuMngDataGroupAndId queryOrder;
 
     @Autowired
+    @Qualifier("queryPayerForGoods")
+    private HisuMngDataGroupAndId queryPayerForGoods;
+
+    @Autowired
     private ShoppingCartService shoppingCartService;
 
     @Autowired
@@ -60,6 +64,7 @@ public class confirmOrder extends HisuBaseControllerAdapter{
         parm.put("memberID", this.getJds().getUserName());
         excute(model, parm, hisuMngDataGroupAndId);
 
+        excute(model,parm,queryPayerForGoods);
         model.addAttribute(shoppingCartService.getShoppingCart().getBuyerItemList("0"));
         model.addAttribute(shoppingCartService.countProMoney());
         model.addAttribute(shoppingCartService.countProNum());
@@ -159,25 +164,19 @@ public class confirmOrder extends HisuBaseControllerAdapter{
     @RequestMapping(value = "/addAddr",method = RequestMethod.POST)
     public String addAddr(Model model,
     							  @RequestParam String operType,
-    							  @RequestParam String province,
-                                  @RequestParam String city,
-                                  @RequestParam String area,
                                   @RequestParam String addr,
                                   @RequestParam String zip,
-                                  @RequestParam String name,
+                                  @RequestParam String receiverName,
                                   @RequestParam String phone,
                                   @RequestParam String isDefault,
                                   @RequestParam String objectID
                                   ){
         logger.debug("/addAddr : post");
         StringBuilder condition = new StringBuilder();
-        condition.append("objectID").append(objectID).append("!");
-        condition.append("province=").append(province).append("|");
-        condition.append("city=").append(city).append("|");
-        condition.append("area=").append(area).append("|");
+        condition.append("objectID=").append(objectID).append("|");
         condition.append("addr=").append(addr).append("|");
         condition.append("zip=").append(zip).append("|");
-        condition.append("name=").append(name).append("|");
+        condition.append("name=").append(receiverName).append("|");
         condition.append("phone=").append(phone).append("|");
         condition.append("isDefault=").append(isDefault);
         if("0".equals(operType)){//增加

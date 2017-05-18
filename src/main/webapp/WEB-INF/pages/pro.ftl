@@ -13,12 +13,9 @@
 <link rel="stylesheet" type="text/css" href="<@spring.url '/css/common.css'/>"/>
 <link rel="stylesheet" type="text/css" href="<@spring.url '/css/model.css'/>"/>
 <script type="text/javascript" src="<@spring.url '/js/jquery.js'/>"></script>
-<script type="text/javascript" src="<@spring.url '/js/model.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/js/util.js'/>"></script>
-<#--<script type="text/javascript" src="<@spring.url '/js/gd_Index.js'/>"></script>-->
 <script type="text/javascript" src="<@spring.url '/js/banner.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/js/menu.js'/>" ></script>
-<script type="text/javascript" src="<@spring.url '/js/jquery.SuperSlide.2.1.1.js'/>" ></script>
 <style>
 .jf-classifyItem .lineH87{ line-height: 87px;}
 .classifyItemImg{ line-height: 25px; width: 102px;}	
@@ -38,6 +35,8 @@
                     <span class="jf-browse">浏览全部<b class="bgImgS"></b></span>
                 </div>
                 <div class="jf-classifyDrop">
+                	
+                	<div class="getHeightDiv">
                 	
                 	<div class="jf-classifyItem">
                         <h2 class="jf-classifyItemTitle lineH87">卡：</h2>
@@ -69,6 +68,9 @@
                         </ul>
                     </div>
                 </#list>
+                
+                	</div>
+                	
                 </div>
             </div>
         </div>
@@ -99,3 +101,21 @@
 
 </body>
 </html>
+<script>
+$(document).ready(function(e) {	
+	//点击浏览全部	
+	$(".jf-browse").click(function(){
+		var h = $(".getHeightDiv").height();
+		if ($(".jf-classifyDrop").height() > 0){
+			$(".jf-classifyDrop").animate({height:"0"},500);
+			$(".jf-browse b").addClass("jf-browseUp");
+			$(".jf-classify").css("padding-bottom","0");
+		}
+		if($(".jf-classifyDrop").height() == 0){
+			$(".jf-classifyDrop").animate({height: h + "px"},500);
+			$(".jf-browse b").removeClass("jf-browseUp");
+			$(".jf-classify").css("padding-bottom","10px");
+		}
+	})		
+})
+</script>

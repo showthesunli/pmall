@@ -29,7 +29,7 @@
 	<!--头部-->
 
 	<!--banner--> 
-    <div style="background:url('<@spring.url '/images/titleTag/b_register.jpg'/>) no-repeat center top;height:150px;"></div>
+    <div style="background:url('images/titleTag/b_register.jpg') no-repeat center top;height:150px;"></div>
     <!--endbanner-->
         
 

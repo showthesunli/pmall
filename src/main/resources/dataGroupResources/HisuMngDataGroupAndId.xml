@@ -317,4 +317,46 @@
                      </list>
               </constructor-arg>
        </bean>
+
+       <!-- 查询商品支付机构 -->
+       <bean id="queryPayerForGoods" class="cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId">
+              <constructor-arg>
+                     <map>
+                            <entry key="jf_shoppingCartAndOrder" >
+                                   <list>
+                                          <ref bean="payerForGoodsOrder"/>
+                                   </list>
+                            </entry>
+                     </map>
+              </constructor-arg>
+       </bean>
+
+       <bean id="payerForGoodsOrder" class="cn.highsuccess.config.systemproperties.HisuMngDataIdArgs">
+              <constructor-arg index="0" value="payerForGoodsOrder"/>
+              <constructor-arg index="1">
+                    <list>
+                    </list>
+              </constructor-arg>
+       </bean>
+
+       <!-- 查询卡支付机构 -->
+       <bean id="queryPayerForCards" class="cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId">
+              <constructor-arg>
+                     <map>
+                            <entry key="jf_shoppingCartAndOrder" >
+                                   <list>
+                                          <ref bean="payerForCardsOrder"/>
+                                   </list>
+                            </entry>
+                     </map>
+              </constructor-arg>
+       </bean>
+
+       <bean id="payerForCardsOrder" class="cn.highsuccess.config.systemproperties.HisuMngDataIdArgs">
+              <constructor-arg index="0" value="payerForCardsOrder"/>
+              <constructor-arg index="1">
+                     <list>
+                     </list>
+              </constructor-arg>
+       </bean>
 </beans>

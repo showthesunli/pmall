@@ -36,7 +36,7 @@
                 	<ul class="jf-cartItemTitle">
                     	<#--<li class="width50"><input id="Checkbox1" type="checkbox"  class="allselect" />全选</li>-->
                         <li class="width200" style="width:500px;">商品名称</li>
-                        <li class="width200">所需积分</li>
+                        <li class="width200">商品单价</li>
                         <#--<li class="width100">最小/最大购买数量</li>-->
                         <li class="width100">商品数量</li>
                         <li class="width200">小计</li>
@@ -61,12 +61,12 @@
                                         <a href="<@spring.url '/proshow;prdNo=${item.prdNo};keyWordsFld=${item.prdNo};'/>" style="width:435px;">${item.prdName?if_exists}</a>
 								</#if>
                             </div>
-                            <div class="width200 jf-exchange" style="line-height:40px;">${item.money}分</div>
+                            <div class="width200 jf-exchange" style="line-height:40px;">￥${item.money}</div>
                             <#--<div class="width100" style="line-height:40px;">1/1000</div>-->
                             <#--<div class="width100"><span class="cartNumL bgImgS" style="margin-left:15px;"></span><input name="cartNum" type="text" value="${item.amount}" class="cartNum" /><span class="cartNumR bgImgS"></span></div>-->
                             <div class="width100" style="line-height: 40px">${item.amount}</div>
                             <div class="width200">
-                                <p><span class="exchangeCount" style=" line-height:40px;">${item.money * item.amount}</span>分</p>
+                                <p><span class="exchangeCount" style=" line-height:40px;">￥${item.money * item.amount}</span></p>
                             </div>
                             <div class="cartDlt width100" style="line-height:40px;"><a href="javascript:delItem('${item.prdNo}','${item.money?c}','${item.amount}')" >删除</a></div>
                         </div>
@@ -78,7 +78,7 @@
                                        
                     <div class="cartBanlance">
                     	<div class="bgGrey">
-                            <p style="line-height:50px; margin-right:20px;">共<span id="shuliang">${prdNum}</span><span style="margin-right:20px;">件</span>合计:<span id="exchangeTotal">${prdMoney}</span>分</p>
+                            <p style="line-height:50px; margin-right:20px;">共<span id="shuliang">${prdNum}</span><span style="margin-right:20px;">件</span>合计:<span id="exchangeTotal">￥${prdMoney}</span></p>
                         </div>
                     </div>
                     

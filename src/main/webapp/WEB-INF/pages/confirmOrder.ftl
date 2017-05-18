@@ -20,7 +20,7 @@
 .orderItemTitel h4{ line-height:30px;}
 .orderItemTitel span{ line-height:30px;}
 .addrDiv .checkbox{ margin-top:5px; *margin-top:1px; margin-right:5px; float:left;}
-.addressDiv,.invDiv,.exchange,.balancePayType{ z-index:102;}
+.addressDiv,.invDiv,.exchange,.balancePayType,.invoiceDivDiv{ z-index:102;}
 .addressForm{ font-size:14px;}
 .addressForm label{ width:70px;}
 .width100{ width:130px;}
@@ -38,6 +38,14 @@
 .payTypeDiv h5{ padding:2px 0; color: #f60; margin-bottom: 10px; font-size: 12px;}
 .payTypeDiv img{ vertical-align: middle;}
 .payTypeDiv input[type=radio]{ vertical-align: middle;}
+
+.addressDiv{ height:300px;}
+.invoiceDivDiv{ height:200px;}
+.addressDiv div,.invoiceDivDiv div{ padding:10px; color:#666; font-size:14px;}
+.addressDiv .tipDivTitle,.invoiceDivDiv .tipDivTitle{ padding:0; margin-bottom:10px;}
+.addressDiv input[type=text],.invoiceDivDiv input[type=text]{ padding:0 5px;}
+.addressDiv label,.invoiceDivDiv label{ width:80px; display:inline-block; text-align:right;}
+.colorRed{color:red;}
 </style>
 </head>
 
@@ -63,7 +71,8 @@
                         <label class="addrPhone">${queryMemberAddress[0].phone}</label>
                         <label class="address">${queryMemberAddress[0].addr}</label>
                         <span class="addrDefault" style="float: none;">默认地址</span>
-                        <span class="addrModifyBtn" onclick="divHeightA('addrSlide')">修改</span>
+                        <span class="addrModifyBtn" onclick="openTipDiv('addressDiv')">添加</span>
+                        <span class="addrModifyBtn" onclick="divHeightA('addrSlide')">修改</span>                       
                     </#if>
                 </div>
             </div>
@@ -96,6 +105,7 @@
                     <label class="invoiceComp">广州睿颢软件技术有限公司1</label>
                     <label class="invoiceTxt">明细1</label>
                     <span class="addrDefault" style="float: none;">默认发票信息</span>
+                    <span class="addrModifyBtn" onclick="openTipDiv('invoiceDivDiv')">添加</span>
                     <span class="invoiceModifyBtn" onclick="divHeightA('invoiceSlide')">修改</span>
                 </div>
             </div>
@@ -134,6 +144,7 @@
                 <div class="payTypeDiv jf-overflowH" style="padding:0 10px;">
                 	<div><h5>积分支付</h5></div>
                 	<div class="jf-overflowH" style="margin-bottom: 10px;">
+                        <!--
 	                    <label class="payTypeItem payTypeItemBO">
 	                    	<input type="radio" name="RadioGroup1" value="逸乐生活" checked="checked" />
 	                    	<img src="<@spring.url '/images/bankLogo/payTypeYL.png'/>" width="100" height="33" />
@@ -142,20 +153,14 @@
 	                    	<input type="radio" name="RadioGroup1" value="中信银行" />
 	                    	<img src="<@spring.url '/images/bankLogo/payTypeZX.png'/>" width="100" height="33" />
 	                    </label>
+	                    -->
+                        <#list payerForGoodsOrder as item>
+                        <label class="payTypeItem">
+                            <input type="radio" name="RadioGroup1" value="${item.payer}" />
+                            <img src="<@spring.url '/imgsrc/'/>${item.iconFileName}" width="100" height="33" alt="${item.payerName}"/>
+                        </label>
+                        </#list>
                     </div>
-                    <!--
-                    <div><h5>资金支付</h5></div>
-                    <div class="jf-overflowH" style="margin-bottom: 10px;">
-	                    <label class="payTypeItem">
-	                    	<input type="radio" name="RadioGroup1" value="支付宝" />
-	                    	<img src="<@spring.url '/images/bankLogo/payTypeZFB.png'/>" width="100" height="33" />
-	                    </label>
-	                    <label class="payTypeItem">
-	                    	<input type="radio" name="RadioGroup1" value="微信" />
-	                    	<img src="<@spring.url '/images/bankLogo/payTypeWX.png'/>" width="100" height="33" />
-	                    </label>
-                    </div>
-                    -->
                     
                 </div>
 
@@ -166,13 +171,6 @@
                 </div>
             </div>
 
-            <!--<<div class="jf-overflowH" style="padding:0 10px;">
-                div class="jf-overflowH" style="float:left; margin-right:50px;">
-                    <label>积分支付方式：</label>
-                    <label>工商银行-信用卡</label>
-                    <span class="invoiceModify" onclick="exchangeOpen()">修改</span>
-                </div>
-            </div>-->
         </div>
         <!--end支付方式-->
              
@@ -209,18 +207,6 @@
                     </div>
                 </div>
 
-                <!--<div class="cartBanlance">
-                    <div>
-                        <p class="jf-overflowH banBgGrey" style="line-height:35px;"><input name="" type="checkbox" checked="checked" value="" id="banCheckbox" style="margin-left:950px; margin-left:940px\9; *margin-left:930px; *margin-top:7px;" /><label style="margin-right:10px;">使用积分支付</label><span>应付积分</span><span style="color:#f60; margin:0 5px;">5000</span><span style="margin-right:28px; margin-right:20px\9;">分</span></p>
-
-                        <div class="jf-overflowH banUse banBgGrey">
-                            <p style="padding-right:20px;">使用的积分：<input name="" type="text" value="4000" style="padding:2px 5px; height:20px; width:90px; border:1px solid #ccc;" /></p>
-                        </div>
-
-                        <p class="banBgGrey balanceP" style="padding-right:10px; line-height:35px;">还需支付：<span id="exchangeTotal" style="width:92px; display:inline-block;">￥50.00</span></p>
-                        <p style="line-height:30px; margin-right:20px;"><span id="shuliang">1</span><span style="margin-right:20px;">件商品</span>共计：<span id="exchangeTotal" style="width:70px; display:inline-block;">5000</span>分</p>
-                    </div>
-                </div>-->
             </div>
         </div>
         <!--end订单信息-->
@@ -239,6 +225,43 @@
     <!--底部-->
     <#include "/lib/template/footer.ftl" encoding="UTF-8">
     <!--end 底部-->
+    
+    <div id="loginBg"></div>
+    <!--新增地址-->
+    <div class="addressDiv">
+        <div class="jf-overflowH tipDivTitle"><h3 style="float:left;">收货地址</h3><span onclick="closeTipDiv('addressDiv')" style="float:right; cursor:pointer; color:#999;font-size:25px;">×</span></div>
+        <div><label><span class="colorRed">*</span> 收货人：</label><input type="text" id="addressName" name="receiverName" value="" /></div>
+        <div><label><span class="colorRed">*</span> 邮编：</label><input type="text" id="addressZip" name="zip" value="" /></div>
+        <div style="overflow: hidden;">
+        	<label style=" float: left;"><span class="colorRed">*</span> 详细地址：</label>
+        	<input type="text" id="addressAddr" name="addr" value="" style="width:477px; line-height: 25px;" />
+        </div>
+        <div><label><span class="colorRed">*</span> 手机号码：</label><input type="text" id="addressPhone" name="phone" value="" /></div>
+        <p style="margin:10px 0 0 90px;"><input type="hidden" id="operType" name="operType" value="0"/><input type="hidden" id="" name="" value=""/><input type="submit" value="保存" class="sureBtn"  onclick="closeTipDiv('addressDiv')"  /><input type="button" value="取消" class="cancleBtn"  onclick="closeTipDiv('addressDiv')" /></p>
+            <input type="hidden" name="isDefault" value="0"/>
+            <input type="hidden" name="objectID" id="objectID" value=""/>
+        </form>
+    </div>
+    <!--新增地址 end-->
+    <!--新增发票-->
+    <div class="invoiceDivDiv">
+        <div class="jf-overflowH tipDivTitle"><h3 style="float:left;">发票信息</h3><span onclick="closeTipDiv('invoiceDivDiv')" style="float:right; cursor:pointer; color:#999;font-size:25px;">×</span></div>
+        <div><label><span class="colorRed">*</span> 发票抬头：</label><input type="text" id="addressName" name="receiverName" value="" style="width: 300px;" /></div>
+         <div>
+         	<label><span class="colorRed">*</span> 发票内容：</label>
+         	<select style="line-height: 25px; height: 25px;">
+         		<option>日用品</option>
+         		<option>办公用品</option>
+         		<option>电脑配件</option>
+         	</select>
+         </div>
+        <p style="margin:10px 0 0 90px;"><input type="hidden" id="operType" name="operType" value="0"/><input type="hidden" id="" name="" value=""/><input type="submit" value="保存" class="sureBtn"  onclick="closeTipDiv('invoiceDiv')"  /><input type="button" value="取消" class="cancleBtn"  onclick="closeTipDiv('invoiceDivDiv')" /></p>
+            <input type="hidden" name="isDefault" value="0"/>
+            <input type="hidden" name="objectID" id="objectID" value=""/>
+        </form>
+    </div>
+    <!--新增发票 end-->
+    
 <form action="<@spring.url '/buycfm'/>" method="post" id="formGo">
     <input name="addr" type="hidden"/>
     <input name="receiverName" type="hidden"/>
@@ -252,6 +275,15 @@
 
 <script language="javascript">
 $(document).ready(function(e) {
+	//新增地址
+    $('.newAddress').click(function(){
+        $('#addressName').val('');
+        $('#addressZip').val('');
+        $('#addressAddr').val('');
+        $('#addressPhone').val('');
+        $('#operType').val("0"); 
+    });
+    
     //地址修改
     $(".addrDiv").click(function () {
         $(".addrDiv").removeClass("bgCO");
@@ -322,6 +354,15 @@ function divHeightZ(obj) {
 function divHeightA(obj) {
     var h = $("." + obj + " div").length * 40;
     $("." + obj).animate({height: h + "px"});
+}
+function openTipDiv(obj,txt) {
+    $("#loginBg").css("display","block");
+    $("." + obj).css("display","block");
+    $('.tipShow').text(txt);
+}
+function closeTipDiv(obj) {
+    $("#loginBg").css("display","none");
+    $("." + obj).css("display","none");
 }
 </script>
 
