@@ -51,12 +51,14 @@ td{ overflow:hidden; height:30px;}
                             </tr>
                             <#list queryMemberOrder as key>
                             <tr>
-                                <td><a href="<@spring.url '/buycfm'/>;billNo=${key.billNo}">${key.billNo}</a></td>
+                                <td><a href="<@spring.url '/myDetial'/>">${key.billNo}</a></td>
                                 <td>${key.orderStatus}</td>
                                 <td>${key.deliveryStatus}</td>
                                 <td style="color:#f60;">￥${key.totalPrice}</td>
                                 <td class="orderBtn">
-                                    <a href="<@spring.url '/myDetial'/>" style="margin-left:0;">详情</a>
+                                    <#if key.orderStatus == "等待支付">
+                                        <a href="<@spring.url '/buycfm'/>;billNo=${key.billNo}" style="margin-left:0;">继续支付</a>
+                                    </#if>
                                 </td>
                             </tr>
                             </#list>

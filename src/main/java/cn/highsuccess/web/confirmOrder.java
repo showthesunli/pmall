@@ -46,6 +46,10 @@ public class confirmOrder extends HisuBaseControllerAdapter{
     private HisuMngDataGroupAndId queryPayerForGoods;
 
     @Autowired
+    @Qualifier("queryPayerForCards")
+    private HisuMngDataGroupAndId queryPayerForCards;
+
+    @Autowired
     private ShoppingCartService shoppingCartService;
 
     @Autowired
@@ -116,6 +120,15 @@ public class confirmOrder extends HisuBaseControllerAdapter{
             param.put("billNo",orderService.getOrder().getOrderNo());
             excute(model,param,queryOrder);
         }
+        com.alibaba.fastjson.JSONArray ja = (com.alibaba.fastjson.JSONArray)model.asMap().get("queryMemberOrder");
+        com.alibaba.fastjson.JSONObject jo  = (com.alibaba.fastjson.JSONObject)ja.get(0);
+        String saleOrderPrdType = jo.getString("saleOrderPrdType");
+        logger.debug("saleOrderPrdType = " + saleOrderPrdType);
+        if (saleOrderPrdType.equals("0")){
+            excute(model,map,queryPayerForGoods);
+        }else {
+            excute(model,map,queryPayerForCards);
+        }
         //返回购买确认页面
         return "/paytoolsBuycfm";
     }
@@ -148,42 +161,4 @@ public class confirmOrder extends HisuBaseControllerAdapter{
         return "status=" + status + "*-*" + errorMsg;
     }
 
-    //删除送货地址
-    @RequestMapping(value = "/deleteAddr",method = RequestMethod.POST)
-    public String deleteAddr(Model model,
-                                  @RequestParam String objectID){
-        logger.debug("/deleteAddr : post");
-        logger.debug("objectID :" + objectID);
-        StringBuilder condition = new StringBuilder();
-        condition.append("objectID=").append(objectID).append("|");
-        this.getJavaOperate().service("jf_memberCenter","btnDelUserAddr",condition.toString());
-
-        return "redirect:/myInformation";
-    }
-    //增加送货地址
-    @RequestMapping(value = "/addAddr",method = RequestMethod.POST)
-    public String addAddr(Model model,
-    							  @RequestParam String operType,
-                                  @RequestParam String addr,
-                                  @RequestParam String zip,
-                                  @RequestParam String receiverName,
-                                  @RequestParam String phone,
-                                  @RequestParam String isDefault,
-                                  @RequestParam String objectID
-                                  ){
-        logger.debug("/addAddr : post");
-        StringBuilder condition = new StringBuilder();
-        condition.append("objectID=").append(objectID).append("|");
-        condition.append("addr=").append(addr).append("|");
-        condition.append("zip=").append(zip).append("|");
-        condition.append("name=").append(receiverName).append("|");
-        condition.append("phone=").append(phone).append("|");
-        condition.append("isDefault=").append(isDefault);
-        if("0".equals(operType)){//增加
-        	this.getJavaOperate().service("jf_memberCenter","btnAddUserAddr",condition.toString());
-        }else{//修改
-        	this.getJavaOperate().service("jf_memberCenter","btnModUserAddr",condition.toString());
-        }
-        return "redirect:/myInformation";
-    }
 }

@@ -51,16 +51,23 @@
                 	</div>
                 	
                 	<div class="payTypeChoice">
-                		<div class="jf-overflowH"><h5>支付方式：</h5><span class="cPayType"></span></div>
+                		<div class="jf-overflowH"><h5>支付方式：</h5><span class="cPayType" style="display: none;"></span><span class="cPayTypeA"></span></div>
 	                	<div class="jf-overflowH" style="margin-bottom: 10px;">
-		                    <label class="payTypeItem payTypeItemBO">
-		                    	<input type="radio" name="RadioGroup1" value="逸乐生活" checked="checked" />
-		                    	<img src="<@spring.url '/images/bankLogo/payTypeYL.png'/>" width="100" height="33" />
-		                    </label>
-		                    <label class="payTypeItem">
-		                    	<input type="radio" name="RadioGroup1" value="中信银行" />
-		                    	<img src="<@spring.url '/images/bankLogo/payTypeZX.png'/>" width="100" height="33" />
-		                    </label>		                    
+                            <#if queryMemberOrder[0].saleOrderPrdType == '0'>
+                            <#list payerForGoodsOrder as item>
+                                <label class="payTypeItem payTypeItemBO">
+                                    <input type="radio" name="RadioGroup1" value="${item.payer}" checked="checked" />
+                                    <img src="<@spring.url '/imgsrc/'/>${item.iconFileName}" width="100" height="33" alt="${item.payerName}" />
+                                </label>
+                            </#list>
+                            <#else >
+                                <#list payerForCardsOrder as item>
+                                    <label class="payTypeItem payTypeItemBO">
+                                        <input type="radio" name="RadioGroup1" value="${item.payer}" checked="checked" />
+                                        <img src="<@spring.url '/imgsrc/'/>${item.iconFileName}" width="100" height="33" alt="${item.payerName}" />
+                                    </label>
+                                </#list>
+                            </#if>
 	                    </div>
                 	</div>
                 	
@@ -114,7 +121,9 @@ $(document).ready(function(e) {
     	$(this).find('input').attr('checked','checked');
     	
     	var p = $(this).find('input').val();
+    	var pA = $(this).find('img').attr('alt');
     	$('.cPayType').text(p);
+    	$('.cPayTypeA').text(pA);    	
     })
     
     $(".industryItem li").click(function(){

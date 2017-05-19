@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-<title>账户充值-逸乐生活网</title>
+<title>途皓卡充值-逸乐生活网</title>
 <meta name="description" content="途皓（北京）商务服务有限公司" />
 <meta name="keywords" content="途皓（北京）商务服务有限公司" />
 <link rel="stylesheet" type="text/css" href="<@spring.url '/css/css.css'/>"/>
@@ -39,15 +39,16 @@
                 <div class="memberMainR-Baseinfo">
                     <img src="<@spring.url '/images/fuwu1.jpg'/>" width="120" height="120">
                     <div class="baseinfo-Account">
-                        <p style="margin-top:5px;">我的账号：<span>${memberInfo[0].memberID}</span></p>
-                        <p>我的积分：<span>${queryMmbAccInfo[0].balanceAmount}</span></p>
+                        <p>我的账号：<span>${memberInfo[0].memberID}</span></p>
+                        <!--<p>我的积分：<span>${queryMmbAccInfo[0].balanceAmount}</span></p>-->
                         <p>我的手机：<span>${memberInfo[0].mobile}</span></p>
                         <p>我的邮箱：<span>${memberInfo[0].email}</span></p>
+                        <p><input type="button" value="修改资料" onclick="javascript:window.location.href='<@spring.url '/myInformation'/>'" style=" color: #3897d7; border: 1px solid #3897d7; margin-left:70px;" /></p>
                     </div>
                 </div>
                 
                 <form class="rechargeForm" autocomplete="off" method="post" action="<@spring.url '/recharge'/>">
-                	<h2>账户充值</h2>
+                	<h2>途皓卡充值</h2>
                 	<p>
                 		<label>卡号：</label>
                 		<input type="text" id="cardNo" name="cardNo" value="" placeholder="请输入您的卡号" class="recTxt" />

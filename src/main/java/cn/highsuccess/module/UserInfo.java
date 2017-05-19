@@ -2,6 +2,7 @@ package cn.highsuccess.module;
 
 /**
  * Created by prototype on 2017/5/17.
+ * 用户信息类
  */
 public class UserInfo {
     //性别

@@ -44,6 +44,8 @@
 #memberName-error,#identityCardNo-error,#email-error,#gender-error,#birthdayDate-error{ position:absolute; left:305px; top:0; color:#f00; padding:0 10px; background:#ffebe7; line-height:25px; border:1px solid #f00; border-radius:5px;}
 .birthD{ color:#666;}
 .marginTB{ margin: 5px 0;}
+.addrBtn{ background: #fff; border: none; color: #3897d7; cursor: pointer;}
+.addrBtn:hover{ text-decoration: underline;}
 </style>
 </head>
 
@@ -64,48 +66,35 @@
                 <div class="myDetial">
                     <div class="myDetialList myAddress">
                         <input type="button" value="新增收货地址" class="detialBtn newAddress" onclick="openTipDiv('addressDiv')" style="margin-left:0; margin-top:0;" />
-                        
-                        
-                        <div class="myAddressItem">
-                            <div class="addrDefaultInforTop">
-                                <div class="addrDefaultInfor">
-                                    <span class="addrName">yyy</span>
-                                    <span class="defStyle">默认地址</span>
+                        <#list queryMemberAddress as item>
+                        <form method="post" action="<@spring.url '/modAddr'/>">
+                            <div class="myAddressItem">
+                                <div class="addrDefaultInforTop">
+                                    <div class="addrDefaultInfor">
+                                        <span class="addrName">${item.name}</span>
+                                        <#if item.isDefault == "1">
+                                            <span class="defStyle">默认地址</span>
+                                        </#if>
+                                    </div>
+                                    <div class="addrOperBtn">
+                                    	<#if item.isDefault == "0">
+                                        	<input type="submit" value="设为默认" class="setToDefAddr addrBtn" />
+                                        </#if>
+                                        <input type="button" value="编辑" class="modifyAddr addrBtn" />
+                                        <input type="submit" value="保存" class="updateAddr addrBtn" style="display: none;" />
+                                        <input type="submit" value="删除" class="deleteAddr addrBtn" />
+                                    </div>
                                 </div>
-                            	<div class="addrOperBtn">
-                                    <span class="setToDefAddr" style="display:none;">设为默认</span>
-                                    <span class="modifyAddr">编辑</span>
-                                    <span class="updateAddr" style="display: none;">保存</span>
-                                    <span class="deleteAddr">删除</span>
-                                </div>
+                                <div class="marginTB"><label>收货人：</label><input id="name" name="receiverName" type="text" value="${item.name}" class="myDetialTxt inputRO" readOnly="true"  maxlength="10" /></div>
+                                <div class="marginTB"><label>手机号码：</label><input id="phone" name="phone" type="text" value="${item.phone}" class="myDetialTxt inputRO" readOnly="true"  maxlength="11" /></div>
+                                <div class="marginTB"><label>邮政编号：</label><input id="zip" name="zipCode" type="text" value="${item.zip}" class="myDetialTxt inputRO" readOnly="true"  maxlength="10" /></div>
+                                <div class="marginTB"><label>收货地址：</label><input id="addr" name="addr" type="text" value="${item.addr}" class="myDetialTxt inputRO" readOnly="true" style="width: 680px;" /></div>
+                                <input type="hidden" name="objectID" value="${item.objectID}"/>
+                                <input type="hidden" name="isDefault" class="isDefaultInput" value="${item.isDefault}"/>
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                             </div>
-                            <div class="marginTB"><label>收货人：</label><input id="name" name="name" type="text" value="yyy" class="myDetialTxt inputRO" readOnly="true"  maxlength="10" /></div>
-                            <div class="marginTB"><label>手机号码：</label><input id="phone" name="phone" type="text" value="164565" class="myDetialTxt inputRO" readOnly="true"  maxlength="11" /></div>
-                            <div class="marginTB"><label>邮政编号：</label><input id="zip" name="zip" type="text" value="548" class="myDetialTxt inputRO" readOnly="true"  maxlength="10" /></div>
-                            <div class="marginTB"><label>收货地址：</label><input id="addr" name="addr" type="text" value="548" class="myDetialTxt inputRO" readOnly="true" style="width: 680px;" /></div>
-                            <div style="display: none"><label>收货地址ID：</label><span class="addrID"></span></div>
-                        </div>
-                        
-                        <div class="myAddressItem">
-                            <div class="addrDefaultInforTop">
-                                <div class="addrDefaultInfor">
-                                    <span class="addrName">hhh</span>
-                                    <span class="defStyle">默认地址</span>
-                                </div>
-                            	<div class="addrOperBtn">
-                                    <span class="setToDefAddr" style="display:none;">设为默认</span>
-                                    <span class="modifyAddr">编辑</span>
-                                    <span class="updateAddr" style="display: none;">保存</span>
-                                    <span class="deleteAddr">删除</span>
-                                </div>
-                            </div>
-                            <div class="marginTB"><label>收货人：</label><input id="name" name="name" type="text" value="hhh" class="myDetialTxt inputRO" readOnly="true"  maxlength="10" /></div>
-                            <div class="marginTB"><label>手机号码：</label><input id="phone" name="phone" type="text" value="164565" class="myDetialTxt inputRO" readOnly="true"  maxlength="11" /></div>
-                            <div class="marginTB"><label>邮政编号：</label><input id="zip" name="zip" type="text" value="548" class="myDetialTxt inputRO" readOnly="true"  maxlength="10" /></div>
-                            <div class="marginTB"><label>收货地址：</label><input id="addr" name="addr" type="text" value="548" class="myDetialTxt inputRO" readOnly="true" style="width: 680px;" /></div>
-                            <div style="display: none"><label>收货地址ID：</label><span class="addrID"></span></div>
-                        </div>
-                                                
+                        </form>
+                        </#list>
                     </div>
                 </div>
 
@@ -125,9 +114,10 @@
     <!--地址-->
     <div class="addressDiv">
         <form method="post" action="<@spring.url '/addAddr'/>">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <div class="jf-overflowH tipDivTitle"><h3 style="float:left;">收货地址</h3><span onclick="closeTipDiv('addressDiv')" style="float:right; cursor:pointer; color:#999;font-size:25px;">×</span></div>
         <div><label><span class="colorRed">*</span> 收货人：</label><input type="text" id="addressName" name="receiverName" value="" /></div>
-        <div><label><span class="colorRed">*</span> 邮编：</label><input type="text" id="addressZip" name="zip" value="" /></div>
+        <div><label><span class="colorRed">*</span> 邮编：</label><input type="text" id="addressZip" name="zipCode" value="" /></div>
         <div style="overflow: hidden;">
         	<label style=" float: left;"><span class="colorRed">*</span> 详细地址：</label>
         	<input type="text" id="addressAddr" name="addr" value="" style="width:477px; line-height: 25px;" />
@@ -151,33 +141,20 @@
 </html>
 <script language="javascript">
 $(document).ready(function(e) {
-	//设置第一个地址显示‘默认地址’
-	$(".defStyle").css("display","none");
-	$('.myAddressItem').eq(0).find(".defStyle").css("display","inline-block");
-	//设置除第一个地址其他地址有‘设为默认’按钮
-	$(".setToDefAddr").css("display","inline-block");
-	$('.myAddressItem').eq(0).find(".setToDefAddr").css("display","none");
-
-    //设为默认值
+	//设为默认值
     $('.setToDefAddr').click(function(){
-        var a = $(this).parent().parent().parent();
-        $(".newAddress").after(a);
-        $(".defStyle").css("display","none");
-        $(".setToDefAddr").css("display","inline-block");
-        $(a).find(".defStyle").css("display","inline-block");
-        $(a).find(".setToDefAddr").css("display","none");
-        openTipDiv('tipDiv','设置成功！');
-    })
-
-    //打开文本编辑框点击a标签
-	$(".deleteAddr").each(function(){
-		$(this).click(function(event){
-			var $this = $(this);
-			deleteAddr($this.attr("ttoken"),$this.attr("objId"));
-			return false;
-		});
-	});
+    	var action = "<@spring.url '/modAddr'/>";
+    	$(this).parent().parent().parent().parent().attr('action',action);
+    	$('.isDefaultInput').val('0');
+    	$(this).parent().parent().parent().parent().find('.isDefaultInput').val('1');
+    });
     
+    //删除地址
+    $('.deleteAddr').click(function(){
+    	var action = "<@spring.url '/deleteAddr'/>";
+		$(this).parent().parent().parent().parent().attr('action',action);
+    });
+
     //编辑地址
     $('.modifyAddr').click(function(){       		$(this).parent().parent().parent().find('.inputRO').addClass('inputRW').removeAttr('readonly').removeClass('inputRO');
 		$(this).parent().parent().parent().find('.modifyAddr').hide();
@@ -185,7 +162,9 @@ $(document).ready(function(e) {
 	});
 	
 	//保存地址
-	$('.updateAddr').click(function(){ 
+	$('.updateAddr').click(function(){
+		var action = "<@spring.url '/modAddr'/>";
+    	$(this).parent().parent().parent().parent().attr('action',action);
 		$(this).parent().parent().parent().find('.inputRW').addClass('inputRO').attr('readonly','ture').removeClass('inputRW');
 		$(this).parent().parent().parent().find('.updateAddr').hide();
 		$(this).parent().parent().parent().find('.modifyAddr').show();

@@ -188,13 +188,24 @@
                             <entry key="jf_memberCenter" >
                                    <list>
                                           <ref bean="memberInfo"/>
+                                   </list>
+                            </entry>
+                     </map>
+              </constructor-arg>
+       </bean>
+       <!-- 查询个人收货地址 -->
+       <bean id="queryPersonalAdress" class="cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId">
+              <constructor-arg>
+                     <map>
+                            <entry key="jf_memberCenter" >
+                                   <list>
                                           <ref bean="queryMemberAddress"/>
                                    </list>
                             </entry>
                      </map>
               </constructor-arg>
        </bean>
-       
+
        <!--personal center 查询个人订单 -->
        <bean id="queryPensonalCenterOrder" class="cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId">
               <constructor-arg>

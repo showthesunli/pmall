@@ -14,7 +14,7 @@
 <script language="javascript" src="<@spring.url '/js/menu.js'/>" ></script>
 <script type="text/javascript" src="<@spring.url '/js/model.js'/>"></script>
 <style>
-.textCon .aboutFC,.textCon2 .aboutFC{ font-family:'华文新魏'; font-size:20px; color:#FF0000;}
+.textCon .aboutFC,.textCon2 .aboutFC{ /*font-family:'华文新魏'; font-size:20px; color:#FF0000;*/}
 </style>
 </head>
 <body>

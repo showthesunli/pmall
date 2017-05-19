@@ -73,6 +73,9 @@ public class PayService implements PayServiceProvider {
         return false;
     }
 
+    /**
+     * @param flag
+     */
     @Override
     public void noticeOrder(boolean flag) {
         if (flag){

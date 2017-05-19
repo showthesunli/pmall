@@ -46,9 +46,9 @@ public class PayController extends HisuBaseControllerAdapter{
 //        payService.payOrder();
 
         model.addAttribute("memberID",this.getJds().getUserName());
-        model.addAttribute("payer",this.getJds().getUserName());
+        model.addAttribute("payer",this.payService.getOrderPaySsn().getPayer());
         model.addAttribute("paySsn",this.payService.getOrderPaySsn().getPaySsn());
-        model.addAttribute("noticeurl", "http://localhost:8080/pmall");
+        model.addAttribute("noticeurl", "http://localhost:8080/pmall/notice");
         model.addAttribute("payAmt",payService.getOrderPaySsn().getTotalAmt());
         return "/payToGateWay";
     }
@@ -57,9 +57,10 @@ public class PayController extends HisuBaseControllerAdapter{
     public String notice(Model model,
                          @RequestParam @Valid @NotNull String orderNumber,
                          @RequestParam @Valid @NotNull int retCode,
+                         @RequestParam @Valid @NotNull String payer,
                          @RequestParam String retMsg){
 
-        payService.perNoticInitPaySsn(orderNumber, "00000001");
+        payService.perNoticInitPaySsn(orderNumber, payer);
         if (retCode<0){
             payService.noticeOrder(false);
             return "/orderPayFailed";

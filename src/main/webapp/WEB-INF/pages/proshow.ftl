@@ -27,6 +27,8 @@
  .exchangeDivPoint li{ margin-bottom: 0;}
  .exchangeDivItem{ margin-top: 10px;}
  .pointInt{ display: none;}
+ .exchangeDivList{ display: block; border-top: none;}
+ .exchangeDivList{ top:0;}
 </style>
 </head>
 <body>
@@ -78,7 +80,7 @@
                 <h1>${queryPrdDetail[0].productInfo}</h1>
 
                 <div class="prodBgRed">
-                    <span class="marginR10">现金价格：</span>
+                    <span class="marginR10">市场价格：</span>
                     <span class="prodPriceRed" >￥${queryPrdDetail[0].prdPrice}</span>
                 </div>
 
@@ -89,33 +91,20 @@
                     <div class="exchangeDiv" style="z-index:9; display:none;">
                         <img src="images/closeImgS.png" width="18" height="17" style="position:absolute; right:-9px; top:-8px; cursor:pointer;" onclick="exchangeDivClose()">
 
-                        <ul class="exchangeDivChassify">
+                        <!--<ul class="exchangeDivChassify">
                             <li class="exDivChassifyP">航空业</li>
                             <li>银行业</li>
-                        </ul>
-                        
-                        <div class="exchangeDivList">
-                            <ul class="exchangeDivPoint jf-overflowH">
-                                <li>
-                                	<span class="pointComp">南方航空</span>
-                                	<span class="pointInt">1000-2000</span>
-                                </li>
-                                <li>
-                                	<span class="pointComp">东方航空</span>
-                                	<span class="pointInt">2000-3000</span>
-                                </li>
-                            </ul>
-                        </div>
+                        </ul>-->
                         
                         <div class="exchangeDivList">
                             <ul class="exchangeDivPoint jf-overflowH">
                                 <li>
                                 	<span class="pointComp">中信银行</span>
-                                	<span class="pointInt">3000-4000</span>
+                                	<span class="pointInt">1000-2000</span>
                                 </li>
                                 <li>
-                                	<span class="pointComp">中国银行</span>
-                                	<span class="pointInt">4000-5000</span>
+                                	<span class="pointComp">工商银行</span>
+                                	<span class="pointInt">2000-3000</span>
                                 </li>
                             </ul>
                         </div>
@@ -247,7 +236,13 @@ $(document).ready(function (e) {
 	})
 	
 	//选择积分来源
-	$(".exchangeDivList").eq(0).show();	
+	$(".exchangeDivPoint li").click(function () {
+        var c = $(this).children('.pointComp').text();//公司
+        var i = $(this).children('.pointInt').text();//积分区间        
+        $('.exchangeFrom span').text(c + ' ' + i);
+        exchangeDivClose();
+   });
+	/*$(".exchangeDivList").eq(0).show();	
 	$(".exchangeDivChassify li").click(function () {
         $(".exchangeDivList").eq(0).show();
 		var index = $(".exchangeDivChassify li").index(this);
@@ -265,7 +260,7 @@ $(document).ready(function (e) {
         var i = $(this).children('.pointInt').text();//积分区间        
         $('.exchangeFrom span').text(t + ' ' + c + ' ' + i);
         exchangeDivClose();
-    })
+    })*/
 	//数量减
 	$(".prodMin").click(function () {
 		var v = $(this).next(".prodNum").attr("value");

@@ -10,13 +10,13 @@
 <#--<script type="text/javascript" src="<@spring.url '/js/gd_Index.js'/>"></script>-->
 <script type="text/javascript" src="<@spring.url '/js/jquery-1.7.2.min.js'/>"></script>
 <script language="javascript" src="<@spring.url '/js/menu.js'/>" ></script>
-    <script type="text/javascript" src="<@spring.url '/js/util.js'/>"></script>
+<script type="text/javascript" src="<@spring.url '/js/util.js'/>"></script>
 <style>
 .addrDiv:hover,.invoiceDiv:hover{ background: #ffefe5;}
 .jf-productList{ width:323px; margin:0 10px 10px 0; background:none;}
 .orderItem,.jf-cartItem,.cartBanlance{ font-size:14px;}
 .orderItem div{ line-height:25px;}
-.orderItemTitel{ padding:0 10px;}
+.orderItemTitel{ padding:0 10px; margin: 0;}
 .orderItemTitel h4{ line-height:30px;}
 .orderItemTitel span{ line-height:30px;}
 .addrDiv .checkbox{ margin-top:5px; *margin-top:1px; margin-right:5px; float:left;}
@@ -46,6 +46,10 @@
 .addressDiv input[type=text],.invoiceDivDiv input[type=text]{ padding:0 5px;}
 .addressDiv label,.invoiceDivDiv label{ width:80px; display:inline-block; text-align:right;}
 .colorRed{color:red;}
+
+.addressErr,.invoiceErr,.payTypeErr{ height: 30px; width: 1200px; margin: 0 auto;}
+.errorCon{ height: 40px; border:1px solid #f00; border-radius: 5px; background: #ffebe7; padding:0 10px; display: inline-block; float: left; width: 400px; margin:10px 0 0 600px; display: none;}
+.errorCon p{ line-height: 20px; font-size: 14px; color:#f00;}
 </style>
 </head>
 
@@ -55,13 +59,14 @@
     <!--end 头部-->
 
     <div class="jf-main">
-        <div class="ny_nav">
+        <div class="ny_nav" style="margin-bottom: 0;">
             <div class="ny_nav1">当前位置：<a href='<@spring.url "/index"/>'>首页</a> > 购物车</div>
             <div class="clearfix"></div>
         </div>
 
         <!--确认订单列表-->
         <!--收货地址-->
+        <div class="addressErr"></div>
         <div class="orderItem jf-width1000 jf-overflowH">
             <div class="orderItemTitel jf-overflowH">
                 <h4>收货信息</h4>
@@ -95,7 +100,8 @@
         <!--end收货地址-->
 
         <!--发票信息-->
-        <div class="orderItem jf-width1000" style="margin-top:20px;">
+        <div class="invoiceErr"></div>
+        <div class="orderItem jf-width1000">
             <div class="orderItemTitel jf-overflowH">
                 <h4>发票信息</h4>
                 <span style="color:#cc0000; float:left;">(只对金额支付部分开具发票)</span>
@@ -131,13 +137,15 @@
         <!--end发票信息-->
 
         <!--支付方式-->
-        <div class="orderItem jf-width1000" style="margin-top:20px;">
+        <div class="payTypeErr"></div>
+        <div class="orderItem jf-width1000">
             <div class="orderItemTitel jf-overflowH">
                 <h4>支付方式</h4>
                 <div class="defaultDiv jf-overflowH" style="float:left;">
                 	<label class="payTypeT">积分支付：</label>
-                    <label class="payTypeA">账户余额</label>
-                    <span class="payTypeModifyBtn" onclick="divHeightA('payTypeSlide')">修改</span>
+                    <label class="payTypeA" style="display: none;"></label>
+                    <label class="payTypePayerName">账户余额</label>
+                    <span class="payTypeModifyBtn">修改</span>
                 </div>
             </div>
             <div class="jf-overflowH payTypeSlide" style="height:0;">
@@ -175,7 +183,7 @@
         <!--end支付方式-->
              
         <!--订单信息-->
-        <div class="orderItem jf-width1000" style="margin-top:20px;">
+        <div class="orderItem jf-width1000" style="margin-top:30px;">
             <div class="orderItemTitel jf-overflowH"><h4>订单信息</h4></div>
 			<div class="jf-cart" style="padding:0 10px;">
                 <ul class="jf-cartItemTitle">
@@ -212,7 +220,13 @@
         <!--end订单信息-->
              
         <#--<p class="jf-overflowH jf-width1000"><input type="button" value="确定下单"  class="btnBgS cartExBtn" style="margin:10px 10px 30px 0;" onclick="window.location='<@spring.url "/buycfm"/>'" /></p>-->
-        <p class="jf-overflowH jf-width1000"><input type="button" value="确定下单"  class="btnBgS cartExBtn" style="margin:10px 10px 30px 0;" id="go" /></p>
+        <div class="jf-overflowH jf-width1000">
+        	<div class="errorCon">
+        		<p id="errorConAddr"></p>
+        		<p id="errorConPay"></p>
+        	</div>
+        	<input type="button" value="确定下单"  class="btnBgS cartExBtn" style="margin:10px 10px 30px 0;" id="go" />
+        </div>
 
         <!--确认订单列表 end-->
             
@@ -294,11 +308,15 @@ $(document).ready(function(e) {
         var phoneNum = $(".bgCO .addrPhone").text();
         var addr = $(".bgCO .address").text();
         $(".addrSlide").animate({height: 0});
-        if(name != "") {
+        if(name != "" || phoneNum != "" || addr != "") {
             $(".defaultDiv .addrName").text(name);
             $(".defaultDiv .addrPhone").text(phoneNum);
             $(".defaultDiv .address").text(addr);
         }
+    	if(name != '' && phoneNum != '' && addr != ''){
+    		$('#errorConAddr').text('');
+        	if($('#errorConPay').text() == ""){$('.errorCon').css('display','none');}
+    	}
     });
     //点击下单按钮
     $("#go").click(function(){
@@ -311,8 +329,20 @@ $(document).ready(function(e) {
         $("input[name='mobile']").val(mobile)
 //        var payToolIDList = "东方航空-积分支付";
         var payToolIDList = $(".payTypeA").text();
-        $("input[name='payToolIDList']").val(payToolIDList)
-        $("#formGo").submit();
+        $("input[name='payToolIDList']").val(payToolIDList);
+        
+        if(receiverName == '' || addr == '' || mobile == ''){
+        	$('.errorCon').css('display','block');
+        	$('#errorConAddr').text('请填写收货人、联系电话和收货地址。');
+        }
+        if(payToolIDList == ''){
+        	$('.errorCon').css('display','block');
+        	$('#errorConPay').text('请选择支付方式。');
+        }
+        if(receiverName != '' && addr != '' && mobile != '' && payToolIDList != ''){
+        	$('.errorCon').css('display','none');
+        	$("#formGo").submit();
+        }
     })
 
     //发票修改
@@ -325,7 +355,7 @@ $(document).ready(function(e) {
         var comp = $(".bgCOIn .invoiceComp").text();
         var txt = $(".bgCOIn .invoiceTxt").text();
         $(".invoiceSlide").animate({height: 0});
-        if(type != "") {
+        if(type != "" || comp != "" || txt != "") {
             $(".defaultDiv .invoiceType").text(type);
             $(".defaultDiv .invoiceComp").text(comp);
             $(".defaultDiv .invoiceTxt").text(txt);
@@ -333,19 +363,30 @@ $(document).ready(function(e) {
     });
     
     //支付方式修改
+    $('.payTypeModifyBtn').click(function(){
+    	var h = $('.payTypeDiv').height() + 50;
+    	$(".payTypeSlide").animate({height: h + "px"});
+    	
+    });
     $('.payTypeItem').click(function(){
     	$('.payTypeItem').removeClass('payTypeItemBO');
     	$(this).addClass('payTypeItemBO');
     	$(this).parent().parent().find('input').removeAttr('checked');
     	$(this).find('input').attr('checked','checked');
-    })
+    });
     $('.payTypeModSureBtn').click(function(){
     	var pay = $('.payTypeDiv').find('input:checked').val();
     	var type = $('.payTypeDiv').find('input:checked').parent().parent().prev().find('h5').text();
+    	var payerName = $('.payTypeDiv').find('input:checked').next('img').attr('alt');
     	$('.payTypeT').text(type + '：');
     	$('.payTypeA').text(pay);
+    	$('.payTypePayerName').text(payerName);
     	divHeightZ('payTypeSlide');
-    })
+    	if(pay != ''){
+    		$('#errorConPay').text('');
+    		if($('#errorConAddr').text() == ""){$('.errorCon').css('display','none');}
+    	}
+    });
         
 })
 function divHeightZ(obj) {

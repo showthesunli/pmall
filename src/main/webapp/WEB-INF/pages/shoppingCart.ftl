@@ -28,7 +28,6 @@
             <div class="ny_nav1">当前位置：<a href='<@spring.url "/index"/>'>首页</a> > 购物车</div>
             <div class="clearfix"></div>
         </div>
-            
             <!--商品购物车列表-->
             <div class="jf-width1000"><h2 class="cartTitle">商品购物车</h2></div>
             <div class="jf-cart jf-width1000">
@@ -45,7 +44,6 @@
 					<#if buyerItemList??>
 					<#list buyerItemList as item>
 					<#if item.prdType == "0">
-
                         <div class="jf-cartItem">
 							<!--
                             <div class="width50">
@@ -73,9 +71,6 @@
 					</#if>
 					</#list>
 					</#if>
-
-
-                                       
                     <div class="cartBanlance">
                     	<div class="bgGrey">
                             <p style="line-height:50px; margin-right:20px;">共<span id="shuliang">${prdNum}</span><span style="margin-right:20px;">件</span>合计:<span id="exchangeTotal">￥${prdMoney}</span></p>
@@ -136,7 +131,7 @@
 
                 <div class="cartBanlance">
                     <div class="bgGrey">
-                        <p style="line-height:50px; margin-right:20px;">共<span id="shuliang">${cardNum}</span><span style="margin-right:20px;">件</span>合计:<span id="exchangeTotal">${cardMoney}</span>分</p>
+                        <p style="line-height:50px; margin-right:20px;">共<span id="shuliang">${cardNum}</span><span style="margin-right:20px;">件</span>合计:<span id="exchangeTotal">￥${cardMoney}</span></p>
                     </div>
                 </div>
 

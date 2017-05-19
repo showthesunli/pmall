@@ -5,6 +5,7 @@ import cn.highsuccess.config.systemproperties.HisuMngDataIdArgs;
 import cn.highsuccess.data.JavaDataSet;
 import cn.highsuccess.data.JavaOperate;
 import cn.highsuccess.module.UserInfo;
+import cn.highsuccess.module.UserReceiveInfoItem;
 import com.alibaba.fastjson.JSON;
 import org.json.JSONArray;
 import org.json.JSONException;
