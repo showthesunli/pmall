@@ -12,6 +12,9 @@
 <script type="text/javascript" src="<@spring.url '/js/gd_Index.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/js/jquery.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/js/menu.js'/>" ></script>
+<style>
+.baseinfo-Account label{ display: inline-block; width: 70px; text-align: right;}	
+</style>
 </head>
 
 <body>
@@ -28,15 +31,15 @@
                 <div class="memberMainR-Baseinfo">
                     <img src="<@spring.url '/images/fuwu1.jpg'/>" width="120" height="120">
                     <div class="baseinfo-Account">
-                        <p>我的账号：<span>${memberInfo[0].memberID}</span></p>
+                        <p><label>用户名：</label><span>${memberInfo[0].memberID}</span></p>
                         <!--<p>我的积分：<span>${queryMmbAccInfo[0].balanceAmount}</span></p>-->
-                        <p>我的手机：<span>${memberInfo[0].mobile}</span></p>
-                        <p>我的邮箱：<span>${memberInfo[0].email}</span></p>
+                        <p><label>我的手机：</label><span>${memberInfo[0].mobile}</span></p>
+                        <p><label>我的邮箱：</label><span>${memberInfo[0].email}</span></p>
                         <p><input type="button" value="修改资料" onclick="javascript:window.location.href='<@spring.url '/myInformation'/>'" style=" color: #3897d7; border: 1px solid #3897d7; margin-left:70px;" /></p>
                     </div>
                     <div class="baseinfo-Tip">
-                        <p>账户余额：<span style="font-size:20px; margin:0 10px;">${queryMmbAccInfo[0].balanceAmount}</span>元</p>
-                        <p><input type="button" value="途皓卡充值" onclick="window.location='<@spring.url "/accountRecharge"/>'" /></p>
+                        <p>途皓卡余额：<span style="font-size:20px; margin:0 10px;">${queryMmbAccInfo[0].balanceAmount}</span>元</p>
+                        <p><input type="button" value="途皓卡余额充值" onclick="window.location='<@spring.url "/accountRecharge"/>'" /></p>
                     </div>
                 </div>
 
@@ -52,7 +55,7 @@
                         </tr>
                         <#list queryMemberOrder as key>
                         <tr>
-                            <td><a href="<@spring.url '/myDetial'/>">${key.billNo}</a></td>
+                            <td><a href="<@spring.url '/myDetial'/>?billNo=${key.billNo}">${key.billNo}</a></td>
                             <td>￥${key.totalPrice}</td>
                             <td>${key.deliveryStatus}</td>
                             <td>${key.orderStatus}</td>

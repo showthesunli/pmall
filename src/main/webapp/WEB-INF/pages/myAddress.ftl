@@ -32,9 +32,9 @@
 .addressDiv{ height:300px;}
 .addressDiv div{ padding:10px; color:#666; font-size:14px;}
 .addressDiv .tipDivTitle{ padding:0; margin-bottom:10px;}
-.addressDiv input[type=text]{ padding:0 5px;}
+.addressDiv input[type=text]{ padding:0 5px; border:1px solid #ccc; height:25px; line-height:25px;}
 .colorRed{color:red;}
-.myDetialTxt{padding:0 5px; margin-left: 5px; line-height: 25px;}
+.myDetialTxt{padding:0 5px; margin-left: 5px; line-height: 25px; height: 25px;}
 .inputRO{ border:1px solid #fff;}
 .inputRW{ border:1px solid #ccc;}
 .detialLabel{ width:80px; text-align: right;}
@@ -117,12 +117,11 @@
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <div class="jf-overflowH tipDivTitle"><h3 style="float:left;">收货地址</h3><span onclick="closeTipDiv('addressDiv')" style="float:right; cursor:pointer; color:#999;font-size:25px;">×</span></div>
         <div><label><span class="colorRed">*</span> 收货人：</label><input type="text" id="addressName" name="receiverName" value="" /></div>
-        <div><label><span class="colorRed">*</span> 邮编：</label><input type="text" id="addressZip" name="zipCode" value="" /></div>
-        <div style="overflow: hidden;">
-        	<label style=" float: left;"><span class="colorRed">*</span> 详细地址：</label>
-        	<input type="text" id="addressAddr" name="addr" value="" style="width:477px; line-height: 25px;" />
-        </div>
         <div><label><span class="colorRed">*</span> 手机号码：</label><input type="text" id="addressPhone" name="phone" value="" /></div>
+        <div><label><span class="colorRed">*</span> 邮政编号：</label><input type="text" id="addressZip" name="zipCode" value="" /></div>
+        <div>
+        	<label><span class="colorRed">*</span> 收货地址：</label><input type="text" id="addressAddr" name="addr" value="" style="width:477px;" />
+        </div>
         <p style="margin:10px 0 0 90px;"><input type="hidden" id="operType" name="operType" value="0"/><input type="hidden" id="" name="" value=""/><input type="submit" value="保存" class="sureBtn"  /><input type="button" value="取消" class="cancleBtn"  onclick="closeTipDiv('addressDiv')" /></p>
             <input type="hidden" name="isDefault" value="0"/>
             <input type="hidden" name="objectID" id="objectID" value=""/>

@@ -19,8 +19,8 @@
 <script type="text/javascript" src="<@spring.url '/js/util.js'/>"></script>
 
 <style>
- .exchangeDiv{ width: 550px; min-height: 100px;}
- .exchangeDivList{width:530px;}
+ .exchangeDiv{ width: 400px; min-height: 100px; top:22px; left: 80px;}
+ .exchangeDivList{width:400px; padding: 0;}
  .exchangeDivItem b{ font-weight: normal;}
  .exCDivH i{font-style: normal;}
  .exCDivH b{ background: url(images/bgTop.png) no-repeat 20px center; }
@@ -29,6 +29,9 @@
  .pointInt{ display: none;}
  .exchangeDivList{ display: block; border-top: none;}
  .exchangeDivList{ top:0;}
+ .productInfro{ font-size:14px;}
+ .exFromClick{ left: 80px;}
+ .pointComp:hover{ color: #f60;}
 </style>
 </head>
 <body>
@@ -105,7 +108,7 @@
                                 <li>
                                 	<span class="pointComp">工商银行</span>
                                 	<span class="pointInt">2000-3000</span>
-                                </li>
+                                </li>                                
                             </ul>
                         </div>
                          
@@ -113,8 +116,8 @@
                 </div>
 
                 <div class="margin15">
-                    <span class="marginR10">服<b style="display:inline-block; width:24px;"></b>务：</span>
-                    <span>由公司负责发货，并由公司负责售后服务</span>
+                    <span class="marginR10">服<b style="display:inline-block; width:27px;"></b>务：</span>
+                    <span>配送服务按照地域（北京/江浙沪/珠三角）， 其他地区不提供兑换</span>
                 </div>
 
                 <div class="borderD"></div>
@@ -136,7 +139,7 @@
                 </div>
 
                 <div class="margin15" style="margin-top:5px;">
-                    <span class="marginR10" style="float:left; line-height:24px;">数<b style="display:inline-block; width:24px;"></b>量：</span>
+                    <span class="marginR10" style="float:left; line-height:24px;">数<b style="display:inline-block; width:27px;"></b>量：</span>
 
                     <div class="numList">
                         <b class="prodMin">-</b>

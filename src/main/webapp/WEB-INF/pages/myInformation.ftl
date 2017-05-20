@@ -34,7 +34,8 @@
 .addressDiv .tipDivTitle{ padding:0; margin-bottom:10px;}
 .addressDiv input[type=text]{ padding:0 5px;}
 .colorRed{color:red;}
-.myDetialTxt{padding:0 5px; margin-left: 5px;}
+.myDetialTxt{padding:0 5px; margin-left: 5px; height: 25px;}
+.inputRO{ border:1px solid #fff;}
 .detialLabel{ width:80px; text-align: right;}
 .myAddressItem label{ width: 90px;}
 .birthD{ height:25px; line-height: 25px;}
@@ -77,12 +78,12 @@
                         <div>
                             <label class="detialLabel">身份证：</label>
                             <input id="identityCardNo" name="identityCardNo" type="text" value="${memberInfo[0].identityCardNo}" class="myDetialTxt inputRO" readOnly="true" maxlength="22" />
-                        </div>
+                        </div>-->
                         <div>
                             <label class="detialLabel">邮箱：</label>
                             <input id="email" name="email" type="text" value="${memberInfo[0].email}" class="myDetialTxt inputRO" readOnly="true" maxlength="20" />
                         </div>
-                        -->
+                        
                         <div>
                             <label class="detialLabel">性别：</label>
                             <#if memberInfo[0].gender == '0' || memberInfo[0].gender == ''>
@@ -109,7 +110,7 @@
                         	
                             <input type="button" value="修改" onclick="modifyInfor()" class="detialBtn modBtn" style="margin-left: 85px;" />
                             <input type="submit" value="保存" onclick="updateInfor()" class="detialBtn updBtn" style="margin-left: 85px; display: none;" />
-                            <input type="button" value="取消" onclick="closeInfor()" class="detialBtn canBtn" style="margin-left: 10px; display: none; color: #666; border-color:#666;" />
+                            <input type="button" value="取消" onclick="cancelInfor()" class="detialBtn canBtn" style="margin-left: 10px; display: none; color: #666; border-color:#666;" />
                         </div>
                     	</form>
                     </div>
@@ -186,14 +187,25 @@ function modifyInfor(){
 function updateInfor(){
 	if($('.error').css('display')=='none' || $('.error').length == 0){	
 		closeInfor();
-//		openTipDiv('tipDiv','保存成功！');
 		var memberID = $('#memberID').val();
 		var mobile = $('#mobile').val();
 		var identityCardNo = $('#identityCardNo').val();
 		var email = $('#email').val();
 		var gender = $('input:radio:checked').val();
+		var birthdayDate = $('#birthdayDate').val();
 	}
 }
+//点击取消按钮
+function cancelInfor(){	
+		closeInfor();
+		$('#email-error').css('display','none');
+		$('#email').val('${memberInfo[0].email}');
+		$('#gender').val('${gen}');
+		var b = '${memberInfo[0].birthday}';
+		if(b != "")$('#birthdayDate').val('b');
+		else $('#birthdayDate').val('');
+}
+
 function closeInfor(){
 	$('.inputRW').addClass('inputRO').attr('readonly','ture').removeClass('inputRW');
 	$('#gender').css('display','inline-block').next('p').css('display','none');

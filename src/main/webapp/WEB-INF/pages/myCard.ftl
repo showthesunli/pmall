@@ -53,9 +53,10 @@ td{ overflow:hidden; height:30px;}
                         <table width="100%" border="0" cellpadding="0" cellspacing="0" class="orderTable">
                             <tr>
                                 <th width="30%">卡号</th>
-                                <th width="30%">卡类型</th>
-                                <th width="20%">金额</th>
-                                <th>操作</th>
+                                <th width="15%">卡类型</th>
+                                <th width="15%">金额</th>
+                                <th width="20%">操作</th>
+                                <th>状态</th>
                             </tr>
                             <#list selectPersonalCard as item>
                                 <tr>
@@ -63,6 +64,7 @@ td{ overflow:hidden; height:30px;}
                                     <td class="cardType">${item.cardType}</td>
                                     <td>￥${item.balanceAmount}</td>
                                     <td class="orderBtn"><a href="#" style="margin-left:0;" psw="${item.cardPassword}">查询卡密</a></td>
+                                    <td>已转赠</td>
                                 </tr>
                             </#list>
                          </table>

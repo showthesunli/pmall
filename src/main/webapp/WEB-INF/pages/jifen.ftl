@@ -34,7 +34,7 @@
 			<dl>
 				<div class="icons"><a class="icon_link" href="<@spring.url "/login"/>"><img src="<@spring.url '/images/icon_link.png'/>"></a></div>
 				<dt><a href='<@spring.url "/login"/>' target="_blank"><img src="<@spring.url '/images/merchant/mTH.jpg'/>" /></a></dt>
-				<dd><h3><a href='<@spring.url "/login"/>' target="_blank">逸乐生活</a></h3></dd>
+				<dd><h3><a href='<@spring.url "/login"/>' target="_blank">途皓卡</a></h3></dd>
 			</dl>
 
 			<dl>

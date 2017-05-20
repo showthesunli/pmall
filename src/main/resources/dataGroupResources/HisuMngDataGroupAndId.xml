@@ -240,6 +240,27 @@
               </constructor-arg>
        </bean>
 
+       <!-- 查询订单详情 -->
+       <bean id="queryOrderDtl" class="cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId">
+              <constructor-arg>
+                     <map>
+                            <entry key="w_mmbCenterPage" >
+                                   <list>
+                                          <ref bean="queryMemberOrderDtl"/>
+                                   </list>
+                            </entry>
+                     </map>
+              </constructor-arg>
+       </bean>
+       <bean id="queryMemberOrderDtl" class="cn.highsuccess.config.systemproperties.HisuMngDataIdArgs">
+              <constructor-arg index="0" value="queryMemberOrderDtl"/>
+              <constructor-arg index="1">
+                     <list>
+                            <value>billNo</value>
+                     </list>
+              </constructor-arg>
+       </bean>
+
        <!--personal center 查询个人卡片 -->
        <bean id="queryPensonalCenterCard" class="cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId">
               <constructor-arg>

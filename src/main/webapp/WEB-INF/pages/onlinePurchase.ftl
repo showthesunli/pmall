@@ -46,7 +46,7 @@
         <div class="eCardItem">
           <a href="<@spring.url "/proCardshow;prdNo=011423;keyWordsFld=011423;"/>" target="_blank"><img src="<@spring.url '/images/about3.jpg'/>" width="540" height="380" /></a>
           <div>
-            <h2><a href='<@spring.url "/proCardshow;prdNo=011423;keyWordsFld=011423;"/>' target="_blank">逸乐生活积分卡（电子卡）</a></h2>
+            <h2><a href='<@spring.url "/proCardshow;prdNo=011423;keyWordsFld=011423;"/>' target="_blank">途皓卡（电子卡）</a></h2>
             <p>途皓以各类客户的会员为主要服务对象，利用综合性的积分兑换平台为客户提供高质量、低成本的会员忠诚度方案。平台通过先进的网络平台、便捷的线下POS、24小时的电话服务，满足不同层次会员的兑换方式喜好；通过不定期、多样性的市场活动持续刺激会员，增强会员粘性度，并激活存量休眠客户；通过积分汇集功能将孤立小积分汇集成商户联盟大积分，增强会员积分价值感；通过商户联盟，为积分兑换打通衣、食、住、行、教育、培训及娱乐等各行业，形成全方位的、线上线下的全覆盖服务；在帮助客户消化积分、提高会员满意度的同时，导入其他中高端客户群的积分消费，为客户带来额外业务收入。</p>
           </div>
         </div>
@@ -55,7 +55,7 @@
         <div class="entityCardItem">
           <a href="<@spring.url "/proCardshow;prdNo=X443241;keyWords=X443241;"/>" target="_blank"><img src="<@spring.url '/images/about3.jpg'/>" width="540" height="380" /></a>
           <div>
-            <h2><a href='<@spring.url "/proCardshow;prdNo=X443241;keyWords=X443241;"/>' target="_blank">逸乐生活积分卡（实体卡）</a></h2>
+            <h2><a href='<@spring.url "/proCardshow;prdNo=X443241;keyWords=X443241;"/>' target="_blank">途皓卡（实体卡）</a></h2>
             <p>途皓以各类客户的会员为主要服务对象，利用综合性的积分兑换平台为客户提供高质量、低成本的会员忠诚度方案。平台通过先进的网络平台、便捷的线下POS、24小时的电话服务，满足不同层次会员的兑换方式喜好；通过不定期、多样性的市场活动持续刺激会员，增强会员粘性度，并激活存量休眠客户；通过积分汇集功能将孤立小积分汇集成商户联盟大积分，增强会员积分价值感；通过商户联盟，为积分兑换打通衣、食、住、行、教育、培训及娱乐等各行业，形成全方位的、线上线下的全覆盖服务；在帮助客户消化积分、提高会员满意度的同时，导入其他中高端客户群的积分消费，为客户带来额外业务收入。</p>
           </div>
         </div>

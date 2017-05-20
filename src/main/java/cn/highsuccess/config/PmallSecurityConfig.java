@@ -12,6 +12,8 @@ import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.filter.CharacterEncodingFilter;
 
+import java.util.AbstractCollection;
+
 /**
  * Created by prototype on 2017/3/21.
  */
@@ -46,6 +48,10 @@ public class PmallSecurityConfig extends WebSecurityConfigurerAdapter{
             .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/login");
+                .logoutSuccessUrl("/login")
+            .and()
+                .logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logoutByModPsw"))
+                .logoutSuccessUrl("/modifyPswSuccess");
     }
 }

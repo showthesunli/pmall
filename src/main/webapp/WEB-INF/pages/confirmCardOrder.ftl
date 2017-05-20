@@ -48,7 +48,7 @@
 .colorRed{color:red;}
 
 .addressErr,.invoiceErr,.payTypeErr{ height: 30px; width: 1200px; margin: 0 auto;}
-.errorCon{ height: 40px; border:1px solid #f00; border-radius: 5px; background: #ffebe7; padding:0 10px; display: inline-block; float: left; width: 400px; margin:10px 0 0 600px; display: none;}
+.errorCon{ height: 40px; border:1px solid #f00; border-radius: 5px; background: #ffebe7; padding:0 10px; display: inline-block; float: left; width: 400px; margin:10px 0 0 440px; display: none;}
 .errorCon p{ line-height: 20px; font-size: 14px; color:#f00;}
 </style>
 </head>
@@ -78,6 +78,8 @@
                         <span class="addrDefault" style="float: none;">默认地址</span>
                         <span class="addrModifyBtn" onclick="openTipDiv('addressDiv')">添加</span>
                         <span class="addrModifyBtn" onclick="divHeightA('addrSlide')">修改</span>
+                    <#else>
+                    	<span class="addrModifyBtn" onclick="openTipDiv('addressDiv')">添加</span>
                     </#if>
                         <span class="addrDefault" style="float: none;">仅购买实体卡时需要配送</span>
                 </div>
@@ -244,6 +246,7 @@
              
         <#--<p class="jf-overflowH jf-width1000"><input type="button" value="确定下单"  class="btnBgS cartExBtn" style="margin:10px 10px 30px 0;" onclick="window.location='<@spring.url "/buycfm"/>'" /></p>-->
         <div class="jf-overflowH jf-width1000">
+        	<input type="button" value="返回上一页"  class="btnBgS cartShopBtn"  onclick="window.location='<@spring.url "/shoppingCart"/>'" style="margin-left: 10px;" />
         	<div class="errorCon">
         		<p id="errorConAddr"></p>
         		<p id="errorConPay"></p>
@@ -268,12 +271,11 @@
     <div class="addressDiv">
         <div class="jf-overflowH tipDivTitle"><h3 style="float:left;">收货地址</h3><span onclick="closeTipDiv('addressDiv')" style="float:right; cursor:pointer; color:#999;font-size:25px;">×</span></div>
         <div><label><span class="colorRed">*</span> 收货人：</label><input type="text" id="addressName" name="receiverName" value="" /></div>
-        <div><label><span class="colorRed">*</span> 邮编：</label><input type="text" id="addressZip" name="zip" value="" /></div>
-        <div style="overflow: hidden;">
-        	<label style=" float: left;"><span class="colorRed">*</span> 详细地址：</label>
-        	<input type="text" id="addressAddr" name="addr" value="" style="width:477px; line-height: 25px;" />
-        </div>
         <div><label><span class="colorRed">*</span> 手机号码：</label><input type="text" id="addressPhone" name="phone" value="" /></div>
+        <div><label><span class="colorRed">*</span> 邮政编号：</label><input type="text" id="addressZip" name="zip" value="" /></div>
+        <div>
+        	<label><span class="colorRed">*</span> 收货地址：</label><input type="text" id="addressAddr" name="addr" value="" style="width:477px;" />
+        </div>
         <p style="margin:10px 0 0 90px;"><input type="hidden" id="operType" name="operType" value="0"/><input type="hidden" id="" name="" value=""/><input type="submit" value="保存" class="sureBtn"  onclick="closeTipDiv('addressDiv')"  /><input type="button" value="取消" class="cancleBtn"  onclick="closeTipDiv('addressDiv')" /></p>
             <input type="hidden" name="isDefault" value="0"/>
             <input type="hidden" name="objectID" id="objectID" value=""/>

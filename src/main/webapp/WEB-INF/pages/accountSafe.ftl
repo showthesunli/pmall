@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-<title>途皓卡充值-逸乐生活网</title>
+<title>账户安全-逸乐生活网</title>
 <meta name="description" content="途皓（北京）商务服务有限公司" />
 <meta name="keywords" content="途皓（北京）商务服务有限公司" />
 <link rel="stylesheet" type="text/css" href="<@spring.url '/css/css.css'/>"/>
@@ -16,12 +16,12 @@
 <style>
 .rechargeForm{ padding:20px 30px;}	
 .rechargeForm p{ margin-bottom: 20px; position: relative;}
-.rechargeForm label{ width: 80px; text-align: right; display: inline-block; font-size: 14px;}
+.inputTitle{ width: 80px; text-align: right; display: inline-block; font-size: 14px;}
 .rechargeForm h2{ font-weight: bold; color: #f60; line-height: 40px; margin-bottom: 20px;}
 .recTxt{ width: 300px; border: 1px solid #ccc; border-radius: 5px; line-height: 35px; padding: 0 10px; font-size: 14px;}
 .rechargeBtn{width: 150px; height: 40px; border: 1px solid #f60; color: #fff; font-size: 16px; font-weight: bold; background:url(images/btnBg.png) no-repeat; background-position: 0 -75px; border-radius: 5px; cursor: pointer;}
-#cardNo-error,#cardPsw-error{ position:absolute; left:420px; top:0; color:#f00; padding:0 10px 0 0; background:#ffebe7; line-height:35px; border:1px solid #f00; border-radius:5px;}
-.baseinfo-Account label{ display: inline-block; width: 70px; text-align: right;}	
+#oldPsw-error,#newPsw-error,#confirm_password-error{ position:absolute; left:420px; top:0; color:#f00; padding:0 10px; background:#ffebe7; line-height:35px; border:1px solid #f00; border-radius:5px; text-align: left; font-size: 14px;}
+.baseinfo-Account label{ display: inline-block; width: 70px; text-align: right;}
 </style>
 </head>
 
@@ -41,29 +41,33 @@
                     <img src="<@spring.url '/images/fuwu1.jpg'/>" width="120" height="120">
                     <div class="baseinfo-Account">
                         <p><label>用户名：</label><span>${memberInfo[0].memberID}</span></p>
-                        <#--<!--<p>我的积分：<span>${queryMmbAccInfo[0].balanceAmount}</span></p>&ndash;&gt;-->
                         <p><label>我的手机：</label><span>${memberInfo[0].mobile}</span></p>
                         <p><label>我的邮箱：</label><span>${memberInfo[0].email}</span></p>
                         <p><input type="button" value="修改资料" onclick="javascript:window.location.href='<@spring.url '/myInformation'/>'" style=" color: #3897d7; border: 1px solid #3897d7; margin-left:70px;" /></p>
                     </div>
                 </div>
                 
-                <form class="rechargeForm" autocomplete="off" method="post" action="<@spring.url '/recharge'/>">
-                	<h2>途皓卡充值</h2>
+                <form class="rechargeForm" autocomplete="off" method="post" action="<@spring.url '/accountSafe/modPassword'/>">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                	<h2>修改密码</h2>
                 	<p>
-                		<label>卡号：</label>
-                		<input type="text" id="cardNo" name="cardNo" value="" placeholder="请输入您的卡号" class="recTxt" />
+                		<label class="inputTitle">旧密码：</label>
+                		<input type="password" id="oldPsw" name="oldPassword" value="" placeholder="请输入旧密码" class="recTxt" />
                 	</p>
                 	<p>
-                		<label>卡密：</label>
+                		<label class="inputTitle">新密码：</label>
                 		<input type="hidden" />
-                		<input type="text" onfocus="this.type='password'" autocomplete="off" id="cardPsw" name="cardPinCiperUnderZPK" value="" placeholder="请输入您的卡密" class="recTxt" />
+                		<input type="password" autocomplete="off" id="newPsw" name="newPassword" value="" placeholder="请输入新密码" class="recTxt" />
                 	</p>
                 	<p>
-                		<label></label>
-                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                		<input type="submit" id="" value="充 值" class="rechargeBtn" />
-                		<!--<input type="submit" id="" value="返 回" class="rechargeBtn" style="background-position: 0 -117px; border: 1px solid #ccc; color: #999; margin-left: 20px;" />-->
+                		<label class="inputTitle">确认密码：</label>
+                		<input type="hidden" />
+                		<input type="password" autocomplete="off" id="confirm_password" name="confirm_password" value="" placeholder="请再次输入密码" class="recTxt" maxlength="20" />
+                	</p>
+                	<p>
+                		<label class="inputTitle"></label>
+                        <input type="hidden" name="" value=""/>
+                		<input type="submit" id="" value="修改密码" class="rechargeBtn" />
                 	</p>
                 	
                 </form>
@@ -88,19 +92,31 @@
         // 在键盘按下并释放及提交后验证提交表单
         $(".rechargeForm").validate({
             rules: {
-                cardNo: {
+                oldPsw: {
                     required: true,
+                    rangelength:[6,20],
                 },
-                cardPsw: {
+                newPsw: {
                     required: true,
+                    rangelength:[6,20],
+                },
+                confirm_password: {
+                    required: true,
+                    equalTo: "#newPsw"
                 },
             },
             messages: {
-                cardNo: {
-                    required: "请输入卡号",
+                oldPsw: {
+                    required: "密码不能为空",
+                    rangelength: "长度只能在6-20个字符之间",
                 },
-                cardPsw: {
-                    required: "请输入卡密",
+                newPsw: {
+                    required: "密码不能为空",
+                    rangelength: "长度只能在6-20个字符之间",
+                },
+                confirm_password: {
+                    required: "密码不能为空",
+                    equalTo: "两次密码输入不一致"
                 },
             }
         });
