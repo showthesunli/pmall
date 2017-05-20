@@ -23,6 +23,9 @@ public class PmallSecurityConfig extends WebSecurityConfigurerAdapter{
     @Autowired
     HisuAuthenticationProvider hisuAuthenticationProvider;
 
+    @Autowired
+    PmallLogoutSuccessHandler pmallLogoutSuccessHandler;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(this.hisuAuthenticationProvider);
@@ -48,10 +51,7 @@ public class PmallSecurityConfig extends WebSecurityConfigurerAdapter{
             .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/login")
-            .and()
-                .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logoutByModPsw"))
-                .logoutSuccessUrl("/modifyPswSuccess");
+                //退出成功的处理逻辑放入 logoutSuccessHandler
+                .logoutSuccessHandler(this.pmallLogoutSuccessHandler);
     }
 }

@@ -54,7 +54,7 @@ public class accountSafeController extends HisuBaseControllerAdapter {
         condition.append("memberID=").append(this.getJds().getUserName());
         this.getJavaOperate().service("w_mmbCenterPage","starExprModMmbPasswd",condition.toString());
         if (this.getJavaOperate().getResult()){
-            return "redirect:/logoutByModPsw";
+            return "redirect:/logout?forword=modifyPswSuccess";
         }else {
             return "redirect:/accountSafe";
         }
