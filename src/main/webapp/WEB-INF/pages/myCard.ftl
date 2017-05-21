@@ -63,8 +63,11 @@ td{ overflow:hidden; height:30px;}
                                     <td class="cardNo"><a href="">${item.cardNo}</a></td>
                                     <td class="cardType">${item.cardType}</td>
                                     <td>￥${item.balanceAmount}</td>
-                                    <td class="orderBtn"><a href="#" style="margin-left:0;" psw="${item.cardPassword}">查询卡密</a></td>
-                                    <td>已转赠</td>
+                                    <td class="orderBtn">
+                                        <a href="<@spring.url '/cardOperation'/>?cardNo=${item.cardNo}&operType=0" style="margin-left:0;" >发送卡密</a>
+                                        <a href="<@spring.url '/cardOperation'/>?cardNo=${item.cardNo}&operType=1" style="margin-left:0;" psw="${item.cardPassword}">转赠</a>
+                                    </td>
+                                    <td>${item.cardStatus}</td>
                                 </tr>
                             </#list>
                          </table>
@@ -102,6 +105,7 @@ td{ overflow:hidden; height:30px;}
 </html>
 <script language="javascript">
 $(document).ready(function(e) {
+    /**
     $(".orderBtn a").click(function(){
         var obj = 'tipDiv';
         var cardNo = $(this).parent().siblings('.cardNo').find('a').text();
@@ -114,6 +118,7 @@ $(document).ready(function(e) {
         }
         else{openTipDiv(obj,cardNo,cardPws);}
     })
+     **/
 })
 function openTipDiv(obj,cardNo,cardPws) {
     $("#loginBg").css("display","block");

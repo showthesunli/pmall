@@ -60,6 +60,9 @@ public class PayController extends HisuBaseControllerAdapter{
                          @RequestParam @Valid @NotNull String payer,
                          @RequestParam String retMsg){
 
+        logger.debug("orderNumber="+orderNumber);
+        logger.debug("retCode="+retCode);
+        logger.debug("payer="+payer);
         payService.perNoticInitPaySsn(orderNumber, payer);
         if (retCode<0){
             payService.noticeOrder(false);

@@ -244,7 +244,7 @@
        <bean id="queryOrderDtl" class="cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId">
               <constructor-arg>
                      <map>
-                            <entry key="w_mmbCenterPage" >
+                            <entry key="jf_memberCenter" >
                                    <list>
                                           <ref bean="queryMemberOrderDtl"/>
                                    </list>

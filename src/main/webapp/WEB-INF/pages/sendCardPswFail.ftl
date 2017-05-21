@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>支付失败-逸乐生活网</title>
+<title>发送卡密失败-逸乐生活网</title>
 <link rel="stylesheet" type="text/css" href="<@spring.url '/css/css.css'/>"/>
 <link rel="stylesheet" type="text/css" href="<@spring.url '/css/style.css'/>"/>
 <script type="text/javascript" src="<@spring.url '/js/gd_Index.js'/>"></script>
@@ -34,18 +34,17 @@
         
     <div class="jf-main">
         <div class="ny_nav">
-            <div class="ny_nav1">当前位置：<a href='<@spring.url "/index"/>'>首页</a> > <a href='<@spring.url "/shoppingCart"/>'>购物车</a> > 支付错误</div>
             <div class="clearfix"></div>
         </div>
         	            
 		<div class="jf-width1000 jf-overflowH" style="background:#fff; margin:10px auto;">
             <div class="addToSucc jf-overflowH">
-                <p class="addToSTitle">支付错误！</p>
+                <p class="addToSTitle">发送卡密失败</p>
                 <div class="showText">
-                    <p><span style="width:70px;">订单产品：</span><span style="width:490px;">订单产品信息</span></p>
+                    <p><span style="width:70px;">卡号：</span><span style="width:490px;">${cardNo}</span></p>
                 </div>
                 <p style="margin-top:20px;">
-                    <a href='<@spring.url "/shoppingCart"/>' class="entityShopBtn">< 返回购物车</a>
+                    <a href='<@spring.url "/myCard"/>' class="entityShopBtn">< 返回我的卡片</a>
                 </p>
             </div>
         </div>

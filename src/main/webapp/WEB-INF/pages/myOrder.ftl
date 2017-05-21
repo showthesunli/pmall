@@ -51,7 +51,7 @@ td{ overflow:hidden; height:30px;}
                             </tr>
                             <#list queryMemberOrder as key>
                             <tr>
-                                <td><a href="<@spring.url '/myDetial'/>">${key.billNo}</a></td>
+                                <td><a href="<@spring.url '/myDetial'/>?billNo=${key.billNo}">${key.billNo}</a></td>
                                 <td>${key.orderStatus}</td>
                                 <td>${key.deliveryStatus}</td>
                                 <td style="color:#f60;">￥${key.totalPrice}</td>

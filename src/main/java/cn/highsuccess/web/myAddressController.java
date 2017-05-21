@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.util.HashMap;
@@ -53,8 +54,10 @@ public class myAddressController extends HisuBaseControllerAdapter{
     //增加送货地址
     @RequestMapping(value = "/addAddr",method = RequestMethod.POST)
     public String addAddr(Model model,
-                          @Valid UserReceiveInfoItem userReceiveInfoItem){
+                          @Valid UserReceiveInfoItem userReceiveInfoItem,
+                          @RequestParam String forword){
         logger.debug("/addAddr : post");
+        logger.debug("forword=" + forword);
         StringBuilder condition = new StringBuilder();
         condition.append("addr=").append(userReceiveInfoItem.getAddr()).append("|");
         condition.append("zip=").append(userReceiveInfoItem.getZipCode()).append("|");
@@ -62,7 +65,11 @@ public class myAddressController extends HisuBaseControllerAdapter{
         condition.append("phone=").append(userReceiveInfoItem.getPhone()).append("|");
         condition.append("isDefault=").append(userReceiveInfoItem.getIsDefault());
         this.getJavaOperate().service("jf_memberCenter","btnAddUserAddr",condition.toString());
-        return "redirect:/myAddress";
+        if (forword == null){
+            return "redirect:/myAddress";
+        }else {
+            return "redirect:/"+forword;
+        }
     }
 
     @RequestMapping(value = "/modAddr",method = RequestMethod.POST)

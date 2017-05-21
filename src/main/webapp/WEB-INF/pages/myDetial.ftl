@@ -68,24 +68,17 @@
                         <li class="width100">数量</li>
                         <li class="width150">小计</li>
                     </ul>
-                    <ul class="listItem">
-                    	<li class="width570 textAL overflowH">
-                    		<a href="#" style="float: left;"><img src="<@spring.url '/images/about3.jpg'/>" width="60" height="40" /></a>
-                    		<a href="#" class="proTxt">商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称</a>
-                    	</li>
-                        <li class="width150">￥100.00</li>
-                        <li class="width100">2</li>
-                        <li class="width150">￥200.00</li>
-                    </ul>
-                    <ul class="listItem">
-                    	<li class="width570 textAL overflowH">
-                    		<a href="#" style="float: left;"><img src="<@spring.url '/images/about3.jpg'/>" width="60" height="40" /></a>
-                    		<a href="#" class="proTxt">商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称</a>
-                    	</li>
-                        <li class="width150">￥100.00</li>
-                        <li class="width100">2</li>
-                        <li class="width150">￥200.00</li>
-                    </ul>
+                    <#list queryMemberOrderDtl as item>
+                        <ul class="listItem">
+                            <li class="width570 textAL overflowH">
+                                <a href="#" style="float: left;"><img src="<@spring.url '/imgsrc/'/>${item.iconFileName}" width="60" height="40" /></a>
+                                <a href="#" class="proTxt">${item.prdInfo}</a>
+                            </li>
+                            <li class="width150">￥${item.prdUnitPrc}</li>
+                            <li class="width100">${item.prdNum}</li>
+                            <li class="width150">￥${item.totalPrice}</li>
+                        </ul>
+                    </#list>
                 </div>
                 <div style="text-align: right; margin-top: 20px;"><input type="button" value="返 回" onclick="history.back()" style="font-size: 14px; padding: 0 20px; line-height: 30px; background: #eee; border:1px solid #ccc; cursor: pointer;" /></div>
 
