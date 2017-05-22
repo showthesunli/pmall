@@ -7,8 +7,8 @@ import javax.servlet.ServletRegistration;
 /**
  * Created by prototype on 2017/3/17.
  */
-//public class PmallWebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer{
-    public class PmallWebAppInitializer {
+//public class WeChartWebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer{
+    public class WeChartWebAppInitializer {
 
     protected Class<?>[] getRootConfigClasses() {
         return new Class<?>[]{RootConfig.class};
@@ -19,11 +19,11 @@ import javax.servlet.ServletRegistration;
     }
 
     protected String[] getServletMappings() {
-        return new String[]{"/"};
+        return new String[]{"/wechart"};
     }
 
     protected void customizeRegistration(ServletRegistration.Dynamic registration) {
-        registration.setInitParameter("spring.profiles.active","pmall");
+        registration.setInitParameter("spring.profiles.active","wechartmall");
     }
 
 }
