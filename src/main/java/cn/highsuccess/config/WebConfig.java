@@ -1,9 +1,6 @@
 package cn.highsuccess.config;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportResource;
+import org.springframework.context.annotation.*;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
@@ -34,9 +31,20 @@ public class WebConfig extends DelegatingWebMvcConfiguration {
 
 //    @Bean(name = "freemarkerConfig")
     @Bean
+    @Profile("pmall")
     public FreeMarkerConfigurer freeMarkerConfigurer(){
         FreeMarkerConfigurer freeMarkerConfigurer = new FreeMarkerConfigurer();
         freeMarkerConfigurer.setTemplateLoaderPaths("/WEB-INF/pages", "/htmlsrc");
+        freeMarkerConfigurer.setDefaultEncoding("UTF-8");
+//        freeMarkerConfigurer.getConfiguration().setURLEscapingCharset("UTF-8");
+        return freeMarkerConfigurer;
+    }
+
+    @Bean
+    @Profile("wechart")
+    public FreeMarkerConfigurer wechartFreeMarkerConfigurer(){
+        FreeMarkerConfigurer freeMarkerConfigurer = new FreeMarkerConfigurer();
+        freeMarkerConfigurer.setTemplateLoaderPaths("/WEB-INF/wechartPages", "/htmlsrc");
         freeMarkerConfigurer.setDefaultEncoding("UTF-8");
 //        freeMarkerConfigurer.getConfiguration().setURLEscapingCharset("UTF-8");
         return freeMarkerConfigurer;

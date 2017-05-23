@@ -20,7 +20,7 @@ public class SendSmsImpl implements SendSms{
     private static final Log logger = LogFactory.getLog(SendSmsImpl.class);
     private String serviceUrl = "http://yxt.bbn.com.cn/eums/rpc/";
     private String account = "test123";	//账号名
-    private String passwd = "888888";	//密码
+    private String passwd = "18601055133";
     private static boolean isRegister = false;
     private String loginToken;
 

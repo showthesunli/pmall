@@ -219,10 +219,10 @@
                     }
 //                        $("#phone-error").css('display','block');
                 }else{
-                    time($this);
+//                    time($this);
                 }
             }
         })
-//        time(this);
+        time(this);
     });
 </script>

@@ -391,4 +391,25 @@
                      </list>
               </constructor-arg>
        </bean>
+
+       <!-- 微信查询行业 -->
+       <bean id="queryIndustry" class="cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId">
+              <constructor-arg>
+                     <map>
+                            <entry key="jf_wechat_quickExchangePage" >
+                                   <list>
+                                          <ref bean="queryTradesForShoppingCard"/>
+                                   </list>
+                            </entry>
+                     </map>
+              </constructor-arg>
+       </bean>
+       <bean id="queryTradesForShoppingCard" class="cn.highsuccess.config.systemproperties.HisuMngDataIdArgs">
+              <constructor-arg index="0" value="queryTradesForShoppingCard"/>
+              <constructor-arg index="1">
+                     <list>
+                     </list>
+              </constructor-arg>
+       </bean>
+
 </beans>
