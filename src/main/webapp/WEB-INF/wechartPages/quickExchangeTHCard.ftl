@@ -46,9 +46,9 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 			</div>
 			<div style="display: block; overflow: hidden; opacity: 1;">
 				<div class="info_child" style=" overflow: hidden; padding-bottom: 0;">
-					<img src="<@spring.url '/wechart/images/1.jpg'/>">
-					<p><b>vivo X3 Hi-Fi 智能手机</b></p>
-					<p><b style="color: #f60;">￥100.00</b></p>
+					<img src="<@spring.url '/imgsrc/'/>"${queryPrdDetail[0].iconFileName}>
+					<p><b>${queryPrdDetail[0].productInfo}</b></p>
+					<p><b style="color: #f60;">￥${queryPrdDetail[0].prdPrice}</b></p>
 					<p style="margin: 20px 0 10px 0;">
 						<span>卡号：</span>
 						<input type="text" value="" class="cardInputTxt cardNoTxt" placeholder="请输入卡号" />
@@ -76,9 +76,11 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 	<#include "/lib/template/footer.ftl" encoding="UTF-8">
 	<!--end 底部-->
 	
-	<form action="<@spring.url '/myOrder'/>" method="post" id="formGo">
+	<form action="<@spring.url '/quickExchangeTHCard'/>" method="post" id="formGo">
 	    <input name="cardNo" type="hidden"/>
-	    <input name="cardPsw" type="hidden"/>
+	    <input name="cardPinCiperUnderZPK" type="hidden"/>
+		<input name="prdNo" type="hidden"/>
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 	</form>
 	
 </div>
@@ -89,8 +91,9 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 	        var cardNo = $('.cardNoTxt').val();
 	        var cardPsw = $('.cardPswTxt').val();
 	        $('input[name=cardNo]').val(cardNo);
-	        $('input[name=cardPsw]').val(cardPsw);
-	        
+	        $('input[name=cardPinCiperUnderZPK]').val(cardPsw);
+            $('input[name=prdNo]').val("${queryPrdDetail[0].prdNo}");
+
 	        if(cardNo == '' || cardPsw == ''){
 	        	$('#cardInforError').css('display','block').text('请填写卡号或卡密。');
 	        }

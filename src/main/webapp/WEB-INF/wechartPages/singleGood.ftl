@@ -1,4 +1,6 @@
 <#import "/spring.ftl" as spring/>
+<#import "/lib/macro/hisuMacro.ftl" as sf />
+<#setting url_escaping_charset = "UTF-8"/>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -16,6 +18,7 @@
 <script type="text/javascript" src="<@spring.url '/wechart/js/jquery-1.10.2.min.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/wechart/js/jquery.accordion.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/wechart/js/unslider.min.js'/>"></script>
+<script type="text/javascript" src="<@spring.url '/wechart/js/util.js'/>"></script>
 <style>
 .prodMin,.prodAdd{cursor: pointer; background: #f6f6f6; line-height: 26px; padding: 0 5px; display: inline-block; border: 1px solid #ccc; float: left;}
 .prodMin{ border-right: none;}
@@ -42,7 +45,15 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 			</div>
 			<div style="display: block; overflow: hidden; opacity: 1;">
 				<div class="info_child" style=" overflow: hidden;">
-					<img src="<@spring.url '/wechart/images/1.jpg'/>">
+					<div class="banner">
+						<ul>
+							<li style="background-image: url('images/index12.jpg');"></li>
+							<li style="background-image: url('images/index1.jpg');"></li>
+							<li style="background-image: url('images/index6.jpg');"></li>
+							<li style="background-image: url('images/index4.jpg');"></li>
+							<li style="background-image: url('images/index2.jpg');"></li>
+						</ul>
+					</div>
 					<p><b>vivo X3 Hi-Fi 智能手机</b></p>
 					<p>
 						<span>型号：</span>

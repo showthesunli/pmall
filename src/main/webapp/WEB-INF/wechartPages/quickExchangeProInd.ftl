@@ -30,7 +30,7 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 		<div class="info_head info_light">
 			<#list queryTradesForShoppingCard as item>
                 <div class="info_card">
-                    <a href="<@spring.url '/quickExchangeProCom'/>?refBusiName=${item.refBusiName}">
+                    <a href="<@spring.url '/quickExchangeProCom'/>;refBusiName=${item.refBusiName}">
                         <i><img src="<@spring.url '/wechart/images/8.jpg'/>"></i>
                         <h1>${item.showName}</h1>
                     </a>

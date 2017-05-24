@@ -14,7 +14,15 @@
 <script type="text/javascript" src="<@spring.url '/wechart/js/jquery-1.10.2.min.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/wechart/js/jquery.accordion.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/wechart/js/unslider.min.js'/>"></script>
+<script language="javascript" src="<@spring.url '/wechart/js/jquery.validate.min.js'/>" ></script>
+<script language="javascript" src="<@spring.url '/wechart/js/jquery.validate.addMethod.js'/>" ></script>
 <title>账号登录</title>
+<style>
+input{ outline:none;}
+.text_1{ position: relative;}
+#username-error,#password-error{ position:absolute; left: 10%; top:52px; color: #f00;}
+input.error{ border-color: #f00;}
+</style>
 </head>
  
 <body>
@@ -24,10 +32,10 @@
     <form class="loginForm" action="<@spring.url '/login'/>" method="post">
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr class="text">
-        <td class="text_1"><input type="text" name="username" class="tet" placeholder="邮箱/手机号码" style="padding-left:10px;"></td>
+        <td class="text_1"><input type="text" id="username" name="username" class="tet" placeholder="请输入用户名" style="padding-left:10px;"></td>
       </tr>
       <tr class="text">
-		<td class="text_1"><input type="password" name="password"  class="tet" placeholder="输入登录密码" style="padding-left:10px;"></td>
+		<td class="text_1"><input type="password" id="password" name="password"  class="tet" placeholder="输入登录密码" style="padding-left:10px;"></td>
       </tr>
       <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
       <tr class="text">
@@ -52,3 +60,30 @@
 
 </body>
 </html>
+<script>
+    $().ready(function () {
+        // 在键盘按下并释放及提交后验证提交表单
+        $(".loginForm").validate({
+            rules: {
+                username: {
+                    required: true,
+                    rangelength:[4,20]
+                },
+                password: {
+                    required: true,
+                    rangelength:[6,20]
+                },
+            },
+            messages: {
+                username: {
+                    required: "请输入用户名",
+                    rangelength: "长度只能在4-20个字符之间"
+                },
+                password: {
+                    required: "请输入密码",
+                    rangelength: "长度只能在6-20个字符之间"
+                },
+            }
+        });
+    });
+</script>

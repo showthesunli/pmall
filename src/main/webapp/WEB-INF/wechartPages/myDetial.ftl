@@ -17,6 +17,7 @@
 	<script type="text/javascript" src="<@spring.url '/wechart/js/jquery-1.10.2.min.js'/>"></script>
 	<script type="text/javascript" src="<@spring.url '/wechart/js/jquery.accordion.js'/>"></script>
 	<script type="text/javascript" src="<@spring.url '/wechart/js/unslider.min.js'/>"></script>
+	<script type="text/javascript" src="<@spring.url '/wechart/js/util.js'/>"></script>
 
 <!--必要样式-->
 <link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/menu_elastic.css'/>">
@@ -26,7 +27,7 @@
 <![endif]-->
 <style>
 .width70{ display: inline-block; width: 70px; text-align: right;}
-.proInforTxt{width: 80%; height: 20px; line-height: 20px; text-overflow:ellipsis; white-space: nowrap; overflow: hidden; display: inline-block; float: left;}
+.proInforTxt{width: 70%; margin-left: 10px; height: 20px; line-height: 20px; text-overflow:ellipsis; white-space: nowrap; overflow: hidden; display: inline-block; float: left;}
 </style>
 </head>
 <body class="huibg">
@@ -84,8 +85,8 @@
                     	
                     	<#list queryMemberOrderDtl as item>
                     		
-                    	<a href="<@spring.url '/singleGood'/>" style=" padding-top: 10px; display: inline-block;">
-                    		<img src="<@spring.url '/imgsrc/'/>${item.iconFileName}" style="max-width: 20%; float: left;" />
+                    	<a href="<@spring.url '/singleGood'/>" style=" padding-top: 10px; display: inline-block; width: 100%;">
+                    		<img src="<@spring.url '/imgsrc/'/>${item.iconFileName}" onerror="downloadErrImg(this,'${item.iconFileName}')" style="width: 50px; height: 40px; float: left;" />
                     		<span class="proInforTxt">${item.prdInfo}</span>
                     		<span class="proInforTxt" style="color: #f60; font-size: 12px;">数量：${item.prdNum}<b style="width: 20px; display: inline-block;"></b>金额：￥${item.totalPrice}</span>
                     	</a>

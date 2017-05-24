@@ -10,14 +10,23 @@
 <meta name="keywords" content="微信,微信公众平台" />
 <meta name="description" content="微信公众平台自助引擎" />
 <title>购物车</title>
+<link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/font_1459473269_4751618.css'/>">
 <link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/style.css'/>">
 <link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/buttons.css'/>">
 <link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/font-awesome.min.css'/>">
 <script type="text/javascript" src="<@spring.url '/wechart/js/jquery-1.10.2.min.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/wechart/js/jquery.accordion.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/wechart/js/unslider.min.js'/>"></script>
+<script type="text/javascript" src="<@spring.url '/wechart/js/util.js'/>"></script>
 <style>
 .continueSBtn{background: -webkit-linear-gradient(#eee, #ccc); background: -o-linear-gradient(#eee, #ccc); background: -moz-linear-gradient(#eee, #ccc); background: linear-gradient(#eee, #ccc);color:#333; border-color: #999;}
+.sCartTitle{ font-size: 16px; font-weight: bold; color: #f60;}
+.f12{ font-size: 12px; font-weight: normal;}
+.iconfont{ width: 16px; height: 16px; display: inline-block;}
+.info_head{ position: relative;}
+.right em{ display: block; -webkit-border-radius: 20px; border-radius: 20px; color: #FFF; font-size: 12px; line-height: 12px; margin-top: 5px; padding: 4px 8px; top: 50%; text-shadow: 0 0 #FFFFFF; font-style: normal;}
+.right{ position: absolute; top:0; right:5px;}
+.info_card_price{ line-height: 20px;}
 </style>
 </head>
 
@@ -29,20 +38,43 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 	</div>
 	<div id="content">
 		
-	
+		<h2 class="sCartTitle">商品购物车</h2>
+						
 		<div class="info_head info_light">
+			<a href="#" class="right"><em class="no">删</em></a>
 			<div class="info_card">
-				<a href="<@spring.url '/singleGood'/>">
-				<i><img src="images/8.jpg"></i>
-				<h1>诺基亚 Lumia 520 超低价格，不要错过哦！wp8超值入门</h1>
+				<a href="#">
+					<i><img src="<@spring.url '/wechart/images/8.jpg'/>" /></i>
+					<h1>商品名称商品名称商品名称商品名称商品名称商品名称商品名称</h1>
 				</a>
 			</div>
+			
+			
 			<div class="info_card_price">
-				<a href="<@spring.url '/singleGood'/>" class="left fb f14 red">￥2980.00</a>
-				<a href="#" class="right"><em class="no">删</em></a>
+				<span class="left f12 red" style="width: 20%;">1</span>
+				<span class="left f12 red" style="width: 30%;">￥100.00</span>
+				<span class="left f12 red" style="width: 50%; text-align: right;">小计：￥100.00</span>
 			</div>
 		</div>
 		
+		
+		<h2 class="sCartTitle">卡购物车</h2>
+		<div class="info_head info_light">
+			<a href="#" class="right"><em class="no">删</em></a>
+			<div class="info_card">
+				<a href="#">
+					<i><img src="<@spring.url '/wechart/images/8.jpg'/>" /></i>
+					<h1>111</h1>
+				</a>
+			</div>
+			
+			<div class="info_card_price">
+				<span class="left f12 red" style="width: 20%;">1</span>
+				<span class="left f12 red" style="width: 30%;">￥100.00</span>
+				<span class="left f12 red" style="width: 50%; text-align: right;">小计：￥100.00</span>
+			</div>
+		</div>
+	
 		
 		<div class="box_exp info_light">
 			<div class="info_integral">

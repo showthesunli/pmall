@@ -412,4 +412,57 @@
               </constructor-arg>
        </bean>
 
+       <!-- 微信根据行业查询企业 -->
+       <bean id="queryTrades" class="cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId">
+              <constructor-arg>
+                     <map>
+                            <entry key="jf_wechat_quickExchangePage" >
+                                   <list>
+                                          <ref bean="queryCompanyByTrade"/>
+                                   </list>
+                            </entry>
+                     </map>
+              </constructor-arg>
+       </bean>
+       <bean id="queryCompanyByTrade" class="cn.highsuccess.config.systemproperties.HisuMngDataIdArgs">
+              <constructor-arg index="0" value="queryCompanyByTrade"/>
+              <constructor-arg index="1">
+                     <list>
+                            <value>refBusiName</value>
+                     </list>
+              </constructor-arg>
+       </bean>
+
+       <!-- 微信根据企业查询卡商品 -->
+       <bean id="queryShoppingCard" class="cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId">
+              <constructor-arg>
+                     <map>
+                            <entry key="jf_wechat_quickExchangePage" >
+                                   <list>
+                                          <ref bean="queryShoppingCardByCompanyName"/>
+                                   </list>
+                            </entry>
+                     </map>
+              </constructor-arg>
+       </bean>
+       <bean id="queryShoppingCardByCompanyName" class="cn.highsuccess.config.systemproperties.HisuMngDataIdArgs">
+              <constructor-arg index="0" value="queryShoppingCardByCompanyName"/>
+              <constructor-arg index="1">
+                     <list>
+                            <value>companyName</value>
+                     </list>
+              </constructor-arg>
+       </bean>
+       <!-- 快捷支付详情页面 -->
+       <bean id="quickExchangeTHCard" class="cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId">
+              <constructor-arg>
+                     <map>
+                            <entry key="jf_goodsDetail" >
+                                   <list>
+                                          <ref bean="queryPrdDetail"/>
+                                   </list>
+                            </entry>
+                     </map>
+              </constructor-arg>
+       </bean>
 </beans>

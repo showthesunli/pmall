@@ -7,19 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="renderer" content="webkit">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>微商城我的卡片-逸乐生活网</title>
-	<link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/font_1459473269_4751618.css'/>">
+	<title>微商城收货地址-逸乐生活网</title>   
+    <link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/font_1459473269_4751618.css'/>">
 	<link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/bootstrap.min.css'/>">
 	<link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/pstyle.css'/>">
 	<link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/style.css'/>">
 	<link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/buttons.css'/>">
 	<link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/font-awesome.min.css'/>">
 	<script type="text/javascript" src="<@spring.url '/wechart/js/jquery-1.10.2.min.js'/>"></script>
-	<script type="text/javascript" src="<@spring.url '/wechart/js/jquery.accordion.js'/>"></script>
-	<script type="text/javascript" src="<@spring.url '/wechart/js/unslider.min.js'/>"></script>
-	<script type="text/javascript" src="<@spring.url '/js/jquery.validate.min.js'/>" ></script>
-	<script type="text/javascript" src="<@spring.url '/js/jquery.validate.addMethod.js'/>" ></script>
-
+	<script type="text/javascript" src="<@spring.url '/wechart/js/bootstrap.min.js'/>"></script>
+	<script type="text/javascript" src="<@spring.url '/wechart/js/jquery.validate.min.js'/>" ></script>
+	<script language="javascript" src="<@spring.url '/wechart/js/jquery.validate.addMethod.js'/>" ></script>
 <!--必要样式-->
 <link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/menu_elastic.css'/>">
 <script type="text/javascript" src="<@spring.url '/wechart/js/snap.svg-min.js'/>"></script>
@@ -28,13 +26,12 @@
 <![endif]-->
 <style>
 input{ outline:none;}
-.text{ margin: 10px auto; border-radius: 20px; font-size: 12px; color: #333; text-align: center;}
-.text_1{ height: 60px; margin: 0px auto; text-align: center; border-radius: 20px; font-size: 12px; color: #333; margin-left: 10px;}
-.tet { width: 80%; height: 40px; border-radius: 3px; border: #999 1px solid; font-size: 14px; font-family: '微软雅黑'; text-align: left;}
-.lg_btn { color: #fff; line-height: 35px; background: #ff4d13; width: 85%; height: 35px; border-radius: 3px; border: 0px; margin: 10px auto; font-size: 14px; font-family: '微软雅黑';}
-.inputRO{ border:1px solid #fff;}
+.usercenter .cdv p{ overflow: hidden; padding-bottom: 30px;}
 .usercenter .cdv .addrTxt{ text-align: right; min-width: 70px; max-width: 70px; float: left; color: #666;}
-.usercenter .cdv .addrInputTxt{ width: 70%; min-width: 150px; float: left; border:1px solid #ccc; max-height: 42px; line-height: 42px; color: #333; padding:0 10px;}
+.usercenter .cdv .addrInputTxt{ width: 70%; min-width: 150px; float: left; border: 1px solid #ccc; padding: 0 5px; height: 30px; line-height: 30px;}
+.usercenter .cdv .addBtnA{ background: #f60; height: 30px; line-height: 30px; color: #fff;}
+.cdv p{ position: relative;}
+#addressName-error,#phone-error,#addressZip-error,#addressAddr-error{ position:absolute; left: 70px; top:25px; color: #f00; font-weight: normal;}
 </style>
 </head>
 <body class="huibg">
@@ -58,74 +55,83 @@ input{ outline:none;}
   </div>
 <nav class="navbar text-center">
    <button class="topleft" onclick="javascript:history.go(-1);"><span class="iconfont icon-fanhui"></span></button>
-  <a class="navbar-tit center-block">我的卡片</a>
+  <a class="navbar-tit center-block">收货地址</a>
 </nav>
 
 
 <div class="usercenter">
-	<div class="cdv dzi">
-	<form class="rechargeForm" autocomplete="off" method="post" action="<@spring.url '/cardOperation'/>">
-  		<table width="100%" border="0" cellspacing="0" cellpadding="0">
-      		<tr class="text">
-				<td class="text_1">
-					<span class="addrTxt">卡号：</span>
-					<input type="text" name="cardNo" value="${cardNo}"  class="addrInputTxt" readOnly="true" />					
-				</td>
-      		</tr>
-      
-      		<#if operType == 0>
-      	
-      		<tr class="text">
-				<td class="text_1">
-					<span class="addrTxt">手机：</span>
-					<input type="text" id="phoneRO" name="mobile" value="${memberInfo[0].mobile}"  class="addrInputTxt" readOnly="true" />
-				</td>
-      		</tr>
-      
-      		<#else >
-      	
-      		<tr class="text">      			
-				<td class="text_1">
-					<span class="addrTxt">手机：</span>
-					<input type="text" name="mobile"  class="addrInputTxt" placeholder="请输入手机号码" maxlength="11" />
-				</td>
-      		</tr>
-      
-      		</#if>
-      		
-      		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-      
-      		<tr class="text">
-        		<td class="text_1">
-        			<span class="addrTxt">&nbsp;</span><input type="submit" value="确 定" class="lg_btn" style="color:#fff; width: 70%; min-width: 150px; float: left; line-height: 35px; "/>
-        		</td>
-      		</tr>
-   		</table>
-   	</form>
-   	</div>
+  
+  	<form class="addAddressForm" method="post" action="<@spring.url '/addAddr'/>">
+  		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+	  	<div class="cdv dzi" style="padding-top: 25px;">
+		    <p>
+		    	<span class="addrTxt">收货人：</span>
+		    	<input type="text" value="" id="addressName" name="receiverName" class="addrInputTxt" placeholder="请输入收货人" maxlength="20" />
+		    </p>
+		    <p>
+		    	<span class="addrTxt">手机号码：</span>
+		    	<input type="text" value="" id="phone" name="phone" class="addrInputTxt" placeholder="请输入手机号码" maxlength="11" />
+		    </p>
+		    <p>
+		    	<span class="addrTxt">邮政编号：</span>
+		    	<input type="text" value="" id="addressZip" name="zipCode" class="addrInputTxt" placeholder="请输入邮政编号" maxlength="10" />
+		    </p>
+		    <p>
+		    	<span class="addrTxt">收货地址：</span>
+		    	<input type="text" value="" id="addressAddr" name="addr" class="addrInputTxt" placeholder="请输入收货地址" />
+		    </p>
+		    <p>
+		    	<span class="addrTxt">&nbsp;</span>
+		    	<input type="submit" value="确 定" class="addBtnA" style="width: 70%;" />
+		    </p>
+		    <input type="hidden" id="operType" name="operType" value="0"/>
+		    <input type="hidden" name="isDefault" value="0"/>
+            <input type="hidden" name="objectID" id="objectID" value=""/>
+            <input type="hidden" name="forword" id="forword" value="myAddress"/>
+	  	</div>
+  	</form>
 
- </div>
- 
-  	<!--底部-->
+	
+</div>
+
+	<!--底部-->
 	<#include "/lib/template/footer.ftl" encoding="UTF-8">
-	<!--end 底部-->
+	<!--end 底部--> 
 
 </body>
 </html>
 <script>
     $().ready(function () {
         // 在键盘按下并释放及提交后验证提交表单
-        $(".rechargeForm").validate({
+        $(".addAddressForm").validate({
             rules: {
-            	phone: {
+                receiverName: {
+                    required: true,
+                },
+                phone: {
                     required: true,
                     isPhone: []
-               },
+                },
+                zipCode: {
+                    required: true,
+                },
+                addr: {
+                    required: true,
+                },
             },
             messages: {
+                receiverName: {
+                    required: "请输入收货人",
+                },
                 phone: {
                     required: "请输入手机号码",
                     isPhone: "请输入正确的手机号码"
+                },
+                zipCode: {
+                    required: "请输入邮编",
+                },
+                addr: {
+                    required: "请输入收货地址",
                 },
             }
         });

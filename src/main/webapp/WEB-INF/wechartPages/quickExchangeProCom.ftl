@@ -15,6 +15,7 @@
 <script type="text/javascript" src="<@spring.url '/wechart/js/jquery-1.10.2.min.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/wechart/js/jquery.accordion.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/wechart/js/unslider.min.js'/>"></script>
+<script type="text/javascript" src="<@spring.url '/wechart/js/util.js'/>"></script>
 <style>
 .info_card{ padding: 0;}
 .info_card i img{ max-width: 100px; max-height: 33px; min-width: 100px; min-height: 33px;}
@@ -30,31 +31,16 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 	</div>
 	<div id="content">
 		<div class="info_head info_light">
-			<div class="info_card">
-				<a href="<@spring.url '/quickExchangeProList'/>">
-				<i><img src="<@spring.url '/wechart/images/bankLogo/banZX.png'/>"></i>
-				</a>
-			</div>
-			<div class="info_card">
-				<a href="<@spring.url '/quickExchangeProList'/>">
-				<i><img src="<@spring.url '/wechart/images/bankLogo/banGD.png'/>"></i>
-				</a>
-			</div>
-			<div class="info_card">
-				<a href="<@spring.url '/quickExchangeProList'/>">
-				<i><img src="<@spring.url '/wechart/images/bankLogo/bankBJ.png'/>"></i>
-				</a>
-			</div>
-			<div class="info_card">
-				<a href="<@spring.url '/quickExchangeProList'/>">
-				<i><img src="<@spring.url '/wechart/images/bankLogo/bankGF.png'/>"></i>
-				</a>
-			</div>
-			<div class="info_card">
-				<a href="<@spring.url '/quickExchangeProList'/>">
-				<i><img src="<@spring.url '/wechart/images/bankLogo/bankHX.png'/>"></i>
-				</a>
-			</div>
+			<#list queryCompanyByTrade as item>
+                <div class="info_card">
+                    <a href="<@spring.url '/quickExchangeProList'/>;companyName=${item.showName}">
+                        <i>
+							<img src="<@spring.url '/imgsrc/'/>${item.iconFileName}" onerror="downloadErrImg(this,'${item.iconFileName}')">
+							<span>${item.companyName}</span>
+						</i>
+                    </a>
+                </div>
+			</#list>
 		</div>
 			
 		<!--常用功能-->

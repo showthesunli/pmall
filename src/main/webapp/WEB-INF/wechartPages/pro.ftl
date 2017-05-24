@@ -17,6 +17,7 @@
 <script type="text/javascript" src="<@spring.url '/wechart/js/jquery-1.10.2.min.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/wechart/js/jquery.accordion.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/wechart/js/unslider.min.js'/>"></script>
+<script type="text/javascript" src="<@spring.url '/wechart/js/util.js'/>"></script>
 <style>
 .banner ul li{ min-height: 140px;}	
 </style>

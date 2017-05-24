@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="renderer" content="webkit">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>html</title>   
+	<title>微商城收货地址-逸乐生活网</title>   
     <link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/font_1459473269_4751618.css'/>">
 	<link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/bootstrap.min.css'/>">
 	<link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/pstyle.css'/>">
@@ -22,6 +22,13 @@
 <!--[if IE]>
 <script src="js/html5.js"></script>
 <![endif]-->
+<style>
+.usercenter .cdv p{ overflow: hidden;}
+.usercenter .cdv .addrTxt{ text-align: right; min-width: 70px; max-width: 70px; float: left; color: #666;}
+.usercenter .cdv .addrInputTxt{ width: 70%; min-width: 150px; float: left; border:none; max-height: 28px; line-height: 28px; color: #333;}
+.usercenter .cdv .addBtnA{ background: #f60; height: 30px; line-height: 30px; color: #fff;}
+.usercenter .label{ padding: 6px 5px; font-weight: normal;}
+</style>
 </head>
 <body class="huibg">
 		
@@ -43,45 +50,80 @@
     </div>
   </div>
 <nav class="navbar text-center">
-   <button class="topleft" onclick="javascript:history.go(-1);"><span class="iconfont icon-fanhui"></span></button>
+   <button class="topleft" onclick="window.location.href='<@spring.url "/member"/>'"><span class="iconfont icon-fanhui"></span></button>
   <a class="navbar-tit center-block">收货地址</a>
 </nav>
 
 
-<div class="usercenter">
+<div class="usercenter" style="margin-bottom: 50px;">
   <div class="cdv">
-    <a href="#"><span>新增收货地址</span></a>
+    <a href="<@spring.url '/myAddressOperation'/>"><span>新增收货地址</span></a>
   </div>
   
     <#list queryMemberAddress as item>
-  	
-  	<div class="cdv dzi">
-	    <a href="#">
-			<p>收货人：${item.name}
-				<button class="label label-warning pull-right" style="margin-left: 10px; background: #ccc; color: #666">删除</button>
-				<button class="label label-warning pull-right" style="margin-left: 10px; background: #3897d7;">编辑</button>
-				
+    	
+  	<form method="post" action="<@spring.url '/modAddr'/>">
+	  	<div class="cdv dzi">
+		    <p>
+		    	<button class="label label-warning pull-right deleteAddr" style="margin-left: 10px; background: #ccc; color: #666">删除</button>
+				<button id="modifyAddrBtn" class="label label-warning pull-right" style="margin-left: 10px; background: #3897d7;">编辑</button>
+					
 				<#if item.isDefault == "1">
-	      			<button class="label label-danger pull-right">默认</button>
-	      		</#if>
-	      		
-	      		<#if item.isDefault == "0">
-	      			<button class="label label-warning pull-right">设为默认</button>
-	      		</#if>
-	      		
-	      </p>
-	      <p>手机号码：${item.phone}</p>
-	      <p>邮政编号：${item.zip}</p>
-	      <p>收货地址：${item.addr}</p>
-	    </a>
-  	</div>
+		      		<button class="label label-danger pull-right">默认</button>
+		      	</#if>
+		      		
+		      	<#if item.isDefault == "0">
+		      		<button class="label label-warning pull-right setToDefAddr">设为默认</button>
+		      	</#if>
+		    </p>
+		    <p>
+		    	<span class="addrTxt">收货人：</span>
+		    	<input type="text" value="${item.name}" id="addressName" name="receiverName" class="addrInputTxt" readOnly="true" />
+		    </p>
+		    <p>
+		    	<span class="addrTxt">手机号码：</span>
+		    	<input type="text" value="${item.phone}" id="phone" name="phone" class="addrInputTxt" readOnly="true" />
+		    </p>
+		    <p>
+		    	<span class="addrTxt">邮政编号：</span>
+		    	<input type="text" value="${item.zip}" id="addressZip" name="zipCode" class="addrInputTxt" readOnly="true" />
+		    </p>
+		    <p>
+		    	<span class="addrTxt">收货地址：</span>
+		    	<span class="addrInputTxt" style=" max-height: 56px;">${item.addr}</span>
+		    	<input type="hidden" value="${item.addr}" id="addressAddr" name="addr" />
+		    </p>
+		    
+		      	<input type="hidden" name="objectID" value="${item.objectID}"/>
+                <input type="hidden" name="isDefault" class="isDefaultInput" value="${item.isDefault}"/>
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+	  	</div>
+  	</form>
   
   	</#list>
-  
-  	<!--底部-->
-	<#include "/lib/template/footer.ftl" encoding="UTF-8">
-	<!--end 底部--> 
 	
 </div>
 
-</body></html>
+	<!--底部-->
+	<#include "/lib/template/footer.ftl" encoding="UTF-8">
+	<!--end 底部--> 
+
+</body>
+</html>
+<script>
+$(document).ready(function(){
+	//删除地址
+    $('.deleteAddr').click(function(){
+    	var action = "<@spring.url '/deleteAddr'/>";
+		$(this).parent().parent().parent().attr('action',action);
+		$(this).parent().parent().parent().submit();
+    });
+    //设为默认值
+    $('.setToDefAddr').click(function(){
+    	var action = "<@spring.url '/modAddr'/>";
+    	$(this).parent().parent().parent().attr('action',action);
+    	$('.isDefaultInput').val('0');
+    	$(this).parent().parent().parent().find('.isDefaultInput').val('1');
+    });
+})
+</script>

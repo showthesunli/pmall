@@ -30,27 +30,27 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 		<div class="info_head info_light">
 			<div class="info_card">
 				<a href="<@spring.url '/secondLevelGoodClass'/>">
-				<i><img src="images/8.jpg"></i>
+				<i><img src="<@spring.url '/wechart/images/8.jpg'/>"></i>
 				<h1>途皓卡</h1>
 				
 				</a>
 			</div>
 			<div class="info_card">
 				<a href="<@spring.url '/secondLevelGoodClass'/>">
-				<i><img src="images/9.jpg"></i>
+				<i><img src="<@spring.url '/wechart/images/9.jpg'/>"></i>
 				<h1>高端商品</h1>
 				
 			</div>
 			<div class="info_card">
 				<a href="<@spring.url '/secondLevelGoodClass'/>">
-				<i><img src="images/10.jpg"></i>
+				<i><img src="<@spring.url '/wechart/images/10.jpg'/>"></i>
 				<h1>电子卡</h1>
 				
 				</a>
 			</div>
 			<div class="info_card">
 				<a href="<@spring.url '/secondLevelGoodClass'/>">
-				<i><img src="images/11.jpg"></i>
+				<i><img src="<@spring.url '/wechart/images/11.jpg'/>"></i>
 				<h1>礼品卡</h1>
 				
 				</a>

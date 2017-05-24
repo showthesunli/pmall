@@ -36,12 +36,12 @@
 	
 	<div class="vipsan">   
 	    <div class="col-xs-4 text-center" style="width:50%;"><a><h4>途皓卡余额</h4><p style="color: #f60;">${queryMmbAccInfo[0].balanceAmount}</p></a></div>
-	    <div class="col-xs-4 text-center" style="width:50%"><a><h4 style=" line-height: 2.4em; background: #f60; color: #fff; margin-top: 0.3em; ">途皓卡充值</h4></a></div>
+	    <div class="col-xs-4 text-center" style="width:50%"><a href="<@spring.url "/accountRecharge"/>"><h4 style=" line-height: 2.4em; background: #f60; color: #fff; margin-top: 0.3em; ">途皓卡充值</h4></a></div>
 	</div>
 	
 	<ul class="vipul" style="margin-bottom: 50px;">
     	<li>
-			<a href="javascript:void(0);">
+			<a href="<@spring.url '/myInformation'/>">
 				<div class="icc"><i class="iconfont icon-yonghux"></i></div>
 				<div class="lzz">个人信息</div>
 				<div class="rizi"><i class="iconfont icon-jiantouri"></i></div>
