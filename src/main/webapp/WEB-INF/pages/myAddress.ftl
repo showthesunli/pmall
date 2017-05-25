@@ -125,6 +125,7 @@
         <p style="margin:10px 0 0 90px;"><input type="hidden" id="operType" name="operType" value="0"/><input type="hidden" id="" name="" value=""/><input type="submit" value="保存" class="sureBtn"  /><input type="button" value="取消" class="cancleBtn"  onclick="closeTipDiv('addressDiv')" /></p>
             <input type="hidden" name="isDefault" value="0"/>
             <input type="hidden" name="objectID" id="objectID" value=""/>
+            <input type="hidden" name="forword" id="forword" value="myAddress"/>
         </form>
     </div>
     <!--地址 end-->

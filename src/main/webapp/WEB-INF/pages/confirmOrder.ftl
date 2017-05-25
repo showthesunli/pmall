@@ -79,6 +79,9 @@
                         <span class="addrModifyBtn" onclick="openTipDiv('addressDiv')">添加</span>
                         <span class="addrModifyBtn" onclick="divHeightA('addrSlide')">修改</span>
                     <#else>
+                    	<label class="addrName"></label>
+                        <label class="addrPhone"></label>
+                        <label class="address"></label>
                     	<span class="addrModifyBtn" onclick="openTipDiv('addressDiv')">添加</span>
                     </#if>
                 </div>

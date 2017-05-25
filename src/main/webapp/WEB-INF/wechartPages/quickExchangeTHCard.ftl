@@ -57,6 +57,10 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 						<span>卡密：</span>
 						<input type="password" value="" class="cardInputTxt cardPswTxt" placeholder="请输入卡密" />
 					</p>
+                    <p>
+                        <span>手机：</span>
+                        <input type="text" value="" id="mobile" class="cardInputTxt cardPswTxt" placeholder="请输入购买人手机" />
+                    </p>
 					<p style="height: 28px; margin-left: 42px;"><span id="cardInforError" style="display: none;"></span></p>
 					</form>
 					
@@ -80,6 +84,7 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 	    <input name="cardNo" type="hidden"/>
 	    <input name="cardPinCiperUnderZPK" type="hidden"/>
 		<input name="prdNo" type="hidden"/>
+		<input name="mobile" type="hidden"/>
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 	</form>
 	
@@ -90,12 +95,14 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 		$("#go").click(function(){
 	        var cardNo = $('.cardNoTxt').val();
 	        var cardPsw = $('.cardPswTxt').val();
+			var mobile = $('#mobile').val();
 	        $('input[name=cardNo]').val(cardNo);
 	        $('input[name=cardPinCiperUnderZPK]').val(cardPsw);
             $('input[name=prdNo]').val("${queryPrdDetail[0].prdNo}");
+			$('input[name=mobile]').val(mobile);
 
-	        if(cardNo == '' || cardPsw == ''){
-	        	$('#cardInforError').css('display','block').text('请填写卡号或卡密。');
+	        if(cardNo == '' || cardPsw == '' || mobile ==''){
+	        	$('#cardInforError').css('display','block').text('请填写卡号、卡密、手机号。');
 	        }
 	        if(cardNo != '' && cardPsw != ''){
 	        	$('#cardInforError').css('display','none');

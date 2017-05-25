@@ -79,6 +79,9 @@
                         <span class="addrModifyBtn" onclick="openTipDiv('addressDiv')">添加</span>
                         <span class="addrModifyBtn" onclick="divHeightA('addrSlide')">修改</span>
                     <#else>
+                    	<label class="addrName"></label>
+                        <label class="addrPhone"></label>
+                        <label class="address"></label>
                     	<span class="addrModifyBtn" onclick="openTipDiv('addressDiv')">添加</span>
                     </#if>
                         <span class="addrDefault" style="float: none;">仅购买实体卡时需要配送</span>
@@ -349,6 +352,7 @@ $(document).ready(function(e) {
 //        var payToolIDList = "东方航空-积分支付";
         var payToolIDList = $(".payTypeA").text();
         $("input[name='payToolIDList']").val(payToolIDList);
+        alert(receiverName);
         
         if(receiverName == '' || addr == '' || mobile == ''){
         	$('.errorCon').css('display','block');

@@ -3,6 +3,7 @@ package cn.highsuccess.web.wechart;
 import cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId;
 import cn.highsuccess.data.JavaDataSet;
 import cn.highsuccess.data.JavaOperate;
+import cn.highsuccess.service.util.HisuOperatePasswd;
 import cn.highsuccess.web.HisuBaseControllerAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -43,10 +44,13 @@ public class QuickExchangeTHCardController extends HisuBaseControllerAdapter{
                                       @RequestParam @NotNull String cardNo,
                                       @RequestParam @NotNull String cardPinCiperUnderZPK,
                                       @RequestParam @NotNull String prdNo,
+                                      @RequestParam @NotNull String mobile,
                                       @RequestParam(defaultValue = "1") String prdNum){
         StringBuilder condition = new StringBuilder();
+        condition.append("mobile=").append(mobile).append("|");
         condition.append("cardNo=").append(cardNo).append("|");
-        condition.append("cardPinCiperUnderZPK=").append(cardPinCiperUnderZPK).append("!");
+        cardPinCiperUnderZPK = HisuOperatePasswd.hisuEncPasswd(cardPinCiperUnderZPK);
+        condition.append("cardPinCiperUnderZPK=").append(cardPinCiperUnderZPK).append("|");
         condition.append("prdNo=").append(prdNo).append("|");
         condition.append("prdNum=").append(prdNum);
         this.getJavaOperate().service("jf_wechat_quickExchangePage","exchangeGoodsByTooHotCard",condition.toString());

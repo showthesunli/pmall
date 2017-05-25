@@ -60,8 +60,9 @@ input.error{ border-color: #f00;}
 
 
 <div class="usercenter">
-	<form class="rechargeForm" autocomplete="off" method="post" action="<@spring.url '/recharge'/>">
-	
+	<!--<form class="rechargeForm" autocomplete="off" method="post" action="<@spring.url '/recharge'/>">-->
+	 <form class="rechargeForm" autocomplete="off" method="post" action="<@spring.url '/accountSafe/modPassword'/>">
+	 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 	  	<table width="100%" border="0" cellspacing="0" cellpadding="0">
 	      	<tr class="text">
 				<td class="text_1">
@@ -71,7 +72,7 @@ input.error{ border-color: #f00;}
 	      	
 	      		<tr class="text">
 				<td class="text_1">
-					<input type="password" id="newPsw" name="newPsw" value="" placeholder="请输入新密码"  class="tet" style="padding-left:10px;">				
+					<input type="password" id="newPsw" name="newPassword" value="" placeholder="请输入新密码"  class="tet" style="padding-left:10px;">				
 				</td>
 	      	</tr>
 	      	
