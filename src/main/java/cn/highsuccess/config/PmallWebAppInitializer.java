@@ -32,6 +32,6 @@ public class PmallWebAppInitializer extends AbstractAnnotationConfigDispatcherSe
     protected void customizeRegistration(ServletRegistration.Dynamic registration) {
         super.customizeRegistration(registration);
         registration.setInitParameter("spring.profiles.default","pmall");
-//        registration.setInitParameter("spring.profiles.active","wechart");
+        registration.setInitParameter("spring.profiles.active","wechart");
     }
 }

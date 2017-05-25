@@ -35,6 +35,8 @@ input{ outline:none;}
 .inputRO{ border:1px solid #fff;}
 .usercenter .cdv .addrTxt{ text-align: right; min-width: 70px; max-width: 70px; float: left; color: #666;}
 .usercenter .cdv .addrInputTxt{ width: 70%; min-width: 150px; float: left; border:1px solid #ccc; max-height: 42px; line-height: 42px; color: #333; padding:0 10px;}
+.text_1{ position: relative;}
+#phone-error{ position:absolute; left: 70px; top:40px; color: #f00; font-weight: normal;}
 </style>
 </head>
 <body class="huibg">
@@ -57,7 +59,7 @@ input{ outline:none;}
     </div>
   </div>
 <nav class="navbar text-center">
-   <button class="topleft" onclick="javascript:history.go(-1);"><span class="iconfont icon-fanhui"></span></button>
+   <button class="topleft" onclick="window.location.href='<@spring.url "/myCard"/>'"><span class="iconfont icon-fanhui"></span></button>
   <a class="navbar-tit center-block">我的卡片</a>
 </nav>
 
@@ -78,7 +80,7 @@ input{ outline:none;}
       		<tr class="text">
 				<td class="text_1">
 					<span class="addrTxt">手机：</span>
-					<input type="text" id="phoneRO" name="mobile" value="${memberInfo[0].mobile}"  class="addrInputTxt" readOnly="true" />
+					<input type="text" id="phone" name="phone" value="${memberInfo[0].mobile}"  class="addrInputTxt" readOnly="true" />
 				</td>
       		</tr>
       
@@ -87,7 +89,7 @@ input{ outline:none;}
       		<tr class="text">      			
 				<td class="text_1">
 					<span class="addrTxt">手机：</span>
-					<input type="text" name="mobile"  class="addrInputTxt" placeholder="请输入手机号码" maxlength="11" />
+					<input type="text" id="phone" name="mobile"  class="addrInputTxt" placeholder="请输入手机号码" maxlength="11" />
 				</td>
       		</tr>
       
@@ -117,13 +119,13 @@ input{ outline:none;}
         // 在键盘按下并释放及提交后验证提交表单
         $(".rechargeForm").validate({
             rules: {
-            	phone: {
+            	mobile: {
                     required: true,
                     isPhone: []
                },
             },
             messages: {
-                phone: {
+                mobile: {
                     required: "请输入手机号码",
                     isPhone: "请输入正确的手机号码"
                 },

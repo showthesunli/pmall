@@ -54,7 +54,7 @@ input.error{ border-color: #f00;}
     </div>
   </div>
 <nav class="navbar text-center">
-   <button class="topleft" onclick="javascript:history.go(-1);"><span class="iconfont icon-fanhui"></span></button>
+   <button class="topleft" onclick="window.location.href='<@spring.url "/member"/>'"><span class="iconfont icon-fanhui"></span></button>
   <a class="navbar-tit center-block">途皓卡充值</a>
 </nav>
 

@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="renderer" content="webkit">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>微商城我的订单详情-逸乐生活网</title>
+	<title>微商城我的卡片-逸乐生活网</title>
 	<link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/font_1459473269_4751618.css'/>">
 	<link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/bootstrap.min.css'/>">
 	<link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/pstyle.css'/>">
@@ -17,6 +17,8 @@
 	<script type="text/javascript" src="<@spring.url '/wechart/js/jquery-1.10.2.min.js'/>"></script>
 	<script type="text/javascript" src="<@spring.url '/wechart/js/jquery.accordion.js'/>"></script>
 	<script type="text/javascript" src="<@spring.url '/wechart/js/unslider.min.js'/>"></script>
+	<script type="text/javascript" src="<@spring.url '/js/jquery.validate.min.js'/>" ></script>
+	<script type="text/javascript" src="<@spring.url '/js/jquery.validate.addMethod.js'/>" ></script>
 
 <!--必要样式-->
 <link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/menu_elastic.css'/>">
@@ -24,6 +26,14 @@
 <!--[if IE]>
 <script src="js/html5.js"></script>
 <![endif]-->
+<style>
+input{ outline:none;}
+.lg_btn { color: #fff; line-height: 35px; background: #ff4d13; width: 85%; height: 35px; border-radius: 3px; border: 0px; margin: 10px auto; font-size: 14px; font-family: '微软雅黑';}
+.usercenter .cdv .addrTxt{ text-align: right; min-width: 70px; max-width: 70px; float: left; color: #666;}
+.usercenter .cdv .addrInputTxt{ width: 70%; min-width: 150px; float: left; max-height: 42px; line-height: 42px; color: #333; padding:0 10px;}
+.text_1{ position: relative;}
+#phone-error{ position:absolute; left: 70px; top:40px; color: #f00; font-weight: normal;}
+</style>
 </head>
 <body class="huibg">
 		
@@ -45,55 +55,57 @@
     </div>
   </div>
 <nav class="navbar text-center">
-   <button class="topleft" onclick="window.location.href='<@spring.url "/member"/>'"><span class="iconfont icon-fanhui"></span></button>
-  <a class="navbar-tit center-block">我的订单</a>
+   <button class="topleft" onclick="window.location.href='<@spring.url "/myCard"/>'"><span class="iconfont icon-fanhui"></span></button>
+  <a class="navbar-tit center-block">发送卡密成功</a>
 </nav>
 
 
-<div class="usercenter" style="padding-left: 0;">
-  <div id="content" style="margin-bottom: 50px;">
-  	
-		<#list queryMemberOrder as key>
-			
-		<div class="box_exp info_light">
-			<div class="info_integral">
-				<span class="title" style="font-size: 14px;">订单号：${key.billNo}</span>
-			</div>
-			<div style="display: block; overflow: hidden; opacity: 1;">
-				<div class="info_child" style=" color: #333;">
-					
-					<p>订单状态：<span style="color: #f60;">${key.orderStatus}</span></p>
-					<p>配送状态：<span style="color: #f60;">${key.deliveryStatus}</span></p>
-					<p>订单总额：<span style="color: #f60;">￥${key.totalPrice}</span></p>
-					
-				</div>
-				<div class="info_child_txt" style="text-align: center;">
-					<#if key.orderStatus == "等待支付">
-					<a href="<@spring.url '/buycfm'/>;billNo=${key.billNo}" style="color: #3897d7; margin-right: 20px;">继续支付</a>
-					</#if>
-					<a href="<@spring.url '/myDetial'/>?billNo=${key.billNo}" style="color: #3897d7;">详情</a>
-				</div>
-			</div>
-		</div>
-		
-		</#list>
-		
-	</div>
-  
+<div class="usercenter">
+	<div class="cdv dzi">
+	<form class="rechargeForm" autocomplete="off" method="post" action="<@spring.url '/cardOperation'/>">
+  		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+      		<tr class="text">
+				<td class="text_1">
+					<span class="addrTxt">卡号：</span>
+					<span class="addrInputTxt">${cardNo}</span>					
+				</td>
+      		</tr>
+      		
+      		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+      
+      		<tr class="text">
+        		<td class="text_1">
+        			<input type="button" value="< 返回我的卡片" class="lg_btn" onclick="window.location.href='<@spring.url "/myCard"/>'" style="color:#fff; width: 100%; min-width: 150px; float: left; line-height: 35px;"/>
+        		</td>
+      		</tr>
+   		</table>
+   	</form>
+   	</div>
+
+ </div>
+ 
   	<!--底部-->
 	<#include "/lib/template/footer.ftl" encoding="UTF-8">
 	<!--end 底部-->
-</div>
 
-<script>
-$(document).ready(function() {
-	$("#content").accordion({
-		alwaysOpen: false,
-		autoheight: false,
-		header: '.info_integral',
-		clearStyle: true
-	});
-});
-</script>
 </body>
 </html>
+<script>
+    $().ready(function () {
+        // 在键盘按下并释放及提交后验证提交表单
+        $(".rechargeForm").validate({
+            rules: {
+            	mobile: {
+                    required: true,
+                    isPhone: []
+               },
+            },
+            messages: {
+                mobile: {
+                    required: "请输入手机号码",
+                    isPhone: "请输入正确的手机号码"
+                },
+            }
+        });
+    });
+</script>

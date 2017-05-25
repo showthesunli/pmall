@@ -54,7 +54,7 @@ input{ outline:none;}
     </div>
   </div>
 <nav class="navbar text-center">
-   <button class="topleft" onclick="javascript:history.go(-1);"><span class="iconfont icon-fanhui"></span></button>
+   <button class="topleft" onclick="window.location.href='<@spring.url "/myAddress"/>'"><span class="iconfont icon-fanhui"></span></button>
   <a class="navbar-tit center-block">收货地址</a>
 </nav>
 

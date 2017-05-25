@@ -219,17 +219,7 @@ $(document).ready(function(){
 		$(this).addClass('imgPitch');
 	});
 
-	$("#addTo").click(function (){
-		var money = ${queryPrdDetail[0].prdPrice};
-		var amount = $("#prdnum").val();
-		var prdNo = "${queryPrdDetail[0].prdNo}";
-		window.location.href = "<@spring.url '/shoppingCart/addCart'/>" + "?prdNo="+prdNo+"&amount="+amount+"&money="+money;
-	})
 
-})
-</script>
-<script>
-$(document).ready(function (e) {
 	$("#addTo").click(function (){
 		var money = ${queryPrdDetail[0].prdPrice};
 		var amount = $("#prdnum").val();
@@ -245,25 +235,6 @@ $(document).ready(function (e) {
         $('.exchangeFrom span').text(c + ' ' + i);
         exchangeDivClose();
    });
-	/*$(".exchangeDivList").eq(0).show();	
-	$(".exchangeDivChassify li").click(function () {
-        $(".exchangeDivList").eq(0).show();
-		var index = $(".exchangeDivChassify li").index(this);
-		$(".exchangeDivList").hide();
-		$(".exchangeDivList").eq(index).show();		
-		$(".exchangeDivChassify li").removeClass("exDivChassifyP");
-		$(this).addClass("exDivChassifyP");
-	})
-    $(".exchangeDivPoint li").click(function () {
-        $(".exchangeDivPoint li").removeClass("exPoint");
-        $(this).addClass("exPoint");
-        
-        var t = $('.exchangeDivChassify .exDivChassifyP').text();//行业
-        var c = $(this).children('.pointComp').text();//公司
-        var i = $(this).children('.pointInt').text();//积分区间        
-        $('.exchangeFrom span').text(t + ' ' + c + ' ' + i);
-        exchangeDivClose();
-    })*/
 	//数量减
 	$(".prodMin").click(function () {
 		var v = $(this).next(".prodNum").attr("value");

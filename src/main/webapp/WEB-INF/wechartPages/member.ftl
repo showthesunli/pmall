@@ -69,7 +69,7 @@
 	      	</a>
 	    </li>
 	    <li>
-	      	<a href="javascript:void(0);">
+	      	<a href="<@spring.url '/accountSafe'/>">
 		       <div class="icc"><i class="iconfont icon-mima"></i></div>
 		       <div class="lzz">账户安全</div>
 		       <div class="rizi"><i class="iconfont icon-jiantouri"></i></div>
