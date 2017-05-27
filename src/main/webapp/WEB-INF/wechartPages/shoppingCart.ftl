@@ -132,8 +132,8 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 			</div>
 		</div>
 		
-		<div style="margin:8px 0;"><a href="<@spring.url "/confirmCardOrder"/>" class="button button-block button-rounded button-caution button-large"><i class="icon-shopping-cart"></i>&nbsp;&nbsp;卡下单</a></div>
-		<div style="margin:8px 0;"><a href="<@spring.url "/confirmOrder"/>" class="button button-block button-rounded button-caution button-large"><i class="icon-shopping-cart"></i>&nbsp;&nbsp;商品下单</a></div>
+		<div style="margin:8px 0;"><a href="<@spring.url "/confirmCardOrder"/>;termID=wechat" class="button button-block button-rounded button-caution button-large"><i class="icon-shopping-cart"></i>&nbsp;&nbsp;卡下单</a></div>
+		<div style="margin:8px 0;"><a href="<@spring.url "/confirmOrder"/>;termID=wechat" class="button button-block button-rounded button-caution button-large"><i class="icon-shopping-cart"></i>&nbsp;&nbsp;商品下单</a></div>
 		<div style="margin:8px 0;"><a href="<@spring.url '/goodClass'/>" class="button button-block button-rounded button-caution button-large continueSBtn">继续购物</a></div>
 		
 		

@@ -1,11 +1,7 @@
 package cn.highsuccess.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-import javax.servlet.Filter;
 import javax.servlet.ServletRegistration;
 
 /**
@@ -32,6 +28,6 @@ public class PmallWebAppInitializer extends AbstractAnnotationConfigDispatcherSe
     protected void customizeRegistration(ServletRegistration.Dynamic registration) {
         super.customizeRegistration(registration);
         registration.setInitParameter("spring.profiles.default","pmall");
-//        registration.setInitParameter("spring.profiles.active","wechart");
+        registration.setInitParameter("spring.profiles.active","wechart");
     }
 }

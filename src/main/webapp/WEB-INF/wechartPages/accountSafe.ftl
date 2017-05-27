@@ -72,13 +72,13 @@ input.error{ border-color: #f00;}
 	      	
 	      		<tr class="text">
 				<td class="text_1">
-					<input type="password" id="newPsw" name="newPassword" value="" placeholder="请输入新密码"  class="tet" style="padding-left:10px;">				
+					<input type="password" id="newPsw" name="newPassword" value="" placeholder="请输入新密码"  class="tet" style="padding-left:10px;" >				
 				</td>
 	      	</tr>
 	      	
 	      	<tr class="text">
 				<td class="text_1">
-					<input type="password" onfocus="this.type='password'" autocomplete="off" id="confirm_password" name="confirm_password" value="" placeholder="请再次输入密码"  class="tet" style="padding-left:10px;">
+					<input type="password" onfocus="this.type='password'" autocomplete="off" id="confirm_password" name="confirm_password" value="" placeholder="请再次输入密码"  class="tet" style="padding-left:10px;" >
 				</td>
 	      	</tr>
 	      
@@ -106,13 +106,13 @@ input.error{ border-color: #f00;}
         // 在键盘按下并释放及提交后验证提交表单
         $(".rechargeForm").validate({
             rules: {
-                oldPsw: {
+                oldPassword: {
                     required: true,
-                    rangelength:[6,20],
+                    rangelength:[6,20]
                 },
-                newPsw: {
+                newPassword: {
                     required: true,
-                    rangelength:[6,20],
+                    rangelength:[6,20]
                 },
                 confirm_password: {
                     required: true,
@@ -120,13 +120,13 @@ input.error{ border-color: #f00;}
                 },
             },
             messages: {
-                oldPsw: {
+                oldPassword: {
                     required: "密码不能为空",
-                    rangelength: "长度只能在6-20个字符之间",
+                    rangelength: "长度只能在6-20个字符之间"
                 },
-                newPsw: {
+                newPassword: {
                     required: "密码不能为空",
-                    rangelength: "长度只能在6-20个字符之间",
+                    rangelength: "长度只能在6-20个字符之间"
                 },
                 confirm_password: {
                     required: "密码不能为空",

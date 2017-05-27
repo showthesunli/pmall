@@ -596,6 +596,13 @@ em.more {text-shadow:0 1px #FFF !important;color:#666666 !important;right:8px !i
 	line-height: 24px;
 	display:block;
 }
+.info_light .title2 {
+	background:url(../images/arrow2.png) no-repeat right 50%;
+	-webkit-background-size:13px 8.5px;
+	background-size:13px 8.5px;
+	line-height: 24px;
+	display:block;
+}
 .info_integral {
 	cursor:pointer;
 	min-height:24px;

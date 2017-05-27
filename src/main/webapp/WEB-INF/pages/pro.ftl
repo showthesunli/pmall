@@ -39,20 +39,15 @@
                 	<div class="getHeightDiv">
                 	
                 	<div class="jf-classifyItem">
-                        <h2 class="jf-classifyItemTitle lineH87">卡：</h2>
+                        <h2 class="jf-classifyItemTitle lineH87">${queryCardPrdType[0].parentAttrID}：</h2>
                         <ul class="jf-classifyItemList">
-                            <li><a href="#" index="0" class="lineH87">全部</a></li>
                             <li style=" text-align: left">
-                            	<a href="#" index="0" class="classifyItemImg">
-                            		<img src="<@spring.url '/images/about3.jpg'/>" width="100" height="60" />
-                            		<span>逸乐积分卡</span>
-                            	</a>
-                            </li>
-                            <li style=" text-align: left">
-                            	<a href="#" index="0" class="classifyItemImg">
-                            		<img src="<@spring.url '/images/about3.jpg'/>" width="100" height="60" />
-                            		<span>逸乐积分卡</span>
-                            	</a>
+                                <#list queryCardPrdType as item>
+                                    <a href="<@spring.url '/pro;mrkPrdCateID=${item.parentAttrID};productName=${item.attrID};'/>" index="0" class="classifyItemImg">
+                                        <img src="<@spring.url '/images/about3.jpg'/>" width="100" height="60" />
+                                        <span>${item.attrID}</span>
+                                    </a>
+                                </#list>
                             </li>
                         </ul>
                     </div>
@@ -90,7 +85,7 @@
 
     <#--分页 当前页，参与分页的总记录数，每页记录数-->
     <#if queryPrdListByPrdType_totalRecNum??>
-        <@sf.pageset currentPage queryPrdListByPrdType_totalRecNum numOfPerPage></@sf.pageset>
+        <@sf.pageset currentPage queryPrdListByPrdType_totalRecNum numOfPerPage "pro"></@sf.pageset>
     </#if>
     <!--end 主体-->
 

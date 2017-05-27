@@ -18,7 +18,7 @@
 <script language="javascript" src="<@spring.url '/wechart/js/jquery.validate.min.js'/>" ></script>
 <script language="javascript" src="<@spring.url '/wechart/js/jquery.validate.addMethod.js'/>" ></script>
 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-<title>微商城注册-逸乐生活网</title>
+<title>修改密码</title>
 <style>
 .getCodeBtn{background: -webkit-linear-gradient(#eee, #ccc); background: -o-linear-gradient(#eee, #ccc); background: -moz-linear-gradient(#eee, #ccc); background: linear-gradient(#eee, #ccc);color:#fff; width: 29%; margin-left: 1%; height: 40px; line-height: 40px; color: #666; border: 1px solid #999; border-radius: 3px;}
 .tet{ padding-left:10px;}
@@ -39,53 +39,53 @@ input.error{ border-color: #f00;}
 		    	
 		    	<tr class="text">
 		        	<td class="text_1">
-		        		<input type="text" id="id" name="id" class="tet" placeholder="用户名" maxlength="20" />		
+		        		<input type="text" id="id" name="id" class="tet" placeholder="用户名/手机/邮箱" maxlength="20" />		
 		        	</td>
 		        	<@sf.error field="id"></@sf.error>
 		      	</tr>
 		      	
-		      	<tr class="text">
-					<td class="text_1">
-						<input type="password" id="password" name="password"  class="tet" placeholder="设置密码" maxlength="20" />			
-					</td>
-			    </tr>
-			    
+		      	
+			  <!--  
 		      	<tr class="text">
 					<td class="text_1">
 						<input type="password" id="confirm_password" name="confirm_password"  class="tet" placeholder="确认密码" maxlength="20" />
 					</td>
-		      	</tr>
+		      	</tr>-->
 		      	
 		      	<tr class="text">
 		        	<td class="text_1">
-		        		<input type="text" id="phone" name="phone" class="tet" placeholder="手机号码" maxlength="11" />	
+		        		<input type="text" id="phone" name="phone" class="tet" placeholder="请输入手机号码" maxlength="11" />	
 		        	</td>
 		     	</tr>
 		     	
 		      	<tr class="text">
 		        	<td class="text_1">
-		        		<input type="text" id="registerCode" name="mCode" class="tet" placeholder="验证码" style=" width:50% ;" maxlength="10" />
+		        		<input type="text" id="registerCode" name="mCode" class="tet" placeholder="请输入验证码" style=" width:50% ;" maxlength="10" />
 		        		 <button type="button" class="getCodeBtn"  id="second">获取验证码</button>
 		        		
 		        	</td>
 		      	</tr>
-		      	
 		      	<tr class="text">
+					<td class="text_1">
+						<input type="text" onfocus="this.type='password'" id="password" name="password"  class="tet" placeholder="请设置密码，至少六位" maxlength="20" />			
+					</td>
+			    </tr>
+		      	<!--<tr class="text">
 		        	<td class="text_1" style="height:40px">
 		        		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 		        		<input id="agree" name="agree" type="checkbox" value=""  checked="checked" style=" float: left; margin-left: 7.5%;"/>
 		        		<span style=" float: left;">我已阅读并同意</span>
-		        		<a href="<@spring.url '/registration'/>" style="color: #f60; text-decoration: underline; float: left;">《注册协议》</a>
+		        		<a href="javascript:void(0);" style="color: #f60; text-decoration: underline; float: left;">《注册协议》</a>
 		        	</td>
-		      	</tr>
+		      	</tr>-->
 		      
 		      	<tr style="width:100%; margin:10px auto; text-align:center;">
-		        	<td><input type="submit" value="注 册" class="lg_btn" style="color:#fff;"/></td>
+		        	<td><input type="submit" value="修改密码" class="lg_btn" style="color:#fff;"/></td>
 		      	</tr>
 		
-		      	<tr style="width:100%; margin:10px auto; text-align:center;">
+		      <!--	<tr style="width:100%; margin:10px auto; text-align:center;">
 		        	<td class="tt">已有账号，立即<a href="<@spring.url '/login'/>" style="color: #f60; text-decoration: underline;">登录</a></td>
-		      	</tr>
+		      	</tr>-->
 		      	
 		    </table>
 		    

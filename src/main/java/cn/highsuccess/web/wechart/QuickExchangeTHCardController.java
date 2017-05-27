@@ -39,6 +39,16 @@ public class QuickExchangeTHCardController extends HisuBaseControllerAdapter{
         return "/quickExchangeTHCard";
     }
 
+    /**
+     * TODO 密码加密被注释
+     * @param model
+     * @param cardNo
+     * @param cardPinCiperUnderZPK
+     * @param prdNo
+     * @param mobile
+     * @param prdNum
+     * @return
+     */
     @RequestMapping(value = "/quickExchangeTHCard",method = RequestMethod.POST)
     public String quickExchangeTHCard(Model model,
                                       @RequestParam @NotNull String cardNo,
@@ -49,7 +59,7 @@ public class QuickExchangeTHCardController extends HisuBaseControllerAdapter{
         StringBuilder condition = new StringBuilder();
         condition.append("mobile=").append(mobile).append("|");
         condition.append("cardNo=").append(cardNo).append("|");
-        cardPinCiperUnderZPK = HisuOperatePasswd.hisuEncPasswd(cardPinCiperUnderZPK);
+//        cardPinCiperUnderZPK = HisuOperatePasswd.hisuEncPasswd(cardPinCiperUnderZPK);
         condition.append("cardPinCiperUnderZPK=").append(cardPinCiperUnderZPK).append("|");
         condition.append("prdNo=").append(prdNo).append("|");
         condition.append("prdNum=").append(prdNum);

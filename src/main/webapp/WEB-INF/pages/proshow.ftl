@@ -159,8 +159,8 @@
         <div class="jf-width1000 jf-overflowH" style="border:1px solid #ddd; border-top:none; margin-top:10px; min-height: 100px;">
             <div class="prodTitel">
                 <span class="sapnPitch">商品简介</span>
-                <span>商品参数</span>
-                <span style="width:898px; border-right:none;"></span>
+                <!--<span>商品参数</span>-->
+                <span style="width:1049px; border-right:none;"></span>
             </div>
             <div class="margin15">
                 <#include "/${queryPrdDetail[0].fileName}" parse=false ignore_missing=true>

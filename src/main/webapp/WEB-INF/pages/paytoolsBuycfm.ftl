@@ -60,6 +60,13 @@
                                     <img src="<@spring.url '/imgsrc/'/>${item.iconFileName}" width="100" height="33" alt="${item.payerName}" />
                                 </label>
                             </#list>
+                            <#list payToolsForPlatEnt as item>
+                                <label class="payTypeItem payTypeItemBO">
+                                    <input type="radio" name="RadioGroup1" value="${item.payer}" checked="checked" />
+                                    <#--<img src="<@spring.url '/imgsrc/'/>${item.iconFileName}" width="100" height="33" alt="${item.payerName}" />-->
+                                <img src="<@spring.url '/imgsrc/'/>" width="100" height="33" alt="${item.payerName}" />
+                                </label>
+                            </#list>
                             <#else >
                                 <#list payerForCardsOrder as item>
                                     <label class="payTypeItem payTypeItemBO">
@@ -70,7 +77,6 @@
                             </#if>
 	                    </div>
                 	</div>
-                	
                 </div>
                 
                 

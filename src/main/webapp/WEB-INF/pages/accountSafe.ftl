@@ -92,11 +92,11 @@
         // 在键盘按下并释放及提交后验证提交表单
         $(".rechargeForm").validate({
             rules: {
-                oldPsw: {
+                oldPassword: {
                     required: true,
                     rangelength:[6,20],
                 },
-                newPsw: {
+                newPassword: {
                     required: true,
                     rangelength:[6,20],
                 },
@@ -106,11 +106,11 @@
                 },
             },
             messages: {
-                oldPsw: {
+               oldPassword: {
                     required: "密码不能为空",
                     rangelength: "长度只能在6-20个字符之间",
                 },
-                newPsw: {
+                newPassword: {
                     required: "密码不能为空",
                     rangelength: "长度只能在6-20个字符之间",
                 },

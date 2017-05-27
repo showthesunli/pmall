@@ -27,6 +27,10 @@ public class ProductListController extends HisuBaseControllerAdapter{
     private HisuMngDataGroupAndId hisuMngDataGroupAndId;
 
     @Autowired
+    @Qualifier("queryTooHotCard")
+    private HisuMngDataGroupAndId queryTooHotCard;
+
+    @Autowired
     protected ProductListController(JavaDataSet jds,JavaOperate javaOperate) {
         super(jds,javaOperate);
     }
@@ -48,19 +52,20 @@ public class ProductListController extends HisuBaseControllerAdapter{
         if (param.get("numOfPerPage") == null){
             param.put("numOfPerPage",numOfPerPage);
         }
-        excute(model, param);
+        excutePro(model, param,hisuMngDataGroupAndId);
+        excutePro(model,param,queryTooHotCard);
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("numOfPerPage",numOfPerPage);
         return "/pro";
     }
 
-    protected void excute(Model model,Map<String,Object> map) throws JSONException {
+    protected void excutePro(Model model,Map<String,Object> map,HisuMngDataGroupAndId hisuMngDataGroupAndId) throws JSONException {
         //获取groupID
-        Set<String> set = this.hisuMngDataGroupAndId.getDataId().keySet();
+        Set<String> set = hisuMngDataGroupAndId.getDataId().keySet();
         Iterator<String> iterator = set.iterator();
         while (iterator.hasNext()){
             String groupId = iterator.next();
-            List<HisuMngDataIdArgs> list = this.hisuMngDataGroupAndId.getDataId().get(groupId);
+            List<HisuMngDataIdArgs> list = hisuMngDataGroupAndId.getDataId().get(groupId);
             if (null != list && list.size()!=0){
                 for (int i=0;i<list.size();i++){
                     StringBuffer condition = new StringBuffer();

@@ -148,43 +148,20 @@
             <div class="orderItemTitel jf-overflowH">
                 <h4>支付方式</h4>
                 <div class="defaultDiv jf-overflowH" style="float:left;">
-                	<label class="payTypeT">积分支付：</label>
+                	<label class="payTypeT">资金支付：</label>
                    	<label class="payTypeA" style="display: none;"></label>
-                    <label class="payTypePayerName">账户余额</label>
+                    <label class="payTypePayerName"></label>
                     <span class="payTypeModifyBtn">修改</span>
                 </div>
             </div>
             <div class="jf-overflowH payTypeSlide" style="height:0;">
                 <div class="payTypeDiv jf-overflowH" style="padding:0 10px;">
-                    <!--
-                	<div><h5>积分支付</h5></div>
-                	<div class="jf-overflowH" style="margin-bottom: 10px;">
-	                    <label class="payTypeItem payTypeItemBO">
-	                    	<input type="radio" name="RadioGroup1" value="逸乐生活" checked="checked" />
-	                    	<img src="<@spring.url '/images/bankLogo/payTypeYL.png'/>" width="100" height="33" />
-	                    </label>
-	                    <label class="payTypeItem">
-	                    	<input type="radio" name="RadioGroup1" value="中信银行" />
-	                    	<img src="<@spring.url '/images/bankLogo/payTypeZX.png'/>" width="100" height="33" />
-	                    </label>
-                    </div>
-                    -->
                     <div><h5>资金支付</h5></div>
                     <div class="jf-overflowH" style="margin-bottom: 10px;">
-                        <#--
-	                    <label class="payTypeItem">
-	                    	<input type="radio" name="RadioGroup1" value="支付宝" />
-	                    	<img src="<@spring.url '/images/bankLogo/payTypeZFB.png'/>" width="100" height="33" />
-	                    </label>
-	                    <label class="payTypeItem">
-	                    	<input type="radio" name="RadioGroup1" value="微信" />
-	                    	<img src="<@spring.url '/images/bankLogo/payTypeWX.png'/>" width="100" height="33" />
-	                    </label>
-	                    -->
                         <#list payerForCardsOrder as item>
                             <label class="payTypeItem">
                                 <input type="radio" name="RadioGroup1" value="${item.payer}" />
-                                <img src="<@spring.url '/imgsrc/'/>${item.iconFileName}" alt="${item.payerName}" width="100" height="33" />
+                                <img src="<@spring.url '/imgsrc/'/>${item.iconFileName}" alt="${item.payerName}" onerror="downloadErrImg(this,'${item.iconFileName}')" width="100" height="33" />
                             </label>
                         </#list>
                     </div>
@@ -197,14 +174,6 @@
                     
                 </div>
             </div>
-
-            <!--<<div class="jf-overflowH" style="padding:0 10px;">
-                div class="jf-overflowH" style="float:left; margin-right:50px;">
-                    <label>积分支付方式：</label>
-                    <label>工商银行-信用卡</label>
-                    <span class="invoiceModify" onclick="exchangeOpen()">修改</span>
-                </div>
-            </div>-->
         </div>
         <!--end支付方式-->
              

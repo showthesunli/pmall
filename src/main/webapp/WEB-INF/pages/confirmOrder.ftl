@@ -33,7 +33,7 @@
 .addForN{ font-size: 12px; margin-left: 20px;}
 .addForN a{ color:#f60; text-decoration: underline;}
 
-.payTypeItem{ padding: 5px; border: 1px solid #eee; cursor: pointer; float: left; margin-right: 10px;}
+.payTypeItem{ padding: 5px; border: 1px solid #eee; cursor: pointer; float: left; margin-right: 10px; margin-bottom: 10px;}
 .payTypeItemBO{border-color:#f60;}
 .payTypeDiv h5{ padding:2px 0; color: #f60; margin-bottom: 10px; font-size: 12px;}
 .payTypeDiv img{ vertical-align: middle;}
@@ -149,7 +149,8 @@
                 <div class="defaultDiv jf-overflowH" style="float:left;">
                 	<label class="payTypeT">积分支付：</label>
                     <label class="payTypeA" style="display: none;"></label>
-                    <label class="payTypePayerName">账户余额</label>
+                    <#--<label class="payTypePayerName">账户余额</label>-->
+                    <label class="payTypePayerName"></label>
                     <span class="payTypeModifyBtn">修改</span>
                 </div>
             </div>
@@ -157,30 +158,28 @@
                 <div class="payTypeDiv jf-overflowH" style="padding:0 10px;">
                 	<div><h5>积分支付</h5></div>
                 	<div class="jf-overflowH" style="margin-bottom: 10px;">
-                        <!--
-	                    <label class="payTypeItem payTypeItemBO">
-	                    	<input type="radio" name="RadioGroup1" value="逸乐生活" checked="checked" />
-	                    	<img src="<@spring.url '/images/bankLogo/payTypeYL.png'/>" width="100" height="33" />
-	                    </label>
-	                    <label class="payTypeItem">
-	                    	<input type="radio" name="RadioGroup1" value="中信银行" />
-	                    	<img src="<@spring.url '/images/bankLogo/payTypeZX.png'/>" width="100" height="33" />
-	                    </label>
-	                    -->
                         <#list payerForGoodsOrder as item>
                         <label class="payTypeItem">
                             <input type="radio" name="RadioGroup1" value="${item.payer}" />
-                            <img src="<@spring.url '/imgsrc/'/>${item.iconFileName}" width="100" height="33" alt="${item.payerName}"/>
+                            <img src="<@spring.url '/imgsrc/'/>${item.iconFileName}"  width="100" onerror="downloadErrImg(this,'${item.iconFileName}')" height="33" alt="${item.payerName}"/>
                         </label>
                         </#list>
                     </div>
-                    
+                
+                    <div><h5>账户支付</h5></div>
+                    <div class="jf-overflowH" style="margin-bottom: 10px;">
+                    <#list payToolsForPlatEnt as item>
+                        <label class="payTypeItem">
+                            <input type="radio" name="RadioGroup1" value="${item.payer}" />
+                            <img src="" width="100" height="33" alt="${item.payerName}"/>
+                        </label>
+                    </#list>
+                    </div>
                 </div>
 
                 <div style="margin-left: 10px;">
                     <span class="payTypeModSureBtn">确定</span>
                     <span class="addrModCBtn" onclick="divHeightZ('payTypeSlide')">取消</span>
-                    
                 </div>
             </div>
 

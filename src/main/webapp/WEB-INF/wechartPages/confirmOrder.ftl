@@ -16,6 +16,7 @@
 <script type="text/javascript" src="<@spring.url '/wechart/js/jquery-1.10.2.min.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/wechart/js/jquery.accordion.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/wechart/js/unslider.min.js'/>"></script>
+<script type="text/javascript" src="<@spring.url '/wechart/js/util.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/wechart/js/jquery.validate.min.js'/>" ></script>
 <script language="javascript" src="<@spring.url '/wechart/js/jquery.validate.addMethod.js'/>" ></script>
 <style>
@@ -24,7 +25,8 @@
 .addBtn{ color: #f60; border: 1px solid #f60; margin-left: 20px;}
 .info_child{ color: #333;}
 .proInforTxt{width: 70%; margin-left: 10px; height: 20px; line-height: 20px; text-overflow:ellipsis; white-space: nowrap; overflow: hidden; display: inline-block; float: left;}
-.payTypeItem{ display: inline-block; margin:0 10px 10px 0;}
+.payTypeItem{ padding: 3px; border: 1px solid #eee; display: inline-block; margin:0 10px 10px 0;}
+.payTypeItemBO{border-color:#f60;}
 .payTypeItem input[type=radio],.payTypeItem img{ vertical-align: middle;}
 .addrDefault,.invoiceDefault{ color: #f60;}
 .addrPhone{ margin: 0 5px;}
@@ -33,9 +35,9 @@
 .borderCO{ border-color:#f60;}
 .errorCon{ color: #f00;}
 .width70{ text-align: right; min-width: 70px; max-width: 70px; float: left; color: #666;}
-.addAddressList p{ margin-bottom: 20px; position: relative;}
-.addAddressList input{ width: 65%; min-width: 180px; padding: 0 5px; line-height: 26px; outline:none;}
-#addressName-error,#phone-error,#addressZip-error,#addressAddr-error{ position:absolute; left: 70px; top:25px; color: #f00; font-weight: normal;}
+.addAddressList p,.addInvoiceList p{ margin-bottom: 20px; position: relative;}
+.addAddressList input,.addInvoiceList input{ width: 65%; min-width: 180px; padding: 0 5px; line-height: 26px; outline:none;}
+#addressName-error,#phone-error,#addressZip-error,#addressAddr-error,#invoiceName-error,#invoiceCon-error{ position:absolute; left: 70px; top:25px; color: #f00; font-weight: normal;}
 </style>
 </head>
 
@@ -196,13 +198,32 @@
 				
 				</div>
 				
-				<div style="display: none;"></div>
+				<!--新增发票-->
+				<div class="addInvoiceList" style="height: 0; overflow: hidden;">
+					<form class="addInvoiceForm" action="" method="post">
+						<div class="info_child">
+							<p>
+								<span class="width70">发票抬头：</span>
+								<input type="text" id="invoiceName" name="invoiceName" value="" />
+							</p>
+							<p>
+								<span class="width70">发票内容：</span>
+								<input type="text" id="invoiceCon" name="invoiceCon" value="" />
+							</p>
+							<p style="text-align: center;">
+								<input type="submit" id="invoiceAddBtn" class="addBtn" value="添 加" style="min-width:56px; max-width:56px; margin-right: 20px;" />
+								<input type="button" value="取 消" class="cancBtn" style="min-width:56px; max-width:56px;" onclick="closeAddDiv('addInvoiceList')" />
+							</p>
+						</div>
+					</form>
+				</div>
+				<!--end 新增发票-->
 									
 				<div class="info_child_txt" style="text-align: center;">
 					<input type="button" value="修 改" class="modifyBtn" onclick="openDiv('invoiceList','invoiceListGetH')"/>
 					<input type="button" value="确 定" class="sureBtn" style="display: none;" onclick="changeInvoice()" />
 					<input type="button" value="取 消" class="cancBtn" style="display: none;  margin-left: 20px;" onclick="closeDiv('invoiceList')" />
-					<!--<input type="button" value="添 加" class="addBtn" />-->
+					<input type="button" value="添 加" class="addBtn" onclick="addInvoiceO()" />
 					<p style="color: #f00;">(只对金额支付部分开具发票)</p>
 				</div>
 			</div>
@@ -216,22 +237,39 @@
 			</div>
 			<div style="display: block; overflow: hidden; opacity: 1;">
 				<div class="info_child">
-					<p>积分支付：
-						<span class="payTypeT" style="color: #f60;"></span>
-						<span class="payTypeA" style=" display: none;"></span>
+					<p>
+						<span class="payTypeT">积分支付：</span>
+						<span class="payTypePayerName" style="color: #f60;">${payToolsForPlatEnt[0].payerName}</span>
+						<span class="payTypeA" style=" display: none;">${payToolsForPlatEnt[0].payer}</span>
 					</p>
 				</div>
 				
 				<div class="payTypeDivHF" style=" height: 0; overflow: hidden;">
 					<div class="payTypeDivH">
-						<#list payerForGoodsOrder as item>
-		                
-		                <label class="payTypeItem">
-							<input type="radio" name="RadioGroup1" value="${item.payer}" />
-							<img src="<@spring.url '/imgsrc/'/>${item.iconFileName}" width="100" height="33" alt="${item.payerName}"/>
-						</label>
-		                        
-						</#list>
+						<div><h5 style=" color: #f60; line-height: 30px;">积分支付</h5></div>
+						<div>
+							<#list payerForGoodsOrder as item>
+			                
+			                <label class="payTypeItem">
+								<input type="radio" name="RadioGroup1" value="${item.payer}" />
+								<img src="<@spring.url '/imgsrc/'/>${item.iconFileName}" onerror="downloadErrImg(this,'${item.iconFileName}')" width="100" height="33" alt="${item.payerName}"/>
+							</label>
+			                        
+							</#list>
+						</div>
+						
+						<div><h5 style=" color: #f60; line-height: 30px;">账户支付</h5></div>
+						<div>
+							<#list payToolsForPlatEnt as item>
+								
+							<label class="payTypeItem">
+								<input type="radio" name="RadioGroup1" value="${item.payer}" />
+								<img src="" onerror="" width="100" height="33" alt="${item.payerName}"/>
+							</label>
+							
+							</#list>
+						</div>
+						
 					</div>
 				</div>
 				
@@ -348,6 +386,24 @@ $(document).ready(function() {
         	},
     	}
 	});
+	$(".addInvoiceForm").validate({
+		rules: {
+			invoiceName: {
+				required: true,
+            },
+            invoiceCon: {
+                required: true,
+            },
+        },
+        messages: {
+            invoiceName: {
+                required: "请输入发票抬头",
+            },           
+            invoiceCon: {
+                required: "请输入发票内容",
+            },
+    	}
+	});
 	
 	$('.info_child_list').eq(0).addClass('borderCO');
 	$('.info_child_list').click(function(){
@@ -386,7 +442,15 @@ $(document).ready(function() {
         	$('.errorCon').css('display','none');
         	$("#formGo").submit();
         }
-    })
+    });
+    
+    //支付方式选中显示橙色边框
+    $('.payTypeItem').click(function(){
+    	$('.payTypeItem').removeClass('payTypeItemBO');
+    	$(this).addClass('payTypeItemBO');
+    	$(this).parent().parent().find('input').removeAttr('checked');
+    	$(this).find('input').attr('checked','checked');
+    });
 });
 
 function openDiv(obj,h){
@@ -456,13 +520,23 @@ function changeInvoice(){
 	    $(".invoiceDefaultDiv .invoiceDefault").text(def);
     }   
 }
+//新增发票
+function addInvoiceO(){
+	var h = $('.addInvoiceForm').height();
+	$('.addInvoiceList').animate({height:h + 'px'});
+	$('.addInvoiceList').next('.info_child_txt').find('.modifyBtn').hide();
+	$('.addInvoiceList').next('.info_child_txt').find('.addBtn').hide();
+}
+
 //修改支付方式
 function changePayType(){
 	var pay = $('.payTypeDivHF').find('input:checked').val();
     var payerName = $('.payTypeDivHF').find('input:checked').next('img').attr('alt');
+    var type = $('.payTypeDivHF').find('input:checked').parent().parent().prev().find('h5').text();
     
     closeDiv('payTypeDivHF');
-    $('.payTypeDivHF').prev('.info_child').find('span').text(payerName);
+    $('.payTypeT').text(type + '：');
+    $('.payTypePayerName').text(payerName);
 	$('.payTypeA').text(pay);
 	
     if(pay != ''){

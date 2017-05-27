@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="renderer" content="webkit">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>微商城我的卡片-逸乐生活网</title>
+	<title>微商城快捷查询-逸乐生活网</title>
 	<link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/font_1459473269_4751618.css'/>">
 	<link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/bootstrap.min.css'/>">
 	<link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/pstyle.css'/>">
@@ -46,37 +46,32 @@
   </div>
 <nav class="navbar text-center">
    <button class="topleft" onclick="window.location.href='<@spring.url "/member"/>'"><span class="iconfont icon-fanhui"></span></button>
-  <a class="navbar-tit center-block">我的卡片</a>
+  <a class="navbar-tit center-block">我的订单</a>
 </nav>
 
 
 <div class="usercenter" style="padding-left: 0;">
   <div id="content" style="margin-bottom: 50px;">
   	
-		<#list selectPersonalCard as item>
-			
+		<#list queryQuickExOrderByMobile as key>
 		<div class="box_exp info_light">
-			<div class="info_integral" style="position: relative;">
-				<span class="title" style="font-size: 14px;display:inline-block;background: none;">卡号：${item.cardNo}</span>
-				<span class="title2" style="width: 13px;height: 9px;position: absolute;top: 50%;right:0%;float: right;"></span>
+			<div class="info_integral">
+				<span class="title" style="font-size: 14px;">订单号：${key.billNo}</span>
 			</div>
 			<div style="display: block; overflow: hidden; opacity: 1;">
 				<div class="info_child" style=" color: #333;">
-					
-					<p>卡类型：<span style="color: #f60;">${item.cardType}</span></p>
-					<p>金额：<span style="color: #f60;">￥${item.balanceAmount}</span></p>
-					<p>状态：<span style="color: #f60;">${item.cardStatus}</span></p>
-					
+					<p>订单状态：<span style="color: #f60;">${key.orderStatus}</span></p>
+					<p>配送状态：<span style="color: #f60;">${key.deliveryStatus}</span></p>
+					<p>订单总额：<span style="color: #f60;">￥${key.totalPrice}</span></p>
 				</div>
 				<div class="info_child_txt" style="text-align: center;">
-					
-					<a href="<@spring.url '/cardOperation'/>?cardNo=${item.cardNo}&operType=0" style="color: #3897d7; margin-right: 20px;">发送卡密</a>
-				
-					<a href="<@spring.url '/cardOperation'/>?cardNo=${item.cardNo}&operType=1" style="color: #3897d7;">转赠</a>
+					<#if key.orderStatus == "等待支付">
+					<a href="<@spring.url '/buycfm'/>;billNo=${key.billNo}" style="color: #3897d7; margin-right: 20px;">继续支付</a>
+					</#if>
+					<a href="<@spring.url '/quickSearchDetial'/>?billNo=${key.billNo}" style="color: #3897d7;">详情</a>
 				</div>
 			</div>
 		</div>
-		
 		</#list>
 		
 	</div>
@@ -95,14 +90,6 @@ $(document).ready(function() {
 		clearStyle: true
 	});
 });
-$(window).resize(function() {
-	
-	var width = $(".info_integral").width()-$(".title2").width();
-	$(".title").width(width);
-	console.log($(".info_integral").width());
-	console.log($(".title2").width());
-	console.log(width);
-	});
 </script>
 </body>
 </html>

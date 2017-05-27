@@ -20,7 +20,7 @@
 <script type="text/javascript" src="<@spring.url '/wechart/js/unslider.min.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/wechart/js/util.js'/>"></script>
 <style>
-.dots{ display: none;}
+.dots,.arrows{ display: none;}
 .prodMin,.prodAdd{cursor: pointer; background: #f6f6f6; line-height: 26px; padding: 0 5px; display: inline-block; border: 1px solid #ccc; float: left;}
 .prodMin{ border-right: none;}
 .prodAdd{ border-left: none;}
@@ -31,6 +31,9 @@
 .pModel a{ line-height: 26px; border: 1px solid #ccc; padding: 0 5px; display: inline-block;}
 .pModel .pModelBO{ border-color: #f60; color: #f60;}
 .borderTop{ border-top:1px dotted #eee; width: 100%;}
+.exchangeDivList{ background: #ffefe5; overflow: hidden; height: 0;}
+.exchangeDivList .exchangeDivPoint .pointInt{ display: none;}
+.exchangeDivPoint{ overflow: hidden; padding:10px 10px 0;}
 </style>
 </head>
 
@@ -47,7 +50,7 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 			</div>
 			<div style="display: block; overflow: hidden; opacity: 1;">
 				<div class="info_child" style=" overflow: hidden;">
-					<div class="banner" style="min-height: 190px;">
+					<div class="banner" style="min-height: 150px;">
 						<ul>
 							<#if querySingleProuctImageGrp[0]??>
                             <#list querySingleProuctImageGrp as item>
@@ -57,7 +60,7 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 							</#list>
 							<#else >
 								
-							<li><img src="<@spring.url '/wechart/images/default.gif'/>" onerror="downloadErrImg(this,'${item.fileName}')";)" /></li>
+							<li><img src="<@spring.url '/wechart/images/default.gif'/>" /></li>
 								
 							</#if>
 
@@ -66,8 +69,23 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 					<p style="color: #333;">${queryPrdDetail[0].productInfo}</p>
 					<p class="borderTop">
 						<span>积分来源：</span>
-						<span>请选择</span>
+						<span class="exC" style=" color: #f60; margin-right: 10px;"></span>
+						<span class="exCOp" style=" color: #3897d7;" onclick="openExchangeDiv()">请选择</span>
 					</p>
+					
+					<div class="exchangeDivList">
+                        <ul class="exchangeDivPoint">
+                            <li>
+                               	<span class="pointComp">中信银行</span>
+                                <span class="pointInt">1000-2000</span>
+                            </li>
+                            <li>
+                                <span class="pointComp">工商银行</span>
+                                <span class="pointInt">2000-3000</span>
+                            </li>                                
+                        </ul>
+                    </div>
+                    
 					<p class="borderTop">
 						<span>服务：</span>
 						<span style="display: inline-block; width: 80%; min-width: 200px;">配送服务按照地域（北京/江浙沪/珠三角）， 其他地区不提供兑换。</span>
@@ -83,7 +101,7 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 							
 							<#else >
 								
-							<a href="<@spring.url '/proshow;prdNo=${queryPrdAllSpecByPrdNoItem.prdNo};keyWordsFld=${queryPrdAllSpecByPrdNoItem.prdNo};'/>" class="pModelBO">${queryPrdAllSpecByPrdNoItem.productSpec}</a>
+							<a href="<@spring.url '/proshow;prdNo=${queryPrdAllSpecByPrdNoItem.prdNo};keyWordsFld=${queryPrdAllSpecByPrdNoItem.prdNo};'/>" >${queryPrdAllSpecByPrdNoItem.productSpec}</a>
 							
 							</#if>
 
@@ -148,6 +166,16 @@ $(document).ready(function() {
 		clearStyle: true
 	});
 	
+	//选择积分来源
+	$(".exchangeDivPoint li").click(function () {
+        var c = $(this).children('.pointComp').text();//公司
+        var i = $(this).children('.pointInt').text();//积分区间        
+        $('.exC').text(c + ' ' + i);
+        $('.exchangeDivList').animate({height:0});
+        if($('.exC').text() != ''){$('.exCOp').text('修改');}
+        else{$('.exCOp').text('请选择');}
+   });
+	
 	//数量减
 	$(".prodMin").click(function () {
 		var v = $(this).next(".prodNum").attr("value");
@@ -191,6 +219,10 @@ $(document).ready(function() {
 		window.location.href = "<@spring.url '/shoppingCart/addCart'/>" + "?prdNo="+prdNo+"&amount="+amount+"&money="+money+"&prdType="+isCard;
 	});
 });
+function openExchangeDiv(){
+	var h = $('.exchangeDivPoint').height() + 10;
+	$('.exchangeDivList').animate({height:h + 'px'});
+}
 </script>
 </body>
 </html>

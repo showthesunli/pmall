@@ -50,6 +50,10 @@ public class confirmOrder extends HisuBaseControllerAdapter{
     private HisuMngDataGroupAndId queryPayerForCards;
 
     @Autowired
+    @Qualifier("queryPlantEnt")
+    private HisuMngDataGroupAndId queryPlantEnt;
+
+    @Autowired
     private ShoppingCartService shoppingCartService;
 
     @Autowired
@@ -69,6 +73,8 @@ public class confirmOrder extends HisuBaseControllerAdapter{
         excute(model, parm, hisuMngDataGroupAndId);
 
         excute(model,parm,queryPayerForGoods);
+
+        excute(model,parm,queryPlantEnt);
         model.addAttribute(shoppingCartService.getShoppingCart().getBuyerItemList("0"));
         model.addAttribute(shoppingCartService.countProMoney());
         model.addAttribute(shoppingCartService.countProNum());
@@ -126,6 +132,7 @@ public class confirmOrder extends HisuBaseControllerAdapter{
         logger.debug("saleOrderPrdType = " + saleOrderPrdType);
         if (saleOrderPrdType.equals("0")){
             excute(model,map,queryPayerForGoods);
+            excute(model,map,queryPlantEnt);
         }else {
             excute(model,map,queryPayerForCards);
         }

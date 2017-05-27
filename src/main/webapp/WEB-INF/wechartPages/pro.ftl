@@ -48,7 +48,7 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 							
 						<li style="width:33%">
 							<div class="line3">
-								<a href="singleGood.html">
+								<a href="<@spring.url '/proshow;prdNo=${queryPrdListByPrdTypeItem.prdNo};keyWordsFld=${queryPrdListByPrdTypeItem.prdNo};'/>">
 									<i>
 										<img src="<@spring.url '/imgsrc/${queryPrdListByPrdTypeItem.iconFileName}'/>" onerror="downloadErrImg(this,'${queryPrdListByPrdTypeItem.iconFileName}')" />
 									</i>

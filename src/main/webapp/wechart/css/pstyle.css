@@ -10,8 +10,8 @@ img {border: 0;}
 .btn-danger { background: #FF2626; border-color: #FF2626;}
 
 .huibg { background: #EEEEEE;}
-.navbar { background: #fff; border-bottom: 1px solid #ddd; margin-bottom: 0px; position: relative;}
-.navbar .navbar-tit {padding: 15px 15px; color: #FF2626;font-size: 18px;line-height: 20px;}
+.navbar { background: #f60; border-bottom: 1px solid #ddd; margin-bottom: 50px; position: fixed;width: 100%;}
+.navbar .navbar-tit {padding: 15px 15px; color: #fff;font-size: 18px;line-height: 20px;font-weight: bold;}
 .navbar .logo { width: 56px; height: 56px; background: #fff; padding: 5px; border-radius: 100%; border: 4px solid #ddd; top: 22px; left: 12px; position: absolute;}
 .navbar .logo img { width: 100%; border-radius: 100%;}
 .navbar .topleft { position: absolute; left: 5px; top: 6px; color: #FF2626; border: 0px; background: none;}

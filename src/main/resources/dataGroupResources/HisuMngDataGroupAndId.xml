@@ -467,4 +467,87 @@
                      </map>
               </constructor-arg>
        </bean>
+       <!-- 查询途皓支付机构 -->
+       <bean id="queryPlantEnt" class="cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId">
+              <constructor-arg>
+                     <map>
+                            <entry key="jf_shoppingCartAndOrder" >
+                                   <list>
+                                          <ref bean="payToolsForPlatEnt"/>
+                                   </list>
+                            </entry>
+                     </map>
+              </constructor-arg>
+       </bean>
+
+       <bean id="payToolsForPlatEnt" class="cn.highsuccess.config.systemproperties.HisuMngDataIdArgs">
+              <constructor-arg index="0" value="payToolsForPlatEnt"/>
+              <constructor-arg index="1">
+                     <list>
+                            <value>payToolsForPlatEnt</value>
+                     </list>
+              </constructor-arg>
+       </bean>
+       <!-- 查询途皓万能卡分类 -->
+       <bean id="queryTooHotCard" class="cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId">
+              <constructor-arg>
+                     <map>
+                            <entry key="jf_goodsList" >
+                                   <list>
+                                          <ref bean="queryCardPrdType"/>
+                                   </list>
+                            </entry>
+                     </map>
+              </constructor-arg>
+       </bean>
+
+       <bean id="queryCardPrdType" class="cn.highsuccess.config.systemproperties.HisuMngDataIdArgs">
+              <constructor-arg index="0" value="queryCardPrdType"/>
+              <constructor-arg index="1">
+                     <list>
+                     </list>
+              </constructor-arg>
+       </bean>
+
+       <!-- 查询快捷兑换订单-->
+       <bean id="queryQuickExOrder" class="cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId">
+              <constructor-arg>
+                     <map>
+                            <entry key="jf_wechat_quickExchangePage" >
+                                   <list>
+                                          <ref bean="queryQuickExOrderByMobile"/>
+                                   </list>
+                            </entry>
+                     </map>
+              </constructor-arg>
+       </bean>
+       <bean id="queryQuickExOrderByMobile" class="cn.highsuccess.config.systemproperties.HisuMngDataIdArgs">
+              <constructor-arg index="0" value="queryQuickExOrderByMobile"/>
+              <constructor-arg index="1">
+                     <list>
+                            <value>memberID</value>
+                     </list>
+              </constructor-arg>
+       </bean>
+
+       <!-- 查询快捷兑换订单详情-->
+       <bean id="queryQuickExOrderDetail" class="cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId">
+              <constructor-arg>
+                     <map>
+                            <entry key="jf_wechat_quickExchangePage" >
+                                   <list>
+                                          <ref bean="queryQuickOrderDtl"/>
+                                   </list>
+                            </entry>
+                     </map>
+              </constructor-arg>
+       </bean>
+       <bean id="queryQuickOrderDtl" class="cn.highsuccess.config.systemproperties.HisuMngDataIdArgs">
+              <constructor-arg index="0" value="queryMemberOrderDtl"/>
+              <constructor-arg index="1">
+                     <list>
+                            <value>billNo</value>
+                     </list>
+              </constructor-arg>
+       </bean>
 </beans>

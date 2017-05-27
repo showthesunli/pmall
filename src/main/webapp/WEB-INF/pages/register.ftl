@@ -174,7 +174,7 @@
             wait = 60;
         } else {
             obj.attr("disabled", true);
-            obj.text(wait + "S");
+            obj.text(wait + "秒");
             wait--;
             setTimeout(function () {
                         time(obj)

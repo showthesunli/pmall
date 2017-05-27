@@ -75,6 +75,9 @@ public abstract class HisuBaseControllerAdapter {
                     }
                     this.getJds().service(groupId,list.get(i).getId(),condition.toString());
                     model.addAttribute(list.get(i).getId(), JSON.parseArray(this.getJds().getDataList().toString()));
+
+                    int totalRecNum = this.getJds().getRecordCount();
+                    model.addAttribute(list.get(i).getId()+"_totalRecNum",totalRecNum);
                 }
             }
         }
