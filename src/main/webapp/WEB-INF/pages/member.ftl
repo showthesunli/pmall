@@ -61,7 +61,7 @@
                             <td>${key.orderStatus}</td>
                             <td>
                                 <#if key.orderStatus == "等待支付">
-                                    <a href="<@spring.url '/buycfm;billNo=${key.billNo};'/>" style="color:#3897d7;">继续支付</a>
+                                    <a href="<@spring.url '/buycfm;billNo=${key.billNo};termID=web;'/>" style="color:#3897d7;">继续支付</a>
                                 </#if>
                             </td>
                         </tr>

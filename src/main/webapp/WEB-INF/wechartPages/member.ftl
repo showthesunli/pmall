@@ -36,7 +36,7 @@
 	
 	<div class="vipsan">   
 	    <div class="col-xs-4 text-center" style="width:50%;"><a><h4>途皓卡余额</h4><p style="color: #f60;">${queryMmbAccInfo[0].balanceAmount}</p></a></div>
-	    <div class="col-xs-4 text-center" style="width:50%"><a href="<@spring.url "/accountRecharge"/>"><h4 style=" line-height: 2.4em; background: #f60; color: #fff; margin-top: 0.3em; ">途皓卡充值</h4></a></div>
+	    <div class="col-xs-4 text-center" style="width:50%"><a href="<@spring.url "/accountRecharge"/>"><h4 style=" line-height: 2.4em; background: #f60; color: #fff; margin-top: 0.3em; ">途皓卡余额充值</h4></a></div>
 	</div>
 	
 	<ul class="vipul" style="margin-bottom: 50px;">

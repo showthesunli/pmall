@@ -34,6 +34,7 @@ public class PayController extends HisuBaseControllerAdapter{
 
     @RequestMapping("/pay")
     public String pay(Model model,
+                      @NotNull String termID,
                       @Valid OrderPaySsn orderPaySsn,
                       Errors errors){
         if (errors.hasErrors()){
@@ -45,6 +46,7 @@ public class PayController extends HisuBaseControllerAdapter{
         //支付订单
 //        payService.payOrder();
 
+        model.addAttribute("termID",termID);
         model.addAttribute("memberID",this.getJds().getUserName());
         model.addAttribute("payer",this.payService.getOrderPaySsn().getPayer());
         model.addAttribute("paySsn",this.payService.getOrderPaySsn().getPaySsn());

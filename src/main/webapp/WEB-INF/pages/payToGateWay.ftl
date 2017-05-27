@@ -22,6 +22,7 @@
     <#--<input type="hidden" name="noticeurl" value="${noticeurl}"/>-->
     <#--<input type="hidden" name="noticeurl" value="http://localhost:8080/pmall/notice"/>-->
     <input type="hidden" name="payDate" value="20170517200000">
+    <input type="hidden" name="termID" value="${termID}">
     <input type="hidden" name="goodsUrl" value="www.happypoints.cn">
     <input type="hidden" name="goodsName" value="逸乐">
 </form>

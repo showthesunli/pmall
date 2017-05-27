@@ -1,8 +1,10 @@
 package cn.highsuccess.web.advice;
 
+import cn.highsuccess.web.exception.HisuOperateException;
 import cn.highsuccess.web.exception.HisuPathNotFoundException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -19,6 +21,12 @@ public class HisuControllerExceptionAdvice {
     public String pathNotFountHandler(){
 
         return "/reigster";
+    }
+
+    @ExceptionHandler(HisuOperateException.class)
+    public String operateError(Model model){
+
+        return null;
     }
 
 }

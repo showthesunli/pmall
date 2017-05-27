@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="renderer" content="webkit">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>html</title>
+	<title>微商城途皓卡余额充值-逸乐生活网</title>
 	<link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/font_1459473269_4751618.css'/>">
 	<link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/bootstrap.min.css'/>">
 	<link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/pstyle.css'/>">
@@ -55,7 +55,7 @@ input.error{ border-color: #f00;}
   </div>
 <nav class="navbar text-center">
    <button class="topleft" onclick="window.location.href='<@spring.url "/member"/>'"><span class="iconfont icon-fanhui"></span></button>
-  <a class="navbar-tit center-block">途皓卡充值</a>
+  <a class="navbar-tit center-block">途皓卡余额充值</a>
 </nav>
 
 

@@ -57,7 +57,7 @@ td{ overflow:hidden; height:30px;}
                                 <td style="color:#f60;">￥${key.totalPrice}</td>
                                 <td class="orderBtn">
                                     <#if key.orderStatus == "等待支付">
-                                        <a href="<@spring.url '/buycfm'/>;billNo=${key.billNo}" style="margin-left:0;">继续支付</a>
+                                        <a href="<@spring.url '/buycfm'/>;billNo=${key.billNo};termID=web" style="margin-left:0;">继续支付</a>
                                     </#if>
                                 </td>
                             </tr>

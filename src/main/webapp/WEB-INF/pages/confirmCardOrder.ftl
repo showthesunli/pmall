@@ -352,7 +352,6 @@ $(document).ready(function(e) {
 //        var payToolIDList = "东方航空-积分支付";
         var payToolIDList = $(".payTypeA").text();
         $("input[name='payToolIDList']").val(payToolIDList);
-        alert(receiverName);
         
         if(receiverName == '' || addr == '' || mobile == ''){
         	$('.errorCon').css('display','block');

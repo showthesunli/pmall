@@ -139,6 +139,7 @@
 					<input type="button" value="确 定" class="sureBtn" style="display: none;" onclick="changeAddress()" />
 					<input type="button" value="取 消" class="cancBtn" style="display: none;  margin-left: 20px;" onclick="closeDiv('addressList')" />
 					<input type="button" value="添 加" class="addBtn" onclick="addAddressO()" />
+					<p style="color: #f00;">(仅购买实体卡时需要配送)</p>
 				</div>
 						
 			</div>
@@ -216,7 +217,7 @@
 			</div>
 			<div style="display: block; overflow: hidden; opacity: 1;">
 				<div class="info_child">
-					<p>积分支付：
+					<p>资金支付：
 						<span class="payTypeT" style="color: #f60;"></span>
 						<span class="payTypeA" style=" display: none;"></span>
 					</p>
@@ -224,7 +225,7 @@
 				
 				<div class="payTypeDivHF" style=" height: 0; overflow: hidden;">
 					<div class="payTypeDivH">
-						<#list payerForGoodsOrder as item>
+						<#list payerForCardsOrder as item>
 		                
 		                <label class="payTypeItem">
 							<input type="radio" name="RadioGroup1" value="${item.payer}" />

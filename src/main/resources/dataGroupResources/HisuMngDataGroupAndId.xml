@@ -388,6 +388,7 @@
               <constructor-arg index="0" value="payerForCardsOrder"/>
               <constructor-arg index="1">
                      <list>
+                            <value>termID</value>
                      </list>
               </constructor-arg>
        </bean>
@@ -408,6 +409,7 @@
               <constructor-arg index="0" value="queryTradesForShoppingCard"/>
               <constructor-arg index="1">
                      <list>
+                            <value>termID</value>
                      </list>
               </constructor-arg>
        </bean>

@@ -16,6 +16,8 @@
 	<link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/font-awesome.min.css'/>">
 	<script type="text/javascript" src="<@spring.url '/wechart/js/jquery-1.10.2.min.js'/>"></script>
 	<script type="text/javascript" src="<@spring.url '/wechart/js/bootstrap.min.js'/>"></script>
+	<script language="javascript" src="<@spring.url '/js/jquery.validate.min.js'/>" ></script>
+<script language="javascript" src="<@spring.url '/js/jquery.validate.addMethod.js'/>" ></script>
 <!--必要样式-->
 <link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/menu_elastic.css'/>">
 <script type="text/javascript" src="<@spring.url '/wechart/js/snap.svg-min.js'/>"></script>
@@ -23,9 +25,14 @@
 <script src="js/html5.js"></script>
 <![endif]-->
 <style>
-.usercenter .cdv p{ line-height: 28px; margin: 5px 0;}
+.usercenter .cdv p{ line-height: 34px; margin: 5px 0;}
 .usercenter .cdv .width70{ display: inline-block; width: 70px; text-align: right; color: #333;}
 .usercenter .cdv span{ color: #f60; font-size: 14px;}
+#email,#birth{line-height: 25px;width: 200px;border: 1px solid #ccc;}
+a#radio input {width: 28px;}
+a#radio {display: none;}
+#email-error{position: absolute;left: 88px;top: 169px;color: #FF2626;font-weight: 400;}
+
 </style>
 </head>
 <body class="huibg">
@@ -54,11 +61,14 @@
 
 
 <div class="usercenter">
- 	
+ 	<form id="informationOfMy" action="modifyMemberInfo" method="post">
   	<div class="cdv dzi">
 		<p><span class="width70">我的账号：</span><span id="memberID" name="memberID">${memberInfo[0].memberID}</span></p>
 	    <p><span class="width70">我的手机：</span><span id="mobile" name="mobile">${memberInfo[0].mobile}</span></p>
-	    <p><span class="width70">邮箱：</span><span id="mobile" name="mobile">${memberInfo[0].email}</span></p>
+	    <p><span class="width70">邮箱：</span><span id="mobile" name="mobile">${memberInfo[0].email}</span>
+	    	 <input id="email" name="email" type="text" value="${memberInfo[0].email}" class="myDetialTxt inputRO" readOnly="true" maxlength="20" style="display: none;"/>
+	    </p>
+	    <div>
 		<#if memberInfo[0].gender == '0' || memberInfo[0].gender == ''>
 			<#assign gen='保密'>
 		<#elseif memberInfo[0].gender == '1'>
@@ -66,14 +76,28 @@
 		<#else>
 			<#assign gen='女'>
 		</#if>
-	    <p><span class="width70">性别：</span><span id="mobile" name="mobile">${gen}</span></p>
-	    <p><span class="width70">生日：</span><span id="mobile" name="mobile">${memberInfo[0].birthday}</span></p>
-
+	    <p><span class="width70">性别：</span><span id="m" name="mobile">${gen}</span>
+			<input style="display: none;" id="gender"  type="" value="" class="myDetialTxt inputRO" readOnly="true" maxlength="20" />
+	       
+	        <a id="radio">
+	        	<input type="radio" name="gender" value="0" id="RadioGroup1_0" />保密
+	            <input type="radio" name="gender" value="1" id="RadioGroup1_1" style="margin-left: 10px;"/>男
+	            <input type="radio" name="gender" value="2" id="RadioGroup1_2" style="margin-left: 10px;"/>女
+	        </a>
+        </p>
+        </div>
+	    <p><span class="width70" id="data">生日：</span><span id="mobile" name="mobile">${memberInfo[0].birthday}</span>
+	    	<input type="text" name="" id="birth" value=""  style="display: none;"/>
+	    </p>
+		<input type="hidden" id="${_csrf.parameterName}" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 	    <div class="info_child_txt" style="text-align: center;">
-			<a href="#" style="color: #3897d7;">修改</a>
+	    	 <input type="button" value="修 改" onclick="modifyInfor()" class="detialBtn modBtn btn btn-info"  style="color: #fff;width: 18%;"/>
+             <input type="submit" value="保 存" onclick="updateInfor()" class="detialBtn updBtn btn btn-success" style=" display: none;color: #fff;width: 18%;" />
+              <input type="button" value="取 消" onclick="cancelInfor()" class="detialBtn canBtn btn" style="width: 18%; display: none; margin-left: 5px;background-color: #666;color: #fff;/>
+			<a href="#" style="color: #3897d7;"></a>
 		</div>
   	</div>
-  
+  </form>
 	
 </div>
 
@@ -82,3 +106,79 @@
 	<!--end 底部--> 
 
 </body></html>
+<script>
+$(function () {
+		
+	// 在键盘按下并释放及提交后验证提交表单
+    $("#informationOfMy").validate({
+		rules: {
+			memberName:{isRealName:true},
+			email:{email:true},
+			identityCardNo:{isIdCardNo:true},
+		},
+		messages: {
+			memberName:{isRealName:"最多输入20个英文或10个汉字"},
+			email: {email:"请输入正确格式的邮箱"},
+			identityCardNo:{isIdCardNo:"请输入正确的身份证号"},
+        }
+    });
+});
+
+//点击修改按钮
+function modifyInfor(){
+	$('.inputRO').addClass('inputRW').removeAttr('readonly').removeClass('inputRO');
+	$('#gender').css('display','none');
+	$('#radio').css('display','inline');	
+	$('#birth').css('display','inline-block');
+	$('#m').css('display','none').next('p').css('display','inline-block');
+	$('#email').css('display','inline-block');	
+	$('.modBtn').hide();
+	$('.updBtn').show();
+	$('.canBtn').show();
+	var g = '${memberInfo[0].gender}';
+	if( g == ''){$('#RadioGroup1_0').attr('checked','checked');}
+	else{$('#RadioGroup1_' + g).attr('checked','checked');}
+}
+//点击保存按钮
+function updateInfor(){
+	if($('.error').css('display')=='none' || $('.error').length == 0){	
+		closeInfor();
+		var memberID = $('#memberID').val();
+		var mobile = $('#mobile').val();
+		var identityCardNo = $('#identityCardNo').val();
+		var email = $('#email').val();
+		var gender = $('input:radio:checked').val();
+		var birthdayDate = $('#birth').val();
+	}
+	$('#radio').css('display','none');
+	$('#m').css('display','inline-block');
+	$('#gender').css('display','none');
+	$('#birth').css('display','none');
+}
+
+//点击取消按钮
+function cancelInfor(){	
+		closeInfor();
+		$('#radio').css('display','none');
+	    $('#m').css('display','inline-block');
+	    $('#gender').css('display','none');
+	    $('#email').css('display','none');	
+	    $('#birth').css('display','none');
+		$('#email-error').css('display','none');
+		$('#email').val('${memberInfo[0].email}');
+		$('#gender').val('${gen}');
+		var b = '${memberInfo[0].birthday}';
+		if(b != "")$('#birthdayDate').val('b');
+		else $('#birthdayDate').val('');
+}
+function closeInfor(){
+	$('.inputRW').addClass('inputRO').attr('readonly','ture').removeClass('inputRW');
+	$('#gender').css('display','inline-block').next('p').css('display','none');
+	$('#birthday').css('display','inline-block').next('input').css('display','none');
+	$('.updBtn').hide();
+	$('.canBtn').hide();
+	$('.modBtn').show();
+}
+
+  
+</script>

@@ -44,7 +44,6 @@ public class PmallSecurityConfig extends WebSecurityConfigurerAdapter{
                 .antMatchers("/member").authenticated()
                 .antMatchers("/confirmOrder").authenticated()
                 .antMatchers("/buycfm**").authenticated()
-                .antMatchers("/quickExchangeTHCard").authenticated()
             .and()
                 .rememberMe()
                 .tokenValiditySeconds(4*7*24*60*60)

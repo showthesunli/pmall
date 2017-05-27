@@ -142,8 +142,8 @@
 			<div class="cartBanlance">
         		<p class="jf-overflowH">
 					<input type="button" value="继续购物"  class="btnBgS cartShopBtn"  onclick="window.location='<@spring.url "/pro"/>'" />
-                    <input type="button" value="商品下单"  class="btnBgS cartBanBtn" onclick="window.location='<@spring.url "/confirmOrder"/>'" style="margin-left:10px;" />
-					<input type="button" value="卡下单"  class="btnBgS cartBanBtn" onclick="window.location='<@spring.url "/confirmCardOrder"/>'" />
+                    <input type="button" value="商品下单"  class="btnBgS cartBanBtn" onclick="window.location='<@spring.url "/confirmOrder"/>;termID=web'" style="margin-left:10px;" />
+					<input type="button" value="卡下单"  class="btnBgS cartBanBtn" onclick="window.location='<@spring.url "/confirmCardOrder"/>;termID=web'" />
 				</p>
         	</div>
 		</div>

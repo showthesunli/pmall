@@ -108,7 +108,7 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 			
 			<div class="info_card">
 				<a href="<@spring.url '/proshow;prdNo=${item.prdNo};keyWordsFld=${item.prdNo};'/>">
-					<i><img src="<@spring.url '/imgsrc/${item.fileName?if_exists}'/>" onerror="downloadErrImg(this,'${item.iconFileName}')" /></i>
+					<i><img src="<@spring.url '/imgsrc/${item.fileName?if_exists}'/>" onerror="downloadErrImg(this,'${item.fileName}')" /></i>
 					<h1>${item.prdName?if_exists}</h1>
 				</a>
 			</div>
@@ -132,7 +132,7 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 			</div>
 		</div>
 		
-		<div style="margin:8px 0;"><a href="<@spring.url '/cart_buy'/>" class="button button-block button-rounded button-caution button-large"><i class="icon-shopping-cart"></i>&nbsp;&nbsp;卡下单</a></div>
+		<div style="margin:8px 0;"><a href="<@spring.url "/confirmCardOrder"/>" class="button button-block button-rounded button-caution button-large"><i class="icon-shopping-cart"></i>&nbsp;&nbsp;卡下单</a></div>
 		<div style="margin:8px 0;"><a href="<@spring.url "/confirmOrder"/>" class="button button-block button-rounded button-caution button-large"><i class="icon-shopping-cart"></i>&nbsp;&nbsp;商品下单</a></div>
 		<div style="margin:8px 0;"><a href="<@spring.url '/goodClass'/>" class="button button-block button-rounded button-caution button-large continueSBtn">继续购物</a></div>
 		

@@ -20,6 +20,7 @@
 <script type="text/javascript" src="<@spring.url '/wechart/js/unslider.min.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/wechart/js/util.js'/>"></script>
 <style>
+.dots{ display: none;}
 .prodMin,.prodAdd{cursor: pointer; background: #f6f6f6; line-height: 26px; padding: 0 5px; display: inline-block; border: 1px solid #ccc; float: left;}
 .prodMin{ border-right: none;}
 .prodAdd{ border-left: none;}
@@ -29,6 +30,7 @@
 .pModel{overflow: hidden; display: inline-block;}
 .pModel a{ line-height: 26px; border: 1px solid #ccc; padding: 0 5px; display: inline-block;}
 .pModel .pModelBO{ border-color: #f60; color: #f60;}
+.borderTop{ border-top:1px dotted #eee; width: 100%;}
 </style>
 </head>
 
@@ -45,7 +47,7 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 			</div>
 			<div style="display: block; overflow: hidden; opacity: 1;">
 				<div class="info_child" style=" overflow: hidden;">
-					<div class="banner">
+					<div class="banner" style="min-height: 190px;">
 						<ul>
 							<#if querySingleProuctImageGrp[0]??>
                             <#list querySingleProuctImageGrp as item>
@@ -61,8 +63,16 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 
 						</ul>
 					</div>
-					<p><b>${queryPrdDetail[0].productInfo}</b></p>
-					<p>
+					<p style="color: #333;">${queryPrdDetail[0].productInfo}</p>
+					<p class="borderTop">
+						<span>积分来源：</span>
+						<span>请选择</span>
+					</p>
+					<p class="borderTop">
+						<span>服务：</span>
+						<span style="display: inline-block; width: 80%; min-width: 200px;">配送服务按照地域（北京/江浙沪/珠三角）， 其他地区不提供兑换。</span>
+					</p>
+					<p class="borderTop">
 						<span>型号：</span>
 						<span class="pModel">
 							
@@ -81,7 +91,7 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
                         	
 						</span>
 					</p>
-					<p>
+					<p class="borderTop">
 						<span>数量：</span>
 						<span style="overflow: hidden; display: inline-block;">
 							<b class="prodMin">-</b>
@@ -92,7 +102,7 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 					</p>
 				</div>
 				<div class="info_child_txt">
-					<a href="javascript:void(0);" class="left fb f14 red">￥${queryPrdDetail[0].prdPrice}</a>
+					<a href="javascript:void(0);" class="left fb f14 red" style="height: 32px; line-height: 32px;">￥${queryPrdDetail[0].prdPrice}</a>
 					<a href="javascript:void(0);" class="button button-rounded button-flat-caution right addTo"><i class="icon-shopping-cart"></i> 加入购物车</a>
 				</div>
 			</div>

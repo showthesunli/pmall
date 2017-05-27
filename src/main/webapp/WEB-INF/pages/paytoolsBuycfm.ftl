@@ -142,11 +142,10 @@ $(document).ready(function(e) {
 		$(this).addClass("exPoint");
 		})
 
-
     $("#pay").click(function(){
         tipOpen();
         var payer = $(".cPayType").text();
-        window.open( "<@spring.url '/pay'/>"+"?orderNo=${queryMemberOrder[0].billNo}&payer="+payer);
+        window.open( "<@spring.url '/pay'/>"+"?orderNo=${queryMemberOrder[0].billNo}&payer="+payer+"&termID=web");
     })
 
     function tipOpen(){
