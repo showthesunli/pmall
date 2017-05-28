@@ -13,7 +13,7 @@
 	<link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/font-awesome.min.css'/>">
 	<title>逸乐用户注册协议-逸乐生活网</title>
 <style>
-.addToSucc{ text-align:center; font-size:12px; color:#666; background:#ffefe5; margin:20px auto; padding:20px 0;}
+.addToSucc{ text-align:center; font-size:12px; color:#666; background:#ffefe5; }
 h2{ font-size:16px; color:#f60;}
 #content{margin-top: 45px;}
 button{border-radius: 5px;line-height: 40px;font-size: 16px;border: none;padding: 0 50px;background: #f60;color: #fff;display:table; margin:auto;margin-top: 30px;}
@@ -26,8 +26,8 @@ a{color: #fff;}
    <a class="navbar-tit center-block">逸乐用户注册协议</a>
 </nav>	
 <div class="usercenter" style="padding-left: 0;">
-  <div id="content">     	            
-		<div class="jf-width1000 jf-overflowH" style="background:#fff; margin:10px 0 0 0;">
+  <!--<div id="content">   -->  	            
+		<!--<div class="jf-width1000 jf-overflowH" style="background:#fff; padding:10px 0 0 0;">-->
             
             <h2>逸乐用户注册协议</h2>
             <p >本协议是您与逸乐生活网站（简称;本站;，网址：www.happypoints.cn）所有者（以下简称为;逸乐;）之间就逸乐网站服务等相关事宜所订立的契约，请您仔细阅读本注册协议，您点击;同意并继续;按钮后，本协议即构成对双方有约束力的法律文件。</p>
@@ -107,9 +107,9 @@ a{color: #fff;}
              <p>12.3本协议内容中以黑体、加粗、下划线、斜体等方式显著标识的条款，请用户着重阅读。</p>
              <p>12.4您点击本协议下方的;同意并继续;按钮即视为您完全接受本协议，在点击之前请您再次确认已知悉并完全理解本协议的全部内容。</p>
              <button><a href='<@spring.url "/register"/>'>确定</a></button>
-        </div>
+        <!--</div>
                         
-    </div> 
+    </div> -->
 </div>
 
 

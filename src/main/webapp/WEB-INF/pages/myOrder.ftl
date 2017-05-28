@@ -1,4 +1,5 @@
 <#import "/spring.ftl" as spring/>
+<#import "/lib/macro/hisuMacro.ftl" as sf />
 <!doctype html>
 <html lang="zh-cn">
 <head>
@@ -63,112 +64,13 @@ td{ overflow:hidden; height:30px;}
                             </tr>
                             </#list>
                         </table>
-                        <div class="page"><a class="a1">22条</a> <a href="#" class="a1">上一页</a> <span>1</span> <a href="#">2</a> <a href="#">3</a> <a href="#" class="a1">下一页</a></div>
+                         <!--<div class="page"><a class="a1">22条</a> <a href="#" class="a1">上一页</a> <span>1</span> <a href="#">2</a> <a href="#">3</a> <a href="#" class="a1">下一页</a></div>-->
+                    <#--分页 当前页，参与分页的总记录数，每页记录数-->
+				    <#if queryMemberOrder_totalRecNum??>
+				        <@sf.pageset currentPage queryMemberOrder_totalRecNum numOfPerPage "myOrder"></@sf.pageset>
+				    </#if>
+				    <!--end 主体-->
                     </div>
-
-                    <!--
-                    <div>
-                        <h2>逸乐积分卡订单</h2>
-                        <table width="100%" border="0" cellpadding="0" cellspacing="0" class="orderTable">
-                            <tr>
-                                <th width="50%">商品名称</th>
-                                <th width="10%">价格</th>
-                                <th width="10%">数量</th>
-                                <th width="10%">合计</th>
-                                <th>操作</th>
-                            </tr>
-                            <tr>
-                                <td><a href="">商品名称商品名称商品名称商品名称商品名称商品名称</a></td>
-                                <td>￥200.00</td>
-                                <td>2</td>
-                                <td style="color:#f60;">￥400</td>
-                                <td class="orderBtn">
-                                    <a href="#" style="margin-left:0;">详情</a>
-                                    <a href="#">支付</a>
-                                    <a href="#">删除</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><a href="">商品名称商品名称商品名称商品名称商品名称商品名称</a></td>
-                                <td>￥200.00</td>
-                                <td>2</td>
-                                <td style="color:#f60;">￥400</td>
-                                <td class="orderBtn">
-                                    <a href="#" style="margin-left:0;">详情</a>
-                                    <a href="#">支付</a>
-                                    <a href="#">删除</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><a href="">商品名称商品名称商品名称商品名称商品名称商品名称</a></td>
-                                <td>￥200.00</td>
-                                <td>2</td>
-                                <td style="color:#f60;">￥400</td>
-                                <td class="orderBtn">
-                                    <a href="#" style="margin-left:0;">详情</a>
-                                    <a href="#">支付</a>
-                                    <a href="#">删除</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><a href="">商品名称商品名称商品名称商品名称商品名称商品名称</a></td>
-                                <td>￥200.00</td>
-                                <td>2</td>
-                                <td style="color:#f60;">￥400</td>
-                                <td class="orderBtn">
-                                    <a href="#" style="margin-left:0;">详情</a>
-                                    <a href="#">支付</a>
-                                    <a href="#">删除</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><a href="">商品名称商品名称商品名称商品名称商品名称商品名称</a></td>
-                                <td>￥200.00</td>
-                                <td>2</td>
-                                <td style="color:#f60;">￥400</td>
-                                <td class="orderBtn">
-                                    <a href="#" style="margin-left:0;">详情</a>
-                                    <a href="#">支付</a>
-                                    <a href="#">删除</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><a href="">商品名称商品名称商品名称商品名称商品名称商品名称</a></td>
-                                <td>￥200.00</td>
-                                <td>2</td>
-                                <td style="color:#f60;">￥400</td>
-                                <td class="orderBtn">
-                                    <a href="#" style="margin-left:0;">详情</a>
-                                    <a href="#">支付</a>
-                                    <a href="#">删除</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><a href="">商品名称商品名称商品名称商品名称商品名称商品名称</a></td>
-                                <td>￥200.00</td>
-                                <td>2</td>
-                                <td style="color:#f60;">￥400</td>
-                                <td class="orderBtn">
-                                    <a href="#" style="margin-left:0;">详情</a>
-                                    <a href="#">支付</a>
-                                    <a href="#">删除</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><a href="">商品名称商品名称商品名称商品名称商品名称商品名称</a></td>
-                                <td>￥200.00</td>
-                                <td>2</td>
-                                <td style="color:#f60;">￥400</td>
-                                <td class="orderBtn">
-                                    <a href="#" style="margin-left:0;">详情</a>
-                                    <a href="#">支付</a>
-                                    <a href="#">删除</a>
-                                </td>
-                            </tr>
-                        </table>
-                        <div class="page"><a class="a1">22条</a> <a href="#" class="a1">上一页</a> <span>1</span> <a href="#">2</a> <a href="/h/khxx/3.html">3</a> <a href="#" class="a1">下一页</a></div>
-                    </div>
-                    -->
                 </div>
 
             </div>

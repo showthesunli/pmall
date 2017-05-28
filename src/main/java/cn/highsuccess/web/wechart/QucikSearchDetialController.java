@@ -25,10 +25,6 @@ public class QucikSearchDetialController extends HisuBaseControllerAdapter {
     private HisuMngDataGroupAndId hisuMngDataGroupAndId;
 
     @Autowired
-    @Qualifier("queryQuickExOrder")
-    private HisuMngDataGroupAndId queryQuickExOrder;
-
-    @Autowired
     protected QucikSearchDetialController(JavaDataSet jds, JavaOperate javaOperate) {
         super(jds, javaOperate);
     }
@@ -39,7 +35,6 @@ public class QucikSearchDetialController extends HisuBaseControllerAdapter {
         Map<String,Object> param = new HashMap<>();
         param.put("billNo",billNo);
         excute(model,param,hisuMngDataGroupAndId);
-        excute(model,param,queryQuickExOrder);
         return "/quickSearchDetial";
     }
 }

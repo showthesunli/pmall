@@ -536,6 +536,7 @@
                      <map>
                             <entry key="jf_wechat_quickExchangePage" >
                                    <list>
+                                          <ref bean="queryQuickExOrderByMobileAndOrderNo"/>
                                           <ref bean="queryQuickOrderDtl"/>
                                    </list>
                             </entry>
@@ -544,6 +545,14 @@
        </bean>
        <bean id="queryQuickOrderDtl" class="cn.highsuccess.config.systemproperties.HisuMngDataIdArgs">
               <constructor-arg index="0" value="queryMemberOrderDtl"/>
+              <constructor-arg index="1">
+                     <list>
+                            <value>billNo</value>
+                     </list>
+              </constructor-arg>
+       </bean>
+       <bean id="queryQuickExOrderByMobileAndOrderNo" class="cn.highsuccess.config.systemproperties.HisuMngDataIdArgs">
+              <constructor-arg index="0" value="queryQuickExOrderByMobile"/>
               <constructor-arg index="1">
                      <list>
                             <value>billNo</value>

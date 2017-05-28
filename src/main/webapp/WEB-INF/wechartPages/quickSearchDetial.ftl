@@ -65,21 +65,18 @@
 			</div>
 			<div style="display: block; overflow: hidden; opacity: 1;">
 				<div class="info_child" style=" color: #333;">
-                   	<p><span class="width70">下单时间：</span><span>222</span></p>
-                   	<p><span class="width70">订单状态：</span><span>333333</span></p>
-                    <p><span class="width70">配送状态：</span><span>4</span></p>
-                   	<p><span class="width70">订单金额：</span><span>￥5</span></p>
-                    <p><span class="width70">收货人：</span><span>6</span></p>
-                    <p><span class="width70">收货地址：</span><span>7</span></p>
+                   	<p><span class="width70">下单时间：</span><span>${queryQuickExOrderByMobile[0].saleDateTime}</span></p>
+                   	<p><span class="width70">订单状态：</span><span>${queryQuickExOrderByMobile[0].orderStatus}</span></p>
+                   	<p><span class="width70">订单金额：</span><span>￥${queryQuickExOrderByMobile[0].totalPrice}</span></p>
                     <p><span class="width70">订单类型：</span><span>商品订单</span></p>
-                    <p><span>订单备注：</span><span>9</span></p>
+                    <p><span>订单备注：</span><span>${queryQuickExOrderByMobile[0].remark}</span></p>
                     
                     <div class="info_child_txt" style="overflow: hidden;">
                     	
                     	<a href="<@spring.url '/singleGood'/>" style=" padding-top: 10px; display: inline-block; width: 100%;">
-                    		<img src="<@spring.url '/wechart/images/8.jpg'/>" onerror="" style="width: 50px; height: 40px; float: left;" />
+                    		<img src="<@spring.url '/imgsrc/'/>${queryMemberOrderDtl[0].iconFileName}" onerror="" style="width: 50px; height: 40px; float: left;" />
                     		<span class="proInforTxt">ewgtwt</span>
-                    		<span class="proInforTxt" style="color: #f60; font-size: 12px;">数量：1<b style="width: 20px; display: inline-block;"></b>金额：￥5</span>
+                    		<span class="proInforTxt" style="color: #f60; font-size: 12px;">数量：${queryMemberOrderDtl[0].prdNum}<b style="width: 20px; display: inline-block;"></b>金额：￥${queryMemberOrderDtl[0].prdUnitPrc}</span>
                     	</a>
 
                     	

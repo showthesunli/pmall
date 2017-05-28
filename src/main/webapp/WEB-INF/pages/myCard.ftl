@@ -1,4 +1,5 @@
 <#import "/spring.ftl" as spring/>
+<#import "/lib/macro/hisuMacro.ftl" as sf />
 <!doctype html>
 <html lang="zh-cn">
 <head>
@@ -72,6 +73,11 @@ td{ overflow:hidden; height:30px;}
                             </#list>
                          </table>
                         <#--<div class="page"><a class="a1">22条</a> <a href="#" class="a1">上一页</a> <span>1</span> <a href="#">2</a> <a href="#">3</a> <a href="#" class="a1">下一页</a></div>-->
+                    	<#--分页 当前页，参与分页的总记录数，每页记录数-->
+				    <#if selectPersonalCard_totalRecNum??>
+				        <@sf.pageset currentPage selectPersonalCard_totalRecNum numOfPerPage "myCard"></@sf.pageset>
+				    </#if>
+				    <!--end 主体-->
                     </div>
 
                 </div>
