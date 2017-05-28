@@ -34,6 +34,7 @@
 .exchangeDivList{ background: #ffefe5; overflow: hidden; height: 0;}
 .exchangeDivList .exchangeDivPoint .pointInt{ display: none;}
 .exchangeDivPoint{ overflow: hidden; padding:10px 10px 0;}
+.banner img{min-height: 150px;max-height: 200px;}
 </style>
 </head>
 
@@ -50,7 +51,7 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 			</div>
 			<div style="display: block; overflow: hidden; opacity: 1;">
 				<div class="info_child" style=" overflow: hidden;">
-					<div class="banner" style="min-height: 150px;">
+					<div class="banner" style="min-height: 150px;max-height: 200px;">
 						<ul>
 							<#if querySingleProuctImageGrp[0]??>
                             <#list querySingleProuctImageGrp as item>
@@ -97,11 +98,11 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 							<#list queryPrdAllSpecByPrdNo as queryPrdAllSpecByPrdNoItem>
                             <#if queryPrdAllSpecByPrdNoItem.prdNo == queryPrdDetail[0].prdNo>
                             	
-							<a href="<@spring.url '/proshow;prdNo=${queryPrdAllSpecByPrdNoItem.prdNo};keyWordsFld=${queryPrdAllSpecByPrdNoItem.prdNo};'/>" class="pModelBO">${queryPrdAllSpecByPrdNoItem.productSpec}</a>
+							<a href="<@spring.url '/proShow;prdNo=${queryPrdAllSpecByPrdNoItem.prdNo};keyWordsFld=${queryPrdAllSpecByPrdNoItem.prdNo};'/>" class="pModelBO">${queryPrdAllSpecByPrdNoItem.productSpec}</a>
 							
 							<#else >
 								
-							<a href="<@spring.url '/proshow;prdNo=${queryPrdAllSpecByPrdNoItem.prdNo};keyWordsFld=${queryPrdAllSpecByPrdNoItem.prdNo};'/>" >${queryPrdAllSpecByPrdNoItem.productSpec}</a>
+							<a href="<@spring.url '/proShow;prdNo=${queryPrdAllSpecByPrdNoItem.prdNo};keyWordsFld=${queryPrdAllSpecByPrdNoItem.prdNo};'/>" >${queryPrdAllSpecByPrdNoItem.productSpec}</a>
 							
 							</#if>
 
