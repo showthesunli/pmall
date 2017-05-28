@@ -25,9 +25,11 @@
                 </#if>
             </#list>
         <#else>
+            <#if (currentPage > 2)>
             ...
             <a href="<@spring.url '/${uri};currentPage=${currentPage-2}'/>">${currentPage-2}</a>
             <a href="<@spring.url '/${uri};currentPage=${currentPage-1}'/>">${currentPage-1}</a>
+            </#if>
             <span>${currentPage}</span>
             <#if currentPage < numofpage-2>
                 <a href="<@spring.url '/${uri};currentPage=${currentPage+1}'/>">${currentPage+1}</a>

@@ -67,9 +67,6 @@
                             </td>
                         </tr>
                         </#list>
-                        <tr>
-                            <td colspan="5" style="text-align:right"><a href="" style="color:#f60; text-decoration:underline;">查看更多 >></a></td>
-                        </tr>
                     </table>
                     <#--分页 当前页，参与分页的总记录数，每页记录数-->
 				    <#if queryMemberOrder_totalRecNum??>
