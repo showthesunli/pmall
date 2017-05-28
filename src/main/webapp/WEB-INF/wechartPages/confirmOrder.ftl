@@ -20,9 +20,9 @@
 <script type="text/javascript" src="<@spring.url '/wechart/js/jquery.validate.min.js'/>" ></script>
 <script language="javascript" src="<@spring.url '/wechart/js/jquery.validate.addMethod.js'/>" ></script>
 <style>
-.modifyBtn,.addBtn,.sureBtn,.cancBtn{ padding: 0 10px; height: 1.75em; background: #fff; color: #3897d7; border: 1px solid #3897d7; border-radius: 5px;}
-.cancBtn{ color:#666; border-color:#666;}
-.addBtn{ color: #f60; border: 1px solid #f60; margin-left: 20px;}
+.modifyBtn,.box_exp .addBtn,.sureBtn,.box_exp .cancBtn{ padding: 0 10px; height: 1.75em; line-height: 1.75em; background: #fff; color: #3897d7; border: 1px solid #3897d7; border-radius: 5px;}
+.box_exp .cancBtn{ color:#666; border-color:#666;}
+.box_exp .addBtn{ color: #f60; border: 1px solid #f60; margin-left: 20px;}
 .info_child{ color: #333;}
 .proInforTxt{width: 70%; margin-left: 10px; height: 20px; line-height: 20px; text-overflow:ellipsis; white-space: nowrap; overflow: hidden; display: inline-block; float: left;}
 .payTypeItem{ padding: 3px; border: 1px solid #eee; display: inline-block; margin:0 10px 10px 0;}

@@ -22,13 +22,13 @@ import java.util.*;
  * Created by showt on 2017/5/14.
  */
 @Controller
-public class searchPrdListController extends HisuBaseControllerAdapter{
+public class SearchPrdListController extends HisuBaseControllerAdapter{
     @Autowired
     @Qualifier("querPrdListByKeyWords")
     private HisuMngDataGroupAndId hisuMngDataGroupAndId;
 
     @Autowired
-    protected searchPrdListController(JavaDataSet jds, JavaOperate javaOperate) {
+    protected SearchPrdListController(JavaDataSet jds, JavaOperate javaOperate) {
         super(jds, javaOperate);
     }
 

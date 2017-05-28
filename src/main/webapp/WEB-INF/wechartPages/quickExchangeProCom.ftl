@@ -18,8 +18,9 @@
 <script type="text/javascript" src="<@spring.url '/wechart/js/util.js'/>"></script>
 <style>
 .info_card{ padding: 0;}
-.info_card i img{ max-width: 100px; max-height: 33px; min-width: 100px; min-height: 33px;}
-.info_card i { margin-left: 10px; top:5px;}
+.info_card i img{ max-width: 100px; max-height: 33px; min-width: 100px; min-height: 33px; float: left;}
+.info_card i { margin-left: 10px; top:8px; overflow: hidden; padding-right: 10px;}
+.info_card span{ line-height: 33px; float: left; margin-left: 10px; color: #333; font-style: normal;}
 </style>
 </head>
 
@@ -34,8 +35,7 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 			<#list queryCompanyByTrade as item>
                 <div class="info_card">
                     <a href="<@spring.url '/quickExchangeProList'/>;companyName=${item.showName}">
-                        <i>
-							<img src="<@spring.url '/imgsrc/'/>${item.iconFileName}" onerror="downloadErrImg(this,'${item.iconFileName}')">
+                        <i><img src="<@spring.url '/imgsrc/'/>${item.iconFileName}" onerror="downloadErrImg(this,'${item.iconFileName}')">
 							<span>${item.companyName}</span>
 						</i>
                     </a>

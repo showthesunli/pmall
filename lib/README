@@ -1,5 +1,5 @@
 #json依赖
-mvn install:install-file -Dfile=E:\work\newworkspace\pmall\src\main\resources\lib\json-20090211.jar -DgroupId=cn.highsuccess -DartifactId=json-20090211 -Dversion=0.0.1 -Dpackaging=jar
+mvn install:install-file -Dfile=E:\work\newworkspace\pmall\lib\json-20090211.jar -DgroupId=cn.highsuccess -DartifactId=json-20090211 -Dversion=0.0.1 -Dpackaging=jar
 
 #dbservice依赖
 mvn install:install-file -Dfile=E:\work\newworkspace\pmall\src\main\resources\lib\hisu-jar-dbservice.jar -DgroupId=cn.highsuccess -DartifactId=hisu-jar-dbservice -Dversion=0.0.1 -Dpackaging=jar

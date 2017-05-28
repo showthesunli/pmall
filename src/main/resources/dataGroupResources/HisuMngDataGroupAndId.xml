@@ -9,15 +9,43 @@
                      <map>
                             <entry key="jf_goodsList" >
                                    <list>
-                                          <ref bean="queryPrdTypeByHeadType"/>
+                                          <ref bean="queryAPCardPrdType"/>
+                                          <ref bean="queryELCardPrdType"/>
+                                          <ref bean="queryGiftCardPrdType"/>
+                                          <ref bean="queryHEPrdType"/>
                                           <ref bean="queryPrdListByPrdType"/>
                                    </list>
                             </entry>
                      </map>
               </constructor-arg>
        </bean>
-       <bean id="queryPrdTypeByHeadType" class="cn.highsuccess.config.systemproperties.HisuMngDataIdArgs">
-              <constructor-arg index="0" value="queryPrdTypeByHeadType"/>
+       <!-- 查询途皓万能卡-->
+       <bean id="queryAPCardPrdType" class="cn.highsuccess.config.systemproperties.HisuMngDataIdArgs">
+              <constructor-arg index="0" value="queryAPCardPrdType"/>
+              <constructor-arg index="1">
+                     <list>
+                     </list>
+              </constructor-arg>
+       </bean>
+       <!-- 查询电子卡分类-->
+       <bean id="queryELCardPrdType" class="cn.highsuccess.config.systemproperties.HisuMngDataIdArgs">
+              <constructor-arg index="0" value="queryELCardPrdType"/>
+              <constructor-arg index="1">
+                     <list>
+                     </list>
+              </constructor-arg>
+       </bean>
+       <!-- 查询礼品卡分类-->
+       <bean id="queryGiftCardPrdType" class="cn.highsuccess.config.systemproperties.HisuMngDataIdArgs">
+              <constructor-arg index="0" value="queryGiftCardPrdType"/>
+              <constructor-arg index="1">
+                     <list>
+                     </list>
+              </constructor-arg>
+       </bean>
+       <!-- 查询高端商品分类-->
+       <bean id="queryHEPrdType" class="cn.highsuccess.config.systemproperties.HisuMngDataIdArgs">
+              <constructor-arg index="0" value="queryHEPrdType"/>
               <constructor-arg index="1">
                      <list>
                      </list>
@@ -28,6 +56,9 @@
               <constructor-arg index="1">
                      <list>
                             <value>mrkPrdCateID</value>
+                            <value>entPrdSrlNo</value>
+                            <value>attrValue</value>
+                            <value>companyName</value>
                             <value>productName</value>
                             <value>currentPage</value>
                             <value>numOfPerPage</value>
@@ -337,6 +368,13 @@
                                    </list>
                             </entry>
                      </map>
+              </constructor-arg>
+       </bean>
+       <bean id="queryPrdTypeByHeadType" class="cn.highsuccess.config.systemproperties.HisuMngDataIdArgs">
+              <constructor-arg index="0" value="queryPrdTypeByHeadType"/>
+              <constructor-arg index="1">
+                     <list>
+                     </list>
               </constructor-arg>
        </bean>
        <bean id="searchPrdListByKeyWords" class="cn.highsuccess.config.systemproperties.HisuMngDataIdArgs">
