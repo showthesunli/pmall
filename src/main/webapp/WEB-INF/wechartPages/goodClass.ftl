@@ -29,30 +29,26 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 	<div id="content">
 		<div class="info_head info_light">
 			<div class="info_card">
-				<a href="<@spring.url '/secondLevelGoodClass'/>">
+				<a href="<@spring.url '/apCardGoodClass'/>">
 				<i><img src="<@spring.url '/wechart/images/8.jpg'/>"></i>
-				<h1>途皓卡</h1>
-				
+				<h1>途皓万能卡</h1>
 				</a>
 			</div>
 			<div class="info_card">
-				<a href="<@spring.url '/secondLevelGoodClass'/>">
+				<a href="<@spring.url '/heClass'/>">
 				<i><img src="<@spring.url '/wechart/images/9.jpg'/>"></i>
 				<h1>高端商品</h1>
-				
 			</div>
 			<div class="info_card">
-				<a href="<@spring.url '/secondLevelGoodClass'/>">
+				<a href="<@spring.url '/elCardClass'/>">
 				<i><img src="<@spring.url '/wechart/images/10.jpg'/>"></i>
 				<h1>电子卡</h1>
-				
 				</a>
 			</div>
 			<div class="info_card">
-				<a href="<@spring.url '/secondLevelGoodClass'/>">
+				<a href="<@spring.url '/giftCardClass'/>">
 				<i><img src="<@spring.url '/wechart/images/11.jpg'/>"></i>
 				<h1>礼品卡</h1>
-				
 				</a>
 			</div>
 		</div>
@@ -60,8 +56,7 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 		<!--常用功能-->
 		<#include "/lib/template/commFunctionsPage.ftl" encoding="UTF-8">
 		<!--end 常用功能-->
-		
-		
+
 		<div style="padding:15px;"></div>
 	</div>
 	

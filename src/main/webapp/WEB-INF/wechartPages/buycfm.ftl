@@ -103,7 +103,7 @@ $(document).ready(function() {
 	$("#pay").click(function(){
         tipOpen();
         var payer = $(".cPayType").text();
-        window.open( "<@spring.url '/pay'/>"+"?orderNo=${queryMemberOrder[0].billNo}&payer="+payer);
+        window.open( "<@spring.url '/pay'/>"+"?orderNo=${queryMemberOrder[0].billNo}&payer="+payer+"&termID=wechat");
    });
    $("#paySuccess").click(function(){
         window.location.href="<@spring.url '/myOrder'/>"

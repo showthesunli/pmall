@@ -31,7 +31,6 @@ public class PayController extends HisuBaseControllerAdapter{
         super(jds, javaOperate);
     }
 
-
     @RequestMapping("/pay")
     public String pay(Model model,
                       @NotNull String termID,

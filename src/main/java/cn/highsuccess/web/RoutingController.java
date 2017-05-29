@@ -100,6 +100,32 @@ public class RoutingController extends HisuBaseControllerAdapter{
         if (((Map<String,String>)model.asMap().get("mobileAuthcode")).get("authCode") != null){
             this.sendSms.sendMcode(mobile, "您本次的验证码为 ："+((Map<String,String>)model.asMap().get("mobileAuthcode")).get("authCode"));
             return ((Map<String,String>)model.asMap().get("mobileAuthcode")).get("authCode");
+        }
+        return  this.getJavaOperate().getResponseData().toString();
+    }
+    
+    
+    @ResponseBody
+    @RequestMapping(value = "/sendForgotPasswordCode",produces = "application/json;charset=UTF-8;")
+    public String sendForgotPasswordCode(Model model,
+                            HttpServletRequest req,
+                            @MatrixVariable Map<String,String> map,
+                            @RequestParam(defaultValue = "30") int effectiveTimeLong,
+                            @RequestParam  String memberID) throws Exception {
+        logger.debug("/sendForgotPasswordCode");
+        logger.debug("memberID :" + memberID);
+//        handleError(model, errors);
+        Map<String,Object> param = new HashMap<>(map);
+        param.put("memberID",memberID);
+        param.put("effectiveTimeLong",effectiveTimeLong);
+        ApplicationContext ac = WebApplicationContextUtils.getWebApplicationContext(req.getServletContext());
+        HisuMngDataGroupAndId hisuMngDataGroupAndId = (HisuMngDataGroupAndId) ac.getBean("sendForgotPasswordCode");
+//        excute(model, param, hisuMngDataGroupAndId);
+        excuteOperate(model, param, hisuMngDataGroupAndId);
+
+        if (((Map<String,String>)model.asMap().get("mobileAuthcode")).get("authCode") != null){
+            //this.sendSms.sendMcode(mobile, "您本次的验证码为 ："+((Map<String,String>)model.asMap().get("mobileAuthcode")).get("authCode"));
+            return ((Map<String,String>)model.asMap().get("mobileAuthcode")).get("authCode");
 
         }
         return  this.getJavaOperate().getResponseData().toString();

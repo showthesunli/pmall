@@ -31,12 +31,12 @@ input{ outline:none;}
 		<a href="javascript:history.go(-1);"><img src="<@spring.url '/wechart/images/bg_info8.jpg'/>"></a>
 	</div>
 	<div id="content">
-		<form id="signupForm" method="post" action="<@spring.url '/quickSearchOrder'/>">
+		<form id="signupForm" method="get" action="<@spring.url '/quickSearchOrder'/>">
 		<p style="border: 1px solid #ccc;">
 			<input type="text" value="" id="mobile" name="mobile" class="cardInputTxt cardPswTxt" placeholder="请输入手机号码" style=" width: 100%; line-height: 40px; height: 40px; text-indent: 10px; border: none;" />
 		</p>
 		<div style="margin:8px 0;">
-			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+			<#--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
 			<input type="submit" value="查 询" class="button button-caution button-large" style=" width: 100%;" />
 		</div>
 		</form>

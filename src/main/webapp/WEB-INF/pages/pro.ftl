@@ -17,14 +17,17 @@
     <script type="text/javascript" src="<@spring.url '/js/banner.js'/>"></script>
     <script type="text/javascript" src="<@spring.url '/js/menu.js'/>"></script>
     <style>
+    	.jf-classifyItem{ margin-bottom: 10px;}
         .jf-classifyItem .lineH87 {
-            line-height: 87px;
+            line-height:25px;
         }
 
         .classifyItemImg {
             line-height: 25px;
             width: 102px;
         }
+        .jf-classifyItemList span{ display: inline-block;}
+        .classifyItemImg img{ border:1px solid #ccc;}
     </style>
 </head>
 <body>
@@ -51,7 +54,7 @@
                             <li style=" text-align: left">
                             <#list queryAPCardPrdType as item>
                                 <a href="<@spring.url '/pro;mrkPrdCateID=${item.mrkPrdCateID};entPrdSrlNo=${item.entPrdSrlNo};'/>"
-                                   index="0" class="classifyItemImg">
+                                   index="0" class="classifyItemImg" style="width: 170px;">
                                     <img src="<@spring.url '/imgsrc/'/>${item.iconFileName}" onerror="downloadErrImg(this,'${item.iconFileName}')" width="100" height="60"/>
                                     <span>${item.entPrdSrlNo}</span>
                                 </a>
