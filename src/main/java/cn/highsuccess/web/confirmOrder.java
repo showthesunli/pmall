@@ -159,11 +159,14 @@ public class confirmOrder extends HisuBaseControllerAdapter{
 
         String status="";
         String errorMsg="";
-        switch (orderStatus){
-            case "等待支付": status="1";break;
-            case "提交失败": status="2";errorMsg=jo.optString("remark");break;
-            case "已提交": status="0";break;
-            default: status="3";
+        if (orderStatus.equals("等待支付")){
+            status = "1";
+        }else if (orderStatus.equals("提交失败")){
+            status = "2";
+        }else if (orderStatus.equals("已提交")){
+            status = "0";
+        }else {
+            status = "3";
         }
         return "status=" + status + "*-*" + errorMsg;
     }

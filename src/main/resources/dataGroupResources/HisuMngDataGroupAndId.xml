@@ -55,6 +55,7 @@
               <constructor-arg index="0" value="queryPrdListByPrdType"/>
               <constructor-arg index="1">
                      <list>
+                            <value>REALEDATAGROUPID</value>
                             <value>mrkPrdCateID</value>
                             <value>entPrdSrlNo</value>
                             <value>attrValue</value>
@@ -72,6 +73,8 @@
                      <map>
                             <entry key="jf_goodsDetail" >
                                    <list>
+                                          <ref bean="queryPrdDetail"/>
+                                          <ref bean="queryPrdAllSpecByPrdNo"/>
                                           <ref bean="querySingleProuctImageGrp"/>
                                    </list>
                             </entry>

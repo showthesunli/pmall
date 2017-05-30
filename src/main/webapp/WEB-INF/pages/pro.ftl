@@ -28,6 +28,7 @@
         }
         .jf-classifyItemList span{ display: inline-block;}
         .classifyItemImg img{ border:1px solid #ccc;}
+        .jf-productName{ width: 260px;}
     </style>
 </head>
 <body>
@@ -53,7 +54,7 @@
                         <ul class="jf-classifyItemList">
                             <li style=" text-align: left">
                             <#list queryAPCardPrdType as item>
-                                <a href="<@spring.url '/pro;mrkPrdCateID=${item.mrkPrdCateID};entPrdSrlNo=${item.entPrdSrlNo};'/>"
+                                <a href="<@spring.url '/pro;realDataGroupId=queryPrdList_apCardGoodClass;mrkPrdCateID=${item.mrkPrdCateID};entPrdSrlNo=${item.entPrdSrlNo};'/>"
                                    index="0" class="classifyItemImg" style="width: 170px;">
                                     <img src="<@spring.url '/imgsrc/'/>${item.iconFileName}" onerror="downloadErrImg(this,'${item.iconFileName}')" width="100" height="60"/>
                                     <span>${item.entPrdSrlNo}</span>
@@ -68,7 +69,7 @@
                         <ul class="jf-classifyItemList">
                             <li style=" text-align: left">
                             <#list queryELCardPrdType as item>
-                                <a href="<@spring.url '/pro;mrkPrdCateID=${item.mrkPrdCateID};attrValue=${item.attrValue};'/>"
+                                <a href="<@spring.url '/pro;realDataGroupId=queryPrdList_elCardClass;mrkPrdCateID=${item.mrkPrdCateID};attrValue=${item.attrValue};'/>"
                                    index="0" class="classifyItemImg">
                                     <img src="<@spring.url '/imgsrc/'/>${item.iconFileName}" onerror="downloadErrImg(this,'${item.iconFileName}')" width="100" height="60"/>
                                     <span>${item.attrValue}</span>
@@ -83,7 +84,7 @@
                         <ul class="jf-classifyItemList">
                             <li style=" text-align: left">
                             <#list queryGiftCardPrdType as item>
-                                <a href="<@spring.url '/pro;mrkPrdCateID=${item.mrkPrdCateID};companyName=${item.companyName};'/>"
+                                <a href="<@spring.url '/pro;realDataGroupId=queryPrdList_giftCardClass;mrkPrdCateID=${item.mrkPrdCateID};companyName=${item.companyName};'/>"
                                    index="0" class="classifyItemImg">
                                     <#--<img src="<@spring.url '/imgsrc/'/>${item.iconFileName}" width="100" height="60"/>-->
                                     <span>${item.companyName}</span>
@@ -98,7 +99,7 @@
                         <ul class="jf-classifyItemList">
                             <li style=" text-align: left">
                             <#list queryHEPrdType as item>
-                                <a href="<@spring.url '/pro;mrkPrdCateID=${item.mrkPrdCateID};productName=${item.productName};'/>"
+                                <a href="<@spring.url '/pro;realDataGroupId=queryPrdList_heClass;mrkPrdCateID=${item.mrkPrdCateID};productName=${item.productName};'/>"
                                    index="0" class="classifyItemImg">
                                     <#--<img src="<@spring.url '/imgsrc/'/>${item.iconFileName}" width="100" height="60"/>-->
                                     <span>${item.productName}</span>

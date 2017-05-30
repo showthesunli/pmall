@@ -28,7 +28,7 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 		<div class="round">
 			<ul>
 				<#list queryELCardPrdType as item>
-                    <li><a href="<@spring.url '/goodList'/>"><span>${item.attrValue}</span></a></li>
+                    <li><a href="<@spring.url '/goodList'/>;realDataGroupId=queryPrdList_elCardClass;mrkPrdCateID=${item.mrkPrdCateID};attrValue=${item.attrValue}"><span>${item.attrValue}</span></a></li>
 				</#list>
 			</ul>
 		</div>

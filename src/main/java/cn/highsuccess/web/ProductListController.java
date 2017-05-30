@@ -39,10 +39,14 @@ public class ProductListController extends HisuBaseControllerAdapter {
                                   @MatrixVariable(required = false) String productName,
                                   @MatrixVariable(required = false) String mrkPrdCateID,
                                   @MatrixVariable(required = false) String attrValue,
-                                  @MatrixVariable(required = false) String entPrdSrlNo) throws JSONException {
+                                  @MatrixVariable(required = false) String entPrdSrlNo,
+                                  @MatrixVariable(required = false) String realDataGroupId) throws JSONException {
         Map<String, Object> param = new HashMap<>();
         param.put("currentPage", currentPage);
         param.put("numOfPerPage", numOfPerPage);
+        if (realDataGroupId != null){
+            param.put("REALEDATAGROUPID",realDataGroupId);
+        }
         if (companyName != null){
             param.put("companyName",companyName);
         }

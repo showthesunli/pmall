@@ -26,28 +26,15 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 	<div id="content">
 		
 		<div class="info_head info_light">
-			<div class="info_card">
-				<a href="<@spring.url '/proshow;prdNo=0389-20160628104254-00013864-0081;keyWordsFld=0389-20160628104254-00013864-0081;'/>">
-				<i><img src="<@spring.url '/wechart/images/8.jpg'/>"></i>
-				<h1>诺基亚 Lumia 520 超低价格，不要错过哦！wp8超值入门</h1>
-				<span class="titles">￥299.00</span>
-				</a>
-			</div>
-			<div class="info_card">
-				<a href="<@spring.url '/proshow;prdNo=0389-20160627174202-00018526-0167;keyWordsFld=0389-20160627174202-00018526-0167;'/>">
-				<i><img src="<@spring.url '/wechart/images/9.jpg'/>"></i>
-				<h1>卓普小姿C35英寸全高清屏幕，441 PPI,四核处理器</h1>
-				<span class="titles">￥1299.00</span>
-				</a>
-			</div>
-			<div class="info_card">
-				<a href="<@spring.url '/proshow;prdNo=0389-20160627174151-00018518-0158;keyWordsFld=0389-20160627174151-00018518-0158;'/>">
-				<i><img src="<@spring.url '/wechart/images/10.jpg'/>"></i>
-				<h1>三星 I9158 3G手机5.8英寸屏，1.7GHz处理器！</h1>
-				<span class="titles">￥5699.00</span>
-				</a>
-			</div>
-
+			<#list queryPrdListByPrdType as item>
+                <div class="info_card">
+                    <a href="<@spring.url '/proshow'/>;prdNo=${item.prdNo};keyWordsFld=${item.prdNo};">
+                        <i><img src="<@spring.url '/imgsrc/'/>${item.iconFileName}"></i>
+                        <h1>${item.productInfo}</h1>
+                        <span class="titles">￥${item.prdPrice}</span>
+                    </a>
+                </div>
+			</#list>
 		</div>
 	
 	

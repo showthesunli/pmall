@@ -28,7 +28,7 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 		<div class="round">
 			<ul>
 				<#list queryGiftCardPrdType as item>
-                    <li><a href="<@spring.url '/goodList'/>"><span>${item.companyName}</span></a></li>
+                    <li><a href="<@spring.url '/goodList'/>;realDataGroupId=queryPrdList_giftCardClass;mrkPrdCateID=${item.mrkPrdCateID};companyName=${item.companyName}"><span>${item.companyName}</span></a></li>
 				</#list>
 			</ul>
 		</div>

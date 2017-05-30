@@ -64,6 +64,9 @@ public abstract class HisuBaseControllerAdapter {
                 for (int i=0;i<list.size();i++){
                     StringBuffer condition = new StringBuffer();
                     for (int l=0;l<list.get(i).getArgs().size();l++){
+                        if (map.get(list.get(i).getArgs().get(l)) == null) {
+                            continue;
+                        }
                         //组装条件
                         condition.append(list.get(i).getArgs().get(l));
                         condition.append("=");

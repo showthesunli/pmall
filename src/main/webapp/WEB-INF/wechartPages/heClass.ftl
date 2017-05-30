@@ -28,7 +28,7 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 		<div class="round">
 			<ul>
 				<#list queryHEPrdType as item>
-                    <li><a href="<@spring.url '/goodList'/>"><span>${item.productName}</span></a></li>
+                    <li><a href="<@spring.url '/goodList'/>;realDataGroupId=queryPrdList_heClass;mrkPrdCateID=${item.mrkPrdCateID};productName=${item.productName}"><span>${item.productName}</span></a></li>
 				</#list>
 			</ul>
 		</div>

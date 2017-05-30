@@ -15,6 +15,7 @@
 <script type="text/javascript" src="<@spring.url '/wechart/js/jquery-1.10.2.min.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/wechart/js/jquery.accordion.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/wechart/js/unslider.min.js'/>"></script>
+<script type="text/javascript" src="<@spring.url '/wechart/js/util.js'/>"></script>
 <style>
 .info_head{ line-height: 48px;}
 </style>
@@ -31,7 +32,7 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 			<#list queryTradesForShoppingCard as item>
                 <div class="info_card">
                     <a href="<@spring.url '/quickExchangeProCom'/>;refBusiName=${item.refBusiName}">
-                        <i><img src="<@spring.url '/wechart/images/8.jpg'/>"></i>
+                        <i><img src="<@spring.url '/imgsrc/'/>${item.iconFileName}" onerror="downloadErrImg(this,'${item.iconFileName}')";)"></i>
                         <h1>${item.showName}</h1>
                     </a>
                 </div>

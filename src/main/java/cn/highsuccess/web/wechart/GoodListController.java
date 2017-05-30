@@ -31,7 +31,7 @@ public class GoodListController extends HisuBaseControllerAdapter {
         super(jds, javaOperate);
     }
 
-    @RequestMapping(value = "/goodList" ,method = RequestMethod.GET)
+    @RequestMapping(value = "/goodList{matrix}" ,method = RequestMethod.GET)
     public String showGoodList(Model model,
                                @MatrixVariable(required = false, defaultValue = "1") int currentPage,
                                @MatrixVariable(required = false, defaultValue = "12") int numOfPerPage,
@@ -39,10 +39,12 @@ public class GoodListController extends HisuBaseControllerAdapter {
                                @MatrixVariable(required = false) String productName,
                                @MatrixVariable(required = false) String mrkPrdCateID,
                                @MatrixVariable(required = false) String attrValue,
-                               @MatrixVariable(required = false) String entPrdSrlNo) throws JSONException {
+                               @MatrixVariable(required = false) String entPrdSrlNo,
+                               @MatrixVariable(required = true) String realDataGroupId) throws JSONException {
         Map<String, Object> param = new HashMap<>();
         param.put("currentPage", currentPage);
         param.put("numOfPerPage", numOfPerPage);
+        param.put("REALEDATAGROUPID", realDataGroupId);
         if (companyName != null) {
             param.put("companyName", companyName);
         }
