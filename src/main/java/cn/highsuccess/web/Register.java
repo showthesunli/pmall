@@ -4,6 +4,7 @@ import cn.highsuccess.data.JavaDataSet;
 import cn.highsuccess.data.JavaOperate;
 import cn.highsuccess.module.User;
 import cn.highsuccess.service.util.HisuOperatePasswd;
+import cn.highsuccess.web.exception.HisuRegisterException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,14 +38,15 @@ public class Register extends HisuBaseControllerAdapter{
         logger.debug("phone :" + phone);
         if (errors.hasErrors()){
             handleError(model,errors);
-            return "/register";
+            throw new HisuRegisterException("注册域非法！");
         }
         user.setPassword(HisuOperatePasswd.hisuEncPasswd(user.getPassword()));
         this.getJavaOperate().service("w_mainPage","mobileRegister","memberID="+user.getId()+"|mobile=" + phone + "|openCptAcc=1|useMobileRegister=1|securityCode=" + mCode + "|passwordCiper=" + user.getPassword());
         if (this.getJavaOperate().getResult()){
             return "/login";
         }else {
-            return "/register";
+            System.out.println(this.getJavaOperate().getErrMessage());
+            throw new HisuRegisterException(this.getJavaOperate().getErrMessage());
         }
     }
 }

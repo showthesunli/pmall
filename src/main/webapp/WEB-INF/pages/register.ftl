@@ -42,9 +42,12 @@
         <div class="jf-width1200">
             <form id="signupForm" class="registerForm" method="post" action="<@spring.url '/register'/>">
                 <p>
+                    <label class="error"><@sf.error field="msg"/></label>
+                </p>
+                <p>
                     <label class="txtLabel" for="id">用<span style="width:6px; display:inline-block"></span>户<span style="width:6px; display:inline-block"></span>名</label>
                     <input id="id" name="id" type="text" class="registerTxt" maxlength="20" placeholder="您的账户名和登录名"  />
-                    <@sf.error field="id"></@sf.error>
+                    <@sf.error field="id"/>
                 </p>
 
                 <p>

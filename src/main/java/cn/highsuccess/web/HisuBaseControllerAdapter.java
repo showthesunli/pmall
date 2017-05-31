@@ -103,7 +103,7 @@ public abstract class HisuBaseControllerAdapter {
                         condition.append(map.get(list.get(i).getArgs().get(l)));
                         condition.append("|");
                     }
-                    condition.deleteCharAt(condition.length()-1);
+                    condition.deleteCharAt(condition.length() - 1);
                     this.getJavaOperate().service(groupId, list.get(i).getId(), condition.toString());
                     model.addAttribute(list.get(i).getId(), JSON.parseObject(this.getJavaOperate().getResponseData().toString()));
                 }
@@ -134,5 +134,6 @@ public abstract class HisuBaseControllerAdapter {
         //5,Cookie写会浏览器
         rsp.addCookie(cookie);
     }
+
 
 }

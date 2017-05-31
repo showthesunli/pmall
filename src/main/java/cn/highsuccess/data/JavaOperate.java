@@ -57,10 +57,13 @@ public class JavaOperate extends BaseConnect{
      * @return
      */
     public String getErrMessage() {
-        if (this.returnCode >= 0) return "";
+        if (this.returnCode >= 0){
+            return "";
+        }
         try {
             return JSONResult.getString("错误原因");
         } catch (JSONException e) {
+            e.printStackTrace();
         }
         return "";
     }

@@ -2,13 +2,18 @@ package cn.highsuccess.web.advice;
 
 import cn.highsuccess.web.exception.HisuOperateException;
 import cn.highsuccess.web.exception.HisuPathNotFoundException;
+import cn.highsuccess.web.exception.HisuRegisterException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by showt on 2017/4/19.
@@ -34,6 +39,21 @@ public class HisuControllerExceptionAdvice {
 
 
         return "/";
+    }
+
+    @ExceptionHandler(HisuRegisterException.class)
+    public ModelAndView handleReisterException(HttpServletRequest req,HisuRegisterException ex){
+        logger.error("request:"+req.getRequestURI() + " exception:"+ex);
+        ModelAndView mv = new ModelAndView();
+        handleException(mv,ex.getMessage());
+        mv.setViewName("/register");
+        return mv;
+    }
+
+    protected void handleException(ModelAndView mv,String exceptionMsg){
+        Map<String,String> map = new HashMap<>();
+        map.put("msg",exceptionMsg);
+        mv.addObject("errorMsg", map);
     }
 
 }

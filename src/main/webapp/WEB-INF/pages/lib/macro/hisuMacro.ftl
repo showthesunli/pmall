@@ -1,7 +1,10 @@
+<#--域错误信息宏-->
 <#macro error field>
     <#if errorMsg??>
         <#assign fieldPath="errorMsg."+field>
-        ${fieldPath?eval}
+        <#if fieldPath?eval??>
+            ${fieldPath?eval}
+        </#if>
     </#if>
 </#macro>
 

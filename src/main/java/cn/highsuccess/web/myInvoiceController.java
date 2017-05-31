@@ -20,7 +20,7 @@ import java.util.Map;
 /**
  * Created by prototype on 2017/5/19.
  */
-@Controller
+//@Controller
 public class myInvoiceController extends HisuBaseControllerAdapter{
 
     @Autowired
