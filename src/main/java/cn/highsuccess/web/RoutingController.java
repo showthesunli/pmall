@@ -97,10 +97,6 @@ public class RoutingController extends HisuBaseControllerAdapter{
 //        excute(model, param, hisuMngDataGroupAndId);
         excuteOperate(model, param, hisuMngDataGroupAndId);
 
-        if (((Map<String,String>)model.asMap().get("mobileAuthcode")).get("authCode") != null){
-            this.sendSms.sendMcode(mobile, "您本次的验证码为 ："+((Map<String,String>)model.asMap().get("mobileAuthcode")).get("authCode"));
-            return ((Map<String,String>)model.asMap().get("mobileAuthcode")).get("authCode");
-        }
         return  this.getJavaOperate().getResponseData().toString();
     }
     
@@ -126,7 +122,6 @@ public class RoutingController extends HisuBaseControllerAdapter{
         if (((Map<String,String>)model.asMap().get("mobileAuthcode")).get("authCode") != null){
             //this.sendSms.sendMcode(mobile, "您本次的验证码为 ："+((Map<String,String>)model.asMap().get("mobileAuthcode")).get("authCode"));
             return ((Map<String,String>)model.asMap().get("mobileAuthcode")).get("authCode");
-
         }
         return  this.getJavaOperate().getResponseData().toString();
     }

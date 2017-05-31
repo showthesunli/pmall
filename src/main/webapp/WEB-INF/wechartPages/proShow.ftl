@@ -14,11 +14,13 @@
 <title>微商城商品详情-逸乐生活网</title>
 <link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/style.css'/>">
 <link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/buttons.css'/>">
+<link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/edslider.css'/>">
 <link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/font-awesome.min.css'/>">
 <script type="text/javascript" src="<@spring.url '/wechart/js/jquery-1.10.2.min.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/wechart/js/jquery.accordion.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/wechart/js/unslider.min.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/wechart/js/util.js'/>"></script>
+<script type="text/javascript" src="<@spring.url '/wechart/js/jquery.edslider.js'/>"></script>
 <style>
 .dots,.arrows{ display: none;}
 .prodMin,.prodAdd{cursor: pointer; background: #f6f6f6; line-height: 26px; padding: 0 5px; display: inline-block; border: 1px solid #ccc; float: left;}
@@ -35,6 +37,7 @@
 .exchangeDivList .exchangeDivPoint .pointInt{ display: none;}
 .exchangeDivPoint{ overflow: hidden; padding:10px 10px 0;}
 .banner img{min-height: 150px;max-height: 150px;}
+.container img{min-height: 150px;max-height: 150px;}
 </style>
 </head>
 
@@ -51,7 +54,7 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 			</div>
 			<div style="display: block; overflow: hidden; opacity: 1;">
 				<div class="info_child" style=" overflow: hidden;">
-					<div class="banner" style="min-height: 150px;max-height: 200px;">
+					<!--<div class="banner" style="min-height: 150px;max-height: 200px;">
 						<ul>
 							<#if querySingleProuctImageGrp[0]??>
                             <#list querySingleProuctImageGrp as item>
@@ -66,7 +69,24 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 							</#if>
 
 						</ul>
+					</div>-->
+					
+					<div class="container" style="min-height: 150px;max-height: 200px;">
+						<ul class="mySlideshow">
+							<#if querySingleProuctImageGrp[0]??>
+                            <#list querySingleProuctImageGrp as item>
+                            	
+							<li><img src="<@spring.url '/imgsrc/${item.fileName}'/>" onerror="downloadErrImg(this,'${item.fileName}')";)" /></li>
+							
+							</#list>
+							<#else >
+								
+							<li><img src="<@spring.url '/wechart/images/default.gif'/>" /></li>
+								
+							</#if>
+						</ul>
 					</div>
+
 					<p style="color: #333;">${queryPrdDetail[0].productInfo}</p>
 					<p class="borderTop">
 						<span>积分来源：</span>
@@ -153,13 +173,22 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 </div>
 
 <script>
+	$(document).ready(function(){
+			//Call plugin
+			$('.mySlideshow').edslider({
+				width : '400%',
+				height: 159
+			});
+		});
+
 $(document).ready(function() {
 	$('.banner').unslider({
-		arrows: true,
-		fluid: true,
-		dots: true
+		arrows: true,   //是否显示左右箭头，用于slider切换
+		fluid: true,    //是否每次在容器大小改变的时候修正slider的大小
+		dots: true      //是否显示白色圆，用于slider切换
 	});
 	
+
 	$("#content").accordion({
 		alwaysOpen: false,
 		autoheight: false,

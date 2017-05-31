@@ -7,8 +7,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 <meta name="format-detection" content="telephone=no" />
-<meta name="keywords" content="微信,微信公众平台" />
-<meta name="description" content="微信公众平台自助引擎" />
+<meta name="description" content="途皓（北京）商务服务有限公司" />
+<meta name="keywords" content="途皓（北京）商务服务有限公司" />
 <title>快捷兑换</title>
 <link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/style.css'/>">
 <link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/font-awesome.min.css'/>">
@@ -16,6 +16,10 @@
 <script type="text/javascript" src="<@spring.url '/wechart/js/jquery.accordion.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/wechart/js/unslider.min.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/wechart/js/util.js'/>"></script>
+<style>
+.info_card i img{ min-width:100px; max-width:100px;}
+.info_card{ padding-left: 100px;}
+</style>
 </head>
 
 <body ondragstart="return false;" onselectstart="return false;" oncontextmenu="return false" onselectstart="return false" 
@@ -29,12 +33,12 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 		<div class="info_head info_light">
 			<#if queryShoppingCardByCompanyName[0]??>
 			<#list queryShoppingCardByCompanyName as item>
-                <div class="info_card">
+                <div class="info_card" style="position: relative;">
                     <a href="<@spring.url '/quickExchangeTHCard'/>;prdNo=${item.prdNo}">
                         <i><img src="<@spring.url '/imgsrc/'/>${item.iconFileName}" onerror="downloadErrImg(this,'${item.iconFileName}')" ></i>
                         <h1>${item.productName}</h1>
                         <span class="titles">￥${item.prdPrice}</span>
-                    </a>
+                   </a>
                 </div>
 			</#list>
 			

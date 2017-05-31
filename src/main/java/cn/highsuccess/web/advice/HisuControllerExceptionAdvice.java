@@ -29,4 +29,11 @@ public class HisuControllerExceptionAdvice {
         return null;
     }
 
+    @ExceptionHandler(freemarker.core.InvalidReferenceException.class)
+    public String freemarkerExcepiton(){
+
+
+        return "/";
+    }
+
 }

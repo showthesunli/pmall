@@ -55,7 +55,7 @@
 </nav>
 
 
-<div class="usercenter" style="margin-bottom: 50px;">
+<div class="usercenter" style="padding-bottom: 50px;">
   <div class="cdv">
     <a href="<@spring.url '/myAddressOperation'/>"><span>新增收货地址</span></a>
   </div>

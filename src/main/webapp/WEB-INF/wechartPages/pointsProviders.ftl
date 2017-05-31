@@ -38,7 +38,7 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 					<ul>
 						<li style="width:50%">
 							<div>
-								<a href="<@spring.url "/login"/>">
+								<a href="<@spring.url "/member"/>">
 									<i><img src="<@spring.url '/images/merchant/mTH.jpg'/>" /></i>
 									<span>途皓卡</span>
 								</a>
