@@ -2,15 +2,12 @@
 <!DOCTYPE html>
 <!-- saved from url=(0054)http://www.sucaihuo.com/modals/20/2070/demo/dizhi.html -->
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	
 	<meta name="keywords" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/font_1459473269_4751618.css'/>">
 	<link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/bootstrap.min.css'/>">
 	<link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/pstyle.css'/>">
 	<link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/style.css'/>">
-	<link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/buttons.css'/>">
-	<link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/font-awesome.min.css'/>">
+
 	<title>逸乐用户注册协议-逸乐生活网</title>
 <style>
 .addToSucc{ text-align:center; font-size:12px; color:#666; background:#ffefe5; }
@@ -23,12 +20,9 @@ a{color: #fff;}
 <body class="huibg">
    <nav class="navbar text-center">
   
-   <a class="navbar-tit center-block">逸乐用户注册协议</a>
+   <a class="navbar-tit center-block" style="font-weight:bold ;">逸乐用户注册协议</a>
 </nav>	
-<div class="usercenter" style="padding-left: 0;">
-  <!--<div id="content">   -->  	            
-		<!--<div class="jf-width1000 jf-overflowH" style="background:#fff; padding:10px 0 0 0;">-->
-            
+<div class="usercenter" style="padding: 0 10px;">
             <h2>逸乐用户注册协议</h2>
             <p >本协议是您与逸乐生活网站（简称;本站;，网址：www.happypoints.cn）所有者（以下简称为;逸乐;）之间就逸乐网站服务等相关事宜所订立的契约，请您仔细阅读本注册协议，您点击;同意并继续;按钮后，本协议即构成对双方有约束力的法律文件。</p>
             <br />
@@ -96,7 +90,7 @@ a{color: #fff;}
              <p style="font-weight: bold;">如因不可抗力或其它本站无法控制的原因使本站销售系统崩溃或无法正常使用导致网上交易无法完成或丢失有关的信息、记录等，逸乐会合理地尽力协助处理善后事宜。</p>
              <br />
              <h2>第10条 协议更新及用户关注义务</h2>
-             <p>根据国家法律法规变化及网站运营需要，逸乐有权对本协议条款不时地进行修改，修改后的协议一旦被张贴在本站上即生效，并代替原来的协议。用户可随时登录查阅最新协议；用户有义务不时关注并阅读最新版的协议及网站公告。如用户不同意更新后的协议，可以且应立即停止接受逸乐网站依据本协议提供的服务；如用户继续使用本网站提供的服务的，即视为同意更新后的协议。逸乐建议您在使用本站之前阅读本协议及本站的公告。如果本协议中任何一条被视为废止、无效或因任何理由不可执行，该条应视为可分的且并不影响任何其余条款的有效性和可执行性。</p>
+             <p>根据国家法律法规变化及网站运营需要，逸乐有权对本协议条款不时地进行修改，修改后的协议一旦被张贴在本站上即生效，并代替原来的协议。用户可随时登录查阅最新协议；<strong>用户有义务不时关注并阅读最新版的协议及网站公告。如用户不同意更新后的协议，可以且应立即停止接受逸乐网站依据本协议提供的服务；如用户继续使用本网站提供的服务的，即视为同意更新后的协议。逸乐建议您在使用本站之前阅读本协议及本站的公告。</strong>如果本协议中任何一条被视为废止、无效或因任何理由不可执行，该条应视为可分的且并不影响任何其余条款的有效性和可执行性。</p>
              <br />
              <h2>第11条 法律管辖和适用</h2>
              <p>本协议的订立、执行和解释及争议的解决均应适用在中华人民共和国大陆地区适用之有效法律（但不包括其冲突法规则）。 如发生本协议与适用之法律相抵触时，则这些条款将完全按法律规定重新解释，而其它有效条款继续有效。 如缔约方就本协议内容或其执行发生任何争议，双方应尽力友好协商解决；协商不成时，任何一方均可向有管辖权的中华人民共和国大陆地区法院提起诉讼。</p>
@@ -107,9 +101,7 @@ a{color: #fff;}
              <p>12.3本协议内容中以黑体、加粗、下划线、斜体等方式显著标识的条款，请用户着重阅读。</p>
              <p>12.4您点击本协议下方的;同意并继续;按钮即视为您完全接受本协议，在点击之前请您再次确认已知悉并完全理解本协议的全部内容。</p>
              <button><a href='<@spring.url "/register"/>'>确定</a></button>
-        <!--</div>
-                        
-    </div> -->
+ 
 </div>
 
 

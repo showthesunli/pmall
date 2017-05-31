@@ -42,7 +42,7 @@ input.error{ border-color: #f00;}
         <td class="text_1"><input type="submit" value="登 录" class="lg_btn" style="color:#fff;"/></td>
       </tr>
       <tr class="text">
-      	<td class="tx" style="margin-left: 7.5%; width: 40%;"><input type="button" value="忘了密码？" onclick="window.location.href='gaimima.html'" class="lg_btn" style="color:#fff; width: 100%;" /></td>
+      	<td class="tx" style="margin-left: 7.5%; width: 40%;"><input type="button" value="忘了密码？" onclick="window.location.href='<@spring.url "/forgotPassword"/>'" class="lg_btn" style="color:#fff; width: 100%;" /></td>
         <td class="tc" style="margin-right: 7.5%; width: 40%;"><input type="button" value="新用户注册" onclick="window.location.href='<@spring.url "/register"/>'" class="lg_btn" style="color:#fff; width: 100%;"  /></td>
       </tr>
     </table>

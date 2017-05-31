@@ -99,9 +99,6 @@ $(window).resize(function() {
 	
 	var width = $(".info_integral").width()-$(".title2").width();
 	$(".title").width(width);
-	console.log($(".info_integral").width());
-	console.log($(".title2").width());
-	console.log(width);
 	});
 </script>
 </body>

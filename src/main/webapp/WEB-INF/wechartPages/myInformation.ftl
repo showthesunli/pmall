@@ -13,11 +13,13 @@
 	<link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/pstyle.css'/>">
 	<link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/style.css'/>">
 	<link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/buttons.css'/>">
+	<link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/LCalendar.css'/>">
 	<link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/font-awesome.min.css'/>">
 	<script type="text/javascript" src="<@spring.url '/wechart/js/jquery-1.10.2.min.js'/>"></script>
 	<script type="text/javascript" src="<@spring.url '/wechart/js/bootstrap.min.js'/>"></script>
+	<script type="text/javascript" src="<@spring.url '/wechart/js/LCalendar.js'/>"></script>
 	<script language="javascript" src="<@spring.url '/js/jquery.validate.min.js'/>" ></script>
-<script language="javascript" src="<@spring.url '/js/jquery.validate.addMethod.js'/>" ></script>
+	<script language="javascript" src="<@spring.url '/js/jquery.validate.addMethod.js'/>" ></script>
 <!--必要样式-->
 <link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/menu_elastic.css'/>">
 <script type="text/javascript" src="<@spring.url '/wechart/js/snap.svg-min.js'/>"></script>
@@ -87,7 +89,7 @@ a#radio {display: none;}
         </p>
         </div>
 	    <p><span class="width70" id="data">生日：</span><span id="mobile" name="mobile">${memberInfo[0].birthday}</span>
-	    	<input type="text" name="" id="birth" value=""  style="display: none;"/>
+	    	<input type="text" name="" id="birth" readonly="readonly"   style="display: none;"/>
 	    </p>
 		<input type="hidden" id="${_csrf.parameterName}" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 	    <div class="info_child_txt" style="text-align: center;">
@@ -179,6 +181,11 @@ function closeInfor(){
 	$('.canBtn').hide();
 	$('.modBtn').show();
 }
-
-  
+	 var calendar = new LCalendar();
+    calendar.init({
+        'trigger': '#birth', //标签id
+        'type': 'date', //date 调出日期选择 datetime 调出日期时间选择 time 调出时间选择 ym 调出年月选择,
+        'minDate': '1900-1-1', //最小日期
+        'maxDate': new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate() //最大日期
+    });
 </script>
