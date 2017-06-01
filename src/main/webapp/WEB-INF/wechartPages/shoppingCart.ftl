@@ -28,6 +28,8 @@
 .info_card_price{ line-height: 20px;}
 .info_card i img{ min-height: 40px;}
 .info_card{ margin-top: 10px;}
+.gray{-webkit-filter: grayscale(100%); -moz-filter: grayscale(100%); -ms-filter: grayscale(100%); -o-filter: grayscale(100%); filter: grayscale(100%); filter: gray;cursor:not-allowed;
+}
 </style>
 </head>
 
@@ -45,7 +47,7 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 		<#list buyerItemList as item>
 		<#if item.prdType == "0">
 						
-		<div class="info_head info_light">
+		<div class="info_head info_light shop">
 			<a href="javascript:delItem('${item.prdNo}','${item.money?c}','${item.amount}')" class="right"><em class="no">删</em></a>
 			
 			<#if item.fileName != "">
@@ -91,7 +93,7 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 		<#list buyerItemList as item>
 		<#if item.prdType != "0">
 		
-		<div class="info_head info_light">
+		<div class="info_head info_light card">
 			
 			<a href="javascript:delItem('${item.prdNo}','${item.money?c}','${item.amount}')" class="right"><em class="no">删</em></a>
 			
@@ -99,7 +101,7 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 				
 			<div class="info_card">
 				<a href="<@spring.url '/proshow;prdNo=${item.prdNo};keyWordsFld=${item.prdNo};'/>">
-					<i><img src="<@spring.url '/imgsrc/${item.fileName?if_exists}'/>" onerror="downloadErrImg(this,'${item.fileName?if_exists}','../imgsrc')" /></i>
+					<i><img src="<@spring.url '/imgsrc/${item.fileName?if_exists}'/>" /></i>
 					<h1>${item.prdName?if_exists}</h1>
 				</a>
 			</div>
@@ -108,7 +110,7 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 			
 			<div class="info_card">
 				<a href="<@spring.url '/proshow;prdNo=${item.prdNo};keyWordsFld=${item.prdNo};'/>">
-					<i><img src="<@spring.url '/imgsrc/${item.fileName?if_exists}'/>" onerror="downloadErrImg(this,'${item.fileName}')" /></i>
+					<i><img src="<@spring.url '/imgsrc/${item.fileName?if_exists}'/>" /></i>
 					<h1>${item.prdName?if_exists}</h1>
 				</a>
 			</div>
@@ -132,8 +134,8 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 			</div>
 		</div>
 		
-		<div style="margin:8px 0;"><a href="<@spring.url "/confirmCardOrder"/>;termID=wechat" class="button button-block button-rounded button-caution button-large"><i class="icon-shopping-cart"></i>&nbsp;&nbsp;卡下单</a></div>
-		<div style="margin:8px 0;"><a href="<@spring.url "/confirmOrder"/>;termID=wechat" class="button button-block button-rounded button-caution button-large"><i class="icon-shopping-cart"></i>&nbsp;&nbsp;商品下单</a></div>
+		<div style="margin:8px 0;"><a href="<@spring.url "/confirmCardOrder"/>;termID=wechat"  id="cardbtn" class="button button-block button-rounded button-caution button-large"><i class="icon-shopping-cart"></i>&nbsp;&nbsp;卡下单</a></div>
+		<div style="margin:8px 0;"><a href="<@spring.url "/confirmOrder"/>;termID=wechat"  id="shopbtn" class="button button-block button-rounded button-caution button-large"><i class="icon-shopping-cart"></i>&nbsp;&nbsp;商品下单</a></div>
 		<div style="margin:8px 0;"><a href="<@spring.url '/goodClass'/>" class="button button-block button-rounded button-caution button-large continueSBtn">继续购物</a></div>
 		
 		
@@ -154,4 +156,17 @@ function delItem(prdNo,money,amount){
 	window.location.href = url + "?prdNo=" + prdNo + "&money=" + money +"&amount=" + amount;
 	return false;
 }
+	$(function(){
+		if($('#content').find('.shop').length ==0){
+		
+	    $('#shopbtn').addClass('gray');
+        $('#shopbtn').attr('href','javascript:void(0);');
+	   
+	}
+		if($('#content').find('.card').length == 0){
+	    $('#cardbtn').addClass('gray');
+        $('#cardbtn').attr('href','javascript:void(0);');
+	   
+	}
+	})
 </script>

@@ -38,6 +38,8 @@
 .exchangeDivPoint{ overflow: hidden; padding:10px 10px 0;}
 .banner img{min-height: 150px;max-height: 150px;}
 .container img{min-height: 150px;max-height: 150px;}
+.banners{position:fixed ;z-index: 99999;width: 100%;}
+/*#content{padding: 70px 0;}*/
 </style>
 </head>
 
@@ -173,13 +175,30 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 </div>
 
 <script>
-	$(document).ready(function(){
-			//Call plugin
-			$('.mySlideshow').edslider({
-				width : '400%',
-				height: 159
-			});
-		});
+//content层的padding-top值随着banners的高度变化而变化
+$(document).ready(function(){
+	var height = $(".banners").height();
+	var padding = height+10+'px';
+	$("#content").css("padding-top",padding);
+	//console.log(height);
+	//console.log(padding);
+});
+$(window).resize(function() {
+	var height = $(".banners").height();
+	var padding = height+10+'px';
+	$("#content").css("padding-top",padding);
+	//console.log(height);
+	//console.log(padding);
+});
+
+//图片插件
+$(document).ready(function(){
+	//Call plugin
+	$('.mySlideshow').edslider({
+		width : '400%',
+		height: 159
+	});
+});
 
 $(document).ready(function() {
 	$('.banner').unslider({

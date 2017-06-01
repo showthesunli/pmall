@@ -15,6 +15,8 @@
 .jf-productList:hover{ background:#faecec;}
 .cartTitle{ color:#f60; font-size: 16px; font-weight: bold; line-height: 30px;}
 .jf-cart{ margin-top: 0;}
+.gray{-webkit-filter: grayscale(100%); -moz-filter: grayscale(100%); -ms-filter: grayscale(100%); -o-filter: grayscale(100%); filter: grayscale(100%); filter: gray;cursor:not-allowed;
+}
 </style>
 </head>
 
@@ -31,7 +33,7 @@
             <!--商品购物车列表-->
             <div class="jf-width1000"><h2 class="cartTitle">商品购物车</h2></div>
             <div class="jf-cart jf-width1000">
-            	<div class="jf-cart">
+            	<div class="jf-cart shop" >
                 	<ul class="jf-cartItemTitle">
                     	<#--<li class="width50"><input id="Checkbox1" type="checkbox"  class="allselect" />全选</li>-->
                         <li class="width200" style="width:500px;">商品名称</li>
@@ -44,7 +46,7 @@
 					<#if buyerItemList??>
 					<#list buyerItemList as item>
 					<#if item.prdType == "0">
-                        <div class="jf-cartItem">
+                        <div class="jf-cartItem ">
 							<!--
                             <div class="width50">
                                 <input type="checkbox" value="" name="newslist" style="margin-top:13px;" />
@@ -84,7 +86,7 @@
         <!--卡购物车列表-->
         <div class="jf-width1000"><h2 class="cartTitle">卡购物车</h2></div>
         <div class="jf-cart jf-width1000">
-            <div class="jf-cart">
+            <div class="jf-cart card">
                 <ul class="jf-cartItemTitle">
 				<#--<li class="width50"><input id="Checkbox1" type="checkbox"  class="allselect" />全选</li>-->
                     <li class="width200" style="width:380px;">商品名称</li>
@@ -142,8 +144,8 @@
 			<div class="cartBanlance">
         		<p class="jf-overflowH">
 					<input type="button" value="继续购物"  class="btnBgS cartShopBtn"  onclick="window.location='<@spring.url "/pro"/>'" />
-                    <input type="button" value="商品下单"  class="btnBgS cartBanBtn" onclick="window.location='<@spring.url "/confirmOrder"/>;termID=web'" style="margin-left:10px;" />
-					<input type="button" value="卡下单"  class="btnBgS cartBanBtn" onclick="window.location='<@spring.url "/confirmCardOrder"/>;termID=web'" />
+                    <input type="button" value="商品下单"  class="btnBgS cartBanBtn shopbtn" onclick="window.location='<@spring.url "/confirmOrder"/>;termID=web'" style="margin-left:10px;"/>
+					<input type="button" value="卡下单"  class="btnBgS cartBanBtn cardbtn" onclick="window.location='<@spring.url "/confirmCardOrder"/>;termID=web'" />
 				</p>
         	</div>
 		</div>
@@ -283,6 +285,19 @@ function delItem(prdNo,money,amount){
 	window.location.href = url + "?prdNo=" + prdNo + "&money=" + money +"&amount=" + amount;
 	return false;
 }
+
+	$(function(){
+		if($('.shop').find('.jf-cartItem').length ==0){
+	    $('.shopbtn').addClass('gray');
+        $('.shopbtn').attr('disabled',true);
+	   
+	}
+		if($('.card').find('.jf-cartItem').length == 0){
+	    $('.cardbtn').addClass('gray');
+        $('.cardbtn').attr('disabled',true);
+	   
+	}
+})
 </script>
 
 </html>
