@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,26 +29,29 @@ public class HisuControllerExceptionAdvice {
         return "/reigster";
     }
 
+    /**
     @ExceptionHandler(HisuOperateException.class)
-    public String operateError(Model model){
-
-        return null;
-    }
-
-    @ExceptionHandler(freemarker.core.InvalidReferenceException.class)
-    public String freemarkerExcepiton(){
-
-
-        return "/";
-    }
-
-    @ExceptionHandler(HisuRegisterException.class)
-    public ModelAndView handleReisterException(HttpServletRequest req,HisuRegisterException ex){
+    public ModelAndView handleReisterException(HttpServletRequest req,HisuOperateException ex){
         logger.error("request:"+req.getRequestURI() + " exception:"+ex);
+        StringBuilder viewName = new StringBuilder(req.getRequestURI());
+        viewName.delete(0,req.getContextPath().length());
+
         ModelAndView mv = new ModelAndView();
         handleException(mv,ex.getMessage());
-        mv.setViewName("/register");
+        logger.debug("error viewName:"+viewName.toString());
+
+        mv.setViewName(viewName.toString());
         return mv;
+    }
+     **/
+    @ExceptionHandler(HisuOperateException.class)
+    public String handleReisterException(HttpServletRequest req,HisuOperateException ex) throws UnsupportedEncodingException {
+        logger.error("request:" + req.getRequestURI() + " exception:" + ex);
+        StringBuilder viewName = new StringBuilder(req.getRequestURI());
+        viewName.delete(0, req.getContextPath().length());
+
+        logger.debug("error viewName:" + viewName.toString());
+        return "redirect:"+viewName+";msg="+new String(ex.getMessage().getBytes("UTF-8"),"GBK");
     }
 
     protected void handleException(ModelAndView mv,String exceptionMsg){

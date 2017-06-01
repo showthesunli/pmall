@@ -1,6 +1,7 @@
 package cn.highsuccess.security;
 
 import cn.highsuccess.transform.HisuTransform;
+import cn.highsuccess.web.exception.HisuOperateException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -30,7 +31,7 @@ public class HisuAuthenticationProvider extends AbstractUserDetailsAuthenticatio
         if (null != obj){
             if(0 > obj.optInt("responseCode")){
                 this.logger.info("Authentication failed: " + obj.optJSONObject("responseObj").optString("错误原因"));
-                throw new BadCredentialsException(this.messages.getMessage("AbstractUserDetailsAuthenticationProvider.badCredentials", "Bad credentials"));
+                throw new BadCredentialsException(obj.optJSONObject("responseObj").optString("错误原因"));
             }
         }else {
             throw new BadCredentialsException("网络错误!");

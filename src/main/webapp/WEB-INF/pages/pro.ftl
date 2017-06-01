@@ -117,6 +117,7 @@
 
     <!--产品-->
     <div class="jf-product jf-width1000" style=" padding-bottom:30px;">
+    <#if queryPrdListByPrdType_totalRecNum != 0>
     <#list queryPrdListByPrdType as queryPrdListByPrdTypeItem>
         <#if queryPrdListByPrdTypeItem.isCard == "0">
         <div class="jf-productList">
@@ -146,6 +147,9 @@
             </div>
         </#if>
     </#list>
+    <#else>
+        <div style=" text-align: center; width: 500px; height:100px; line-height: 100px; font-size: 16px; font-weight: bold; color: #f60; background: #ffebe7; margin: 50px auto 30px;">抱歉，没有商品，请查看其它分类！</div>
+    </#if>
     </div>
     <!--产品 end-->
 

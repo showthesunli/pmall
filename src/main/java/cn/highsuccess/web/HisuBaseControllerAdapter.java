@@ -84,6 +84,7 @@ public abstract class HisuBaseControllerAdapter {
                 }
             }
         }
+        model.addAttribute(map);
     }
 
     protected void excuteOperate(Model model,Map<String,Object> map,HisuMngDataGroupAndId hisuMngDataGroupAndId){

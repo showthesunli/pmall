@@ -53,6 +53,19 @@ public class ShoppingCartService implements ShoppingCartServiceProvider {
         }
         return false;
     }
+    
+    @Override
+    public boolean modifyProduct(BuyerItem buyerItem) {
+        Iterator<BuyerItem> it = shoppingCart.getBuyerItemList().iterator();
+        while (it.hasNext()){
+            BuyerItem item = it.next();
+            if (item.equals(buyerItem)){
+            	it.remove();
+            	shoppingCart.getBuyerItemList().add(buyerItem);
+            }
+        }
+        return false;
+    }
 
     @Override
     public double countProMoney() {

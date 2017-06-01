@@ -1,9 +1,11 @@
 <#import "/spring.ftl" as spring/>
+<#import "/lib/macro/hisuMacro.ftl" as sf/>
 <!DOCTYPE html>
 <!-- saved from url=(0054)http://www.sucaihuo.com/modals/20/2070/demo/dizhi.html -->
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	
-	<meta name="keywords" content="">
+	<meta name="description" content="途皓（北京）商务服务有限公司" />
+	<meta name="keywords" content="途皓（北京）商务服务有限公司" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="renderer" content="webkit">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,8 +19,8 @@
 	<script type="text/javascript" src="<@spring.url '/wechart/js/jquery-1.10.2.min.js'/>"></script>
 	<script type="text/javascript" src="<@spring.url '/wechart/js/jquery.accordion.js'/>"></script>
 	<script type="text/javascript" src="<@spring.url '/wechart/js/unslider.min.js'/>"></script>
-	<script type="text/javascript" src="<@spring.url '/js/jquery.validate.min.js'/>" ></script>
-	<script type="text/javascript" src="<@spring.url '/js/jquery.validate.addMethod.js'/>" ></script>
+	<script type="text/javascript" src="<@spring.url '/wechart/js/jquery.validate.min.js'/>" ></script>
+	<script type="text/javascript" src="<@spring.url '/wechart/js/jquery.validate.addMethod.js'/>" ></script>
 
 <!--必要样式-->
 <link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/menu_elastic.css'/>">
@@ -37,6 +39,8 @@ input{ outline:none;}
 .usercenter .cdv .addrInputTxt{ width: 70%; min-width: 150px; float: left; border:1px solid #ccc; max-height: 42px; line-height: 42px; color: #333; padding:0 10px;}
 .text_1{ position: relative;}
 #phone-error{ position:absolute; left: 70px; top:40px; color: #f00; font-weight: normal;}
+#errorShow{ text-align: center; min-height: 22px; line-height: 20px;}
+.errorTxt{ text-align: center; min-height: 20px; line-height: 20px; color: #f00; background:#ffebe7; padding: 0 10px; border: 1px solid #f00; border-radius:5px; display: none;}
 </style>
 </head>
 <body class="huibg">
@@ -66,6 +70,9 @@ input{ outline:none;}
 
 <div class="usercenter">
 	<div class="cdv dzi">
+		<div id="errorShow">
+			<span class="errorTxt"><@sf.error field="msg"/></span>
+		</div>
 	<form class="rechargeForm" autocomplete="off" method="post" action="<@spring.url '/cardOperation'/>">
   		<table width="100%" border="0" cellspacing="0" cellpadding="0">
       		<tr class="text">

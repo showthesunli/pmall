@@ -19,28 +19,24 @@ import javax.validation.Valid;
  * Created by prototype on 2017/5/5.
  */
 @Controller
-public class ForgotPassword extends HisuBaseControllerAdapter{
+public class ForgotPassword extends HisuBaseControllerAdapter {
 
     @Autowired
     protected ForgotPassword(JavaDataSet jds, JavaOperate javaOperate) {
         super(jds, javaOperate);
     }
 
-    @RequestMapping(value = "/forgotPassword",method = RequestMethod.POST)
+    @RequestMapping(value = "/forgotPassword", method = RequestMethod.POST)
     public String registerProcess(Model model,
                                   @RequestParam String mCode,
                                   @RequestParam String username,
-                                  @RequestParam String password){
+                                  @RequestParam String password) {
         logger.debug("/forgotPassword : post");
         logger.debug("mCode :" + mCode);
         logger.debug("memberID :" + username);
 
         password = HisuOperatePasswd.hisuEncPasswd(password);
-        this.getJavaOperate().service("jf_memberCenter","forceChangePasswd","memberID="+username+"|authCode=" + mCode + "|mmbPINUnderZPK=" + password);
-        if (this.getJavaOperate().getResult()){
-            return "/login";
-        }else {
-            return "/forgotPassword";
-        }
+        this.getJavaOperate().service("jf_memberCenter", "forceChangePasswd", "memberID=" + username + "|authCode=" + mCode + "|mmbPINUnderZPK=" + password);
+        return "/login";
     }
 }

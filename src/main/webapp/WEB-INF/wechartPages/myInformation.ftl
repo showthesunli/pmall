@@ -1,9 +1,11 @@
 <#import "/spring.ftl" as spring/>
+<#import "/lib/macro/hisuMacro.ftl" as sf/>
 <!DOCTYPE html>
 <!-- saved from url=(0054)http://www.sucaihuo.com/modals/20/2070/demo/dizhi.html -->
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	
-	<meta name="keywords" content="">
+	<meta name="description" content="途皓（北京）商务服务有限公司" />
+	<meta name="keywords" content="途皓（北京）商务服务有限公司" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="renderer" content="webkit">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,8 +20,9 @@
 	<script type="text/javascript" src="<@spring.url '/wechart/js/jquery-1.10.2.min.js'/>"></script>
 	<script type="text/javascript" src="<@spring.url '/wechart/js/bootstrap.min.js'/>"></script>
 	<script type="text/javascript" src="<@spring.url '/wechart/js/LCalendar.js'/>"></script>
-	<script language="javascript" src="<@spring.url '/js/jquery.validate.min.js'/>" ></script>
-	<script language="javascript" src="<@spring.url '/js/jquery.validate.addMethod.js'/>" ></script>
+	<script language="javascript" src="<@spring.url '/wechart/js/jquery.validate.min.js'/>" ></script>
+	<script language="javascript" src="<@spring.url '/wechart/js/jquery.validate.addMethod.js'/>" ></script>
+	<script type="text/javascript" src="<@spring.url '/wechart/js/jquery.validate.addMethod.js'/>" ></script>
 <!--必要样式-->
 <link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/menu_elastic.css'/>">
 <script type="text/javascript" src="<@spring.url '/wechart/js/snap.svg-min.js'/>"></script>
@@ -34,7 +37,8 @@
 a#radio input {width: 28px;}
 a#radio {display: none;}
 #email-error{position: absolute;left: 88px;top: 169px;color: #FF2626;font-weight: 400;}
-
+#errorShow{ text-align: center; min-height: 22px; line-height: 20px;}
+.errorTxt{ text-align: center; min-height: 20px; line-height: 20px; color: #f00; background:#ffebe7; padding: 0 10px; border: 1px solid #f00; border-radius:5px; display: none;}
 </style>
 </head>
 <body class="huibg">
@@ -63,8 +67,13 @@ a#radio {display: none;}
 
 
 <div class="usercenter">
+	
  	<form id="informationOfMy" action="modifyMemberInfo" method="post">
   	<div class="cdv dzi">
+  		<div id="errorShow">
+			<span class="errorTxt"><@sf.error field="msg"/></span>
+		</div>
+		
 		<p><span class="width70">我的账号：</span><span id="memberID" name="memberID">${memberInfo[0].memberID}</span></p>
 	    <p><span class="width70">我的手机：</span><span id="mobile" name="mobile">${memberInfo[0].mobile}</span></p>
 	    <p><span class="width70">邮箱：</span><span id="mobile" name="mobile">${memberInfo[0].email}</span>

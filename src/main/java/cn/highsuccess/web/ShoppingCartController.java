@@ -113,4 +113,17 @@ public class ShoppingCartController extends HisuBaseControllerAdapter {
         this.writBuyerItemsToCookie(rsp,this.shoppingCartService);
         return "redirect:/shoppingCart";
     }
+    
+    //从购物车修改商品
+    @RequestMapping(value = "/modCart")
+    public String modItemFromCart(HttpServletRequest req,
+                                  HttpServletResponse rsp,
+                                  Model model,
+                                  @CookieValue(value = "SHOPPINGCART-ITEMS",required = false)String shoppingCartStr,
+                                  BuyerItem buyerItem) throws UnsupportedEncodingException {
+        this.initShoppingCart(shoppingCartStr,this.shoppingCartService);
+        this.shoppingCartService.modifyProduct(buyerItem);
+        this.writBuyerItemsToCookie(rsp,this.shoppingCartService);
+        return "redirect:/shoppingCart";
+    }
 }

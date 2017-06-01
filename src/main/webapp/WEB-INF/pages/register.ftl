@@ -10,6 +10,7 @@
 <script type="text/javascript" src="<@spring.url '/js/jquery-1.7.2.min.js'/>"></script>
 <script language="javascript" src="<@spring.url '/js/menu.js'/>" ></script>
 <script language="javascript" src="<@spring.url '/js/jquery.validate.min.js'/>" ></script>
+<script language="javascript" src="<@spring.url '/js/jquery.validate.addMethod.js'/>" ></script>
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 <style>
 .topNav a{ line-height:37px;}
@@ -18,7 +19,6 @@
 .regFTitle h2{ float:left; padding:0 20px; cursor:pointer; font-size:14px; font-weight:bold; color:#ff6600; line-height:40px;}
 .registerForm p{ position:relative;}
 .txtLabel{width:48px;}
-#id-error,#phone-error,#password-error,#confirm_password-error,#registerCode-error,#agree-error{ position:absolute; left:305px; top:4px; color:#f00; padding:0 10px; background:#ffebe7; line-height:30px; border:1px solid #f00; border-radius:5px;}
 </style>
 </head>
 
@@ -40,10 +40,13 @@
         </div>
 
         <div class="jf-width1200">
+        	<div id="errorShow">
+                <span class="errorTxt"><@sf.error field="msg"/></span>
+                <#if msg??>
+                    <span class="errorTxt">${msg}</span>
+                </#if>
+            </div>
             <form id="signupForm" class="registerForm" method="post" action="<@spring.url '/register'/>">
-                <p>
-                    <label class="error"><@sf.error field="msg"/></label>
-                </p>
                 <p>
                     <label class="txtLabel" for="id">用<span style="width:6px; display:inline-block"></span>户<span style="width:6px; display:inline-block"></span>名</label>
                     <input id="id" name="id" type="text" class="registerTxt" maxlength="20" placeholder="您的账户名和登录名"  />
@@ -147,16 +150,6 @@
 </script>
 
 <script>
-
-    $.validator.addMethod("isPhone", function (value, element) {
-        var phone = $("#phone").val();// 手机号码
-        var phoneRule = /^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0-9]|170)\d{8}$/;
-
-        // 手机号码错误
-        if (!phoneRule.test(phone))
-            return false;
-        return true;
-    }, "ignore");
 
     // 空字符串判断
     function isEmpty(v, allowBlank) {

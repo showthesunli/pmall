@@ -40,7 +40,7 @@ public class accountRechargeController extends HisuBaseControllerAdapter{
         return "/accountRecharge";
     }
 
-    @RequestMapping(value = "/recharge",method = RequestMethod.POST)
+    @RequestMapping(value = "/accountRecharge",method = RequestMethod.POST)
     public String recharge(Model model,
                            @Valid Card card,
                            Errors errors){

@@ -32,7 +32,9 @@ input.error{ border-color: #f00;}
 <body>
 <div class="main_1" >
     <div class="login">
-    	
+    	<div id="errorShow">
+            <span class="errorTxt"><@sf.error field="msg"/></span>
+        </div>
     	<form id="signupForm" class="registerForm" method="post" action="<@spring.url '/register'/>">
     	
 		    <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -40,8 +42,7 @@ input.error{ border-color: #f00;}
 		    	<tr class="text">
 		        	<td class="text_1">
 		        		<input type="text" id="id" name="id" class="tet" placeholder="用户名" maxlength="20" />		
-		        	</td>
-		        	<@sf.error field="id"></@sf.error>
+		        	</td>		        	
 		      	</tr>
 		      	
 		      	<tr class="text">

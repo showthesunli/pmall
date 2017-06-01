@@ -1,4 +1,5 @@
 <#import "/spring.ftl" as spring/>
+<#import "/lib/macro/hisuMacro.ftl" as sf/>
 <!doctype html>
 <html lang="zh-cn">
 <head>
@@ -13,11 +14,12 @@
 <script type="text/javascript" src="<@spring.url '/js/jquery-1.7.2.min.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/js/menu.js'/>" ></script>
 <script type="text/javascript" src="<@spring.url '/js/jquery.validate.min.js'/>" ></script>
+<script language="javascript" src="<@spring.url '/js/jquery.validate.addMethod.js'/>" ></script>
 <style>
 .rechargeForm{ padding:20px 30px;}	
 .rechargeForm p{ margin-bottom: 20px; position: relative;}
 .inputTitle{ width: 80px; text-align: right; display: inline-block; font-size: 14px;}
-.rechargeForm h2{ font-weight: bold; color: #f60; line-height: 40px; margin-bottom: 20px;}
+.rechargeForm h2{ font-weight: bold; color: #f60; line-height: 40px;}
 .recTxt{ width: 300px; border: 1px solid #ccc; border-radius: 5px; line-height: 35px; padding: 0 10px; font-size: 14px;}
 .rechargeBtn{width: 150px; height: 40px; border: 1px solid #f60; color: #fff; font-size: 16px; font-weight: bold; background:url(images/btnBg.png) no-repeat; background-position: 0 -75px; border-radius: 5px; cursor: pointer;}
 #oldPsw-error,#newPsw-error,#confirm_password-error{ position:absolute; left:420px; top:0; color:#f00; padding:0 10px; background:#ffebe7; line-height:35px; border:1px solid #f00; border-radius:5px; text-align: left; font-size: 14px;}
@@ -47,9 +49,12 @@
                     </div>
                 </div>
                 
-                <form class="rechargeForm" autocomplete="off" method="post" action="<@spring.url '/accountSafe/modPassword'/>">
+                <form class="rechargeForm" autocomplete="off" method="post" action="<@spring.url '/accountSafe'/>">
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 	<h2>修改密码</h2>
+                	<div id="errorShow">
+		                <span class="errorTxt"><@sf.error field="msg"/></span>
+		            </div>
                 	<p>
                 		<label class="inputTitle">旧密码：</label>
                 		<input type="password" id="oldPsw" name="oldPassword" value="" placeholder="请输入旧密码" class="recTxt" />

@@ -194,6 +194,28 @@
        </bean>
        
        
+        <!--query invoice 查询用户发票 -->
+       <bean id="queryInvoice" class="cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId">
+              <constructor-arg>
+                     <map>
+                            <entry key="jf_memberCenter" >
+                                   <list>
+                                          <ref bean="queryMemberInvoice"/>
+                                   </list>
+                            </entry>
+                     </map>
+              </constructor-arg>
+       </bean>
+       <bean id="queryMemberInvoice" class="cn.highsuccess.config.systemproperties.HisuMngDataIdArgs">
+              <constructor-arg index="0" value="queryMemberInvoice"/>
+              <constructor-arg index="1">
+                     <list>
+                            <value>memberID</value>
+                     </list>
+              </constructor-arg>
+       </bean>
+       
+       
        <!--personal center 查询个人信息,个人账户信息,订单,查询收货地址 -->
        <bean id="queryPersonalCenter" class="cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId">
               <constructor-arg>

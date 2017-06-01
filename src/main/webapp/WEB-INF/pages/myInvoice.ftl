@@ -65,8 +65,8 @@ select{ margin-left: 5px; line-height: 25px; height: 25px; border-color: #ccc; c
                 <div class="myDetial">
                     <div class="myDetialList myAddress">
                         <input type="button" value="新增发票信息" class="detialBtn newAddress" onclick="openTipDiv('addressDiv')" style="margin-left:0; margin-top:0;" />
-                        
-                        <form method="post" action="<@spring.url '/modAddr'/>">
+                        <#list queryMemberInvoice as item>
+                        <form method="post" action="<@spring.url '/modInvoice'/>">
                             <div class="myAddressItem">
                                 <div class="addrDefaultInforTop">
                                     <div class="addrDefaultInfor">
@@ -82,40 +82,45 @@ select{ margin-left: 5px; line-height: 25px; height: 25px; border-color: #ccc; c
                                 </div>
                                 <div class="marginTB">
                                 	<label>发票抬头：</label>
-                                	<input id="invoiceTitle" name="invoiceTitle" type="text" value="" class="myDetialTxt inputRO" readOnly="true" style="width: 680px;" />
+                                	<input id="rcptTitle" name="rcptTitle" type="text" value="${item.rcptTitle}" class="myDetialTxt inputRO" readOnly="true" style="width: 680px;" />
                                 </div>
                                 <div class="marginTB">
                                 	<label>发票类型：</label>
-                                	<input id="invoiceType" name="invoiceType" type="text" value="" class="myDetialTxt inputRO" readOnly="true" />
+                                	<input id="receiptType" name="receiptType" type="text" value="${item.receiptType}" class="myDetialTxt inputRO" readOnly="true" />
                                 	<select style="display: none;">
-                                		<option>纸质发票</option>
-                                		<option>电子发票</option>
+                                		<option value="1">个人</option>
+                                		<option value="2">法人</option>
                                 	</select>
                                 </div>
                                 <div class="marginTB">
                                 	<label>发票内容：</label>
-                                	<input id="invoiceCon" name="invoiceCon" type="text" value="" class="myDetialTxt inputRO" readOnly="true" />
+                                	<input id="rcptContent" name="rcptContent" type="text" value="${item.rcptContent}" class="myDetialTxt inputRO" readOnly="true" />
                                 	<select style="display: none;">
-                                		<option>办公用品</option>
-                                		<option>日用品</option>
+                                		<option value="0">明细</option>
+                                		<option value="1">办公用品</option>
+                                		<option value="2">电脑配件</option>
+                                		<option value="3">耗材</option>
+                                		<option value="10">用品</option>
+                                		<option value="11">日用品</option>
+                                		<option value="12">礼品</option>
                                 	</select>
                                 </div>
                                 <div class="marginTB">
                                 	<label>收票人手机：</label>
-                                	<input id="invoicePhone" name="invoicePhone" type="text" value="" class="myDetialTxt inputRO" readOnly="true"  maxlength="11" />
+                                	<input id="mobile" name="mobile" type="text" value="${item.mobile}" class="myDetialTxt inputRO" readOnly="true"  maxlength="11" />
                                 </div>
                                 <div class="marginTB">
                                 	<label>收票人邮箱：</label>
-                                	<input id="invoiceEmail" name="invoiceEmail" type="text" value="" class="myDetialTxt inputRO" readOnly="true" />
+                                	<input id="billReceiverMail" name="billReceiverMail" type="text" value="${item.billReceiverMail}" class="myDetialTxt inputRO" readOnly="true" />
                                 </div>
                                 <div class="marginTB">
                                 	<label>公司纳税人识别号：</label>
-                                	<input id="invoiceNum" name="invoiceNum" type="text" value="" class="myDetialTxt inputRO" readOnly="true" />
+                                	<input id="taxpayerID" name="taxpayerID" type="text" value="${item.taxpayerID}" class="myDetialTxt inputRO" readOnly="true" />
                                 </div>
                                 
                             </div>
                         </form>
-                       
+                       </#list>
                     </div>
                 </div>
 
@@ -139,38 +144,42 @@ select{ margin-left: 5px; line-height: 25px; height: 25px; border-color: #ccc; c
         <div class="jf-overflowH tipDivTitle"><h3 style="float:left;">发票信息</h3><span onclick="closeTipDiv('addressDiv')" style="float:right; cursor:pointer; color:#999;font-size:25px;">×</span></div>
         <div>
         	<label><span class="colorRed"></span>发票抬头：</label>
-        	<input type="text" id="addAnvoiceTitle" name="addAnvoiceTitle" value="" style="width:427px;" />
+        	<input type="text" id="addRcptTitle" name="addRcptTitle" value="" style="width:427px;" />
         </div>
         <div>
         	<label><span class="colorRed"></span>发票类型：</label>
-        	<select>
-                <option>纸质发票</option>
-				<option>电子发票</option>
+        	<select id="addIntAttrValue1" name="addIntAttrValue1">
+                  <option value="1">个人</option>
+                  <option value="2">法人</option>
 			</select>
         </div>
         <div>
         	<label><span class="colorRed"></span>发票内容：</label>
-        	<select>
-				<option>办公用品</option>
-				<option>日用品</option>
+        	<select id="addRcptContent" name="addIntAttrValue2" >
+				<option value="0">明细</option>
+                <option value="1">办公用品</option>
+                <option value="2">电脑配件</option>
+                <option value="3">耗材</option>
+                <option value="10">用品</option>
+                <option value="11">日用品</option>
+                <option value="12">礼品</option>
 			</select>
         </div>
         <div>
         	<label><span class="colorRed"></span> 收票人手机：</label>
-        	<input type="text" id="addAnvoicePhone" name="addAnvoicePhone" value="" />
+        	<input type="text" id="addMobile" name="addAttr128LenValue3" value="" />
         </div>
         <div>
         	<label><span class="colorRed"></span>收票人邮箱：</label>
-        	<input type="text" id="addAnvoiceEmail" name="addAnvoiceEmail" value="" />
+        	<input type="text" id="addBillReceiverMail" name="addBillReceiverMail" value="" />
         </div>
         <div>
         	<label><span class="colorRed"></span> 公司纳税人识别号：</label>
-        	<input type="text" id="addAnvoiceNum" name="addAnvoiceNum" value="" />
+        	<input type="text" id="taxpayerID" name="taxpayerID" value="" />
         </div>
         <p style="margin:10px 0 0 140px;"><input type="hidden" id="operType" name="operType" value="0"/><input type="hidden" id="" name="" value=""/><input type="submit" value="保存" class="sureBtn"  /><input type="button" value="取消" class="cancleBtn"  onclick="closeTipDiv('addressDiv')" /></p>
-            <input type="hidden" name="isDefault" value="0"/>
             <input type="hidden" name="objectID" id="objectID" value=""/>
-            <input type="hidden" name="forword" id="forword" value="myAddress"/>
+            <input type="hidden" name="forword" id="forword" value="myInvoice"/>
         </form>
     </div>
     <!--新增发票 end-->
@@ -204,10 +213,10 @@ $(document).ready(function(e) {
     $('.modifyAddr').click(function(){       		$(this).parent().parent().parent().find('.inputRO').addClass('inputRW').removeAttr('readonly').removeClass('inputRO');
 		$(this).parent().parent().parent().find('.modifyAddr').hide();
 		$(this).parent().parent().parent().find('.updateAddr').show();
-		$(this).parent().parent().parent().find('#invoiceType').hide();
-		$(this).parent().parent().parent().find('#invoiceType').next('select').show();
-		$(this).parent().parent().parent().find('#invoiceCon').hide();
-		$(this).parent().parent().parent().find('#invoiceCon').next('select').show();
+		$(this).parent().parent().parent().find('#receiptType').hide();
+		$(this).parent().parent().parent().find('#receiptType').next('select').show();
+		$(this).parent().parent().parent().find('#rcptContent').hide();
+		$(this).parent().parent().parent().find('#rcptContent').next('select').show();
 	});
 	
 	//保存发票
@@ -217,10 +226,10 @@ $(document).ready(function(e) {
 		$(this).parent().parent().parent().find('.inputRW').addClass('inputRO').attr('readonly','ture').removeClass('inputRW');
 		$(this).parent().parent().parent().find('.updateAddr').hide();
 		$(this).parent().parent().parent().find('.modifyAddr').show();
-		$(this).parent().parent().parent().find('#invoiceType').show();
-		$(this).parent().parent().parent().find('#invoiceType').next('select').hide();
-		$(this).parent().parent().parent().find('#invoiceCon').show();
-		$(this).parent().parent().parent().find('#invoiceCon').next('select').hide();
+		$(this).parent().parent().parent().find('#receiptType').show();
+		$(this).parent().parent().parent().find('#receiptType').next('select').hide();
+		$(this).parent().parent().parent().find('#rcptContent').show();
+		$(this).parent().parent().parent().find('#rcptContent').next('select').hide();
 	});
 
 })

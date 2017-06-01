@@ -3,6 +3,7 @@ package cn.highsuccess.data;
 import cn.highsuccess.config.systemproperties.HisuMngAttribute;
 import cn.highsuccess.config.systemproperties.HisuMngSvr;
 import cn.highsuccess.transform.HisuTransform;
+import cn.highsuccess.web.exception.HisuOperateException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -37,6 +38,9 @@ public class JavaOperate extends BaseConnect{
             returnCode = Integer.parseInt(codestr);
         } catch (JSONException e) {
             e.printStackTrace();
+        }
+        if (!this.getResult()){
+            throw new HisuOperateException(this.getErrMessage());
         }
         return JSONResult;
     }

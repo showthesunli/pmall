@@ -1,4 +1,5 @@
 <#import "/spring.ftl" as spring/>
+<#import "/lib/macro/hisuMacro.ftl" as sf/>
 <!doctype html>
 <html lang="zh-cn">
 <head>
@@ -46,6 +47,8 @@
 .marginTB{ margin: 5px 0;}
 .addrBtn{ background: #fff; border: none; color: #3897d7; cursor: pointer;}
 .addrBtn:hover{ text-decoration: underline;}
+.baseinfo-Title{ margin-bottom: 0;}
+.memberMain-Right #errorShow{ margin-left:32px;}
 </style>
 </head>
 
@@ -63,6 +66,9 @@
 
             <div class="memberMain-Right">
                 <h1 class="baseinfo-Title">收货地址</h1>
+                <div id="errorShow">
+		            <span class="errorTxt"><@sf.error field="msg"/></span>
+		        </div>
                 <div class="myDetial">
                     <div class="myDetialList myAddress">
                         <input type="button" value="新增收货地址" class="detialBtn newAddress" onclick="openTipDiv('addressDiv')" style="margin-left:0; margin-top:0;" />

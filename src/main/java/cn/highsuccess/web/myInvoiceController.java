@@ -4,7 +4,9 @@ import cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId;
 import cn.highsuccess.data.JavaDataSet;
 import cn.highsuccess.data.JavaOperate;
 import cn.highsuccess.data.serivce.ReceiveInfoService;
+import cn.highsuccess.module.InvoiceInfoItem;
 import cn.highsuccess.module.UserReceiveInfoItem;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -14,20 +16,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
+
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by prototype on 2017/5/19.
+ * Created by Saviour on 2017/6/1.
  */
-//@Controller
+@Controller
 public class myInvoiceController extends HisuBaseControllerAdapter{
 
     @Autowired
     private ReceiveInfoService receiveInfoService;
 
     @Autowired
-    @Qualifier("queryPersonalAdress")
+    @Qualifier("queryInvoice")
     private HisuMngDataGroupAndId hisuMngDataGroupAndId;
 
     @Autowired
@@ -35,62 +38,56 @@ public class myInvoiceController extends HisuBaseControllerAdapter{
         super(jds, javaOperate);
     }
 
-    /*char attr128LenValue1[128]; //发票标签
-	char attr128LenValue2[128]; //发票抬头
-	int intAttrValue1; //发票类型
-	int intAttrValue2; //发票内容
-	char attr128LenValue3[128]; //收票人手机
-	char attr128LenValue4[128]; //收票人邮箱
-	char attr128LenValue5[128]; //公司纳税人识别号
-*/
-    @RequestMapping(value = "/myAddress",method = RequestMethod.GET)
-    public String showAddress(Model model){
+    @RequestMapping(value = "/myInvoice",method = RequestMethod.GET)
+    public String showInvoice(Model model){
         Map<String ,Object> param = new HashMap<>();
         param.put("memberID",this.getJds().getUserName());
         excute(model,param,hisuMngDataGroupAndId);
-        return "/myAddress";
+        return "/myInvoice";
     }
 
     //删除送货地址
-    @RequestMapping(value = "/deleteAddr",method = RequestMethod.POST)
-    public String deleteAddr(Model model,
-                             @Valid UserReceiveInfoItem userReceiveInfoItem){
-        String condition = "objectID="+userReceiveInfoItem.getObjectID();
+    @RequestMapping(value = "/deleteInvoice",method = RequestMethod.POST)
+    public String deleteInvoice(Model model,
+                             @Valid InvoiceInfoItem invoiceInfoItem){
+        String condition = "billTag="+invoiceInfoItem.getBillTag();
         this.getJavaOperate().service("jf_memberCenter", "btnDelUserAddr", condition);
-        return "redirect:/myAddress";
+        return "redirect:/myInvoice";
     }
     //增加送货地址
-    @RequestMapping(value = "/addAddr",method = RequestMethod.POST)
-    public String addAddr(Model model,
-                          @Valid UserReceiveInfoItem userReceiveInfoItem,
+    @RequestMapping(value = "/addInvoice",method = RequestMethod.POST)
+    public String addInvoice(Model model,
+                          @Valid InvoiceInfoItem invoiceInfoItem,
                           @RequestParam String forword){
-        logger.debug("/addAddr : post");
+        logger.debug("/addInvoice : post");
         logger.debug("forword=" + forword);
         StringBuilder condition = new StringBuilder();
-        condition.append("addr=").append(userReceiveInfoItem.getAddr()).append("|");
-        condition.append("zip=").append(userReceiveInfoItem.getZipCode()).append("|");
-        condition.append("name=").append(userReceiveInfoItem.getReceiverName()).append("|");
-        condition.append("phone=").append(userReceiveInfoItem.getPhone()).append("|");
-        condition.append("isDefault=").append(userReceiveInfoItem.getIsDefault());
+        condition.append("rcptTitle=").append(invoiceInfoItem.getRcptTitle()).append("|");
+        condition.append("receiptType=").append(invoiceInfoItem.getReceiptType()).append("|");
+        condition.append("rcptContent=").append(invoiceInfoItem.getRcptContent()).append("|");
+        condition.append("mobile=").append(invoiceInfoItem.getMobile()).append("|");
+        condition.append("billReceiverMail=").append(invoiceInfoItem.getBillReceiverMail());
+        condition.append("taxpayerID=").append(invoiceInfoItem.getTaxpayerID());
         this.getJavaOperate().service("jf_memberCenter","btnAddUserAddr",condition.toString());
         if (forword == null){
-            return "redirect:/myAddress";
+            return "redirect:/myInvoice";
         }else {
             return "redirect:/"+forword;
         }
     }
 
-    @RequestMapping(value = "/modAddr",method = RequestMethod.POST)
-    public String modAddr(Model model,
-                          @Valid UserReceiveInfoItem userReceiveInfoItem){
+    @RequestMapping(value = "/modInvoice",method = RequestMethod.POST)
+    public String modInvoice(Model model,
+                          @Valid InvoiceInfoItem invoiceInfoItem){
         StringBuilder condition = new StringBuilder();
-        condition.append("objectID=").append(userReceiveInfoItem.getObjectID()).append("|");
-        condition.append("addr=").append(userReceiveInfoItem.getAddr()).append("|");
-        condition.append("zip=").append(userReceiveInfoItem.getZipCode()).append("|");
-        condition.append("name=").append(userReceiveInfoItem.getReceiverName()).append("|");
-        condition.append("phone=").append(userReceiveInfoItem.getPhone()).append("|");
-        condition.append("isDefault=").append(userReceiveInfoItem.getIsDefault());
+        condition.append("billTag=").append(invoiceInfoItem.getBillTag()).append("|");
+        condition.append("rcptTitle=").append(invoiceInfoItem.getRcptTitle()).append("|");
+        condition.append("receiptType=").append(invoiceInfoItem.getReceiptType()).append("|");
+        condition.append("rcptContent=").append(invoiceInfoItem.getRcptContent()).append("|");
+        condition.append("mobile=").append(invoiceInfoItem.getMobile()).append("|");
+        condition.append("billReceiverMail=").append(invoiceInfoItem.getBillReceiverMail());
+        condition.append("taxpayerID=").append(invoiceInfoItem.getTaxpayerID());
         this.getJavaOperate().service("jf_memberCenter","btnModUserAddr",condition.toString());
-        return "redirect:/myAddress";
+        return "redirect:/myInvoice";
     }
 }

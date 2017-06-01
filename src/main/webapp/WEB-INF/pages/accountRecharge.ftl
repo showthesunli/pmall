@@ -1,4 +1,5 @@
 <#import "/spring.ftl" as spring/>
+<#import "/lib/macro/hisuMacro.ftl" as sf/>
 <!doctype html>
 <html lang="zh-cn">
 <head>
@@ -13,11 +14,12 @@
 <script type="text/javascript" src="<@spring.url '/js/jquery-1.7.2.min.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/js/menu.js'/>" ></script>
 <script type="text/javascript" src="<@spring.url '/js/jquery.validate.min.js'/>" ></script>
+<script language="javascript" src="<@spring.url '/js/jquery.validate.addMethod.js'/>" ></script>
 <style>
 .rechargeForm{ padding:20px 30px;}	
 .rechargeForm p{ margin-bottom: 20px; position: relative;}
 .rechargeForm label{ width: 80px; text-align: right; display: inline-block; font-size: 14px;}
-.rechargeForm h2{ font-weight: bold; color: #f60; line-height: 40px; margin-bottom: 20px;}
+.rechargeForm h2{ font-weight: bold; color: #f60; line-height: 40px;}
 .recTxt{ width: 300px; border: 1px solid #ccc; border-radius: 5px; line-height: 35px; padding: 0 10px; font-size: 14px;}
 .rechargeBtn{width: 150px; height: 40px; border: 1px solid #f60; color: #fff; font-size: 16px; font-weight: bold; background:url(images/btnBg.png) no-repeat; background-position: 0 -75px; border-radius: 5px; cursor: pointer;}
 #cardNo-error,#cardPsw-error{ position:absolute; left:420px; top:0; color:#f00; padding:0 10px 0 0; background:#ffebe7; line-height:35px; border:1px solid #f00; border-radius:5px;}
@@ -48,8 +50,11 @@
                     </div>
                 </div>
                 
-                <form class="rechargeForm" autocomplete="off" method="post" action="<@spring.url '/recharge'/>">
+                <form class="rechargeForm" autocomplete="off" method="post" action="<@spring.url '/accountRecharge'/>">
                 	<h2>途皓卡充值</h2>
+                	<div id="errorShow">
+		                <span class="errorTxt"><@sf.error field="msg"/></span>
+		            </div>
                 	<p>
                 		<label>卡号：</label>
                 		<input type="text" id="cardNo" name="cardNo" value="" placeholder="请输入您的卡号" class="recTxt" />
@@ -91,7 +96,7 @@
                 cardNo: {
                     required: true,
                 },
-                cardPsw: {
+                cardPinCiperUnderZPK: {
                     required: true,
                 },
             },
@@ -99,7 +104,7 @@
                 cardNo: {
                     required: "请输入卡号",
                 },
-                cardPsw: {
+                cardPinCiperUnderZPK: {
                     required: "请输入卡密",
                 },
             }

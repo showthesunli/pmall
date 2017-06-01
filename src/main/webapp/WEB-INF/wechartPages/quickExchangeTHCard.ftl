@@ -46,7 +46,7 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 			</div>
 			<div style="display: block; overflow: hidden; opacity: 1;">
 				<div class="info_child" style=" overflow: hidden; padding-bottom: 0;">
-					<img src="<@spring.url '/imgsrc/'/>"${queryPrdDetail[0].iconFileName}>
+					<img src="<@spring.url '/imgsrc/'/>${queryPrdDetail[0].iconFileName}">
 					<p><b>${queryPrdDetail[0].productInfo}</b></p>
 					<p><b style="color: #f60;">￥${queryPrdDetail[0].prdPrice}</b></p>
 					<p style="margin: 20px 0 10px 0;">

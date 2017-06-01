@@ -60,10 +60,10 @@
     <!--联系-->
     <div class="wjhbg">
     	<ul class="ul_wjhli cl">
-    	   <li style="background:#ebebeb url(images/ioc_01.jpg) no-repeat left center;"><a href="javascript:void(0);" ><h3 style="color:#222B83">衣</h3><span>时尚潮流，随时、随地、随心拥有。</span><em>more ></em></a></li>
-    	   <li style="background:#ebebeb url(images/ioc_02.jpg) no-repeat left center;"><a href="javascript:void(0);" ><h3 style="color:#1265B0">食</h3><span>美味饕餮， 不用麻烦，一步之遥。</span><em>more ></em></a></li>
-    	   <li style="background:#ebebeb url(images/ioc_03.jpg) no-repeat left center;"><a href="javascript:void(0);" ><h3 style="color:#E35318">住</h3><span>不管旅行还是商务出差， 住的好才是真的好。</span><em>more ></em></a></li>
-    	   <li  style="background:#ebebeb url(images/ioc_04.jpg) no-repeat left center;margin-right:0px;"><a href="javascript:void(0);"><h3 style="color:#EB8C10">行</h3><span>在路上，您需要的便利和舒适，我们都有。</span><em>more ></em></a></li>
+    	   <li style="background:#ebebeb url(images/ioc_01.jpg) no-repeat left center;"><a href="<@spring.url '/pro;realDataGroupId=queryPrdList_elCardClass;mrkPrdCateID=电子卡;attrValue=食;'/>" target="_blank"><h3 style="color:#222B83">衣</h3><span>时尚潮流，随时、随地、随心拥有。</span><em>more ></em></a></li>
+    	   <li style="background:#ebebeb url(images/ioc_02.jpg) no-repeat left center;"><a href="<@spring.url '/pro;realDataGroupId=queryPrdList_elCardClass;mrkPrdCateID=电子卡;attrValue=行;'/>" target="_blank"><h3 style="color:#1265B0">食</h3><span>美味饕餮， 不用麻烦，一步之遥。</span><em>more ></em></a></li>
+    	   <li style="background:#ebebeb url(images/ioc_03.jpg) no-repeat left center;"><a href="<@spring.url '/pro;realDataGroupId=queryPrdList_elCardClass;mrkPrdCateID=电子卡;attrValue=衣;'/>" target="_blank"><h3 style="color:#E35318">住</h3><span>不管旅行还是商务出差， 住的好才是真的好。</span><em>more ></em></a></li>
+    	   <li  style="background:#ebebeb url(images/ioc_04.jpg) no-repeat left center;margin-right:0px;"><a href="<@spring.url '/pro;realDataGroupId=queryPrdList_elCardClass;mrkPrdCateID=电子卡;attrValue=住;'/>" target="_blank"><h3 style="color:#EB8C10">行</h3><span>在路上，您需要的便利和舒适，我们都有。</span><em>more ></em></a></li>
     	<ul>
     </div>
     <!--end 联系-->

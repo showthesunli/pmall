@@ -1,4 +1,5 @@
 <#import "/spring.ftl" as spring/>
+<#import "/lib/macro/hisuMacro.ftl" as sf/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -22,12 +23,16 @@ input{ outline:none;}
 .text_1{ position: relative;}
 #username-error,#password-error{ position:absolute; left: 10%; top:52px; color: #f00;}
 input.error{ border-color: #f00;}
+.login{ margin-top: 0;}
 </style>
 </head>
  
 <body>
 <div class="main_1" >
 	<div class="hy">您好，欢迎登录！</div>
+	<div id="errorShow">
+        <span class="errorTxt"><#if SPRING_SECURITY_LAST_EXCEPTION??>${SPRING_SECURITY_LAST_EXCEPTION.message}</#if></span>
+    </div>
     <div class="login">
     <form class="loginForm" action="<@spring.url '/login'/>" method="post">
     <table width="100%" border="0" cellspacing="0" cellpadding="0">

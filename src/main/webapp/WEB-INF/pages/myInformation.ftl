@@ -1,4 +1,5 @@
 <#import "/spring.ftl" as spring/>
+<#import "/lib/macro/hisuMacro.ftl" as sf/>
 <!doctype html>
 <html lang="zh-cn">
 <head>
@@ -42,6 +43,8 @@
 #informationOfMy div{ position:relative;}
 #memberName-error,#identityCardNo-error,#email-error,#gender-error,#birthdayDate-error{ position:absolute; left:305px; top:0; color:#f00; padding:0 10px; background:#ffebe7; line-height:25px; border:1px solid #f00; border-radius:5px;}
 .birthD{ color:#666;}
+.memberMain-Right #errorShow{ margin-left:117px;}
+.baseinfo-Title{ margin-bottom: 0;}
 </style>
 </head>
 
@@ -59,6 +62,9 @@
 
             <div class="memberMain-Right">
                 <h1 class="baseinfo-Title">个人信息</h1>
+                <div id="errorShow">
+		            <span class="errorTxt"><@sf.error field="msg"/></span>
+		        </div>
                 <div class="myDetial">
                     <div id="myInformation" class="myDetialList myBaseInfor">
                     	<form id="informationOfMy" action="modifyMemberInfo" method="post">

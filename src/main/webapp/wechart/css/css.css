@@ -107,8 +107,6 @@ a,img{border:0;}
 
 
 
-
-
-
-
-
+/*=====20170601======*/
+#errorShow{ min-height: 22px; line-height: 20px; margin-top: 10px;}
+.errorTxt{ text-align: center; display: none; min-height: 20px; line-height: 20px; color: #f00; background:#ffebe7; padding: 0 10px; border: 1px solid #f00; border-radius:5px;}

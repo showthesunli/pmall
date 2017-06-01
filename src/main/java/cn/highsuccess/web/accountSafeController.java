@@ -42,7 +42,7 @@ public class accountSafeController extends HisuBaseControllerAdapter {
         return "/accountSafe";
     }
 
-    @RequestMapping(value = "/modPassword",method = RequestMethod.POST)
+    @RequestMapping(value = "",method = RequestMethod.POST)
     public String modUserPassword(Model model,
                                   @NotNull @RequestParam String oldPassword,
                                   @NotNull @RequestParam String newPassword){

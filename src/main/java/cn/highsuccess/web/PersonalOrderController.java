@@ -3,6 +3,8 @@ package cn.highsuccess.web;
 import cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId;
 import cn.highsuccess.data.JavaDataSet;
 import cn.highsuccess.data.JavaOperate;
+import cn.highsuccess.module.UserReceiveInfoItem;
+
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -10,8 +12,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.MatrixVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.*;
+
+import javax.validation.Valid;
 
 /**
  * Created by prototype on 2017/4/20.
@@ -47,4 +54,12 @@ public class PersonalOrderController extends HisuBaseControllerAdapter{
         return "/myOrder";
     }
 
+    //删除订单
+    @RequestMapping(value = "/deleteOrder",method = RequestMethod.POST)
+    public String deleteAddr(Model model,
+    						@RequestParam String billNo){
+        String condition = "billNo="+billNo;
+        this.getJavaOperate().service("jf_memberCenter", "btnDelUserAddr", condition);
+        return "redirect:/myOrder";
+    }
 }

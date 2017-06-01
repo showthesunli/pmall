@@ -1,12 +1,15 @@
 <#import "/spring.ftl" as spring/>
+<#import "/lib/macro/hisuMacro.ftl" as sf/>
 <!DOCTYPE html>
 <!-- saved from url=(0054)http://www.sucaihuo.com/modals/20/2070/demo/dizhi.html -->
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	
-	<meta name="keywords" content="">
+	<meta name="description" content="途皓（北京）商务服务有限公司" />
+	<meta name="keywords" content="途皓（北京）商务服务有限公司" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="renderer" content="webkit">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
 	<title>微商城途皓卡余额充值-逸乐生活网</title>
 	<link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/font_1459473269_4751618.css'/>">
 	<link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/bootstrap.min.css'/>">
@@ -17,6 +20,7 @@
 	<script type="text/javascript" src="<@spring.url '/wechart/js/jquery-1.10.2.min.js'/>"></script>
 	<script type="text/javascript" src="<@spring.url '/wechart/js/bootstrap.min.js'/>"></script>
 	<script type="text/javascript" src="<@spring.url '/wechart/js/jquery.validate.min.js'/>" ></script>
+	<script language="javascript" src="<@spring.url '/wechart/js/jquery.validate.addMethod.js'/>" ></script>
 <!--必要样式-->
 <link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/menu_elastic.css'/>">
 <script type="text/javascript" src="<@spring.url '/wechart/js/snap.svg-min.js'/>"></script>
@@ -32,6 +36,8 @@ input{ outline:none;}
 .text_1{ position: relative;}
 #cardNo-error,#cardPsw-error{ position:absolute; left: 10%; top:52px; color: #f00; font-weight: normal;}
 input.error{ border-color: #f00;}
+#errorShow{ text-align: center; min-height: 22px; line-height: 20px;}
+.errorTxt{ text-align: center; min-height: 20px; line-height: 20px; color: #f00; background:#ffebe7; padding: 0 10px; border: 1px solid #f00; border-radius:5px; display: none;}
 </style>
 </head>
 <body class="huibg">
@@ -60,6 +66,10 @@ input.error{ border-color: #f00;}
 
 
 <div class="usercenter">
+	<div id="errorShow">
+		<span class="errorTxt"><@sf.error field="msg"/></span>
+	</div>
+	
 	<form class="rechargeForm" autocomplete="off" method="post" action="<@spring.url '/recharge'/>">
 	
 	  	<table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -84,7 +94,8 @@ input.error{ border-color: #f00;}
 	   	</table>
    	
    	</form>
-
+	
+	
  
 </div>
 

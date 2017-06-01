@@ -100,3 +100,12 @@ input[type=radio]{ margin-right:5px;}
 .myDetialList p{ float:left;}
 #birthYear,#birthYear option,#birthMonth,#birthMonth option,#birthDay,#birthDay option{ height:25px; line-height:25px;}
 .detialBtn{ color: #3897d7; background:#fff; border: 1px solid #3897d7; margin:20px 0 0 80px; border-radius:5px; heoght:25px; padding:0 10px; cursor:pointer;}
+
+/*=====20170601=====*/
+#errorShow{ text-align: center; margin-top: 20px; height: 30px;}
+.errorTxt{ background: #ffebe7; border:1px solid #f00; border-radius:5px; display: none; line-height: 30px; color: #f00; padding: 0 10px; font-size: 12px;}
+.loginForm,.registerForm{ margin-top: 20px;}
+label.error{ position:absolute; left:305px; top:4px; color:#f00; padding:0 10px; background:#ffebe7; line-height:30px; border:1px solid #f00; border-radius:5px;}
+.memberMain-Right #errorShow{ text-align: left; margin:0 0 10px 85px; height: 20px; line-height:20px;}
+.memberMain-Right .errorTxt{ height: 20px; line-height:20px;}
+.memberMain-Right label.error{ left:420px;}

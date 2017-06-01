@@ -8,6 +8,8 @@
 <meta name="viewport" content="initial-scale=1.0,user-scalable=no"/>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="description" content="途皓（北京）商务服务有限公司" />
+<meta name="keywords" content="途皓（北京）商务服务有限公司" />
 <link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/css.css'/>">
 <link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/style.css'/>">
 <link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/buttons.css'/>">
@@ -23,8 +25,7 @@
 .getCodeBtn{background: -webkit-linear-gradient(#eee, #ccc); background: -o-linear-gradient(#eee, #ccc); background: -moz-linear-gradient(#eee, #ccc); background: linear-gradient(#eee, #ccc);color:#fff; width: 29%; margin-left: 1%; height: 40px; line-height: 40px; color: #666; border: 1px solid #999; border-radius: 3px;}
 .tet{ padding-left:10px;}
 .text_1{ position: relative;}
-#id-error,#phone-error,#password-error,#confirm_password-error,#registerCode-error,#agree-error{ position:absolute; left: 10%; top:52px; color: #f00;}
-#agree-error{ top:32px;}
+#username-error,#registerCode-error,#password-error{ position:absolute; left: 10%; top:52px; color: #f00;}
 input.error{ border-color: #f00;}
 </style>
 </head>
@@ -32,36 +33,24 @@ input.error{ border-color: #f00;}
 <body>
 <div class="main_1" >
     <div class="login">
-    	
-    	<form id="signupForm" class="registerForm" method="post" action="<@spring.url '/register'/>">
+    	<div id="errorShow">
+		    <span class="errorTxt"><@sf.error field="msg"/></span>
+		</div>
+		
+    	<form id="signupForm" class="registerForm" method="post" action="<@spring.url '/forgotPassword'/>">
     	
 		    <table width="100%" border="0" cellspacing="0" cellpadding="0">
 		    	
 		    	<tr class="text">
 		        	<td class="text_1">
-		        		<input type="text" id="id" name="id" class="tet" placeholder="用户名/手机/邮箱" maxlength="20" />		
+		        		<input type="text" id="username" name="username" class="tet" placeholder="用户名/手机/邮箱" maxlength="20" />		
 		        	</td>
-		        	<@sf.error field="id"></@sf.error>
 		      	</tr>
-		      	
-		      	
-			  <!--  
-		      	<tr class="text">
-					<td class="text_1">
-						<input type="password" id="confirm_password" name="confirm_password"  class="tet" placeholder="确认密码" maxlength="20" />
-					</td>
-		      	</tr>-->
-		      	
-		      	<tr class="text">
-		        	<td class="text_1">
-		        		<input type="text" id="phone" name="phone" class="tet" placeholder="请输入手机号码" maxlength="11" />	
-		        	</td>
-		     	</tr>
-		     	
+		      			     	
 		      	<tr class="text">
 		        	<td class="text_1">
 		        		<input type="text" id="registerCode" name="mCode" class="tet" placeholder="请输入验证码" style=" width:50% ;" maxlength="10" />
-		        		 <button type="button" class="getCodeBtn"  id="second">获取验证码</button>
+		        		<button type="button" class="getCodeBtn"  id="second">获取验证码</button>
 		        		
 		        	</td>
 		      	</tr>
@@ -70,22 +59,12 @@ input.error{ border-color: #f00;}
 						<input type="text" onfocus="this.type='password'" id="password" name="password"  class="tet" placeholder="请设置密码，至少六位" maxlength="20" />			
 					</td>
 			    </tr>
-		      	<!--<tr class="text">
-		        	<td class="text_1" style="height:40px">
-		        		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-		        		<input id="agree" name="agree" type="checkbox" value=""  checked="checked" style=" float: left; margin-left: 7.5%;"/>
-		        		<span style=" float: left;">我已阅读并同意</span>
-		        		<a href="javascript:void(0);" style="color: #f60; text-decoration: underline; float: left;">《注册协议》</a>
-		        	</td>
-		      	</tr>-->
 		      
 		      	<tr style="width:100%; margin:10px auto; text-align:center;">
-		        	<td><input type="submit" value="修改密码" class="lg_btn" style="color:#fff;"/></td>
+		        	<td>
+		        		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+		        		<input type="submit" value="修改密码" class="lg_btn" style="color:#fff;"/></td>
 		      	</tr>
-		
-		      <!--	<tr style="width:100%; margin:10px auto; text-align:center;">
-		        	<td class="tt">已有账号，立即<a href="<@spring.url '/login'/>" style="color: #f60; text-decoration: underline;">登录</a></td>
-		      	</tr>-->
 		      	
 		    </table>
 		    
@@ -105,7 +84,7 @@ input.error{ border-color: #f00;}
         // 在键盘按下并释放及提交后验证提交表单
         $("#signupForm").validate({
             rules: {
-                id: {
+                username: {
                     required: true,
                     rangelength:[4,20]
                 },
@@ -113,7 +92,7 @@ input.error{ border-color: #f00;}
                     required: true,
                     rangelength:[6,20]
                 },
-                confirm_password: {
+                /*confirm_password: {
                     required: true,
                     equalTo: "#password"
                 },
@@ -121,11 +100,11 @@ input.error{ border-color: #f00;}
                     required: true,
                     isPhone: []
                 },
-                agree: "required",
+                agree: "required",*/
                 mCode: "required"
             },
             messages: {
-                id: {
+                username: {
                     required: "请输入用户名",
                     rangelength: "长度只能在4-20个字符之间"
                 },
@@ -133,16 +112,16 @@ input.error{ border-color: #f00;}
                     required: "请输入密码",
                     rangelength: "长度只能在6-20个字符之间"
                 },
-                confirm_password: {
+                /*confirm_password: {
                     required: "请输入密码",
                     equalTo: "两次密码输入不一致"
                 },
-                agree: "请接受我们的声明",
+                agree: "请接受我们的声明",*/
                 mCode: "请输入验证码",
-                phone: {
+                /*phone: {
                     required: "请输入手机号码",
                     isPhone: "请输入正确的手机号码"
-                },
+                },*/
             }
         });
     });
@@ -168,7 +147,15 @@ input.error{ border-color: #f00;}
         }
     }
     $("#second").click(function () {
-        var phone = $("#phone").val();
+    	var username = $("#username").val();
+        if (username == "") {
+            if ($("#username-error").length == 0) {
+                $('#username').after('<label id="username-error" class="error" for="username">请输入会员号</label>');
+            } else
+                $("#username-error").css('display','block');
+            return false;
+        }
+        /*var phone = $("#phone").val();
         if (phone == "") {
             if ($("#phone-error").length == 0) {
                 $('#phone').after('<label id="phone-error" class="error" for="phone">请输入手机号码</label>');
@@ -184,10 +171,10 @@ input.error{ border-color: #f00;}
             } else
                 $("#phone-error").css('display','block');
                 return false;
-        }
+        }*/
 
         //ajax发送验证码
-        var phoneNumber = $("#phone").val();
+        /*var phoneNumber = $("#phone").val();
         var mcode = "";
         var $this = this;
         $.ajax({
@@ -206,6 +193,20 @@ input.error{ border-color: #f00;}
                 }else{
 //                    time($this);
                 }
+            }
+        })
+        time(this);
+    });*/
+   var username = $("#username").val();
+        var mcode = "";
+        var $this = this;
+        $.ajax({
+            url:"<@spring.url '/sendForgotPasswordCode'/>",
+            data:"memberID="+username,
+            type:"GET",
+            dataType: "json",
+            success: function (data) {
+                
             }
         })
         time(this);
