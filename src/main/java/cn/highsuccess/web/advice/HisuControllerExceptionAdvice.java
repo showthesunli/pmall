@@ -30,11 +30,6 @@ import java.util.Map;
 public class HisuControllerExceptionAdvice {
     private final Log logger = LogFactory.getLog(this.getClass());
 
-    @ExceptionHandler(HisuPathNotFoundException.class)
-    public String pathNotFountHandler(){
-
-        return "/reigster";
-    }
 
     @ExceptionHandler(HisuOperateException.class)
     public String handleReisterException(HttpServletRequest req,HisuOperateException ex) throws UnsupportedEncodingException {
@@ -49,22 +44,6 @@ public class HisuControllerExceptionAdvice {
 
     @ExceptionHandler(Exception.class)
     public String handleException(HttpServletRequest req,Exception ex){
-        logger.error("request:" + req.getRequestURI() + " exception:" + ex);
-        processExceptionMsg(req, ex);
-        logger.debug("error msg:" + ex.getMessage());
-        return "redirect:/500error";
-    }
-
-    @ExceptionHandler(TemplateException.class)
-    public String handleFreemarkerException(HttpServletRequest req,TemplateException ex){
-        logger.error("request:" + req.getRequestURI() + " exception:" + ex);
-        processExceptionMsg(req, ex);
-        logger.debug("error msg:" + ex.getMessage());
-        return "redirect:/500error";
-    }
-
-    @ExceptionHandler(InvalidReferenceException.class)
-    public String handleFreemarkerException(HttpServletRequest req,InvalidReferenceException ex){
         logger.error("request:" + req.getRequestURI() + " exception:" + ex);
         processExceptionMsg(req, ex);
         logger.debug("error msg:" + ex.getMessage());

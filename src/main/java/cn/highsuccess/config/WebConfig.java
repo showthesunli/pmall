@@ -6,6 +6,7 @@ import org.springframework.context.annotation.*;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
@@ -45,8 +46,8 @@ public class WebConfig extends DelegatingWebMvcConfiguration {
         freeMarkerConfigurer.setTemplateLoaderPaths("/WEB-INF/pages", "/htmlsrc");
         freeMarkerConfigurer.setDefaultEncoding("UTF-8");
         Properties properties = new Properties();
-//        properties.setProperty("template_exception_handler","rethrow");
-        properties.setProperty("template_exception_handler","html_debug");
+        properties.setProperty("template_exception_handler","rethrow");
+//        properties.setProperty("template_exception_handler","html_debug");
         freeMarkerConfigurer.setFreemarkerSettings(properties);
         return freeMarkerConfigurer;
     }
@@ -57,10 +58,10 @@ public class WebConfig extends DelegatingWebMvcConfiguration {
         FreeMarkerConfigurer freeMarkerConfigurer = new FreeMarkerConfigurer();
         freeMarkerConfigurer.setTemplateLoaderPaths("/WEB-INF/wechartPages", "/htmlsrc");
         freeMarkerConfigurer.setDefaultEncoding("UTF-8");
-        freemarker.template.Configuration configuration = new freemarker.template.Configuration(freemarker.template.Configuration.VERSION_2_3_23);
-        configuration.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
-        freeMarkerConfigurer.setConfiguration(configuration);
-//        freeMarkerConfigurer.getConfiguration().setURLEscapingCharset("UTF-8");
+        Properties properties = new Properties();
+        properties.setProperty("template_exception_handler","rethrow");
+//        properties.setProperty("template_exception_handler","html_debug");
+        freeMarkerConfigurer.setFreemarkerSettings(properties);
         return freeMarkerConfigurer;
     }
 

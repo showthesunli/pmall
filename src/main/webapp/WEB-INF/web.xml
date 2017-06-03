@@ -1,0 +1,6 @@
+<web-app>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/500error</location>
+    </error-page>
+</web-app>
