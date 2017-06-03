@@ -4,6 +4,8 @@ import cn.highsuccess.web.exception.HisuOperateException;
 import cn.highsuccess.web.exception.HisuPathNotFoundException;
 import cn.highsuccess.web.exception.HisuRegisterException;
 import com.sun.tracing.dtrace.ModuleAttributes;
+import freemarker.core.InvalidReferenceException;
+import freemarker.template.TemplateException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.ui.Model;
@@ -34,42 +36,47 @@ public class HisuControllerExceptionAdvice {
         return "/reigster";
     }
 
-    /**
-    @ExceptionHandler(HisuOperateException.class)
-    public ModelAndView handleReisterException(HttpServletRequest req,HisuOperateException ex){
-        logger.error("request:"+req.getRequestURI() + " exception:"+ex);
-        StringBuilder viewName = new StringBuilder(req.getRequestURI());
-        viewName.delete(0,req.getContextPath().length());
-
-        ModelAndView mv = new ModelAndView();
-        handleException(mv,ex.getMessage());
-        logger.debug("error viewName:"+viewName.toString());
-
-        mv.setViewName(viewName.toString());
-        return mv;
-    }
-     **/
     @ExceptionHandler(HisuOperateException.class)
     public String handleReisterException(HttpServletRequest req,HisuOperateException ex) throws UnsupportedEncodingException {
         logger.error("request:" + req.getRequestURI() + " exception:" + ex);
         StringBuilder viewName = new StringBuilder(req.getRequestURI());
         viewName.delete(0, req.getContextPath().length());
-
-        FlashMap outputFlashMap = RequestContextUtils.getOutputFlashMap(req);
-        if (outputFlashMap != null){
-            Map<String,Object> map = new HashMap<>();
-            map.put("msg",ex.getMessage());
-            outputFlashMap.put("errorMsg",map);
-        }
+        processExceptionMsg(req,ex);
         logger.debug("error viewName:" + viewName.toString());
         logger.debug("error msg:" + ex.getMessage());
         return "redirect:"+viewName;
     }
 
-    @ModelAttribute
-    public void preRequest(@MatrixVariable(required = false) Map<String,String> map,Model model){
-        if ( map!=null && map.size() != 0 ){
-            model.addAttribute("errorMsg",map);
+    @ExceptionHandler(Exception.class)
+    public String handleException(HttpServletRequest req,Exception ex){
+        logger.error("request:" + req.getRequestURI() + " exception:" + ex);
+        processExceptionMsg(req, ex);
+        logger.debug("error msg:" + ex.getMessage());
+        return "redirect:/500error";
+    }
+
+    @ExceptionHandler(TemplateException.class)
+    public String handleFreemarkerException(HttpServletRequest req,TemplateException ex){
+        logger.error("request:" + req.getRequestURI() + " exception:" + ex);
+        processExceptionMsg(req, ex);
+        logger.debug("error msg:" + ex.getMessage());
+        return "redirect:/500error";
+    }
+
+    @ExceptionHandler(InvalidReferenceException.class)
+    public String handleFreemarkerException(HttpServletRequest req,InvalidReferenceException ex){
+        logger.error("request:" + req.getRequestURI() + " exception:" + ex);
+        processExceptionMsg(req, ex);
+        logger.debug("error msg:" + ex.getMessage());
+        return "redirect:/500error";
+    }
+
+    public void processExceptionMsg(HttpServletRequest req,Exception ex){
+        FlashMap outputFlashMap = RequestContextUtils.getOutputFlashMap(req);
+        if (outputFlashMap != null){
+            Map<String,Object> map = new HashMap<>();
+            map.put("msg",ex.getMessage());
+            outputFlashMap.put("errorMsg",map);
         }
     }
 

@@ -206,14 +206,14 @@
             success: function (data) {
                 if(data.errorMsg.msg){
                     if ($("#phone-error").length == 0) {
-                        $('#phone').after('<label id="phone-error" class="error" for="phone">data.errorMsg.msg</label>');
+                        $('#phone').after('<label id="phone-error" class="error" for="phone">'+data.errorMsg.msg+'</label>');
                     } else{
                         $("#phone-error").css('display','block').text(data.errorMsg.msg);
                     }
-//                        $("#phone-error").css('display','block');
+                }else{
+                    time(this);
                 }
             }
         })
-        time(this);
     });
 </script>

@@ -1,4 +1,5 @@
 <#import "/spring.ftl" as spring/>
+<#import "/lib/macro/hisuMacro.ftl" as sf/>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -19,5 +20,8 @@
 			<script type="text/javascript" src="<@spring.url '/js/error1.js'/>"></script>
 		</div>
 	<script type="text/javascript" src="<@spring.url '/js/error2.js'/>"></script>
+	<!--
+                <@sf.error field="msg"/>
+	 -->
 	</body>
 </html>

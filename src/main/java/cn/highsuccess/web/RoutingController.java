@@ -8,6 +8,7 @@ import cn.highsuccess.sms.SendSms;
 import cn.highsuccess.transform.HisuTransform;
 import cn.highsuccess.web.exception.HisuFlashOperationExcetion;
 import cn.highsuccess.web.exception.HisuOperateException;
+import com.alibaba.fastjson.JSON;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -135,12 +136,12 @@ public class RoutingController extends HisuBaseControllerAdapter{
 
     @ExceptionHandler(HisuFlashOperationExcetion.class)
     @ResponseBody
-    public Map<String,Object> handError(HttpServletRequest req,HisuFlashOperationExcetion ex){
+    public String handError(HttpServletRequest req,HisuFlashOperationExcetion ex){
         Map<String,Object> map = new HashMap<>();
         Map<String,String> msg = new HashMap<>();
         msg.put("msg",ex.getMessage());
-        map.put("errorMsg",msg);
-        return map;
+        map.put("errorMsg", msg);
+        return JSON.toJSONString(map);
     }
 
 }
