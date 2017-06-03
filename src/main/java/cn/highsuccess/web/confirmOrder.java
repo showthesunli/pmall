@@ -5,8 +5,11 @@ import cn.highsuccess.data.JavaDataSet;
 import cn.highsuccess.data.JavaOperate;
 import cn.highsuccess.data.serivce.OrderService;
 import cn.highsuccess.data.serivce.ShoppingCartService;
+import cn.highsuccess.module.BuyerItem;
 import cn.highsuccess.module.Order;
+
 import com.alibaba.fastjson.JSON;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,7 +28,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -78,6 +83,43 @@ public class confirmOrder extends HisuBaseControllerAdapter{
         model.addAttribute(shoppingCartService.getShoppingCart().getBuyerItemList("0"));
         model.addAttribute(shoppingCartService.countProMoney());
         model.addAttribute(shoppingCartService.countProNum());
+        return "/confirmOrder";
+    }
+    
+    @RequestMapping(value = "/confirmOrderNow")
+    public String showConfirmOrderNow(Model model,
+    									BuyerItem buyerItem) throws UnsupportedEncodingException{
+        Map<String,Object> parm = new HashMap<String,Object>();
+        parm.put("memberID", this.getJds().getUserName());
+        excute(model, parm, hisuMngDataGroupAndId);
+
+        excute(model,parm,queryPayerForGoods);
+
+        excute(model,parm,queryPlantEnt);
+        /*model.addAttribute(shoppingCartService.getShoppingCart().getBuyerItemList("0"));
+        model.addAttribute(shoppingCartService.countProMoney());
+        model.addAttribute(shoppingCartService.countProNum());*/
+        //拼装BuyerItemList  
+        /*BuyerItem bi = new BuyerItem();
+        bi.setPrdNo((String)map.get("prdNo"));
+        bi.setPrdName((String)map.get("prdName"));
+        bi.setAmount(Integer.parseInt((String)map.get("amount")));
+        bi.setPrdType((String)map.get("prdType"));
+        bi.setFileName((String)map.get("fileName"));*/
+        //buyerItem.setPrdName(new String(buyerItem.getPrdName().getBytes("iso-8859-1"), "GBK"));
+        
+        ArrayList<BuyerItem> list = new ArrayList<BuyerItem>();
+        list.add(buyerItem);
+        shoppingCartService.getShoppingCart().setBuyerItemList(list);
+        model.addAttribute(list);
+        int  prdNum = 0;
+        double prdMoney = 0.00;
+        if (buyerItem.getPrdType().equals("0")) {
+            prdNum = buyerItem.getAmount();
+            prdMoney = buyerItem.getMoney()*buyerItem.getAmount();
+        }
+        model.addAttribute(prdMoney);
+        model.addAttribute(prdNum);
         return "/confirmOrder";
     }
 

@@ -70,7 +70,7 @@
 	    </li>
 	     <li>
 			<a href="<@spring.url '/myInvoice'/>">
-		       <div class="icc"><i class="iconfont icon-xitongmingpian"></i></div>
+		       <div class="icc"><i class="iconfont icon-youhuiquan"></i></div>
 		       <div class="lzz">发票信息</div>
 		       <div class="rizi"><i class="iconfont icon-jiantouri"></i></div>
 	      	</a>

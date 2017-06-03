@@ -129,7 +129,7 @@
 							</p>
 							<input type="hidden" name="isDefault" value="0"/>
 				            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-				            <input type="hidden" name="forword" value="confirmOrder"/>
+				            <input type="hidden" name="forword" value="confirmCardOrder;termID=wechat"/>
 				            <input type="hidden" name="objectID" id="objectID" value=""/>
 						</div>
 					</form>

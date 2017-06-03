@@ -17,6 +17,7 @@
 .jf-cart{ margin-top: 0;}
 .gray{-webkit-filter: grayscale(100%); -moz-filter: grayscale(100%); -ms-filter: grayscale(100%); -o-filter: grayscale(100%); filter: grayscale(100%); filter: gray;cursor:not-allowed;
 }
+.cartNum{ width: 40px;}
 </style>
 </head>
 
@@ -46,30 +47,46 @@
 					<#if buyerItemList??>
 					<#list buyerItemList as item>
 					<#if item.prdType == "0">
-                        <div class="jf-cartItem ">
+                    	<div class="jf-cartItem ">
 							<!--
                             <div class="width50">
                                 <input type="checkbox" value="" name="newslist" style="margin-top:13px;" />
                             </div>
                             -->
+                            
                             <div class="width200 cartItemTitle" style="width:500px;">
 								<#if item.fileName != "">
                                     <a href="<@spring.url '/proshow;prdNo=${item.prdNo};keyWordsFld=${item.prdNo};'/>"><img src="<@spring.url '/imgsrc/${item.fileName?if_exists}'/>" width="60" height="40" onerror="downloadErrImg(this,'${item.fileName?if_exists}','../imgsrc')"/></a>
-                                    <a href="<@spring.url '/proshow;prdNo=${item.prdNo};keyWordsFld=${item.prdNo};'/>" style="width:435px;">${item.prdName?if_exists}</a>
+                                    <a href="<@spring.url '/proshow;prdNo=${item.prdNo};keyWordsFld=${item.prdNo};'/>" style="width:435px;" class="cartPrdName">${item.prdName?if_exists}</a>
 									<#else >
                                         <a href="<@spring.url '/proshow;prdNo=${item.prdNo};keyWordsFld=${item.prdNo};'/>"><img src="<@spring.url '/imgsrc/${item.fileName?if_exists}'/>" width="60" height="40" /></a>
-                                        <a href="<@spring.url '/proshow;prdNo=${item.prdNo};keyWordsFld=${item.prdNo};'/>" style="width:435px;">${item.prdName?if_exists}</a>
+                                        <a href="<@spring.url '/proshow;prdNo=${item.prdNo};keyWordsFld=${item.prdNo};'/>" style="width:435px;" class="cartPrdName">${item.prdName?if_exists}</a>
 								</#if>
                             </div>
-                            <div class="width200 jf-exchange" style="line-height:40px;">￥${item.money}</div>
-                            <#--<div class="width100" style="line-height:40px;">1/1000</div>-->
-                            <#--<div class="width100"><span class="cartNumL bgImgS" style="margin-left:15px;"></span><input name="cartNum" type="text" value="${item.amount}" class="cartNum" /><span class="cartNumR bgImgS"></span></div>-->
-                            <div class="width100" style="line-height: 40px">${item.amount}</div>
+                            <div class="width200 jf-exchange" style="line-height:40px;">￥<span>${item.money}</span></div>
+                            <div class="width100">
+                            	<span class="cartNumL bgImgS"></span>
+                            	<input name="cartNum" type="text" value="${item.amount}" class="cartNum" />
+                            	<span class="cartNumR bgImgS"></span>
+                            </div>
                             <div class="width200">
                                 <p><span class="exchangeCount" style=" line-height:40px;">￥${item.money * item.amount}</span></p>
                             </div>
-                            <div class="cartDlt width100" style="line-height:40px;"><a href="javascript:delItem('${item.prdNo}','${item.money?c}','${item.amount}')" >删除</a></div>
+                            <div class="cartDlt width100" style="line-height:40px;">
+                            	<a href="javascript:delItem('${item.prdNo}','${item.money?c}','${item.amount}')" >删除</a>
+                            </div>
                         </div>
+                        
+                    	<form  action="<@spring.url '/shoppingCart/modCart'/>" method="get" class="formGo">     
+							<input name="prdNo" type="hidden" value="${item.prdNo}" />
+							<input name="prdName" type="hidden" value="${item.prdName}" />
+							<input name="amount" type="hidden" value="${item.amount}" />
+							<input name="money" type="hidden" value="${item.money}" />
+							<input name="prdType" type="hidden" value="${item.prdType}" />
+							<input name="fileName" type="hidden" value="${item.fileName}" />
+							<input name="prdWareNum" type="hidden" value="${item.prdWareNum}" />
+						</form>
+                    
 					</#if>
 					</#list>
 					</#if>
@@ -106,25 +123,41 @@
                             <input type="checkbox" value="" name="newslist" style="margin-top:13px;" />
                         </div>
                         -->
-                        <div class="width200 cartItemTitle" style="width:380px;">
+                        <div class="width200 cartItemTitle" style="width:380px;">                       	
 							<#if item.fileName != "">
                                 <a href="<@spring.url '/proshow;prdNo=${item.prdNo};keyWordsFld=${item.prdNo};'/>"><img src="<@spring.url '/imgsrc/${item.fileName?if_exists}'/>" width="60" height="40" onerror="downloadErrImg(this,'${item.fileName?if_exists}','../imgsrc')"/></a>
-                                <a href="<@spring.url '/proshow;prdNo=${item.prdNo};keyWordsFld=${item.prdNo};'/>" style="width:315px;">${item.prdName?if_exists}</a>
+                                <a href="<@spring.url '/proshow;prdNo=${item.prdNo};keyWordsFld=${item.prdNo};'/>" style="width:315px;" class="cartPrdName">${item.prdName?if_exists}</a>
 							<#else >
                                 <a href="<@spring.url '/proshow;prdNo=${item.prdNo};keyWordsFld=${item.prdNo};'/>"><img src="<@spring.url '/imgsrc/${item.fileName?if_exists}'/>" width="60" height="40" /></a>
-                                <a href="<@spring.url '/proshow;prdNo=${item.prdNo};keyWordsFld=${item.prdNo};'/>" style="width:315px;">${item.prdName?if_exists}</a>
+                                <a href="<@spring.url '/proshow;prdNo=${item.prdNo};keyWordsFld=${item.prdNo};'/>" style="width:315px;" class="cartPrdName">${item.prdName?if_exists}</a>
 							</#if>
                         </div>
                         <div class="width100" style="line-height: 40px">${item.prdType}</div>
-                        <div class="width200 jf-exchange" style="line-height:40px;">￥${item.money}</div>
-					<#--<div class="width100" style="line-height:40px;">1/1000</div>-->
-					<#--<div class="width100"><span class="cartNumL bgImgS" style="margin-left:15px;"></span><input name="cartNum" type="text" value="${item.amount}" class="cartNum" /><span class="cartNumR bgImgS"></span></div>-->
-                        <div class="width100" style="line-height: 40px">${item.amount}</div>
+                        <div class="width200 jf-exchange" style="line-height:40px;">￥<span>${item.money}</span></div>
+                        <#--<div class="width100" style="line-height:40px;">1/1000</div>-->
+						<div class="width100">
+							<span class="cartNumL bgImgS"></span>
+							<input name="cartNum" type="text" value="${item.amount}" class="cartNum" />
+							<span class="cartNumR bgImgS"></span>
+						</div>
+						
+                        <#--<div class="width100" style="line-height: 40px">${item.amount}</div>-->
                         <div class="width200">
                             <p><span class="exchangeCount" style=" line-height:40px;">￥${item.money * item.amount}</span></p>
                         </div>
                         <div class="cartDlt width100" style="line-height:40px;"><a href="javascript:delItem('${item.prdNo}','${item.money?c}','${item.amount}')" >删除</a></div>
                     </div>
+                    
+                    <form  action="<@spring.url '/shoppingCart/modCart'/>" method="get" class="formGo">     
+						<input name="prdNo" type="hidden" value="${item.prdNo}" />
+						<input name="prdName" type="hidden" value="${item.prdName}" />
+						<input name="amount" type="hidden" value="${item.amount}" />
+						<input name="money" type="hidden" value="${item.money}" />
+						<input name="prdType" type="hidden" value="${item.prdType}" />
+						<input name="fileName" type="hidden" value="${item.fileName}" />
+						<input name="prdWareNum" type="hidden" value="${item.prdWareNum}" />
+					</form>
+					
 				</#if>
 				</#list>
 			</#if>
@@ -159,131 +192,101 @@
     <!--底部-->
     <#include "/lib/template/footer.ftl" encoding="UTF-8">
     <!--end 底部-->
+    
+    <div id="loginBg"></div>
+    <!--提示框-->
+    <div class="tipDiv">
+        <div class="jf-overflowH tipDivTitle"><h3 style="float:left;">提示</h3><span onclick="closeTipDiv('tipDiv')" style="float:right; cursor:pointer; color:#999;font-size:25px;">×</span></div>
+        <p class="tipShow" style="font-size:14px; font-weight:bold; color:#f60"></p>
+        <p><input type="button" value="确定" class="sureBtn" onclick="closeTipDiv('tipDiv')" /></p>
+    </div>
+    <!--提示框 end-->
 
 </body>
 
 <script language="javascript">
-$(document).ready(function(e) {		
+
+$(document).ready(function(e) {	
 	//数量减
 	$(".cartNumL").click(function(){		 
 		var v =  $(this).next(".cartNum").attr("value");
 		var num=parseInt(v) - 1;
-		var exchange = num * 5000;
-		var price = num *  100;
-		  
+		var wareNum = $(this).parent().parent().next(".formGo").find("input[name='prdWareNum']").val();
+		var money = $(this).parent().parent().next(".formGo").find("input[name='money']").val();
+						  
 		if(parseInt(v)==1){
-			$(this).next(".cartNum").val(1);
+			openTipDiv('tipDiv','商品数量必须大于0');			
 		}
 		else{
+			$("input[name='amount']").val(num);			
 			$(this).next(".cartNum").val(num);
-			//$(this).parent().parent().find(".priceCount").html(price.toFixed(2));
-			$(this).parent().parent().find(".exchangeCount").html(exchange);
-			GetCount();
+			$("input[name='prdWareNum']").val(wareNum.replace(/,/g,''));
+			$("input[name='money']").val(money.replace(/,/g,''));
+			$(this).parent().parent().next(".formGo").submit();
 		}		  
 	});
 	
 	//数量加	
 	$(".cartNumR").click(function(){
 		var v =  $(this).prev(".cartNum").attr("value");
-		var num=parseInt(v) + 1;
-		var exchange = num * 5000;
-		var price = num *  100;
-		
-		$(this).prev(".cartNum").val(num);
-		//$(this).parent().parent().find(".priceCount").html(price.toFixed(2));
-		$(this).parent().parent().find(".exchangeCount").html(exchange);
-		GetCount();
-		});
-		
-	//全选        
-	$(".allselect").click(function () {		
-		if($(this).attr("checked")){
-			$(".jf-cartItem input[name=newslist]").each(function () {
-				$(this).attr("checked", true);
-			});
-			GetCount();
+		var wareNum = $(this).parent().parent().next(".formGo").find("input[name='prdWareNum']").val();
+		var money = $(this).parent().parent().next(".formGo").find("input[name='money']").val();
+		var num = parseInt(v) + 1;
+				
+		if(num < parseInt(wareNum)){
+			$(this).prev(".cartNum").val(num);
+			$("input[name='amount']").val(num);
+			$("input[name='prdWareNum']").val(wareNum.replace(/,/g,''));
+			$("input[name='money']").val(money.replace(/,/g,''));
+			$(this).parent().parent().next(".formGo").submit();
 		}
-		else
-   		{
-			$(".jf-cartItem input[name=newslist]").each(function () {
-				if ($(this).attr("checked")) {
-					$(this).attr("checked", false);
-				} else {
-					$(this).attr("checked", true);
-				} 
-			});
-			GetCount();
-   		}		
+		else{
+			openTipDiv('tipDiv','商品数量超限');
+			$(this).val(wareNum);
+		}
+				
 	});
 	
-	// 所有复选(:checkbox)框点击事件
-	$(".jf-cartItem input[name=newslist]").click(function () {
-		if($(this).attr("checked")){
-			var n = $(".jf-cartItem input:checked").length;
-			var i = $("input[name=newslist]").length;
-			if(n==i){$(".allselect").attr("checked", true);}
-			$(this).attr("checked", true);
-			GetCount();
-		}
-		else {
-			$(this).attr("checked", false);
-			$(".allselect").attr("checked", false);
-			GetCount();
-		}
-	});
-
-	$("#cx").click(function(){
-		$(".industryItem li").removeClass("borderColorW");
-		$(this).addClass("borderColorW");
-        $("#loginBg").css("display","block");
-		$("#industry-cx").css("display","block");
-		$("#industry-xy").css("display","none");
-		})
+	//数量手输
+	$(".cartNum").blur(function(){
+		var v = $(this).val();
+		var oldNum = $(this).parent().parent().next(".formGo").find("input[name='amount']").val();
+		var wareNum = $(this).parent().parent().next(".formGo").find("input[name='prdWareNum']").val();
+		var money = $(this).parent().parent().next(".formGo").find("input[name='money']").val();
 		
-	$("#xy").click(function(){
-		$(".industryItem li").removeClass("borderColorW");
-		$(this).addClass("borderColorW");
-         $("#loginBg").css("display","block");
-		 $("#industry-xy").css("display","block");
-		 $("#industry-cx").css("display","none");
-		})
-	$("input[name=radioG]").click(function(){
-		$(".industry").removeClass("industryChecked");
-		$(this).parent("h4").addClass("industryChecked");
-		})
+		if(v <= 0){			
+			openTipDiv('tipDiv','商品数量必须大于0');
+			$(this).val(1);
+		}
+		else if(v <= wareNum && v > 0){
+			$(this).val(v);
+			$("input[name='amount']").val(v);			
+			$("input[name='prdWareNum']").val(wareNum.replace(/,/g,''));
+			$("input[name='money']").val(money.replace(/,/g,''));
+			$(this).parent().parent().next(".formGo").submit();
+		}
+		else{
+			openTipDiv('tipDiv','商品数量超限');
+			$(this).val(oldNum);
+		}
+	});	
+
 })
-
-function GetCount() {
-	var pConts = 0;
-	var exConts = 0;
-	var numTotal = 0;
-	$(".jf-cartItem input[name=newslist]").each(function () {
-		if ($(this).attr("checked")) {
-			for (var i = 0; i < $(this).length; i++) {
-				exConts += parseInt($(this).parent().parent().find(".exchangeCount").text());
-				//pConts += parseInt($(this).parent().parent().find(".priceCount").text());
-				numTotal += parseInt($(this).parent().parent().find(".cartNum").val());
-			}
-		}
-	});
-	$("#shuliang").text(numTotal);
-	$("#exchangeTotal").html(exConts);
-	$("#priceTotal").html((pConts).toFixed(2));
-}
-	
-function getVal(){
-	var v = $("input[name=radioG1]:checked").val();
-	$("input[name=exVal]").val(v);
-	exchangeClose();
-	if($("input[name=exVal]").val() != ''){
-		$(".cartBanBtn").removeClass("btnGrey");
-		}
-	}
 
 function delItem(prdNo,money,amount){
 	var url = "<@spring.url '/shoppingCart/delCart'/>";
 	window.location.href = url + "?prdNo=" + prdNo + "&money=" + money +"&amount=" + amount;
 	return false;
+}
+
+function openTipDiv(obj,txt) {
+    $("#loginBg").css("display","block");
+    $("." + obj).css("display","block");
+    $('.tipShow').text(txt);
+}
+function closeTipDiv(obj) {
+    $("#loginBg").css("display","none");
+    $("." + obj).css("display","none");
 }
 
 	$(function(){

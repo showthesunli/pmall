@@ -36,7 +36,7 @@
 #email,#birth{line-height: 25px;width: 200px;border: 1px solid #ccc;}
 a#radio input {width: 28px;}
 a#radio {display: none;}
-#email-error{position: absolute;left: 88px;top: 169px;color: #FF2626;font-weight: 400;}
+#email-error{position: absolute;left: 88px;top: 191px;color: #FF2626;font-weight: 400;}
 #errorShow{ text-align: center; min-height: 22px; line-height: 20px;}
 .errorTxt{ text-align: center; min-height: 20px; line-height: 20px; color: #f00; background:#ffebe7; padding: 0 10px; border: 1px solid #f00; border-radius:5px; display: none;}
 </style>

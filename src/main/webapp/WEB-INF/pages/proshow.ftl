@@ -150,7 +150,7 @@
                 </div>
 
                 <div class="margin15">
-                    <input name="" type="button" value="购买" class="btnBgS prodBuyBtn"><input name="" type="button" value="加入购物车" id="addTo" class="btnBgS prodCartBtn">
+                    <input name="" type="button" value="购买" id="purchaseNow" class="btnBgS prodBuyBtn"><input name="" type="button" value="加入购物车" id="addTo" class="btnBgS prodCartBtn">
                 </div>
 
             </div>
@@ -224,8 +224,20 @@ $(document).ready(function(){
 		var money = ${queryPrdDetail[0].prdPrice};
 		var amount = $("#prdnum").val();
 		var prdNo = "${queryPrdDetail[0].prdNo}";
-		var isCard = "${queryPrdDetail[0].isCard}"
-		window.location.href = "<@spring.url '/shoppingCart/addCart'/>" + "?prdNo="+prdNo+"&amount="+amount+"&money="+money+"&prdType="+isCard;
+		var isCard = "${queryPrdDetail[0].isCard}";
+		var prdWareNum = "${queryPrdDetail[0].prdWareNum}";
+		window.location.href = "<@spring.url '/shoppingCart/addCart'/>" + "?prdNo="+prdNo+"&amount="+amount+"&money="+money+"&prdType="+isCard + "&prdWareNum="+prdWareNum;
+	})
+	
+	$("#purchaseNow").click(function (){
+		var money = ${queryPrdDetail[0].prdPrice};
+		var amount = $("#prdnum").val();
+		var prdNo = "${queryPrdDetail[0].prdNo}";
+		var prdName = "${queryPrdDetail[0].productInfo}";
+		var isCard = "${queryPrdDetail[0].isCard}";
+		var fileName = "${queryPrdDetail[0].fileName}";
+		//window.location.href = "<@spring.url '/confirmOrder'/>" + ";prdNo="+prdNo+ ";prdName="+prdName+";amount="+amount+";money="+money+";prdType="+isCard + ";fileName=" + fileName;
+		window.location.href = "<@spring.url '/confirmOrderNow'/>" + "?prdNo="+prdNo+ "&prdName="+prdName+"&amount="+amount+"&money="+money+"&prdType="+isCard + "&fileName=" + fileName;
 	})
 	
 	//选择积分来源

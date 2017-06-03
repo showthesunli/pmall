@@ -22,7 +22,7 @@ import java.util.Map;
  * Created by prototype on 2017/5/20.
  */
 @Controller
-@RequestMapping(value = "/accountSafe")
+@RequestMapping(value = "/accountSafe{matrix}")
 public class accountSafeController extends HisuBaseControllerAdapter {
     @Autowired
     @Qualifier(value = "queryPersonalCenterInfo")
@@ -33,30 +33,26 @@ public class accountSafeController extends HisuBaseControllerAdapter {
         super(jds, javaOperate);
     }
 
-    @RequestMapping(value = "",method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public String showAccountSafe(Model model,
-                                  @MatrixVariable(required = false) Map<String,String> map){
-        Map<String,Object> param = new HashMap<>(map);
+                                  @MatrixVariable(required = false) Map<String, String> map) {
+        Map<String, Object> param = new HashMap<>(map);
         param.put("memberID", this.getJds().getUserName());
         excute(model, param, hisuMngDataGroupAndId);
         return "/accountSafe";
     }
 
-    @RequestMapping(value = "",method = RequestMethod.POST)
+    @RequestMapping(value = "", method = RequestMethod.POST)
     public String modUserPassword(Model model,
                                   @NotNull @RequestParam String oldPassword,
-                                  @NotNull @RequestParam String newPassword){
-        StringBuilder condition =  new StringBuilder();
+                                  @NotNull @RequestParam String newPassword) {
+        StringBuilder condition = new StringBuilder();
         oldPassword = HisuOperatePasswd.hisuEncPasswd(oldPassword);
         newPassword = HisuOperatePasswd.hisuEncPasswd(newPassword);
         condition.append("oldPassword=").append(oldPassword).append("|");
         condition.append("newPassword=").append(newPassword).append("|");
         condition.append("memberID=").append(this.getJds().getUserName());
-        this.getJavaOperate().service("w_mmbCenterPage","starExprModMmbPasswd",condition.toString());
-        if (this.getJavaOperate().getResult()){
-            return "redirect:/logout?forword=modifyPswSuccess";
-        }else {
-            return "redirect:/accountSafe";
-        }
+        this.getJavaOperate().service("w_mmbCenterPage", "starExprModMmbPasswd", condition.toString());
+        return "redirect:/logout?forword=modifyPswSuccess";
     }
 }

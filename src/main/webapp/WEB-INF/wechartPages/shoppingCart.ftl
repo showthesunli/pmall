@@ -20,7 +20,7 @@
 <style>
 .continueSBtn{background: -webkit-linear-gradient(#eee, #ccc); background: -o-linear-gradient(#eee, #ccc); background: -moz-linear-gradient(#eee, #ccc); background: linear-gradient(#eee, #ccc);color:#333; border-color: #999;}
 .sCartTitle{ font-size: 16px; font-weight: bold; color: #f60;}
-.f12{ font-size: 12px; font-weight: normal;}
+.f12{ font-size: 12px; font-weight: normal;margin: 15px 16px;}
 .iconfont{ width: 16px; height: 16px; display: inline-block;}
 .info_head{ position: relative;}
 .right em{ display: block; -webkit-border-radius: 20px; border-radius: 20px; color: #FFF; font-size: 12px; line-height: 12px; margin-top: 5px; padding: 4px 8px; top: 50%; text-shadow: 0 0 #FFFFFF; font-style: normal;}
@@ -30,6 +30,11 @@
 .info_card{ margin-top: 10px;}
 .gray{-webkit-filter: grayscale(100%); -moz-filter: grayscale(100%); -ms-filter: grayscale(100%); -o-filter: grayscale(100%); filter: grayscale(100%); filter: gray;cursor:not-allowed;
 }
+.gw_num{border: 1px solid #dbdbdb;width: 106px;line-height: 26px;overflow: hidden;margin-top: 10px;}
+.gw_num a{display: block;height: 26px;width: 26px;float: left;color: #7A7979;border-right: 1px solid #dbdbdb;text-align: center;cursor: pointer;}
+.gw_num .num{display: block;float: left;text-align: center;width: 52px;font-style: normal;font-size: 14px;line-height: 24px;border: 0;}
+.gw_num a.add{float: right;border-right: 0;border-left: 1px solid #dbdbdb;}
+.gw_num,.left f12 red{float: left;}
 </style>
 </head>
 
@@ -71,9 +76,13 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 			</#if>
 			
 			<div class="info_card_price">
-				<span class="left f12 red" style="width: 20%;">${item.amount}</span>
-				<span class="left f12 red" style="width: 30%;">￥${item.money}</span>
-				<span class="left f12 red" style="width: 50%; text-align: right;">小计：￥${item.money * item.amount}</span>
+				<div class="gw_num">
+					<a class="jian">-</a>
+					<input type="text" value="${item.amount}" class="num"/>
+					<a class="add">+</a>
+			    </div>
+				<span class="left f12 red" >单价：￥${item.money}</span>
+				<span class="left f12 red" >小计：￥${item.money * item.amount}</span>
 			</div>
 		</div>
 		
@@ -104,6 +113,7 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 					<i><img src="<@spring.url '/imgsrc/${item.fileName?if_exists}'/>" /></i>
 					<h1>${item.prdName?if_exists}</h1>
 				</a>
+				
 			</div>
 			
 			<#else >
@@ -113,14 +123,20 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 					<i><img src="<@spring.url '/imgsrc/${item.fileName?if_exists}'/>" /></i>
 					<h1>${item.prdName?if_exists}</h1>
 				</a>
+				
 			</div>
 			
 			</#if>
 			
 			<div class="info_card_price">
-				<span class="left f12 red" style="width: 20%;">${item.amount}</span>
-				<span class="left f12 red" style="width: 30%;">￥${item.money}</span>
-				<span class="left f12 red" style="width: 50%; text-align: right;">小计：￥${item.money * item.amount}</span>
+				<div class="gw_num">
+					<a class="jian">-</a>
+					<input type="text" value="${item.amount}" class="num"/>
+					<a class="add">+</a>
+			    </div>
+				<!--<span class="left f12 red" style="width: 20%;">${item.amount}</span>-->
+				<span class="left f12 red">单价：￥${item.money}</span>
+				<span class="left f12 red">小计：￥${item.money * item.amount}</span>
 			</div>
 		</div>
 	
@@ -169,4 +185,20 @@ function delItem(prdNo,money,amount){
 	   
 	}
 	})
+	$(document).ready(function(){
+		//加的效果
+		$(".add").click(function(){
+		var n=$(this).prev().val();
+		var num=parseInt(n)+1;
+		if(num==0){ return;}
+		$(this).prev().val(num);
+		});
+		//减的效果
+		$(".jian").click(function(){
+		var n=$(this).next().val();
+		var num=parseInt(n)-1;
+		if(num==0){ return}
+		$(this).next().val(num);
+		});
+		})
 </script>

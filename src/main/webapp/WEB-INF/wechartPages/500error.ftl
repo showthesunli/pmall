@@ -1,0 +1,23 @@
+<#import "/spring.ftl" as spring/>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>500哟</title>
+		<link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/errorstyle.css'/>">
+	</head>
+
+	<body>
+
+		<div class="demo">
+			<p><span>5</span><span>0</span><span>0</span></p>
+			<p>服务器开小差了(´･ω･`)</p>
+		</div>
+
+		<div style="display:none">
+			<script type="text/javascript" src="<@spring.url '/wechart/js/error1.js'/>"></script>
+		</div>
+	<script type="text/javascript" src="<@spring.url '/wechart/js/error2.js'/>"></script>
+	</body>
+</html>

@@ -43,6 +43,8 @@ public class PmallSecurityConfig extends WebSecurityConfigurerAdapter{
                 .authorizeRequests()
                 .antMatchers("/member").authenticated()
                 .antMatchers("/confirmOrder").authenticated()
+                .antMatchers("/confirmOrderNow").authenticated()
+                .antMatchers("/confirmCardOrder").authenticated()
                 .antMatchers("/buycfm**").authenticated()
                 .antMatchers("/myInformation").authenticated()
                 .antMatchers("/myOrder").authenticated()

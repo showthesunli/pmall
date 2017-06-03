@@ -38,6 +38,11 @@ public class ShoppingCart {
     public List<BuyerItem> getBuyerItemList() {
         return buyerItemList;
     }
+    
+    public void setBuyerItemList(List<BuyerItem> buyerItemList){
+    	this.buyerItemList = new LinkedList<BuyerItem>();
+    	this.buyerItemList.addAll(buyerItemList);
+    }
 
     /**
      * itemType 为0时为实物商品项，为1时为卡项

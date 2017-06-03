@@ -42,9 +42,6 @@
         <div class="jf-width1200">
         	<div id="errorShow">
                 <span class="errorTxt"><@sf.error field="msg"/></span>
-                <#if msg??>
-                    <span class="errorTxt">${msg}</span>
-                </#if>
             </div>
             <form id="signupForm" class="registerForm" method="post" action="<@spring.url '/register'/>">
                 <p>
@@ -207,15 +204,13 @@
             type:"GET",
             dataType: "json",
             success: function (data) {
-                if(data['错误原因']){
+                if(data.errorMsg.msg){
                     if ($("#phone-error").length == 0) {
-                        $('#phone').after('<label id="phone-error" class="error" for="phone">手机号码重复</label>');
+                        $('#phone').after('<label id="phone-error" class="error" for="phone">data.errorMsg.msg</label>');
                     } else{
-                        $("#phone-error").css('display','block').text("手机号码重复");
+                        $("#phone-error").css('display','block').text(data.errorMsg.msg);
                     }
 //                        $("#phone-error").css('display','block');
-                }else{
-//                    time($this);
                 }
             }
         })

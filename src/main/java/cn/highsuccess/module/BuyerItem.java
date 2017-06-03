@@ -19,6 +19,9 @@ public class BuyerItem {
 
     //产品单价
     private double money;
+    
+    //商品库存
+    private int prdWareNum;
 
     //商品分类，区分卡和商品,分别下单,卡为1
     private String prdType;
@@ -86,11 +89,19 @@ public class BuyerItem {
         this.amount = amount;
     }
 
-    public boolean equals(Object that){
-        return EqualsBuilder.reflectionEquals(this,that,"amount","money","prdName","fileName","prdType");
+    public int getPrdWareNum() {
+		return prdWareNum;
+	}
+
+	public void setPrdWareNum(int prdWareNum) {
+		this.prdWareNum = prdWareNum;
+	}
+
+	public boolean equals(Object that){
+        return EqualsBuilder.reflectionEquals(this,that,"amount","money","prdName","fileName","prdType","prdWareNum");
     }
 
     public int hashCode(){
-        return HashCodeBuilder.reflectionHashCode(this,"amount","money","prdName","fileName","prdType");
+        return HashCodeBuilder.reflectionHashCode(this,"amount","money","prdName","fileName","prdType","prdWareNum");
     }
 }

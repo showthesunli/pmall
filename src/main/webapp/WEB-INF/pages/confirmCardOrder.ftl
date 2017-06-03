@@ -252,7 +252,7 @@
         <p style="margin:10px 0 0 90px;"><input type="hidden" id="operType" name="operType" value="0"/><input type="hidden" id="" name="" value=""/><input type="submit" value="保存" class="sureBtn"  onclick="closeTipDiv('addressDiv')"  /><input type="button" value="取消" class="cancleBtn"  onclick="closeTipDiv('addressDiv')" /></p>
             <input type="hidden" name="isDefault" value="0"/>
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            <input type="hidden" name="forword" value="confirmCardOrder"/>
+            <input type="hidden" name="forword" value="confirmCardOrder;termID=web"/>
             <input type="hidden" name="objectID" id="objectID" value=""/>
         </form>
     </div>

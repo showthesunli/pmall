@@ -87,7 +87,7 @@ input{ outline:none;}
       		<tr class="text">
 				<td class="text_1">
 					<span class="addrTxt">手机：</span>
-					<input type="text" id="phone" name="phone" value="${memberInfo[0].mobile}"  class="addrInputTxt" readOnly="true" />
+					<input type="text" id="phone" name="mobile" value="${memberInfo[0].mobile}"  class="addrInputTxt" readOnly="true" />
 				</td>
       		</tr>
       

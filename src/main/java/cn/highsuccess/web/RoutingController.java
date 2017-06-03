@@ -6,6 +6,8 @@ import cn.highsuccess.data.JavaDataSet;
 import cn.highsuccess.data.JavaOperate;
 import cn.highsuccess.sms.SendSms;
 import cn.highsuccess.transform.HisuTransform;
+import cn.highsuccess.web.exception.HisuFlashOperationExcetion;
+import cn.highsuccess.web.exception.HisuOperateException;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,16 +57,13 @@ public class RoutingController extends HisuBaseControllerAdapter{
                                         Model model,
                                         @MatrixVariable(required = false) Map<String,Object> map){
         logger.debug("processGetWithNoParam path: "+path);
-        if (map != null){
-            model.addAllAttributes(map);
-        }
         return path;
     }
 
     @GetMapping("/")
     public String index(Model model){
         logger.debug("/ path: index");
-        return "/";
+        return "/index";
     }
 
     @ResponseBody
@@ -99,7 +98,11 @@ public class RoutingController extends HisuBaseControllerAdapter{
         ApplicationContext ac = WebApplicationContextUtils.getWebApplicationContext(req.getServletContext());
         HisuMngDataGroupAndId hisuMngDataGroupAndId = (HisuMngDataGroupAndId) ac.getBean("sendMcode");
 //        excute(model, param, hisuMngDataGroupAndId);
-        excuteOperate(model, param, hisuMngDataGroupAndId);
+        try {
+            excuteOperate(model, param, hisuMngDataGroupAndId);
+        }catch (HisuOperateException e){
+            throw new HisuFlashOperationExcetion(e.getMessage());
+        }
 
         return  this.getJavaOperate().getResponseData().toString();
     }
@@ -121,13 +124,23 @@ public class RoutingController extends HisuBaseControllerAdapter{
         ApplicationContext ac = WebApplicationContextUtils.getWebApplicationContext(req.getServletContext());
         HisuMngDataGroupAndId hisuMngDataGroupAndId = (HisuMngDataGroupAndId) ac.getBean("sendForgotPasswordCode");
 //        excute(model, param, hisuMngDataGroupAndId);
-        excuteOperate(model, param, hisuMngDataGroupAndId);
-
-        if (((Map<String,String>)model.asMap().get("mobileAuthcode")).get("authCode") != null){
-            //this.sendSms.sendMcode(mobile, "您本次的验证码为 ："+((Map<String,String>)model.asMap().get("mobileAuthcode")).get("authCode"));
-            return ((Map<String,String>)model.asMap().get("mobileAuthcode")).get("authCode");
+        try {
+            excuteOperate(model, param, hisuMngDataGroupAndId);
+        }catch (HisuOperateException e){
+            throw new HisuFlashOperationExcetion(e.getMessage());
         }
+
         return  this.getJavaOperate().getResponseData().toString();
+    }
+
+    @ExceptionHandler(HisuFlashOperationExcetion.class)
+    @ResponseBody
+    public Map<String,Object> handError(HttpServletRequest req,HisuFlashOperationExcetion ex){
+        Map<String,Object> map = new HashMap<>();
+        Map<String,String> msg = new HashMap<>();
+        msg.put("msg",ex.getMessage());
+        map.put("errorMsg",msg);
+        return map;
     }
 
 }

@@ -69,7 +69,7 @@ input.error{ border-color: #f00;}
 		<span class="errorTxt"><@sf.error field="msg"/></span>
 	</div>
 	
-	 <form class="rechargeForm" autocomplete="off" method="post" action="<@spring.url '/accountSafe/modPassword'/>">
+	 <form class="rechargeForm" autocomplete="off" method="post" action="<@spring.url '/accountSafe'/>">
 	 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 	  	<table width="100%" border="0" cellspacing="0" cellpadding="0">
 	      	<tr class="text">

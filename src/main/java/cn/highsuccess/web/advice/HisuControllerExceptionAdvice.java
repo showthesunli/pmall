@@ -3,12 +3,17 @@ package cn.highsuccess.web.advice;
 import cn.highsuccess.web.exception.HisuOperateException;
 import cn.highsuccess.web.exception.HisuPathNotFoundException;
 import cn.highsuccess.web.exception.HisuRegisterException;
+import com.sun.tracing.dtrace.ModuleAttributes;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.MatrixVariable;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.servlet.FlashMap;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -50,14 +55,22 @@ public class HisuControllerExceptionAdvice {
         StringBuilder viewName = new StringBuilder(req.getRequestURI());
         viewName.delete(0, req.getContextPath().length());
 
+        FlashMap outputFlashMap = RequestContextUtils.getOutputFlashMap(req);
+        if (outputFlashMap != null){
+            Map<String,Object> map = new HashMap<>();
+            map.put("msg",ex.getMessage());
+            outputFlashMap.put("errorMsg",map);
+        }
         logger.debug("error viewName:" + viewName.toString());
-        return "redirect:"+viewName+";msg="+new String(ex.getMessage().getBytes("UTF-8"),"GBK");
+        logger.debug("error msg:" + ex.getMessage());
+        return "redirect:"+viewName;
     }
 
-    protected void handleException(ModelAndView mv,String exceptionMsg){
-        Map<String,String> map = new HashMap<>();
-        map.put("msg",exceptionMsg);
-        mv.addObject("errorMsg", map);
+    @ModelAttribute
+    public void preRequest(@MatrixVariable(required = false) Map<String,String> map,Model model){
+        if ( map!=null && map.size() != 0 ){
+            model.addAttribute("errorMsg",map);
+        }
     }
 
 }
