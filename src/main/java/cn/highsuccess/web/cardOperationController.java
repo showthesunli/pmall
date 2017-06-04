@@ -68,27 +68,10 @@ public class cardOperationController extends HisuBaseControllerAdapter {
             Map<String,Object> map = new HashMap<>();
             map.put("cardNo",cardNo);
             map.put("operType","1");
-            throw new HisuFlashOperationExcetion(e.getMessage(), map);
+            throw new HisuFlashOperationExcetion("/cardOperation",e.getMessage(), map);
         }
         model.addAttribute("cardNo", cardNo);
         return "/sendCardPswSuc";
     }
 
-    @ExceptionHandler(HisuFlashOperationExcetion.class)
-    public RedirectView handleReisterException(HttpServletRequest req,HisuFlashOperationExcetion ex) throws UnsupportedEncodingException {
-        logger.error("request:" + req.getRequestURI() + " exception:" + ex);
-        StringBuilder viewName = new StringBuilder(req.getRequestURI());
-        viewName.delete(0, req.getContextPath().length());
-        RedirectView rw = new RedirectView("/cardOperation");
-        rw.setAttributesMap(ex.getMap());
-        FlashMap outputFlashMap = RequestContextUtils.getOutputFlashMap(req);
-        if (outputFlashMap != null){
-            Map<String,Object> map = new HashMap<>();
-            map.put("msg",ex.getMessage());
-            outputFlashMap.put("errorMsg",map);
-        }
-        logger.debug("error viewName:" + viewName.toString());
-        logger.debug("error msg:" + ex.getMessage());
-        return rw;
-    }
 }

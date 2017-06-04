@@ -73,7 +73,7 @@ public class QuickExchangeTHCardController extends HisuBaseControllerAdapter{
         }catch (HisuOperateException e){
             Map<String,Object> map = new HashMap<>();
             map.put("prdNo",prdNo);
-            throw new HisuFlashOperationExcetion(e.getMessage(),map);
+            throw new HisuFlashOperationExcetion("/quickExchangeTHCard",e.getMessage(),map);
         }
         String billNo = this.getJavaOperate().getResponseData().optString("billNo");
         rModel.addFlashAttribute("billNo",billNo);

@@ -1,3 +1,4 @@
+<#import "/lib/macro/hisuMacro.ftl" as sf/>
 <#import "/spring.ftl" as spring/>
 <!DOCTYPE HTML>
 <html>
@@ -49,6 +50,9 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 					<img src="<@spring.url '/imgsrc/'/>${queryPrdDetail[0].iconFileName}">
 					<p><b>${queryPrdDetail[0].productInfo}</b></p>
 					<p><b style="color: #f60;">￥${queryPrdDetail[0].prdPrice}</b></p>
+                    <div id="errorShow">
+                        <span class="errorTxt"><@sf.error field="msg"/></span>
+                    </div>
 					<p style="margin: 20px 0 10px 0;">
 						<span>卡号：</span>
 						<input type="text" value="" class="cardInputTxt cardNoTxt" placeholder="请输入卡号" />
