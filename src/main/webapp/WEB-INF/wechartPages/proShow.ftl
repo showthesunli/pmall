@@ -265,7 +265,8 @@ $(document).ready(function() {
 		var amount = $("#prdnum").val();
 		var prdNo = "${queryPrdDetail[0].prdNo}";
 		var isCard = "${queryPrdDetail[0].isCard}";
-		window.location.href = "<@spring.url '/shoppingCart/addCart'/>" + "?prdNo="+prdNo+"&amount="+amount+"&money="+money+"&prdType="+isCard;
+		var prdWareNum = "${queryPrdDetail[0].prdWareNum}";
+		window.location.href = "<@spring.url '/shoppingCart/addCart'/>" + "?prdNo="+prdNo+"&amount="+amount+"&money="+money+"&prdType="+isCard + "&prdWareNum="+prdWareNum;
 	});
 });
 function openExchangeDiv(){

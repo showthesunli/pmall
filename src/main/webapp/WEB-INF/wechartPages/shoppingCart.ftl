@@ -84,7 +84,18 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 				<span class="left f12 red" >单价：￥${item.money}</span>
 				<span class="left f12 red" >小计：￥${item.money * item.amount}</span>
 			</div>
+						
 		</div>
+		
+		<form  action="<@spring.url '/shoppingCart/modCart'/>" method="get" class="formGo">     
+			<input name="prdNo" type="hidden" value="${item.prdNo}" />
+			<input name="prdName" type="hidden" value="${item.prdName}" />
+			<input name="amount" type="hidden" value="${item.amount}" />
+			<input name="money" type="hidden" value="${item.money}" />
+			<input name="prdType" type="hidden" value="${item.prdType}" />
+			<input name="fileName" type="hidden" value="${item.fileName}" />
+			<input name="prdWareNum" type="hidden" value="${item.prdWareNum}" />
+		</form>
 		
 		</#if>
 		</#list>
@@ -138,8 +149,19 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 				<span class="left f12 red">单价：￥${item.money}</span>
 				<span class="left f12 red">小计：￥${item.money * item.amount}</span>
 			</div>
+						
 		</div>
-	
+		
+		<form  action="<@spring.url '/shoppingCart/modCart'/>" method="get" class="formGo">     
+			<input name="prdNo" type="hidden" value="${item.prdNo}" />
+			<input name="prdName" type="hidden" value="${item.prdName}" />
+			<input name="amount" type="hidden" value="${item.amount}" />
+			<input name="money" type="hidden" value="${item.money}" />
+			<input name="prdType" type="hidden" value="${item.prdType}" />
+			<input name="fileName" type="hidden" value="${item.fileName}" />
+			<input name="prdWareNum" type="hidden" value="${item.prdWareNum}" />
+		</form>
+		
 		</#if>
 		</#list>
 		</#if>
@@ -185,20 +207,70 @@ function delItem(prdNo,money,amount){
 	   
 	}
 	})
-	$(document).ready(function(){
-		//加的效果
-		$(".add").click(function(){
-		var n=$(this).prev().val();
-		var num=parseInt(n)+1;
-		if(num==0){ return;}
-		$(this).prev().val(num);
-		});
-		//减的效果
-		$(".jian").click(function(){
-		var n=$(this).next().val();
-		var num=parseInt(n)-1;
-		if(num==0){ return}
-		$(this).next().val(num);
-		});
-		})
+$(document).ready(function(){
+	//加的效果
+	$(".add").click(function(){
+		var v =  $(this).prev(".num").attr("value");
+		var wareNum = $(this).parent().parent().parent().next(".formGo").find("input[name='prdWareNum']").val();
+		var money = $(this).parent().parent().parent().next(".formGo").find("input[name='money']").val();
+		var num = parseInt(v) + 1;
+					
+		if(num < parseInt(wareNum)){
+			$(this).prev(".cartNum").val(num);
+			$(this).parent().parent().parent().next(".formGo").find("input[name='amount']").val(num);
+			$(this).parent().parent().parent().next(".formGo").find("input[name='prdWareNum']").val(wareNum.replace(/,/g,''));
+			$(this).parent().parent().parent().next(".formGo").find("input[name='money']").val(money.replace(/,/g,''));
+			$(this).parent().parent().parent().next(".formGo").submit();
+		}
+		else{
+			$(this).val(wareNum);
+			alert('商品数量超限');
+		}
+	});
+	
+	//减的效果
+	$(".jian").click(function(){
+		var v =  $(this).next(".num").attr("value");
+		var num = parseInt(v) - 1;
+		var wareNum = $(this).parent().parent().parent().next(".formGo").find("input[name='prdWareNum']").val();
+		var money = $(this).parent().parent().parent().next(".formGo").find("input[name='money']").val();
+							  
+		if(parseInt(v) == 1){
+			$(this).val(1);
+			alert('商品数量必须大于0');
+		}
+		else{
+			$("input[name='amount']").val(num);			
+			$(this).next(".cartNum").val(num);
+			$(this).parent().parent().parent().next(".formGo").find("input[name='prdWareNum']").val(wareNum.replace(/,/g,''));
+			$(this).parent().parent().parent().next(".formGo").find("input[name='money']").val(money.replace(/,/g,''));
+			$(this).parent().parent().parent().next(".formGo").submit();
+		}
+	});
+		
+	//数量手输
+	$(".num").blur(function(){
+		var v = $(this).val();
+		var oldNum = $(this).parent().parent().parent().next(".formGo").find("input[name='amount']").val();
+		var wareNum = $(this).parent().parent().parent().next(".formGo").find("input[name='prdWareNum']").val();
+		var money = $(this).parent().parent().parent().next(".formGo").find("input[name='money']").val();
+		
+		if(v <= 0){
+			$(this).val(1);
+			alert('商品数量必须大于0');
+		}
+		else if(v <= wareNum && v > 0){
+			$(this).val(v);
+			$(this).parent().parent().parent().next(".formGo").find("input[name='amount']").val(v);			
+			$(this).parent().parent().parent().next(".formGo").find("input[name='prdWareNum']").val(wareNum.replace(/,/g,''));
+			$(this).parent().parent().parent().next(".formGo").find("input[name='money']").val(money.replace(/,/g,''));
+			$(this).parent().parent().parent().next(".formGo").submit();
+		}
+		else{
+			$(this).val(oldNum);
+			alert('商品数量超限');
+		}
+	});	
+	
+})
 </script>
