@@ -55,8 +55,7 @@ public class RoutingController extends HisuBaseControllerAdapter{
 
     @GetMapping(value = "/{path}")
     public String processGetWithNoParam(@PathVariable String path,
-                                        Model model,
-                                        @MatrixVariable(required = false) Map<String,Object> map){
+                                        Model model){
         logger.debug("processGetWithNoParam path: "+path);
         return path;
     }

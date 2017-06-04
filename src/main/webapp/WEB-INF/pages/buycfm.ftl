@@ -100,10 +100,10 @@
                 </div>
                     
                 <p style="text-align:center; margin:20px 0 0; float:right">
-                    <input type="button" value="取消订单" class="sureBtn" style="background: #eee; color:#666; margin-right:10px; border:1px solid #ccc;""  />
+                    <input type="button" value="取消订单" id="deleteOrder" class="sureBtn" style="background: #eee; color:#666; margin-right:10px; border:1px solid #ccc;"  />
                     <input type="button" value="支付" id="pay" class="sureBtn"  />
                 </p>
-            </div>
+            </div> 
             
     </div>
         
@@ -144,6 +144,10 @@ $(document).ready(function(e) {
 		})
 
 
+    $("#deleteOrder").click(function(){
+        window.open( "<@spring.url '/deleteOrder'/>"+"?billNo=${queryMemberOrder[0].billNo}");
+    })
+    
     $("#pay").click(function(){
         tipOpen();
         var payer = $(".cPayType").text();

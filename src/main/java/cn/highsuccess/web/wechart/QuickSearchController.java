@@ -30,7 +30,7 @@ public class QuickSearchController extends HisuBaseControllerAdapter{
         super(jds, javaOperate);
     }
 
-    @RequestMapping(value = "/quickSearchOrder",method = RequestMethod.POST)
+    @RequestMapping(value = "/quickSearchOrder")
     public String showQucikSearch(Model model,
                                   @RequestParam @NotNull String mobile){
         Map<String,Object> param = new HashMap<>();

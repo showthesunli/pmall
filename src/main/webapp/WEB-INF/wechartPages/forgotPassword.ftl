@@ -43,7 +43,7 @@ input.error{ border-color: #f00;}
 		    	
 		    	<tr class="text">
 		        	<td class="text_1">
-		        		<input type="text" id="username" name="username" class="tet" placeholder="用户名/手机/邮箱" maxlength="20" />		
+		        		<input type="text" id="username" name="username" class="tet" placeholder="请输入用户名" maxlength="20" />		
 		        	</td>
 		      	</tr>
 		      			     	
@@ -92,15 +92,6 @@ input.error{ border-color: #f00;}
                     required: true,
                     rangelength:[6,20]
                 },
-                /*confirm_password: {
-                    required: true,
-                    equalTo: "#password"
-                },
-                phone: {
-                    required: true,
-                    isPhone: []
-                },
-                agree: "required",*/
                 mCode: "required"
             },
             messages: {
@@ -112,16 +103,7 @@ input.error{ border-color: #f00;}
                     required: "请输入密码",
                     rangelength: "长度只能在6-20个字符之间"
                 },
-                /*confirm_password: {
-                    required: "请输入密码",
-                    equalTo: "两次密码输入不一致"
-                },
-                agree: "请接受我们的声明",*/
                 mCode: "请输入验证码",
-                /*phone: {
-                    required: "请输入手机号码",
-                    isPhone: "请输入正确的手机号码"
-                },*/
             }
         });
     });
@@ -150,53 +132,12 @@ input.error{ border-color: #f00;}
     	var username = $("#username").val();
         if (username == "") {
             if ($("#username-error").length == 0) {
-                $('#username').after('<label id="username-error" class="error" for="username">请输入会员号</label>');
+                $('#username').after('<label id="username-error" class="error" for="username">请输入用户名</label>');
             } else
                 $("#username-error").css('display','block');
             return false;
         }
-        /*var phone = $("#phone").val();
-        if (phone == "") {
-            if ($("#phone-error").length == 0) {
-                $('#phone').after('<label id="phone-error" class="error" for="phone">请输入手机号码</label>');
-            } else
-                $("#phone-error").css('display','block');
-            return false;
-        }
-        var phoneRule = /^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0-9]|170)\d{8}$/;
-        // 手机号码错误
-        if (!phoneRule.test(phone)) {
-            if ($("#phone-error").length == 0) {
-                $('#phone').after('<label id="phone-error" class="error" for="phone">请输入正确的手机号码</label>');
-            } else
-                $("#phone-error").css('display','block');
-                return false;
-        }*/
 
-        //ajax发送验证码
-        /*var phoneNumber = $("#phone").val();
-        var mcode = "";
-        var $this = this;
-        $.ajax({
-            url:"<@spring.url '/sendMcode'/>",
-            data:"mobile="+phoneNumber,
-            type:"GET",
-            dataType: "json",
-            success: function (data) {
-                if(data['错误原因']){
-                    if ($("#phone-error").length == 0) {
-                        $('#phone').after('<label id="phone-error" class="error" for="phone">手机号码重复</label>');
-                    } else{
-                        $("#phone-error").css('display','block').text("手机号码重复");
-                    }
-//                        $("#phone-error").css('display','block');
-                }else{
-//                    time($this);
-                }
-            }
-        })
-        time(this);
-    });*/
    var username = $("#username").val();
         var mcode = "";
         var $this = this;
@@ -206,9 +147,16 @@ input.error{ border-color: #f00;}
             type:"GET",
             dataType: "json",
             success: function (data) {
-                
+               if(data.errorMsg.msg){
+                    if ($("#username-error").length == 0) {
+                        $('#username').after('<label id="username-error" class="error" for="username">'+data.errorMsg.msg+'</label>');
+                    } else{
+                        $("#username-error").css('display','block').text(data.errorMsg.msg);
+                    }
+                }else{
+                    time(this);
+                }
             }
-        })
-        time(this);
-    });
+       }) 
+     });
 </script>

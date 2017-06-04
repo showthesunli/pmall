@@ -5,6 +5,8 @@ import cn.highsuccess.data.JavaDataSet;
 import cn.highsuccess.data.JavaOperate;
 import cn.highsuccess.service.util.HisuOperatePasswd;
 import cn.highsuccess.web.HisuBaseControllerAdapter;
+import cn.highsuccess.web.exception.HisuFlashOperationExcetion;
+import cn.highsuccess.web.exception.HisuOperateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -13,8 +15,10 @@ import org.springframework.web.bind.annotation.MatrixVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.constraints.NotNull;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -51,6 +55,7 @@ public class QuickExchangeTHCardController extends HisuBaseControllerAdapter{
      */
     @RequestMapping(value = "/quickExchangeTHCard",method = RequestMethod.POST)
     public String quickExchangeTHCard(Model model,
+                                      RedirectAttributes rModel,
                                       @RequestParam @NotNull String cardNo,
                                       @RequestParam @NotNull String cardPinCiperUnderZPK,
                                       @RequestParam @NotNull String prdNo,
@@ -63,12 +68,15 @@ public class QuickExchangeTHCardController extends HisuBaseControllerAdapter{
         condition.append("cardPinCiperUnderZPK=").append(cardPinCiperUnderZPK).append("|");
         condition.append("prdNo=").append(prdNo).append("|");
         condition.append("prdNum=").append(prdNum);
-        this.getJavaOperate().service("jf_wechat_quickExchangePage","exchangeGoodsByTooHotCard",condition.toString());
-        if (this.getJavaOperate().getResult()){
-            String billNo = this.getJavaOperate().getResponseData().optString("billNo");
-            return "redirect:/myDetial?billNo="+billNo;
-        }else {
-            return "redirect:/quickExchangeTHCard;prdNo="+prdNo;
+        try {
+            this.getJavaOperate().service("jf_wechat_quickExchangePage","exchangeGoodsByTooHotCard",condition.toString());
+        }catch (HisuOperateException e){
+            Map<String,Object> map = new HashMap<>();
+            map.put("prdNo",prdNo);
+            throw new HisuFlashOperationExcetion(e.getMessage(),map);
         }
+        String billNo = this.getJavaOperate().getResponseData().optString("billNo");
+        rModel.addFlashAttribute("billNo",billNo);
+        return "redirect:/quickExchangeSuccess";
     }
 }

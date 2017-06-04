@@ -9,19 +9,14 @@
 <meta name="format-detection" content="telephone=no" />
 <meta name="keywords" content="微信,微信公众平台" />
 <meta name="description" content="微信公众平台自助引擎" />
-<title>商品分类</title>
+<title>商品详情</title>
+<link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/font_1459473269_4751618.css'/>">
 <link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/style.css'/>">
+<link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/buttons.css'/>">
 <link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/font-awesome.min.css'/>">
 <script type="text/javascript" src="<@spring.url '/wechart/js/jquery-1.10.2.min.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/wechart/js/jquery.accordion.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/wechart/js/unslider.min.js'/>"></script>
-<script type="text/javascript" src="<@spring.url '/wechart/js/util.js'/>"></script>
-<style>
-.info_card{ padding: 0;}
-.info_card i img{ max-width: 100px; max-height: 33px; min-width: 100px; min-height: 33px; float: left;}
-.info_card i { margin-left: 10px; top:8px; overflow: hidden; padding-right: 10px;}
-.info_card span{ line-height: 33px; float: left; margin-left: 10px; color: #333; font-style: normal;}
-</style>
 </head>
 
 <body ondragstart="return false;" onselectstart="return false;" oncontextmenu="return false" onselectstart="return false" 
@@ -31,22 +26,15 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 		<a href="javascript:history.go(-1);"><img src="<@spring.url '/wechart/images/bg_info5.jpg'/>"></a>
 	</div>
 	<div id="content">
-		<div class="info_head info_light">
-			<#list queryCompanyByTrade as item>
-                <div class="info_card">
-                    <a href="<@spring.url '/quickExchangeProList'/>;companyName=${item.companyName}">
-                        <i><img src="<@spring.url '/imgsrc/'/>${item.iconFileName}" onerror="downloadErrImg(this,'${item.iconFileName}')">
-							<span>${item.companyName}</span>
-						</i>
-                    </a>
-                </div>
-			</#list>
-		</div>
+		<div class="box_exp info_light">
 			
-		<!--常用功能-->
-		<#include "/lib/template/commFunctionsPage.ftl" encoding="UTF-8">
-		<!--end 常用功能-->
-		</div>		
+			<div style="text-align: center; padding: 10px 20px; background: #ffefe5;">
+				<p style="line-height: 30px; color: #f60;"><b>兑换成功！</b></p>
+				<a href="<@spring.url '/quickSearch'/>" style="padding:5px 20px; color: #fff; background: #f60; display: inline-block; margin: 10px 0;">< 查询兑换订单</a>
+			</div>
+			
+		</div>
+		
 		
 		<div style="padding:15px;"></div>
 	</div>
@@ -54,8 +42,10 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 	<!--底部-->
 	<#include "/lib/template/footer.ftl" encoding="UTF-8">
 	<!--end 底部-->
-	
+
 </div>
+
+<script>
 
 </body>
 </html>

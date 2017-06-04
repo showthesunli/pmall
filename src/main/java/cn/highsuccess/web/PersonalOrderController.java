@@ -55,11 +55,11 @@ public class PersonalOrderController extends HisuBaseControllerAdapter{
     }
 
     //删除订单
-    @RequestMapping(value = "/deleteOrder",method = RequestMethod.POST)
+    @RequestMapping(value = "/deleteOrder")
     public String deleteAddr(Model model,
     						@RequestParam String billNo){
         String condition = "billNo="+billNo;
-        this.getJavaOperate().service("jf_memberCenter", "btnDelUserAddr", condition);
+        this.getJavaOperate().service("jf_memberCenter", "cancelOrder", condition);
         return "redirect:/myOrder";
     }
 }

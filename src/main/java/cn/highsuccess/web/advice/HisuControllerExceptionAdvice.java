@@ -32,7 +32,7 @@ public class HisuControllerExceptionAdvice {
 
 
     @ExceptionHandler(HisuOperateException.class)
-    public String handleReisterException(HttpServletRequest req,HisuOperateException ex) throws UnsupportedEncodingException {
+    public String handlOperationException(HttpServletRequest req,HisuOperateException ex) throws UnsupportedEncodingException {
         logger.error("request:" + req.getRequestURI() + " exception:" + ex);
         StringBuilder viewName = new StringBuilder(req.getRequestURI());
         viewName.delete(0, req.getContextPath().length());
