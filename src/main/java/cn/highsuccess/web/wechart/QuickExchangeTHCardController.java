@@ -11,15 +11,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.MatrixVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.FlashMap;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotNull;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by prototype on 2017/5/24.
@@ -39,7 +40,7 @@ public class QuickExchangeTHCardController extends HisuBaseControllerAdapter{
     public String showQucikExchangeTHCard(Model model,
                                           @MatrixVariable Map<String,Object> map){
 
-        excute(model,map,hisuMngDataGroupAndId);
+        excute(model, map, hisuMngDataGroupAndId);
         return "/quickExchangeTHCard";
     }
 
@@ -76,7 +77,26 @@ public class QuickExchangeTHCardController extends HisuBaseControllerAdapter{
             throw new HisuFlashOperationExcetion("/quickExchangeTHCard",e.getMessage(),map);
         }
         String billNo = this.getJavaOperate().getResponseData().optString("billNo");
-        rModel.addFlashAttribute("billNo",billNo);
+        rModel.addFlashAttribute("billNo", billNo);
         return "redirect:/quickExchangeSuccess";
+    }
+
+    @ExceptionHandler(HisuFlashOperationExcetion.class)
+    public String hanlFlashOperationException(HttpServletRequest req,HisuFlashOperationExcetion ex){
+        logger.error("request:" + req.getRequestURI() + " exception:" + ex);
+        StringBuilder param = new StringBuilder();
+        Set<String> keys = ex.getMap().keySet();
+        for (String key : keys){
+            param.append(";").append(key).append("=").append(ex.getMap().get(key));
+        }
+        FlashMap outputFlashMap = RequestContextUtils.getOutputFlashMap(req);
+        if (outputFlashMap != null){
+            Map<String,Object> map = new HashMap<>();
+            map.put("msg",ex.getMessage());
+            outputFlashMap.put("errorMsg",map);
+        }
+        logger.debug("error viewName:" + ex.getRedirectUrl());
+        logger.debug("error msg:" + ex.getMessage());
+        return "redirect:"+ex.getRedirectUrl()+param.toString();
     }
 }

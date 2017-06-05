@@ -24,7 +24,7 @@ import java.util.Map;
  * Created by Saviour on 2017/6/1.
  */
 @Controller
-public class myInvoiceController extends HisuBaseControllerAdapter{
+public class MyInvoiceController extends HisuBaseControllerAdapter{
 
     @Autowired
     private ReceiveInfoService receiveInfoService;
@@ -34,7 +34,7 @@ public class myInvoiceController extends HisuBaseControllerAdapter{
     private HisuMngDataGroupAndId hisuMngDataGroupAndId;
 
     @Autowired
-    protected myInvoiceController(JavaDataSet jds, JavaOperate javaOperate) {
+    protected MyInvoiceController(JavaDataSet jds, JavaOperate javaOperate) {
         super(jds, javaOperate);
     }
 
@@ -51,7 +51,7 @@ public class myInvoiceController extends HisuBaseControllerAdapter{
     public String deleteInvoice(Model model,
                              @Valid InvoiceInfoItem invoiceInfoItem){
         String condition = "billTag="+invoiceInfoItem.getBillTag();
-        this.getJavaOperate().service("jf_memberCenter", "btnDelUserAddr", condition);
+        this.getJavaOperate().service("jf_memberCenter", "delInvoice", condition);
         return "redirect:/myInvoice";
     }
     //增加送货地址
@@ -62,13 +62,15 @@ public class myInvoiceController extends HisuBaseControllerAdapter{
         logger.debug("/addInvoice : post");
         logger.debug("forword=" + forword);
         StringBuilder condition = new StringBuilder();
+        condition.append("billTag=").append(invoiceInfoItem.getBillTag()).append("|");
         condition.append("rcptTitle=").append(invoiceInfoItem.getRcptTitle()).append("|");
         condition.append("receiptType=").append(invoiceInfoItem.getReceiptType()).append("|");
         condition.append("rcptContent=").append(invoiceInfoItem.getRcptContent()).append("|");
         condition.append("mobile=").append(invoiceInfoItem.getMobile()).append("|");
-        condition.append("billReceiverMail=").append(invoiceInfoItem.getBillReceiverMail());
-        condition.append("taxpayerID=").append(invoiceInfoItem.getTaxpayerID());
-        this.getJavaOperate().service("jf_memberCenter","btnAddUserAddr",condition.toString());
+        condition.append("billReceiverMail=").append(invoiceInfoItem.getBillReceiverMail()).append("|");
+        condition.append("taxpayerID=").append(invoiceInfoItem.getTaxpayerID()).append("|");
+        condition.append("isDefault=").append(invoiceInfoItem.getIsDefault());
+        this.getJavaOperate().service("jf_memberCenter","addInvoice",condition.toString());
         if (forword == null){
             return "redirect:/myInvoice";
         }else {
@@ -85,9 +87,10 @@ public class myInvoiceController extends HisuBaseControllerAdapter{
         condition.append("receiptType=").append(invoiceInfoItem.getReceiptType()).append("|");
         condition.append("rcptContent=").append(invoiceInfoItem.getRcptContent()).append("|");
         condition.append("mobile=").append(invoiceInfoItem.getMobile()).append("|");
-        condition.append("billReceiverMail=").append(invoiceInfoItem.getBillReceiverMail());
-        condition.append("taxpayerID=").append(invoiceInfoItem.getTaxpayerID());
-        this.getJavaOperate().service("jf_memberCenter","btnModUserAddr",condition.toString());
+        condition.append("billReceiverMail=").append(invoiceInfoItem.getBillReceiverMail()).append("|");
+        condition.append("taxpayerID=").append(invoiceInfoItem.getTaxpayerID()).append("|");
+        condition.append("isDefault=").append(invoiceInfoItem.getIsDefault());
+        this.getJavaOperate().service("jf_memberCenter","modInvoice",condition.toString());
         return "redirect:/myInvoice";
     }
 }

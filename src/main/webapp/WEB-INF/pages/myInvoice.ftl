@@ -1,4 +1,5 @@
 <#import "/spring.ftl" as spring/>
+<#import "/lib/macro/hisuMacro.ftl" as sf/>
 <!doctype html>
 <html lang="zh-cn">
 <head>
@@ -26,7 +27,7 @@
 .addrOperBtn span{ color:#3897d7; margin-left:10px; cursor:pointer;}
 .addrOperBtn span:hover{ text-decoration: underline;}
 
-.addressDiv{ height:400px; margin: -200px 0 0 -300px;}
+.addressDiv{ height:430px; margin: -200px 0 0 -300px;}
 .addressDiv div{ padding:10px; color:#666; font-size:14px;}
 .addressDiv .tipDivTitle{ padding:0; margin-bottom:10px;}
 .addressDiv input[type=text]{ padding:0 5px; border:1px solid #ccc; height:25px; line-height:25px;}
@@ -70,32 +71,59 @@ select{ margin-left: 5px; line-height: 25px; height: 25px; border-color: #ccc; c
                             <div class="myAddressItem">
                                 <div class="addrDefaultInforTop">
                                     <div class="addrDefaultInfor">
-                                        <span class="addrName">发票标签</span>                                        
-                                        <span class="defStyle">默认发票</span>                                       
+                                        <span class="addrName">${item.billTag}</span>
+                                        <#if item.isDefault == "1">
+                                        <span class="defStyle">默认发票</span>
+                                        </#if>
                                     </div>
-                                    <div class="addrOperBtn">                                   	
-                                        <input type="submit" value="设为默认" class="setToDefAddr addrBtn" />                                   
+                                    <div class="addrOperBtn">
+                                    	<#if item.isDefault == "0">
+                                        <input type="submit" value="设为默认" class="setToDefAddr addrBtn" />
+                                        </#if>
                                         <input type="button" value="编辑" class="modifyAddr addrBtn" />
                                         <input type="submit" value="保存" class="updateAddr addrBtn" style="display: none;" />
                                         <input type="submit" value="删除" class="deleteAddr addrBtn" />
                                     </div>
                                 </div>
+                                <input name="billTag" type="hidden" value="${item.billTag}"/>
                                 <div class="marginTB">
                                 	<label>发票抬头：</label>
                                 	<input id="rcptTitle" name="rcptTitle" type="text" value="${item.rcptTitle}" class="myDetialTxt inputRO" readOnly="true" style="width: 680px;" />
                                 </div>
                                 <div class="marginTB">
                                 	<label>发票类型：</label>
-                                	<input id="receiptType" name="receiptType" type="text" value="${item.receiptType}" class="myDetialTxt inputRO" readOnly="true" />
-                                	<select style="display: none;">
+                                	<#if item.receiptType == '1'>
+				                        <#assign rec='个人'>
+				                    <#else>
+				                    	<#assign rec='法人'>
+				                    </#if>
+				                    <input type="hidden" value="${item.receiptType}" />
+                                	<input id="receiptType" type="text" value="${rec}" class="myDetialTxt inputRO" readOnly="true" />
+                                	<select style="display: none;" name="receiptType">
                                 		<option value="1">个人</option>
                                 		<option value="2">法人</option>
                                 	</select>
                                 </div>
                                 <div class="marginTB">
                                 	<label>发票内容：</label>
-                                	<input id="rcptContent" name="rcptContent" type="text" value="${item.rcptContent}" class="myDetialTxt inputRO" readOnly="true" />
-                                	<select style="display: none;">
+                                	<#if item.rcptContent == '0'>
+				                        <#assign rcp='明细'>
+				                    <#elseif item.rcptContent == '1'>
+				                    	<#assign rcp='办公用品'>
+				                   	<#elseif item.rcptContent == '2'>
+				                    	<#assign rcp='电脑配件'>
+				                    <#elseif item.rcptContent == '3'>
+				                    	<#assign rcp='耗材'>
+				                    <#elseif item.rcptContent == '10'>
+				                    	<#assign rcp='用品'>
+				                    <#elseif item.rcptContent == '11'>
+				                    	<#assign rcp='日用品'>				                    
+				                    <#else>
+				                    	<#assign rcp='礼品'>
+				                    </#if>
+                                	<input type="hidden" value="${item.rcptContent}" />
+                                	<input id="rcptContent" type="text" value="${rcp}" class="myDetialTxt inputRO" readOnly="true" />                               	
+                                	<select style="display: none;" name="rcptContent">
                                 		<option value="0">明细</option>
                                 		<option value="1">办公用品</option>
                                 		<option value="2">电脑配件</option>
@@ -117,7 +145,8 @@ select{ margin-left: 5px; line-height: 25px; height: 25px; border-color: #ccc; c
                                 	<label>公司纳税人识别号：</label>
                                 	<input id="taxpayerID" name="taxpayerID" type="text" value="${item.taxpayerID}" class="myDetialTxt inputRO" readOnly="true" />
                                 </div>
-                                
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                <input type="hidden" name="isDefault" class="isDefaultInput" value="${item.isDefault}"/>
                             </div>
                         </form>
                        </#list>
@@ -139,23 +168,27 @@ select{ margin-left: 5px; line-height: 25px; height: 25px; border-color: #ccc; c
     <div id="loginBg"></div>
     <!--新增发票-->
     <div class="addressDiv">
-        <form method="post" action="">
-            
+        <form method="post" action="<@spring.url '/addInvoice'/>">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>    
         <div class="jf-overflowH tipDivTitle"><h3 style="float:left;">发票信息</h3><span onclick="closeTipDiv('addressDiv')" style="float:right; cursor:pointer; color:#999;font-size:25px;">×</span></div>
         <div>
+        	<label><span class="colorRed"></span>发票标签：</label>
+        	<input type="text" id="addBillTag" name="billTag" value="" style="width:427px;" />
+        </div>
+        <div>
         	<label><span class="colorRed"></span>发票抬头：</label>
-        	<input type="text" id="addRcptTitle" name="addRcptTitle" value="" style="width:427px;" />
+        	<input type="text" id="addRcptTitle" name="rcptTitle" value="" style="width:427px;" />
         </div>
         <div>
         	<label><span class="colorRed"></span>发票类型：</label>
-        	<select id="addIntAttrValue1" name="addIntAttrValue1">
+        	<select id="addReceiptType" name="receiptType">
                   <option value="1">个人</option>
                   <option value="2">法人</option>
 			</select>
         </div>
         <div>
         	<label><span class="colorRed"></span>发票内容：</label>
-        	<select id="addRcptContent" name="addIntAttrValue2" >
+        	<select id="addRcptContent" name="intAttrValue2" >
 				<option value="0">明细</option>
                 <option value="1">办公用品</option>
                 <option value="2">电脑配件</option>
@@ -167,17 +200,18 @@ select{ margin-left: 5px; line-height: 25px; height: 25px; border-color: #ccc; c
         </div>
         <div>
         	<label><span class="colorRed"></span> 收票人手机：</label>
-        	<input type="text" id="addMobile" name="addAttr128LenValue3" value="" />
+        	<input type="text" id="addMobile" name="mobile" value="" />
         </div>
         <div>
         	<label><span class="colorRed"></span>收票人邮箱：</label>
-        	<input type="text" id="addBillReceiverMail" name="addBillReceiverMail" value="" />
+        	<input type="text" id="addBillReceiverMail" name="billReceiverMail" value="" />
         </div>
         <div>
         	<label><span class="colorRed"></span> 公司纳税人识别号：</label>
-        	<input type="text" id="taxpayerID" name="taxpayerID" value="" />
+        	<input type="text" id="addTaxpayerID" name="taxpayerID" value="" />
         </div>
         <p style="margin:10px 0 0 140px;"><input type="hidden" id="operType" name="operType" value="0"/><input type="hidden" id="" name="" value=""/><input type="submit" value="保存" class="sureBtn"  /><input type="button" value="取消" class="cancleBtn"  onclick="closeTipDiv('addressDiv')" /></p>
+        	<input type="hidden" name="isDefault" value="0"/>
             <input type="hidden" name="objectID" id="objectID" value=""/>
             <input type="hidden" name="forword" id="forword" value="myInvoice"/>
         </form>
@@ -197,7 +231,7 @@ select{ margin-left: 5px; line-height: 25px; height: 25px; border-color: #ccc; c
 $(document).ready(function(e) {
 	//设为默认值
     $('.setToDefAddr').click(function(){
-    	var action = "";
+    	var action = "<@spring.url '/modInvoice'/>";
     	$(this).parent().parent().parent().parent().attr('action',action);
     	$('.isDefaultInput').val('0');
     	$(this).parent().parent().parent().parent().find('.isDefaultInput').val('1');
@@ -205,31 +239,43 @@ $(document).ready(function(e) {
     
     //删除发票
     $('.deleteAddr').click(function(){
-    	var action = "";
+    	var action = "<@spring.url '/deleteInvoice'/>";
 		$(this).parent().parent().parent().parent().attr('action',action);
     });
 
     //编辑发票
-    $('.modifyAddr').click(function(){       		$(this).parent().parent().parent().find('.inputRO').addClass('inputRW').removeAttr('readonly').removeClass('inputRO');
-		$(this).parent().parent().parent().find('.modifyAddr').hide();
-		$(this).parent().parent().parent().find('.updateAddr').show();
-		$(this).parent().parent().parent().find('#receiptType').hide();
-		$(this).parent().parent().parent().find('#receiptType').next('select').show();
-		$(this).parent().parent().parent().find('#rcptContent').hide();
-		$(this).parent().parent().parent().find('#rcptContent').next('select').show();
+
+    $('.modifyAddr').click(function(){
+    	var thisP = $(this).parent().parent().parent();
+    	thisP.find('.inputRO').addClass('inputRW').removeAttr('readonly').removeClass('inputRO');
+		thisP.find('.modifyAddr').hide();
+		thisP.find('.updateAddr').show();		
+		thisP.find('#receiptType').hide();
+		thisP.find('#receiptType').next('select').show();
+		thisP.find('#rcptContent').hide();
+		thisP.find('#rcptContent').next('select').show();
+		
+		var recType = thisP.find("#receiptType").prev().val();
+		var rcptCon = thisP.find("#rcptContent").prev().val();
+		thisP.find("#receiptType").next('select').val(recType);
+		thisP.find("#rcptContent").next('select').val(rcptCon);
+
 	});
 	
 	//保存发票
 	$('.updateAddr').click(function(){
-		var action = "";
-    	$(this).parent().parent().parent().parent().attr('action',action);
-		$(this).parent().parent().parent().find('.inputRW').addClass('inputRO').attr('readonly','ture').removeClass('inputRW');
-		$(this).parent().parent().parent().find('.updateAddr').hide();
-		$(this).parent().parent().parent().find('.modifyAddr').show();
-		$(this).parent().parent().parent().find('#receiptType').show();
-		$(this).parent().parent().parent().find('#receiptType').next('select').hide();
-		$(this).parent().parent().parent().find('#rcptContent').show();
-		$(this).parent().parent().parent().find('#rcptContent').next('select').hide();
+
+		var action = "<@spring.url '/modInvoice'/>";
+		var thisP = $(this).parent().parent().parent();
+    	thisP.parent().attr('action',action);
+		thisP.find('.inputRW').addClass('inputRO').attr('readonly','ture').removeClass('inputRW');
+		thisP.find('.updateAddr').hide();
+		thisP.find('.modifyAddr').show();
+		thisP.find('#receiptType').show();
+		thisP.find('#receiptType').next('select').hide();
+		thisP.find('#rcptContent').show();
+		thisP.find('#rcptContent').next('select').hide();
+
 	});
 
 })

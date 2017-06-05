@@ -21,7 +21,7 @@ import java.util.Map;
  * Created by prototype on 2017/5/19.
  */
 @Controller
-public class myAddressController extends HisuBaseControllerAdapter{
+public class MyAddressController extends HisuBaseControllerAdapter{
 
     @Autowired
     private ReceiveInfoService receiveInfoService;
@@ -31,7 +31,7 @@ public class myAddressController extends HisuBaseControllerAdapter{
     private HisuMngDataGroupAndId hisuMngDataGroupAndId;
 
     @Autowired
-    protected myAddressController(JavaDataSet jds, JavaOperate javaOperate) {
+    protected MyAddressController(JavaDataSet jds, JavaOperate javaOperate) {
         super(jds, javaOperate);
     }
 

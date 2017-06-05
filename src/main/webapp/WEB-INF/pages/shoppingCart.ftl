@@ -209,19 +209,23 @@
 $(document).ready(function(e) {	
 	//数量减
 	$(".cartNumL").click(function(){		 
-		var v =  $(this).next(".cartNum").attr("value");
-		var num=parseInt(v) - 1;
+		var v =  $(this).next(".cartNum").attr("value");		
 		var wareNum = $(this).parent().parent().next(".formGo").find("input[name='prdWareNum']").val();
-		var money = $(this).parent().parent().next(".formGo").find("input[name='money']").val();
+		var money = $(this).parent().parent().next(".formGo").find("input[name='money']").val().replace(/,/g,'');
+		
+		v = parseInt(v.replace(/,/g,''));
+		wareNum = parseInt(wareNum.replace(/,/g,''));
+		
+		var num=v - 1;
 						  
-		if(parseInt(v)==1){
+		if(v==1){
 			openTipDiv('tipDiv','商品数量必须大于0');			
 		}
 		else{
-			$("input[name='amount']").val(num);			
+			$(this).parent().parent().next(".formGo").find("input[name='amount']").val(num);			
 			$(this).next(".cartNum").val(num);
-			$("input[name='prdWareNum']").val(wareNum.replace(/,/g,''));
-			$("input[name='money']").val(money.replace(/,/g,''));
+			$(this).parent().parent().next(".formGo").find("input[name='prdWareNum']").val(wareNum);
+			$(this).parent().parent().next(".formGo").find("input[name='money']").val(money);
 			$(this).parent().parent().next(".formGo").submit();
 		}		  
 	});
@@ -230,14 +234,18 @@ $(document).ready(function(e) {
 	$(".cartNumR").click(function(){
 		var v =  $(this).prev(".cartNum").attr("value");
 		var wareNum = $(this).parent().parent().next(".formGo").find("input[name='prdWareNum']").val();
-		var money = $(this).parent().parent().next(".formGo").find("input[name='money']").val();
-		var num = parseInt(v) + 1;
+		var money = $(this).parent().parent().next(".formGo").find("input[name='money']").val().replace(/,/g,'');		
+		
+		v = parseInt(v.replace(/,/g,''));
+		wareNum = parseInt(wareNum.replace(/,/g,''));
+		
+		var num = v + 1;
 				
-		if(num < parseInt(wareNum)){
+		if(num <= wareNum){
 			$(this).prev(".cartNum").val(num);
-			$("input[name='amount']").val(num);
-			$("input[name='prdWareNum']").val(wareNum.replace(/,/g,''));
-			$("input[name='money']").val(money.replace(/,/g,''));
+			$(this).parent().parent().next(".formGo").find("input[name='amount']").val(num);
+			$(this).parent().parent().next(".formGo").find("input[name='prdWareNum']").val(wareNum);
+			$(this).parent().parent().next(".formGo").find("input[name='money']").val(money);
 			$(this).parent().parent().next(".formGo").submit();
 		}
 		else{
@@ -252,7 +260,11 @@ $(document).ready(function(e) {
 		var v = $(this).val();
 		var oldNum = $(this).parent().parent().next(".formGo").find("input[name='amount']").val();
 		var wareNum = $(this).parent().parent().next(".formGo").find("input[name='prdWareNum']").val();
-		var money = $(this).parent().parent().next(".formGo").find("input[name='money']").val();
+		var money = $(this).parent().parent().next(".formGo").find("input[name='money']").val().replace(/,/g,'');
+		
+		v = parseInt(v.replace(/,/g,''));
+		oldNum = parseInt(oldNum.replace(/,/g,''));
+		wareNum = parseInt(wareNum.replace(/,/g,''));
 		
 		if(v <= 0){			
 			openTipDiv('tipDiv','商品数量必须大于0');
@@ -260,9 +272,9 @@ $(document).ready(function(e) {
 		}
 		else if(v <= wareNum && v > 0){
 			$(this).val(v);
-			$("input[name='amount']").val(v);			
-			$("input[name='prdWareNum']").val(wareNum.replace(/,/g,''));
-			$("input[name='money']").val(money.replace(/,/g,''));
+			$(this).parent().parent().next(".formGo").find("input[name='amount']").val(v);			
+			$(this).parent().parent().next(".formGo").find("input[name='prdWareNum']").val(wareNum);
+			$(this).parent().parent().next(".formGo").find("input[name='money']").val(money);
 			$(this).parent().parent().next(".formGo").submit();
 		}
 		else{

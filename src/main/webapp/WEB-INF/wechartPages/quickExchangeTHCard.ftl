@@ -30,7 +30,9 @@
 .pModel .pModelBO{ border-color: #f60; color: #f60;}
 .cardInputTxt{ min-width: 220px; width: 80%; padding: 0 5px; line-height: 26px; border: 1px solid #ccc;}
 .info_child img{ max-width: 100%;}
-#cardInforError{ display: inline-block; color:#f00; padding:0 10px; background:#ffebe7; line-height:26px; border:1px solid #f00; border-radius:5px;}
+#errorShow{ display: none; text-align: center; overflow: hidden; width: 100%; margin: 5px 0;}
+#cardInforError,.errorTxt{ display: inline-block; color:#f00; padding:0 10px; background:#ffebe7; line-height:26px; border:1px solid #f00; border-radius:5px;}
+#errorShow .errorTxt{ float: none;}
 </style>
 </head>
 
@@ -50,10 +52,8 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 					<img src="<@spring.url '/imgsrc/'/>${queryPrdDetail[0].iconFileName}">
 					<p><b>${queryPrdDetail[0].productInfo}</b></p>
 					<p><b style="color: #f60;">￥${queryPrdDetail[0].prdPrice}</b></p>
-                    <div id="errorShow">
-                        <span class="errorTxt"><@sf.error field="msg"/></span>
-                    </div>
-					<p style="margin: 20px 0 10px 0;">
+					
+					<p style="margin: 0 0 10px 0;">
 						<span>卡号：</span>
 						<input type="text" value="" class="cardInputTxt cardNoTxt" placeholder="请输入卡号" />
 					</p>
@@ -66,6 +66,8 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
                         <input type="text" value="" id="mobile" class="cardInputTxt cardPswTxt" placeholder="请输入购买人手机" />
                     </p>
 					<p style="height: 28px; margin-left: 42px;"><span id="cardInforError" style="display: none;"></span></p>
+					<div id="errorShow"><@sf.error field="msg"/></div>
+					
 					</form>
 					
 				</div>
@@ -128,6 +130,11 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 			focusElem.scrollIntoView(false);
 		}
 	});
+	
+	if($('#errorShow').text() != ''){
+		var t = $('#errorShow').text();
+    	$('#cardInforError').css('display','inline-block').text(t);
+   }
     </script>
 </body>
 </html>

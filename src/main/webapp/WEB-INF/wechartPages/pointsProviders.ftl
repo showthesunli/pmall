@@ -20,6 +20,7 @@
 .info_child img{border: 1px solid #e6e4e4; padding: 3px;}
 .info_child{ margin-top: 0; padding: 0;}
 .info_child div{ margin-bottom: 10px;}
+.banners{position:fixed ;z-index: 99999;width: 100%;}
 </style>
 </head>
 
@@ -112,6 +113,22 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 
 
 <script>
+//content层的padding-top值随着banners的高度变化而变化
+$(document).ready(function(){
+	var height = $(".banners").height();
+	var padding = height+10+'px';
+	$("#content").css("padding-top",padding);
+	//console.log(height);
+	//console.log(padding);
+});
+$(window).resize(function() {
+	var height = $(".banners").height();
+	var padding = height+10+'px';
+	$("#content").css("padding-top",padding);
+	//console.log(height);
+	//console.log(padding);
+});	
+	
 $(document).ready(function() {
 	$("#content").accordion({
 		alwaysOpen: false,

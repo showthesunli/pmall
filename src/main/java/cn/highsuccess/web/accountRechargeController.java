@@ -21,13 +21,13 @@ import java.util.Map;
  * Created by showt on 2017/5/17.
  */
 @Controller
-public class accountRechargeController extends HisuBaseControllerAdapter{
+public class AccountRechargeController extends HisuBaseControllerAdapter{
     @Autowired
     @Qualifier(value = "queryPersonalCenter")
     private HisuMngDataGroupAndId hisuMngDataGroupAndId;
 
     @Autowired
-    protected accountRechargeController(JavaDataSet jds, JavaOperate javaOperate) {
+    protected AccountRechargeController(JavaDataSet jds, JavaOperate javaOperate) {
         super(jds, javaOperate);
     }
 

@@ -20,7 +20,7 @@
 <style>
 .continueSBtn{background: -webkit-linear-gradient(#eee, #ccc); background: -o-linear-gradient(#eee, #ccc); background: -moz-linear-gradient(#eee, #ccc); background: linear-gradient(#eee, #ccc);color:#333; border-color: #999;}
 .sCartTitle{ font-size: 16px; font-weight: bold; color: #f60;}
-.f12{ font-size: 12px; font-weight: normal;margin: 15px 16px;}
+.f12{ font-size: 12px; font-weight: normal;margin: 15px 12px;}
 .iconfont{ width: 16px; height: 16px; display: inline-block;}
 .info_head{ position: relative;}
 .right em{ display: block; -webkit-border-radius: 20px; border-radius: 20px; color: #FFF; font-size: 12px; line-height: 12px; margin-top: 5px; padding: 4px 8px; top: 50%; text-shadow: 0 0 #FFFFFF; font-style: normal;}
@@ -35,6 +35,7 @@
 .gw_num .num{display: block;float: left;text-align: center;width: 52px;font-style: normal;font-size: 14px;line-height: 24px;border: 0;}
 .gw_num a.add{float: right;border-right: 0;border-left: 1px solid #dbdbdb;}
 .gw_num,.left f12 red{float: left;}
+.banners{position:fixed ;z-index: 99999;width: 100%;}
 </style>
 </head>
 
@@ -189,6 +190,21 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 </body>
 </html>
 <script>
+	//content层的padding-top值随着banners的高度变化而变化
+$(document).ready(function(){
+	var height = $(".banners").height();
+	var padding = height+10+'px';
+	$("#content").css("padding-top",padding);
+	//console.log(height);
+	//console.log(padding);
+});
+$(window).resize(function() {
+	var height = $(".banners").height();
+	var padding = height+10+'px';
+	$("#content").css("padding-top",padding);
+	//console.log(height);
+	//console.log(padding);
+});
 function delItem(prdNo,money,amount){
 	var url = "<@spring.url '/shoppingCart/delCart'/>";
 	window.location.href = url + "?prdNo=" + prdNo + "&money=" + money +"&amount=" + amount;
@@ -212,14 +228,18 @@ $(document).ready(function(){
 	$(".add").click(function(){
 		var v =  $(this).prev(".num").attr("value");
 		var wareNum = $(this).parent().parent().parent().next(".formGo").find("input[name='prdWareNum']").val();
-		var money = $(this).parent().parent().parent().next(".formGo").find("input[name='money']").val();
-		var num = parseInt(v) + 1;
+		var money = $(this).parent().parent().parent().next(".formGo").find("input[name='money']").val().replace(/,/g,'');
+				
+		v = parseInt(v.replace(/,/g,''));
+		wareNum = parseInt(wareNum.replace(/,/g,''));
+		
+		var num = v + 1;
 					
-		if(num < parseInt(wareNum)){
+		if(num <= wareNum){
 			$(this).prev(".cartNum").val(num);
 			$(this).parent().parent().parent().next(".formGo").find("input[name='amount']").val(num);
-			$(this).parent().parent().parent().next(".formGo").find("input[name='prdWareNum']").val(wareNum.replace(/,/g,''));
-			$(this).parent().parent().parent().next(".formGo").find("input[name='money']").val(money.replace(/,/g,''));
+			$(this).parent().parent().parent().next(".formGo").find("input[name='prdWareNum']").val(wareNum);
+			$(this).parent().parent().parent().next(".formGo").find("input[name='money']").val(money);
 			$(this).parent().parent().parent().next(".formGo").submit();
 		}
 		else{
@@ -231,39 +251,47 @@ $(document).ready(function(){
 	//减的效果
 	$(".jian").click(function(){
 		var v =  $(this).next(".num").attr("value");
-		var num = parseInt(v) - 1;
 		var wareNum = $(this).parent().parent().parent().next(".formGo").find("input[name='prdWareNum']").val();
-		var money = $(this).parent().parent().parent().next(".formGo").find("input[name='money']").val();
-							  
-		if(parseInt(v) == 1){
+		var money = $(this).parent().parent().parent().next(".formGo").find("input[name='money']").val().replace(/,/g,'');
+		
+		v = parseInt(v.replace(/,/g,''));
+		wareNum = parseInt(wareNum.replace(/,/g,''));
+		
+		var num = v - 1;
+		
+		if(v == 1){
 			$(this).val(1);
 			alert('商品数量必须大于0');
 		}
 		else{
 			$("input[name='amount']").val(num);			
 			$(this).next(".cartNum").val(num);
-			$(this).parent().parent().parent().next(".formGo").find("input[name='prdWareNum']").val(wareNum.replace(/,/g,''));
-			$(this).parent().parent().parent().next(".formGo").find("input[name='money']").val(money.replace(/,/g,''));
+			$(this).parent().parent().parent().next(".formGo").find("input[name='prdWareNum']").val(wareNum);
+			$(this).parent().parent().parent().next(".formGo").find("input[name='money']").val(money);
 			$(this).parent().parent().parent().next(".formGo").submit();
 		}
 	});
 		
 	//数量手输
 	$(".num").blur(function(){
-		var v = $(this).val();
+		var v =$(this).val();
 		var oldNum = $(this).parent().parent().parent().next(".formGo").find("input[name='amount']").val();
 		var wareNum = $(this).parent().parent().parent().next(".formGo").find("input[name='prdWareNum']").val();
-		var money = $(this).parent().parent().parent().next(".formGo").find("input[name='money']").val();
+		var money = $(this).parent().parent().parent().next(".formGo").find("input[name='money']").val().replace(/,/g,'');
+		
+		v = parseInt(v.replace(/,/g,''));
+		oldNum = parseInt(oldNum.replace(/,/g,''));
+		wareNum = parseInt(wareNum.replace(/,/g,''));
 		
 		if(v <= 0){
 			$(this).val(1);
 			alert('商品数量必须大于0');
 		}
-		else if(v <= wareNum && v > 0){
+		else if(v > 0 && v <= wareNum){
 			$(this).val(v);
 			$(this).parent().parent().parent().next(".formGo").find("input[name='amount']").val(v);			
-			$(this).parent().parent().parent().next(".formGo").find("input[name='prdWareNum']").val(wareNum.replace(/,/g,''));
-			$(this).parent().parent().parent().next(".formGo").find("input[name='money']").val(money.replace(/,/g,''));
+			$(this).parent().parent().parent().next(".formGo").find("input[name='prdWareNum']").val(wareNum);
+			$(this).parent().parent().parent().next(".formGo").find("input[name='money']").val(money);
 			$(this).parent().parent().parent().next(".formGo").submit();
 		}
 		else{

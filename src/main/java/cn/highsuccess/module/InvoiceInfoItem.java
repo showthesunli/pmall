@@ -3,6 +3,7 @@ package cn.highsuccess.module;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.NotNull;
+
 import java.lang.annotation.Native;
 
 
@@ -27,6 +28,7 @@ public class InvoiceInfoItem {
     private String mobile;
     private String billReceiverMail;
     private String taxpayerID;
+    private String isDefault;
 	public String getBillTag() {
 		return billTag;
 	}
@@ -68,5 +70,11 @@ public class InvoiceInfoItem {
 	}
 	public void setTaxpayerID(String taxpayerID) {
 		this.taxpayerID = taxpayerID;
+	}
+	public String getIsDefault() {
+		return isDefault;
+	}
+	public void setIsDefault(String isDefault) {
+		this.isDefault = isDefault;
 	}
 }

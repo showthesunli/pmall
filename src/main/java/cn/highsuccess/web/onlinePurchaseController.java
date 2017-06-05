@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * Created by prototype on 2017/5/10.
  */
 @Controller
-public class onlinePurchaseController extends HisuBaseControllerAdapter{
+public class OnlinePurchaseController extends HisuBaseControllerAdapter{
 
     @Autowired
-    protected onlinePurchaseController(JavaDataSet jds, JavaOperate javaOperate) {
+    protected OnlinePurchaseController(JavaDataSet jds, JavaOperate javaOperate) {
         super(jds, javaOperate);
     }
 

@@ -27,13 +27,15 @@
 <script src="js/html5.js"></script>
 <![endif]-->
 <style>
-.usercenter .cdv p{ overflow: hidden;}
+.usercenter .cdv p{ overflow: hidden; padding-bottom: 18px; position: relative;}
 .usercenter .cdv .addrTxt{ text-align: right; min-width: 70px; max-width: 70px; float: left; color: #666;}
-.usercenter .cdv .addrInputTxt{ width: 70%; min-width: 150px; float: left; border:none; max-height: 28px; line-height: 28px; color: #333;}
+.usercenter .cdv .addrInputTxt{ width: 70%; min-width: 150px; float: left; border:1px solid #fff; max-height: 28px; line-height: 28px; color: #333; padding: 0 5px; -webkit-appearance: none;}
 .usercenter .cdv .addBtnA{ background: #f60; height: 30px; line-height: 30px; color: #fff;}
 .usercenter .label{ padding: 6px 5px; font-weight: normal;}
 #errorShow{ text-align: center;}
 .errorTxt{ text-align: center; min-height: 20px; line-height: 20px; color: #f00; background:#ffebe7; padding: 0 10px; border: 1px solid #f00; border-radius:5px; display: none;}
+.usercenter .cdv .inputRW{ border:1px solid #ccc;}
+label.error{ position:absolute; left: 70px; top:22px; color: #f00; font-weight: normal;}
 </style>
 </head>
 <body class="huibg">
@@ -71,36 +73,37 @@
   
     <#list queryMemberAddress as item>
     	
-  	<form method="post" action="<@spring.url '/modAddr'/>">
+  	<form class="addressForm" method="post" action="<@spring.url '/modAddr'/>">
 	  	<div class="cdv dzi">
-		    <p>
-		    	<button class="label label-warning pull-right deleteAddr" style="margin-left: 10px; background: #ccc; color: #666">删除</button>
-				<button id="modifyAddrBtn" class="label label-warning pull-right" style="margin-left: 10px; background: #3897d7;">编辑</button>
+		    <p style="padding-bottom: 5px;">
+		    	<span class="label label-warning pull-right deleteAddr" style="margin-left: 10px; background: #ccc; color: #666">删除</span>
+				<span class="label label-warning pull-right modifyAddrBtn" style="margin-left: 10px; background: #3897d7;">编辑</span>
+				<span class="label label-warning pull-right updateAddrBtn" style="margin-left: 10px; background: #3897d7; display: none;">保存</span>
+				
 					
 				<#if item.isDefault == "1">
-		      		<button class="label label-danger pull-right">默认</button>
+		      		<span class="label label-danger pull-right">默认</span>
 		      	</#if>
 		      		
 		      	<#if item.isDefault == "0">
-		      		<button class="label label-warning pull-right setToDefAddr">设为默认</button>
+		      		<span class="label label-warning pull-right setToDefAddr">设为默认</span>
 		      	</#if>
 		    </p>
 		    <p>
 		    	<span class="addrTxt">收货人：</span>
-		    	<input type="text" value="${item.name}" id="addressName" name="receiverName" class="addrInputTxt" readOnly="true" />
+		    	<input type="text" value="${item.name}" id="addressName" name="receiverName" class="addrInputTxt inputRO" readOnly="true" maxlength="20" />
 		    </p>
 		    <p>
 		    	<span class="addrTxt">手机号码：</span>
-		    	<input type="text" value="${item.phone}" id="phone" name="phone" class="addrInputTxt" readOnly="true" />
+		    	<input type="text" value="${item.phone}" id="phone" name="phone" class="addrInputTxt inputRO" readOnly="true" maxlength="11" />
 		    </p>
 		    <p>
 		    	<span class="addrTxt">邮政编号：</span>
-		    	<input type="text" value="${item.zip}" id="addressZip" name="zipCode" class="addrInputTxt" readOnly="true" />
+		    	<input type="text" value="${item.zip}" id="addressZip" name="zipCode" class="addrInputTxt inputRO" readOnly="true" maxlength="6" />
 		    </p>
 		    <p>
 		    	<span class="addrTxt">收货地址：</span>
-		    	<span class="addrInputTxt" style=" max-height: 56px;">${item.addr}</span>
-		    	<input type="hidden" value="${item.addr}" id="addressAddr" name="addr" />
+		    	<input type="text" value="${item.addr}" id="addressAddr" name="addr" class="addrInputTxt inputRO" readOnly="true" />
 		    </p>
 		    
 		      	<input type="hidden" name="objectID" value="${item.objectID}"/>
@@ -121,6 +124,39 @@
 </html>
 <script>
 $(document).ready(function(){
+	$(".addressForm").validate({
+            rules: {
+                receiverName: {
+                    required: true,
+                },
+                phone: {
+                    required: true,
+                    isPhone: []
+                },
+                zipCode: {
+                    required: true,
+                },
+                addr: {
+                    required: true,
+                },
+            },
+            messages: {
+                receiverName: {
+                    required: "请输入收货人",
+                },
+                phone: {
+                    required: "请输入手机号码",
+                    isPhone: "请输入正确的手机号码"
+                },
+                zipCode: {
+                    required: "请输入邮编",
+                },
+                addr: {
+                    required: "请输入收货地址",
+                },
+            }
+       });
+        
 	//删除地址
     $('.deleteAddr').click(function(){
     	var action = "<@spring.url '/deleteAddr'/>";
@@ -130,9 +166,10 @@ $(document).ready(function(){
     //设为默认值
     $('.setToDefAddr').click(function(){
     	var action = "<@spring.url '/modAddr'/>";
-    	$(this).parent().parent().parent().attr('action',action);
+    	$(this).parent().parent().parent().attr('action',action);    	
     	$('.isDefaultInput').val('0');
     	$(this).parent().parent().parent().find('.isDefaultInput').val('1');
+    	$(this).parent().parent().parent().submit();
     });
     
     if($('#errorShow .errorTxt').text() == ''){
@@ -141,6 +178,22 @@ $(document).ready(function(){
     else{
     	$('#errorShow').show();
     }
+    
+    //编辑地址
+    $('.modifyAddrBtn').click(function(){       		$(this).parent().parent().find('.inputRO').addClass('inputRW').removeAttr('readonly').removeClass('inputRO');
+		$(this).parent().parent().find('.modifyAddrBtn').hide();
+		$(this).parent().parent().find('.updateAddrBtn').show();
+	});
+	
+	//保存地址
+	$('.updateAddrBtn').click(function(){
+		var action = "<@spring.url '/modAddr'/>";
+    	$(this).parent().parent().parent().attr('action',action);
+    	$(this).parent().parent().parent().submit();
+		$(this).parent().parent().find('.inputRW').addClass('inputRO').attr('readonly','ture').removeClass('inputRW');
+		$(this).parent().parent().find('.updateAddrBtn').hide();
+		$(this).parent().parent().find('.modifyAddrBtn').show();
+	});
     
 })
 </script>

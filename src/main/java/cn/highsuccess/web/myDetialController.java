@@ -19,7 +19,7 @@ import java.util.Map;
  * Created by prototype on 2017/5/20.
  */
 @Controller
-public class myDetialController extends HisuBaseControllerAdapter {
+public class MyDetialController extends HisuBaseControllerAdapter {
     @Autowired
     @Qualifier("queryOrder")
     private HisuMngDataGroupAndId queryOrder;
@@ -29,7 +29,7 @@ public class myDetialController extends HisuBaseControllerAdapter {
     private HisuMngDataGroupAndId queryOrderDtl;
 
     @Autowired
-    protected myDetialController(JavaDataSet jds, JavaOperate javaOperate) {
+    protected MyDetialController(JavaDataSet jds, JavaOperate javaOperate) {
         super(jds, javaOperate);
     }
 

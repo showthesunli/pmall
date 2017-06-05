@@ -23,13 +23,13 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping(value = "/accountSafe{matrix}")
-public class accountSafeController extends HisuBaseControllerAdapter {
+public class AccountSafeController extends HisuBaseControllerAdapter {
     @Autowired
     @Qualifier(value = "queryPersonalCenterInfo")
     private HisuMngDataGroupAndId hisuMngDataGroupAndId;
 
     @Autowired
-    protected accountSafeController(JavaDataSet jds, JavaOperate javaOperate) {
+    protected AccountSafeController(JavaDataSet jds, JavaOperate javaOperate) {
         super(jds, javaOperate);
     }
 

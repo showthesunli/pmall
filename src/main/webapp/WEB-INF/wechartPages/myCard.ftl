@@ -12,17 +12,17 @@
 	<link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/bootstrap.min.css'/>">
 	<link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/pstyle.css'/>">
 	<link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/style.css'/>">
-	<link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/buttons.css'/>">
+	<link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/dropload.css'/>">
 	<link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/font-awesome.min.css'/>">
-	<script type="text/javascript" src="<@spring.url '/wechart/js/jquery-1.10.2.min.js'/>"></script>
+	<script type="text/javascript" src="<@spring.url '/wechart/js/jquery-1.10.2.min.js'/>"></script>	
 	<script type="text/javascript" src="<@spring.url '/wechart/js/jquery.accordion.js'/>"></script>
-	<script type="text/javascript" src="<@spring.url '/wechart/js/unslider.min.js'/>"></script>
+	<script type="text/javascript" src="<@spring.url '/wechart/js/dropload.min.js'/>"></script>
 
 <!--必要样式-->
 <link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/menu_elastic.css'/>">
 <script type="text/javascript" src="<@spring.url '/wechart/js/snap.svg-min.js'/>"></script>
 <!--[if IE]>
-<script src="js/html5.js"></script>
+<script src="<@spring.url '/wechart/js/html5.js'/>"></script>
 <![endif]-->
 </head>
 <body class="huibg">
@@ -51,34 +51,36 @@
 
 
 <div class="usercenter" style="padding-left: 0;">
-  <div id="content" style="margin-bottom: 50px;">
-  	
-		<#list selectPersonalCard as item>
+  	<div id="content" style=" margin-bottom: 50px;">
+	  	<div class="contentLists">
+	  	
+	  		<#list selectPersonalCard as item>
 			
-		<div class="box_exp info_light">
-			<div class="info_integral" style="position: relative;">
-				<span class="title" style="font-size: 14px;display:inline-block;background: none;">卡号：${item.cardNo}</span>
-				<span class="title2" style="width: 13px;height: 9px;position: absolute;top: 50%;right:0%;float: right;"></span>
-			</div>
-			<div style="display: block; overflow: hidden; opacity: 1;">
-				<div class="info_child" style=" color: #333;">
-					
-					<p>卡类型：<span style="color: #f60;">${item.cardType}</span></p>
-					<p>金额：<span style="color: #f60;">￥${item.balanceAmount}</span></p>
-					<p>状态：<span style="color: #f60;">${item.cardStatus}</span></p>
-					
+			<div class="box_exp info_light">
+				<div class="info_integral" style="position: relative;">
+					<span class="title" style="font-size: 14px;display:inline-block;background: none;">卡号：${item.cardNo}</span>
+					<span class="title2" style="width: 13px;height: 9px;position: absolute;top: 50%;right:0%;float: right;"></span>
 				</div>
-				<div class="info_child_txt" style="text-align: center;">
+				<div style="display: block; overflow: hidden; opacity: 1;">
+					<div class="info_child" style=" color: #333;">
+						
+						<p>卡类型：<span style="color: #f60;">${item.cardType}</span></p>
+						<p>金额：<span style="color: #f60;">￥${item.balanceAmount}</span></p>
+						<p>状态：<span style="color: #f60;">${item.cardStatus}</span></p>
+						
+					</div>
+					<div class="info_child_txt" style="text-align: center;">
+						
+						<a href="<@spring.url '/cardOperation'/>?cardNo=${item.cardNo}&operType=0" style="color: #3897d7; margin-right: 20px;">发送卡密</a>
 					
-					<a href="<@spring.url '/cardOperation'/>?cardNo=${item.cardNo}&operType=0" style="color: #3897d7; margin-right: 20px;">发送卡密</a>
-				
-					<a href="<@spring.url '/cardOperation'/>?cardNo=${item.cardNo}&operType=1" style="color: #3897d7;">转赠</a>
+						<a href="<@spring.url '/cardOperation'/>?cardNo=${item.cardNo}&operType=1" style="color: #3897d7;">转赠</a>
+					</div>
 				</div>
 			</div>
+			
+			</#list>
+			
 		</div>
-		
-		</#list>
-		
 	</div>
   
   	<!--底部-->
@@ -94,6 +96,90 @@ $(document).ready(function() {
 		header: '.info_integral',
 		clearStyle: true
 	});
+	
+	// 页数
+    var page = 1;
+    // 每页展示个数
+    var size = 6;
+	
+	
+    // dropload
+    $('#content').dropload({
+        scrollArea : window,
+        domDown : {
+            domClass   : 'dropload-down',
+            domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
+            domLoad    : '<div class="dropload-load"><span class="loading"></span>加载中</div>',
+            domNoData  : '<div class="dropload-noData">暂无更多</div>'
+        },
+        loadDownFn : function(me){
+            page++;
+            // 拼接HTML
+            var result = '';
+            $.ajax({               
+                url: '<@spring.url "/myCardList;currentPage='+page+';numOfPerPage='+size+';"/>',
+                type: 'GET',
+                dataType: 'json',
+                success: function(data){
+                	if(data.selectPersonalCard_totalRecNum != 0){
+                	var arrLen = data.selectPersonalCard.length;
+           
+                    if(arrLen > 0){
+                        for(var i=0; i<arrLen; i++){
+                        	var link1 = "<@spring.url '/cardOperation'/>?cardNo="+data.selectPersonalCard[i].cardNo+"&operType=0";
+                        	var link2 = "<@spring.url '/cardOperation'/>?cardNo="+data.selectPersonalCard[i].cardNo+"&operType=1";
+                        	
+                        	result +=	'<div class="box_exp info_light">'
+                        					+'<div class="info_integral" style="position: relative;">'
+                        						+'<span class="title" style="font-size: 14px;display:inline-block;background: none;">卡号：'+data.selectPersonalCard[i].cardNo+'</span>'
+                        						+'<span class="title2" style="width: 13px;height: 9px;position: absolute;top: 50%;right:0%;float: right;"></span>'
+                        					+'</div>'
+                        					+'<div style="display:none;">'
+                        						+'<div class="info_child" style=" color: #333;">'
+                        							+'<p>卡类型：'
+                        								+'<span style="color: #f60;">'+data.selectPersonalCard[i].cardType+'</span>'
+                        							+'</p>'
+                        							+'<p>金额：'
+                        								+'<span style="color: #f60;">￥'+data.selectPersonalCard[i].balanceAmount+'</span>'
+                        							+'</p>'
+                        							+'<p>状态：'
+                        								+'<span style="color: #f60;">'+data.selectPersonalCard[i].cardStatus+'</span>'
+                        							+'</p>'
+                        						+'</div>'
+                        						+'<div class="info_child_txt" style="text-align: center;">'
+                        							+'<a href="'+link1+' style="color: #3897d7; margin-right: 20px;">发送卡密</a>'
+                        							+'<a href="'+link2+'" style="color: #3897d7;">转赠</a>'
+                        						+'</div>'
+                        					+'</div>'
+                        				+'</div>';
+                        							                     
+                        }
+                    // 如果没有数据
+                    }else{
+                        // 锁定
+                        me.lock();
+                        // 无数据
+                        me.noData();
+                    }
+                    // 为了测试，延迟1秒加载
+                    setTimeout(function(){
+                        // 插入数据到页面，放到最后面
+                        $('.contentLists').append(result);
+                        // 每次数据插入，必须重置
+                        me.resetload();
+                    });
+                    }
+                },
+                error: function(xhr, type){
+                    alert('抱歉，网络问题无法加载更多商品。');
+                    // 即使加载出错，也得重置
+                    me.resetload();
+                }
+            });
+        }
+    });
+    
+
 });
 $(window).resize(function() {
 	

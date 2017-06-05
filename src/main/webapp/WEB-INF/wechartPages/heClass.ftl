@@ -15,6 +15,9 @@
 <script type="text/javascript" src="<@spring.url '/wechart/js/jquery-1.10.2.min.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/wechart/js/jquery.accordion.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/wechart/js/unslider.min.js'/>"></script>
+<style type="text/css">
+	.banners{position:fixed ;z-index: 99999;width: 100%;}
+</style>
 </head>
 
 <body ondragstart="return false;" onselectstart="return false;" oncontextmenu="return false" onselectstart="return false" 
@@ -47,6 +50,23 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 	<!--end 底部-->
 	
 </div>
-
+<script>
+	//content层的padding-top值随着banners的高度变化而变化
+$(document).ready(function(){
+	var height = $(".banners").height();
+	var padding = height+10+'px';
+	$("#content").css("padding-top",padding);
+	//console.log(height);
+	//console.log(padding);
+});
+$(window).resize(function() {
+	var height = $(".banners").height();
+	var padding = height+10+'px';
+	$("#content").css("padding-top",padding);
+	//console.log(height);
+	//console.log(padding);
+});
+	
+</script>
 </body>
 </html>

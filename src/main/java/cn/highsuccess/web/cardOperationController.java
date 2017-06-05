@@ -30,14 +30,14 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping(value = "/cardOperation{matrix}")
-public class cardOperationController extends HisuBaseControllerAdapter {
+public class CardOperationController extends HisuBaseControllerAdapter {
 
     @Autowired
     @Qualifier(value = "queryPersonalCenterInfo")
     private HisuMngDataGroupAndId hisuMngDataGroupAndId;
 
     @Autowired
-    protected cardOperationController(JavaDataSet jds, JavaOperate javaOperate) {
+    protected CardOperationController(JavaDataSet jds, JavaOperate javaOperate) {
         super(jds, javaOperate);
     }
 

@@ -18,7 +18,7 @@
 			paginator : true,
 			navigator : true,
 			progress  : true,
-			loadImgSrc: 'images/load.gif',
+//			loadImgSrc: 'images/load.gif',
 			skin      : 'edslider'
 		};
 
@@ -146,12 +146,12 @@
 
 				index = sliderLi.index(current) + 1;
 				
-				if(options.paginator){
-					paginatorLi
-						.removeClass('current')
-						.filter(':nth-child(' + index + ')')
-						.addClass('current');
-				}
+//				if(options.paginator){
+//					paginatorLi
+//						.removeClass('current')
+//						.filter(':nth-child(' + index + ')')
+//						.addClass('current');
+//				}
 			}
 
 			function next(){

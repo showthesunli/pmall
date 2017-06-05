@@ -18,7 +18,7 @@ import java.util.Map;
  * Created by showt on 2017/5/8.
  */
 @Controller
-public class confirmCardOrder extends HisuBaseControllerAdapter{
+public class ConfirmCardOrder extends HisuBaseControllerAdapter{
     @Autowired
     @Qualifier(value = "queryAddr")
     private HisuMngDataGroupAndId hisuMngDataGroupAndId;
@@ -38,7 +38,7 @@ public class confirmCardOrder extends HisuBaseControllerAdapter{
     private OrderService orderService;
 
     @Autowired
-    protected confirmCardOrder(JavaDataSet jds, JavaOperate javaOperate) {
+    protected ConfirmCardOrder(JavaDataSet jds, JavaOperate javaOperate) {
         super(jds, javaOperate);
     }
 
