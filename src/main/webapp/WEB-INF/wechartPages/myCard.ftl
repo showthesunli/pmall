@@ -24,6 +24,9 @@
 <!--[if IE]>
 <script src="<@spring.url '/wechart/js/html5.js'/>"></script>
 <![endif]-->
+<style type="text/css">
+	.fixed{position:fixed ;z-index: 99999;width: 100%;}
+</style>
 </head>
 <body class="huibg">
 		
@@ -44,13 +47,13 @@
       <desc>Created with Snap</desc><defs></defs></svg>
     </div>
   </div>
-<nav class="navbar text-center">
+<nav class="navbar text-center fixed">
    <button class="topleft" onclick="window.location.href='<@spring.url "/member"/>'"><span class="iconfont icon-fanhui"></span></button>
   <a class="navbar-tit center-block">我的卡片</a>
 </nav>
 
 
-<div class="usercenter" style="padding-left: 0;">
+<div class="usercenter" style="padding-left: 0;padding-top: 60px;">
   	<div id="content" style=" margin-bottom: 50px;">
 	  	<div class="contentLists">
 	  	
@@ -89,6 +92,17 @@
 </div>
 
 <script>
+	//usercenter层的padding-top值随着fixed的高度变化而变化
+$(document).ready(function(){
+	var height = $(".fixed").height();
+	var padding = height+5+'px';
+	$(".usercenter").css("padding-top",padding);
+});
+$(window).resize(function() {
+	var height = $(".fixed").height();
+	var padding = height+5+'px';
+	$(".usercenter").css("padding-top",padding);
+
 $(document).ready(function() {
 	$("#content").accordion({
 		alwaysOpen: false,

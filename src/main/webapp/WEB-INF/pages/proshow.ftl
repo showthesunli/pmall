@@ -235,9 +235,13 @@ $(document).ready(function(){
 		var prdNo = "${queryPrdDetail[0].prdNo}";
 		var prdName = "${queryPrdDetail[0].productInfo}";
 		var isCard = "${queryPrdDetail[0].isCard}";
-		var fileName = "${queryPrdDetail[0].fileName}";
+		var fileName = "${queryPrdDetail[0].iconFileName}";
 		//window.location.href = "<@spring.url '/confirmOrder'/>" + ";prdNo="+prdNo+ ";prdName="+prdName+";amount="+amount+";money="+money+";prdType="+isCard + ";fileName=" + fileName;
-		window.location.href = "<@spring.url '/confirmOrderNow'/>" + "?prdNo="+prdNo+ "&prdName="+prdName+"&amount="+amount+"&money="+money+"&prdType="+isCard + "&fileName=" + fileName;
+        if(isCard == "0"){
+            window.location.href = "<@spring.url '/confirmOrderNow'/>" + ";termID=web?prdNo="+prdNo+ "&prdName="+prdName+"&amount="+amount+"&money="+money+"&prdType="+isCard + "&fileName=" + fileName;
+        }else{
+            window.location.href = "<@spring.url '/confirmCardOrderNow'/>" + ";termID=web?prdNo="+prdNo+ "&prdName="+prdName+"&amount="+amount+"&money="+money+"&prdType="+isCard + "&fileName=" + fileName;
+        }
 	})
 	
 	//选择积分来源

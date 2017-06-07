@@ -41,6 +41,10 @@ public class ConfirmOrder extends HisuBaseControllerAdapter{
     @Autowired
     @Qualifier(value = "queryAddr")
     private HisuMngDataGroupAndId hisuMngDataGroupAndId;
+    
+    @Autowired
+    @Qualifier("queryInvoice")
+    private HisuMngDataGroupAndId queryInvoice;
 
     @Autowired
     @Qualifier("queryOrder")
@@ -76,7 +80,7 @@ public class ConfirmOrder extends HisuBaseControllerAdapter{
         Map<String,Object> parm = new HashMap<String,Object>(map);
         parm.put("memberID", this.getJds().getUserName());
         excute(model, parm, hisuMngDataGroupAndId);
-
+        excute(model, parm, queryInvoice);
         excute(model,parm,queryPayerForGoods);
 
         excute(model,parm,queryPlantEnt);
@@ -86,28 +90,18 @@ public class ConfirmOrder extends HisuBaseControllerAdapter{
         return "/confirmOrder";
     }
     
-    @RequestMapping(value = "/confirmOrderNow")
+    @RequestMapping(value = "/confirmOrderNow{matrix}")
     public String showConfirmOrderNow(Model model,
-    									BuyerItem buyerItem) throws UnsupportedEncodingException{
-        Map<String,Object> parm = new HashMap<String,Object>();
+    									BuyerItem buyerItem,
+                                      @MatrixVariable Map<String,Object> map) throws UnsupportedEncodingException{
+        Map<String,Object> parm = new HashMap<String,Object>(map);
         parm.put("memberID", this.getJds().getUserName());
         excute(model, parm, hisuMngDataGroupAndId);
-
+        excute(model, parm, queryInvoice);
         excute(model,parm,queryPayerForGoods);
 
         excute(model,parm,queryPlantEnt);
-        /*model.addAttribute(shoppingCartService.getShoppingCart().getBuyerItemList("0"));
-        model.addAttribute(shoppingCartService.countProMoney());
-        model.addAttribute(shoppingCartService.countProNum());*/
-        //拼装BuyerItemList  
-        /*BuyerItem bi = new BuyerItem();
-        bi.setPrdNo((String)map.get("prdNo"));
-        bi.setPrdName((String)map.get("prdName"));
-        bi.setAmount(Integer.parseInt((String)map.get("amount")));
-        bi.setPrdType((String)map.get("prdType"));
-        bi.setFileName((String)map.get("fileName"));*/
-        //buyerItem.setPrdName(new String(buyerItem.getPrdName().getBytes("iso-8859-1"), "GBK"));
-        
+
         ArrayList<BuyerItem> list = new ArrayList<BuyerItem>();
         list.add(buyerItem);
         shoppingCartService.getShoppingCart().setBuyerItemList(list);

@@ -36,6 +36,7 @@
 .errorTxt{ text-align: center; min-height: 20px; line-height: 20px; color: #f00; background:#ffebe7; padding: 0 10px; border: 1px solid #f00; border-radius:5px; display: none;}
 .usercenter .cdv .inputRW{ border:1px solid #ccc;}
 label.error{ position:absolute; left: 70px; top:22px; color: #f00; font-weight: normal;}
+.fixed{position:fixed ;z-index: 99999;width: 100%;}
 </style>
 </head>
 <body class="huibg">
@@ -57,7 +58,7 @@ label.error{ position:absolute; left: 70px; top:22px; color: #f00; font-weight: 
       <desc>Created with Snap</desc><defs></defs></svg>
     </div>
   </div>
-<nav class="navbar text-center">
+<nav class="navbar text-center fixed">
    <button class="topleft" onclick="window.location.href='<@spring.url "/member"/>'"><span class="iconfont icon-fanhui"></span></button>
   <a class="navbar-tit center-block">收货地址</a>
 </nav>
@@ -123,6 +124,19 @@ label.error{ position:absolute; left: 70px; top:22px; color: #f00; font-weight: 
 </body>
 </html>
 <script>
+
+//usercenter层的padding-top值随着fixed的高度变化而变化
+$(document).ready(function(){
+	var height = $(".fixed").height();
+	var padding = height+10+'px';
+	$(".usercenter").css("padding-top",padding);
+});
+$(window).resize(function() {
+	var height = $(".fixed").height();
+	var padding = height+10+'px';
+	$(".usercenter").css("padding-top",padding);
+});	
+	
 $(document).ready(function(){
 	$(".addressForm").validate({
             rules: {

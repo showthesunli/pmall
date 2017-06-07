@@ -25,8 +25,9 @@
 .addressForm label{ width:70px;}
 .width100{ width:130px;}
 .orderItem .defaultDiv {  margin-left: 30px;  float: left;  line-height: 30px;  }
-.defaultDiv .addrDefault {  color: #cc0000;  cursor: default;  }
-.addrModifyBtn,.invoiceModifyBtn,.payTypeModifyBtn{  margin-left: 30px;  }
+.defaultDiv .addrDefault,.defaultDiv .invoiceDefault{  color: #cc0000;  cursor: default;}
+.invoiceDefault{ color: #cc0000; margin-left: 10px;}
+.addrModifyBtn,.invoiceModifyBtn,.payTypeModifyBtn,.noInvoiceBtn{  margin-left: 30px;  }
 .addrModSureBtn,.addrModCBtn ,.invoiceModSureBtn,.payTypeModSureBtn{  display: inline-block;  padding: 0 20px;  margin-top: 10px;  color: #fff;  background: #f60;  height: 30px;  line-height: 30px;  cursor: pointer;}
 .addrModCBtn{ background:#eee; color: #666; margin-left: 10px; }
 .bgCO,.bgCOIn {  background: #ffefe5;  }
@@ -40,16 +41,18 @@
 .payTypeDiv input[type=radio]{ vertical-align: middle;}
 
 .addressDiv{ height:300px;}
-.invoiceDivDiv{ height:200px;}
+.invoiceDivDiv{ height:430px; margin: -215px 0 0 -300px;}
 .addressDiv div,.invoiceDivDiv div{ padding:10px; color:#666; font-size:14px;}
 .addressDiv .tipDivTitle,.invoiceDivDiv .tipDivTitle{ padding:0; margin-bottom:10px;}
 .addressDiv input[type=text],.invoiceDivDiv input[type=text]{ padding:0 5px;}
 .addressDiv label,.invoiceDivDiv label{ width:80px; display:inline-block; text-align:right;}
+.invoiceDivDiv label{ width: 130px;}
 .colorRed{color:red;}
 
 .addressErr,.invoiceErr,.payTypeErr{ height: 30px; width: 1200px; margin: 0 auto;}
 .errorCon{ height: 40px; border:1px solid #f00; border-radius: 5px; background: #ffebe7; padding:0 10px; display: inline-block; float: left; width: 400px; margin:10px 0 0 440px; display: none;}
 .errorCon p{ line-height: 20px; font-size: 14px; color:#f00;}
+.cartShopBtn{ border-color:#f60; color: #f60; background: #faecec;}
 </style>
 </head>
 
@@ -60,7 +63,7 @@
 
     <div class="jf-main">
         <div class="ny_nav" style="margin-bottom: 0;">
-            <div class="ny_nav1">当前位置：<a href='<@spring.url "/index"/>'>首页</a> > 购物车</div>
+            <div class="ny_nav1">当前位置：<a href='<@spring.url "/index"/>'>首页</a> > 确认订单</div>
             <div class="clearfix"></div>
         </div>
 
@@ -74,8 +77,9 @@
                     <#if queryMemberAddress[0]??>
                         <label class="addrName">${queryMemberAddress[0].name}</label>
                         <label class="addrPhone">${queryMemberAddress[0].phone}</label>
-                        <label class="address">${queryMemberAddress[0].addr}</label>
-                        <span class="addrDefault" style="float: none;">默认地址</span>
+                        <label class="address">${queryMemberAddress[0].addr}</label>                       
+                        <span class="addrDefault" style="float: none;"><#if queryMemberAddress[0].isDefault == "1">默认地址</#if></span>
+                        
                         <span class="addrModifyBtn" onclick="openTipDiv('addressDiv')">添加</span>
                         <span class="addrModifyBtn" onclick="divHeightA('addrSlide')">修改</span>
                     <#else>
@@ -92,13 +96,14 @@
                     <div class="addrDiv jf-overflowH">
                         <label class="addrName">${item.name}</label>
                         <label class="addrPhone">${item.phone}</label>
-                        <label class="address">${item.addr}</label>
+                        <label class="address">${item.addr}</label>                       
+                        <span class="addrDefault" style="float: none;"><#if item.isDefault == "1">默认地址</#if></span>
+                        
                     </div>
                 </#list>
                 <div style="margin-left: 10px;">
                     <span class="addrModSureBtn">确定</span>
                     <span class="addrModCBtn" onclick="divHeightZ('addrSlide')">取消</span>
-                    <!--<span class="addForN" style="">没有您想要的地址？请 <a href="javascript:void(0);">添加</a></span>-->
                 </div>
             </div>
         </div>
@@ -112,30 +117,88 @@
                 <span style="color:#cc0000; float:left;">(只对金额支付部分开具发票)</span>
 
                 <div class="defaultDiv jf-overflowH">
-                    <label class="invoiceType">普通发票（纸质）1</label>
-                    <label class="invoiceComp">广州睿颢软件技术有限公司1</label>
-                    <label class="invoiceTxt">明细1</label>
-                    <span class="addrDefault" style="float: none;">默认发票信息</span>
+                	
+                	<#if queryMemberInvoice[0]??>
+                		<#if queryMemberInvoice[0].receiptType == '1'>
+							<#assign rec='个人'>
+						<#else>
+							<#assign rec='法人'>
+						 </#if>
+						                    
+		            	<#if queryMemberInvoice[0].rcptContent == '0'>
+							<#assign rcp='明细'>
+						<#elseif queryMemberInvoice[0].rcptContent == '1'>
+							<#assign rcp='办公用品'>
+						<#elseif queryMemberInvoice[0].rcptContent == '2'>
+							<#assign rcp='电脑配件'>
+						<#elseif queryMemberInvoice[0].rcptContent == '3'>
+							<#assign rcp='耗材'>
+						<#elseif queryMemberInvoice[0].rcptContent == '10'>
+							<#assign rcp='用品'>
+						<#elseif queryMemberInvoice[0].rcptContent == '11'>
+							<#assign rcp='日用品'>				                    
+						<#else>
+							<#assign rcp='礼品'>
+						</#if>
+                	<label class="invoiceTag" style="display: none;">${queryMemberInvoice[0].billTag}</label>
+                    <label class="invoiceTitle">${queryMemberInvoice[0].rcptTitle}</label>
+                    <label class="invoiceType">${rec}</label>
+                    <label class="invoiceCon">${rcp}</label>
+                    <label class="invoiceID">${queryMemberInvoice[0].taxpayerID}</label>
+                    
+                    <span class="invoiceDefault" style="float: none;"><#if queryMemberInvoice[0].isDefault == '1'>默认发票信息</#if></span>
+                    
+                    <span class="noInvoiceBtn" onclick="divHeightZ('invoiceSlide')">不开发票</span>
                     <span class="addrModifyBtn" onclick="openTipDiv('invoiceDivDiv')">添加</span>
-                    <span class="invoiceModifyBtn" onclick="divHeightA('invoiceSlide')">修改</span>
+                    <span class="invoiceModifyBtn" onclick="divHeightA('invoiceSlide')">修改</span>                                 
+                    </#if>
+                   
                 </div>
+                
             </div>
 
             <div class="jf-overflowH invoiceSlide" style="height:0;">
+            	<#list queryMemberInvoice as item>
+            	
+            	<#if item.receiptType == '1'>
+					<#assign rec='个人'>
+				<#else>
+					<#assign rec='法人'>
+				 </#if>
+				                    
+            	<#if item.rcptContent == '0'>
+					<#assign rcp='明细'>
+				<#elseif item.rcptContent == '1'>
+					<#assign rcp='办公用品'>
+				<#elseif item.rcptContent == '2'>
+					<#assign rcp='电脑配件'>
+				<#elseif item.rcptContent == '3'>
+					<#assign rcp='耗材'>
+				<#elseif item.rcptContent == '10'>
+					<#assign rcp='用品'>
+				<#elseif item.rcptContent == '11'>
+					<#assign rcp='日用品'>				                    
+				<#else>
+					<#assign rcp='礼品'>
+				</#if>
+            		
                 <div class="invoiceDiv jf-overflowH">
-                    <label class="invoiceType">普通发票（纸质）1</label>
-                    <label class="invoiceComp">广州睿颢软件技术有限公司1</label>
-                    <label class="invoiceTxt">明细1</label>
+                	<label class="invoiceTag">${item.billTag}</label>
+                    <label class="invoiceTitle">${item.rcptTitle}</label>
+                    <label class="invoiceType">${rec}</label>
+                    <label class="invoiceCon">${rcp}</label>
+                    <label class="invoiceMobile">${item.mobile}</label>
+                    <label class="invoiceMail">${item.billReceiverMail}</label>
+                    <label class="invoiceID">${item.taxpayerID}</label>
+                    <span class="invoiceDefault" style="float: none;"><#if item.isDefault == '1'>默认发票信息</#if></span>
+                    
                 </div>
-                <div class="invoiceDiv jf-overflowH">
-                    <label class="invoiceType">普通发票（纸质）2</label>
-                    <label class="invoiceComp">广州睿颢软件技术有限公司2</label>
-                    <label class="invoiceTxt">明细2</label>
-                </div>
+                
+                </#list>
+                
                 <div style="margin-left: 10px;">
                     <span class="invoiceModSureBtn">确定</span>
                     <span class="addrModCBtn" onclick="divHeightZ('invoiceSlide')">取消</span>
-                    <!--<span class="addForN" style="">没有您想要的发票信息？请 <a href="javascript:void(0);">添加</a></span>-->
                 </div>
             </div>
         </div>
@@ -147,10 +210,10 @@
             <div class="orderItemTitel jf-overflowH">
                 <h4>支付方式</h4>
                 <div class="defaultDiv jf-overflowH" style="float:left;">
-                	<label class="payTypeT">积分支付：</label>
-                    <label class="payTypeA" style="display: none;"></label>
+                	<label class="payTypeT">账户支付：</label>
+                    <label class="payTypeA" style="display: none;">${payToolsForPlatEnt[0].payer}</label>
                     <#--<label class="payTypePayerName">账户余额</label>-->
-                    <label class="payTypePayerName"></label>
+                    <label class="payTypePayerName">${payToolsForPlatEnt[0].payerName}</label>
                     <span class="payTypeModifyBtn">修改</span>
                 </div>
             </div>
@@ -266,19 +329,52 @@
     <!--新增地址 end-->
     <!--新增发票-->
     <div class="invoiceDivDiv">
+        <form method="post" action="<@spring.url '/addInvoice'/>">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>    
         <div class="jf-overflowH tipDivTitle"><h3 style="float:left;">发票信息</h3><span onclick="closeTipDiv('invoiceDivDiv')" style="float:right; cursor:pointer; color:#999;font-size:25px;">×</span></div>
-        <div><label><span class="colorRed">*</span> 发票抬头：</label><input type="text" id="addressName" name="receiverName" value="" style="width: 300px;" /></div>
-         <div>
-         	<label><span class="colorRed">*</span> 发票内容：</label>
-         	<select style="line-height: 25px; height: 25px;">
-         		<option>日用品</option>
-         		<option>办公用品</option>
-         		<option>电脑配件</option>
-         	</select>
-         </div>
-        <p style="margin:10px 0 0 90px;"><input type="hidden" id="operType" name="operType" value="0"/><input type="hidden" id="" name="" value=""/><input type="submit" value="保存" class="sureBtn"  onclick="closeTipDiv('invoiceDiv')"  /><input type="button" value="取消" class="cancleBtn"  onclick="closeTipDiv('invoiceDivDiv')" /></p>
-            <input type="hidden" name="isDefault" value="0"/>
+        <div>
+        	<label><span class="colorRed"></span>发票标签：</label>
+        	<input type="text" id="addBillTag" name="billTag" value="" style="width:427px;" />
+        </div>
+        <div>
+        	<label><span class="colorRed"></span>发票抬头：</label>
+        	<input type="text" id="addRcptTitle" name="rcptTitle" value="" style="width:427px;" />
+        </div>
+        <div>
+        	<label><span class="colorRed"></span>发票类型：</label>
+        	<select id="addReceiptType" name="receiptType">
+                  <option value="1">个人</option>
+                  <option value="2">法人</option>
+			</select>
+        </div>
+        <div>
+        	<label><span class="colorRed"></span>发票内容：</label>
+        	<select id="addRcptContent" name="rcptContent" >
+				<option value="0">明细</option>
+                <option value="1">办公用品</option>
+                <option value="2">电脑配件</option>
+                <option value="3">耗材</option>
+                <option value="10">用品</option>
+                <option value="11">日用品</option>
+                <option value="12">礼品</option>
+			</select>
+        </div>
+        <div>
+        	<label><span class="colorRed"></span> 收票人手机：</label>
+        	<input type="text" id="addMobile" name="mobile" value="" />
+        </div>
+        <div>
+        	<label><span class="colorRed"></span>收票人邮箱：</label>
+        	<input type="text" id="addBillReceiverMail" name="billReceiverMail" value="" />
+        </div>
+        <div>
+        	<label><span class="colorRed"></span> 公司纳税人识别号：</label>
+        	<input type="text" id="addTaxpayerID" name="taxpayerID" value="" />
+        </div>
+        <p style="margin:10px 0 0 140px;"><input type="hidden" id="operType" name="operType" value="0"/><input type="hidden" id="" name="" value=""/><input type="submit" value="保存" class="sureBtn"  /><input type="button" value="取消" class="cancleBtn"  onclick="closeTipDiv('invoiceDivDiv')" /></p>
+        	<input type="hidden" name="isDefault" value="0"/>
             <input type="hidden" name="objectID" id="objectID" value=""/>
+            <input type="hidden" name="forword" id="forword" value="confirmOrder"/>
         </form>
     </div>
     <!--新增发票 end-->
@@ -289,6 +385,7 @@
     <input name="mobile" type="hidden"/>
     <input name="payToolIDList" type="hidden"/>
     <input name="OrderType" value="0" type="hidden"/>
+    <input name="billTag" type="hidden"/>
     <input name="_csrf" value="${_csrf.token}" type="hidden"/>
 </form>
 
@@ -314,11 +411,13 @@ $(document).ready(function(e) {
         var name = $(".bgCO .addrName").text();
         var phoneNum = $(".bgCO .addrPhone").text();
         var addr = $(".bgCO .address").text();
+        var def = $(".bgCO .addrDefault").text();
         $(".addrSlide").animate({height: 0});
         if(name != "" || phoneNum != "" || addr != "") {
             $(".defaultDiv .addrName").text(name);
             $(".defaultDiv .addrPhone").text(phoneNum);
             $(".defaultDiv .address").text(addr);
+            $(".defaultDiv .addrDefault").text(def);
         }
     	if(name != '' && phoneNum != '' && addr != ''){
     		$('#errorConAddr').text('');
@@ -337,6 +436,8 @@ $(document).ready(function(e) {
 //        var payToolIDList = "东方航空-积分支付";
         var payToolIDList = $(".payTypeA").text();
         $("input[name='payToolIDList']").val(payToolIDList);
+        var billTag = $(".defaultDiv .invoiceTag").html();
+        $("input[name='billTag']").val(billTag);
         
         if(receiverName == '' || addr == '' || mobile == ''){
         	$('.errorCon').css('display','block');
@@ -358,16 +459,32 @@ $(document).ready(function(e) {
         $(this).addClass("bgCOIn");
     });
     $(".invoiceModSureBtn").click(function () {
+        var title = $(".bgCOIn .invoiceTitle").text();
         var type = $(".bgCOIn .invoiceType").text();
-        var comp = $(".bgCOIn .invoiceComp").text();
-        var txt = $(".bgCOIn .invoiceTxt").text();
+        var con = $(".bgCOIn .invoiceCon").text();
+        var def = $(".bgCOIn .invoiceDefault").text();
+        var iId = $(".bgCOIn .invoiceID").text();
+        var tag = $(".bgCOIn .invoiceTag").text();
         $(".invoiceSlide").animate({height: 0});
         if(type != "" || comp != "" || txt != "") {
+            $(".defaultDiv .invoiceTitle").text(title);
             $(".defaultDiv .invoiceType").text(type);
-            $(".defaultDiv .invoiceComp").text(comp);
-            $(".defaultDiv .invoiceTxt").text(txt);
+            $(".defaultDiv .invoiceCon").text(con);
+            $(".defaultDiv .invoiceDefault").text(def);
+            $(".defaultDiv .invoiceID").text(iId);
+            $(".defaultDiv .invoiceTag").text(tag);
         }
     });
+    
+    //不开发票
+    $('.noInvoiceBtn').click(function(){
+    	$(".defaultDiv .invoiceTitle").text('');
+        $(".defaultDiv .invoiceType").text('');
+        $(".defaultDiv .invoiceCon").text('');
+        $(".defaultDiv .invoiceDefault").text('');
+        $(".defaultDiv .invoiceID").text('');
+        $(".defaultDiv .invoiceTag").text('');
+    })
     
     //支付方式修改
     $('.payTypeModifyBtn').click(function(){

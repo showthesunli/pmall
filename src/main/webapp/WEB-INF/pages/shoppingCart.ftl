@@ -18,6 +18,7 @@
 .gray{-webkit-filter: grayscale(100%); -moz-filter: grayscale(100%); -ms-filter: grayscale(100%); -o-filter: grayscale(100%); filter: grayscale(100%); filter: gray;cursor:not-allowed;
 }
 .cartNum{ width: 40px;}
+.cartShopBtn{ border-color:#f60; color: #f60; background: #faecec;}
 </style>
 </head>
 

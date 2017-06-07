@@ -18,7 +18,7 @@
 <script type="text/javascript" src="<@spring.url '/wechart/js/unslider.min.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/wechart/js/util.js'/>"></script>
 <style>
-.continueSBtn{background: -webkit-linear-gradient(#eee, #ccc); background: -o-linear-gradient(#eee, #ccc); background: -moz-linear-gradient(#eee, #ccc); background: linear-gradient(#eee, #ccc);color:#333; border-color: #999;}
+.continueSBtn{background: -webkit-linear-gradient(#eee, #ccc); background: -o-linear-gradient(#eee, #ccc); background: -moz-linear-gradient(#eee, #ccc); background: linear-gradient(rgba(44, 154, 219, 0.8), #ccc);color:#333; border-color: #999;}
 .sCartTitle{ font-size: 16px; font-weight: bold; color: #f60;}
 .f12{ font-size: 12px; font-weight: normal;margin: 15px 12px;}
 .iconfont{ width: 16px; height: 16px; display: inline-block;}
@@ -226,21 +226,18 @@ function delItem(prdNo,money,amount){
 $(document).ready(function(){
 	//加的效果
 	$(".add").click(function(){
-		var v =  $(this).prev(".num").attr("value");
-		var wareNum = $(this).parent().parent().parent().next(".formGo").find("input[name='prdWareNum']").val();
-		var money = $(this).parent().parent().parent().next(".formGo").find("input[name='money']").val().replace(/,/g,'');
-				
-		v = parseInt(v.replace(/,/g,''));
-		wareNum = parseInt(wareNum.replace(/,/g,''));
-		
+		var $this = $(this).parent().parent().parent();
+		var v =  parseInt($(this).prev(".num").val().replace(/,/g,''));
+		var wareNum = parseInt($this.next(".formGo").find("input[name='prdWareNum']").val().replace(/,/g,''));
+		var money = $this.next(".formGo").find("input[name='money']").val().replace(/,/g,'');		
 		var num = v + 1;
 					
 		if(num <= wareNum){
 			$(this).prev(".cartNum").val(num);
-			$(this).parent().parent().parent().next(".formGo").find("input[name='amount']").val(num);
-			$(this).parent().parent().parent().next(".formGo").find("input[name='prdWareNum']").val(wareNum);
-			$(this).parent().parent().parent().next(".formGo").find("input[name='money']").val(money);
-			$(this).parent().parent().parent().next(".formGo").submit();
+			$this.next(".formGo").find("input[name='amount']").val(num);
+			$this.next(".formGo").find("input[name='prdWareNum']").val(wareNum);
+			$this.next(".formGo").find("input[name='money']").val(money);
+			$this.next(".formGo").submit();
 		}
 		else{
 			$(this).val(wareNum);
@@ -250,13 +247,10 @@ $(document).ready(function(){
 	
 	//减的效果
 	$(".jian").click(function(){
-		var v =  $(this).next(".num").attr("value");
-		var wareNum = $(this).parent().parent().parent().next(".formGo").find("input[name='prdWareNum']").val();
-		var money = $(this).parent().parent().parent().next(".formGo").find("input[name='money']").val().replace(/,/g,'');
-		
-		v = parseInt(v.replace(/,/g,''));
-		wareNum = parseInt(wareNum.replace(/,/g,''));
-		
+		var $this = $(this).parent().parent().parent();
+		var v =  parseInt($(this).next(".num").val().replace(/,/g,''));
+		var wareNum = parseInt($this.next(".formGo").find("input[name='prdWareNum']").val().replace(/,/g,''));
+		var money = $this.next(".formGo").find("input[name='money']").val().replace(/,/g,'');
 		var num = v - 1;
 		
 		if(v == 1){
@@ -266,33 +260,30 @@ $(document).ready(function(){
 		else{
 			$("input[name='amount']").val(num);			
 			$(this).next(".cartNum").val(num);
-			$(this).parent().parent().parent().next(".formGo").find("input[name='prdWareNum']").val(wareNum);
-			$(this).parent().parent().parent().next(".formGo").find("input[name='money']").val(money);
-			$(this).parent().parent().parent().next(".formGo").submit();
+			$this.next(".formGo").find("input[name='prdWareNum']").val(wareNum);
+			$this.next(".formGo").find("input[name='money']").val(money);
+			$this.next(".formGo").submit();
 		}
 	});
 		
 	//数量手输
 	$(".num").blur(function(){
-		var v =$(this).val();
-		var oldNum = $(this).parent().parent().parent().next(".formGo").find("input[name='amount']").val();
-		var wareNum = $(this).parent().parent().parent().next(".formGo").find("input[name='prdWareNum']").val();
-		var money = $(this).parent().parent().parent().next(".formGo").find("input[name='money']").val().replace(/,/g,'');
-		
-		v = parseInt(v.replace(/,/g,''));
-		oldNum = parseInt(oldNum.replace(/,/g,''));
-		wareNum = parseInt(wareNum.replace(/,/g,''));
-		
+		var $this = $(this).parent().parent().parent();
+		var v = parseInt($(this).val().replace(/,/g,''));
+		var oldNum = parseInt($this.next(".formGo").find("input[name='amount']").val().replace(/,/g,''));
+		var wareNum = parseInt($this.next(".formGo").find("input[name='prdWareNum']").val().replace(/,/g,''));
+		var money = $this.next(".formGo").find("input[name='money']").val().replace(/,/g,'');
+
 		if(v <= 0){
 			$(this).val(1);
 			alert('商品数量必须大于0');
 		}
 		else if(v > 0 && v <= wareNum){
 			$(this).val(v);
-			$(this).parent().parent().parent().next(".formGo").find("input[name='amount']").val(v);			
-			$(this).parent().parent().parent().next(".formGo").find("input[name='prdWareNum']").val(wareNum);
-			$(this).parent().parent().parent().next(".formGo").find("input[name='money']").val(money);
-			$(this).parent().parent().parent().next(".formGo").submit();
+			$this.next(".formGo").find("input[name='amount']").val(v);			
+			$this.next(".formGo").find("input[name='prdWareNum']").val(wareNum);
+			$this.next(".formGo").find("input[name='money']").val(money);
+			$this.next(".formGo").submit();
 		}
 		else{
 			$(this).val(oldNum);

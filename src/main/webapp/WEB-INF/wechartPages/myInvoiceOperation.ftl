@@ -26,8 +26,8 @@
 <![endif]-->
 <style>
 
-.usercenter .cdv p{ overflow: hidden; padding-bottom: 30px;}
-.usercenter .cdv .addrTxt{ text-align: right; min-width: 80px; max-width: 80px; float: left; color: #666;}
+.usercenter .cdv p{ overflow: hidden; padding-bottom: 20px;}
+.usercenter .cdv .addrTxt{ text-align: right; min-width: 90px; max-width: 80px; float: left; color: #666;}
 .usercenter .cdv .addrInputTxt{ width: 70%; min-width: 150px; float: left; border: 1px solid #ccc; padding: 0 5px; height: 30px; line-height: 30px;}
 .usercenter .cdv .addBtnA{ background: #f60; height: 30px; line-height: 30px; color: #fff;}
 .cdv p{ position: relative;}
@@ -61,39 +61,58 @@
 <div class="usercenter">
   
   
-  		
+  	<form method="post" action="<@spring.url '/addInvoice'/>">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>  	
 	  	<div class="cdv dzi" style="padding-top: 25px;">
+	  	
+             <p>
+	        	<span class="addrTxt">发票标签：</span>
+	        	<input type="text" id="addBillTag" class="addrInputTxt" name="billTag" value=""  />
+        	</p>
 		    <p>
 		    	<span class="addrTxt">发票抬头：</span>
-		    	<input type="text" value=""  class="addrInputTxt" placeholder="请输入发票抬头"  />
+		    	<input type="text" value=""  id="addBillTag" class="addrInputTxt"  name="rcptTitle"  />
 		    </p>
 		    <p>
 		    	<span class="addrTxt">发票类型：</span>
-		    	<select name="" id="">   
-			        <option value="1">纸质发票</option>   
-			        <option value="2">电子发票</option>   
+		    	<select id="addReceiptType" name="receiptType">   
+			        <option value="1">个人</option>   
+			        <option value="2">法人</option>   
       			</select>   
 		    </p>
 		    <p>
 		    	<span class="addrTxt">发票内容：</span>
-		    	<select name="" id="">   
-			        <option value="1">办公用品</option>   
-			        <option value="2">日用品</option>   
+		    	<select id="addRcptContent" name="rcptContent">   
+			        <option value="0">明细</option>
+	                <option value="1">办公用品</option>
+	                <option value="2">电脑配件</option>
+	                <option value="3">耗材</option>
+	                <option value="10">用品</option>
+	                <option value="11">日用品</option>
+	                <option value="12">礼品</option>
       			</select>   
 		    </p>
 		    <p>
 		    	<span class="addrTxt">收票人手机：</span>
-		    	<input type="text" value=""  class="addrInputTxt" placeholder="请输入收票人手机号码" />
+		    	<input type="text" value="" id="addMobile" class="addrInputTxt"  name="mobile"/>
 		    </p>
 		    <p>
 		    	<span class="addrTxt">收票人邮箱：</span>
-		    	<input type="text" value=""  class="addrInputTxt"  placeholder="请输入收票人邮箱" />
+		    	<input type="text" value=""  id="addBillReceiverMail" class="addrInputTxt"  name="billReceiverMail"/>
 		    </p>
+		     <p>
+	        	<span class="addrTxt" style="font-size: 10px;">公司纳税人识别号：</span>
+	        	<input type="text" id="addTaxpayerID" class="addrInputTxt" name="taxpayerID" value="" />
+       		 </p>
 		    <p>
 		    	<span class="addrTxt">&nbsp;</span>
 		    	<input type="submit" value="确 定" class="addBtnA" style="width: 70%;" />
 		    </p>
-		   
+		    <input type="hidden" id="operType" name="operType" value="0"/>
+		    <input type="hidden" name="isDefault" value="0"/>
+            <input type="hidden" name="objectID" id="objectID" value=""/>
+            <input type="hidden" name="forword" id="forword" value="myInvoice"/>
+		 </form>   
 	
 
 		</div>

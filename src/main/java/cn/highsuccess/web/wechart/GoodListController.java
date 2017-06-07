@@ -66,7 +66,7 @@ public class GoodListController extends HisuBaseControllerAdapter {
         return "/goodList";
     }
 
-    @RequestMapping(value = "/goodsList",method = RequestMethod.GET,produces = "application/json;charset=UTF-8;")
+    @RequestMapping(value = "/goodsList{matrix}",method = RequestMethod.GET,produces = "application/json;charset=UTF-8;")
     @ResponseBody
     public String goodsListForJson(Model model,
                                    @MatrixVariable(required = false, defaultValue = "1") int currentPage,

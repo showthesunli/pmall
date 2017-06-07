@@ -55,13 +55,13 @@
 	                	<div class="jf-overflowH" style="margin-bottom: 10px;">
                             <#if queryMemberOrder[0].saleOrderPrdType == '0'>
                             <#list payerForGoodsOrder as item>
-                                <label class="payTypeItem payTypeItemBO">
+                                <label class="payTypeItem">
                                     <input type="radio" name="RadioGroup1" value="${item.payer}" checked="checked" />
                                     <img src="<@spring.url '/imgsrc/'/>${item.iconFileName}" width="100" height="33" alt="${item.payerName}" />
                                 </label>
                             </#list>
                             <#list payToolsForPlatEnt as item>
-                                <label class="payTypeItem payTypeItemBO">
+                                <label class="payTypeItem">
                                     <input type="radio" name="RadioGroup1" value="${item.payer}" checked="checked" />
                                     <#--<img src="<@spring.url '/imgsrc/'/>${item.iconFileName}" width="100" height="33" alt="${item.payerName}" />-->
                                 <img src="<@spring.url '/imgsrc/'/>" width="100" height="33" alt="${item.payerName}" />
@@ -69,7 +69,7 @@
                             </#list>
                             <#else >
                                 <#list payerForCardsOrder as item>
-                                    <label class="payTypeItem payTypeItemBO">
+                                    <label class="payTypeItem">
                                         <input type="radio" name="RadioGroup1" value="${item.payer}" checked="checked" />
                                         <img src="<@spring.url '/imgsrc/'/>${item.iconFileName}" width="100" height="33" alt="${item.payerName}" />
                                     </label>
@@ -91,7 +91,7 @@
                 </div>
                     
                 <p style="text-align:center; margin:20px 0 0; float:right">
-                    <input type="button" value="取消订单" class="sureBtn" style="background: #eee; color:#666; margin-right:10px; border:1px solid #ccc;""  />
+                    <input type="button" value="取消订单" class="sureBtn" style="background: #faecec; color:#f60; margin-right:10px; border:1px solid #f60;""  />
                     <input type="button" value="支付" id="pay" class="sureBtn"  />
                 </p>
             </div>
