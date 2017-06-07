@@ -37,18 +37,29 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 	<div id="content" style=" margin-bottom: 50px;">
 		
 		<div class="info_head info_light">
+			<div class="droploadCon">
 			
 			<#list queryPrdListByPrdType as item>
                 <div class="info_card">
                     <a href="<@spring.url '/proshow'/>;prdNo=${item.prdNo};keyWordsFld=${item.prdNo};">
-                        <i><img src="<@spring.url '/imgsrc/'/>${item.iconFileName}"></i>
+                        <i><img src="<@spring.url '/imgsrc/'/>${item.iconFileName}" onerror="downloadErrImg(this,'${item.iconFileName}')" /></i>
                         <h1>${item.productInfo}</h1>
                         <span class="titles">￥${item.prdPrice}</span>
                     </a>
                 </div>
 			</#list>
+			
+			</div>
 						
 		</div>
+		
+		<!--常用功能-->
+		<#include "/lib/template/commFunctionsPage.ftl" encoding="UTF-8">
+		<!--end 常用功能-->
+		</div>	
+		
+		
+		<div style="padding:15px;"></div>
 			
 	</div>
 	
@@ -72,14 +83,7 @@ $(window).resize(function() {
 	$("#content").css("padding-top",padding);
 });
 	
-$(document).ready(function() {
-	$("#content").accordion({
-		alwaysOpen: false,
-		autoheight: false,
-		header: '.info_integral',
-		clearStyle: true
-	});
-	
+$(document).ready(function() {	
 	var urlinfo = window.location.href;
 	var strs = new Array();
 	var para = "";
@@ -95,7 +99,7 @@ $(document).ready(function() {
     var size = 12;	
 	
     // dropload
-    $('#content').dropload({
+    $('.info_head').dropload({
         scrollArea : window,
         domDown : {
             domClass   : 'dropload-down',
@@ -122,7 +126,7 @@ $(document).ready(function() {
                         	
                         	result +=	'<div class="info_card">'
                         					+'<a href="'+link1+'">'
-                        						+'<i><img src="'+link2+'"></i>'
+                        						+'<i><img src="'+link2+'" onerror="downloadErrImg(this,'+data.queryPrdListByPrdType[i].iconFileName+')"></i>'
                         						+'<h1>'+data.queryPrdListByPrdType[i].productInfo+'</h1>'
                         						+'<span class="titles">￥'+data.queryPrdListByPrdType[i].prdPrice+'</span>'
                         					+'</a>'
@@ -139,7 +143,7 @@ $(document).ready(function() {
                     // 为了测试，延迟1秒加载
                     setTimeout(function(){
                         // 插入数据到页面，放到最后面
-                        $('.info_head').append(result);
+                        $('.droploadCon').append(result);
                         // 每次数据插入，必须重置
                         me.resetload();
                     });

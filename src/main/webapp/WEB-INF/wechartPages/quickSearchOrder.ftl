@@ -12,11 +12,11 @@
 	<link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/bootstrap.min.css'/>">
 	<link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/pstyle.css'/>">
 	<link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/style.css'/>">
-	<link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/buttons.css'/>">
+	<link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/dropload.css'/>">
 	<link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/font-awesome.min.css'/>">
 	<script type="text/javascript" src="<@spring.url '/wechart/js/jquery-1.10.2.min.js'/>"></script>
 	<script type="text/javascript" src="<@spring.url '/wechart/js/jquery.accordion.js'/>"></script>
-	<script type="text/javascript" src="<@spring.url '/wechart/js/unslider.min.js'/>"></script>
+	<script type="text/javascript" src="<@spring.url '/wechart/js/dropload.min.js'/>"></script>
 
 <!--必要样式-->
 <link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/menu_elastic.css'/>">
@@ -45,13 +45,14 @@
     </div>
   </div>
 <nav class="navbar text-center">
-   <button class="topleft" onclick="window.location.href='<@spring.url "/member"/>'"><span class="iconfont icon-fanhui"></span></button>
+   <button class="topleft" onclick="javascript:history.go(-1);"><span class="iconfont icon-fanhui"></span></button>
   <a class="navbar-tit center-block">我的订单</a>
 </nav>
 
 
 <div class="usercenter" style="padding-left: 0;">
   <div id="content" style="margin-bottom: 50px;">
+  	<div class="contentLists">
   	
 		<#list queryQuickExOrderByMobile as key>
 		<div class="box_exp info_light">
@@ -74,6 +75,8 @@
 		</div>
 		</#list>
 		
+		</div>
+		
 	</div>
   
   	<!--底部-->
@@ -83,12 +86,105 @@
 
 <script>
 $(document).ready(function() {
-	$("#content").accordion({
+	 $("#content").accordion({
 		alwaysOpen: false,
 		autoheight: false,
 		header: '.info_integral',
 		clearStyle: true
 	});
+	
+	var urlinfo = window.location.href;
+	var strs = new Array();
+	var para = "";
+	strs = urlinfo.split("?");
+	for (i = 1; i < strs.length ; i++ ) 
+	{ 		
+		para += decodeURI(strs[i]);		
+	}
+	
+    // 页数
+    var page = 1;
+    // 每页展示个数
+    var size = 6;
+
+    // dropload
+    $('#content').dropload({    	
+        scrollArea : window,
+        domDown : {
+            domClass   : 'dropload-down',
+            domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
+            domLoad    : '<div class="dropload-load"><span class="loading"></span>加载中</div>',
+            domNoData  : '<div class="dropload-noData">暂无更多</div>'
+        },
+        loadDownFn : function(me){
+            page++;
+            // 拼接HTML
+            var result = '';
+            $.ajax({               
+                url: '<@spring.url "/quickSearchOrderList;currentPage='+page+';numOfPerPage='+size+'?'+para+'"/>',
+                type: 'GET',
+                dataType: 'json',
+                success: function(data){
+                	if(data.queryQuickExOrderByMobile_totalRecNum != 0){
+                		var arrLen = data.queryQuickExOrderByMobile.length;
+                    if(arrLen > 0){
+                        for(var i=0; i<arrLen; i++){
+                        	var link1 = "<@spring.url '/buycfm'/>;billNo="+data.queryQuickExOrderByMobile[i].billNo+";termID=wechat";
+                        	var link2 = "<@spring.url '/myDetial'/>?billNo="+data.queryQuickExOrderByMobile[i].billNo;
+                        	
+                        	var wattingPayhtml = '';
+                        	if(data.queryQuickExOrderByMobile[i].orderStatus == "等待支付" ){
+                        		wattingPayhtml = '<a href="'+link1+'" style="color: #3897d7; margin-right: 20px;">继续支付</a>';
+                        	}
+                        	
+                        	result +=	'<div class="box_exp info_light">'
+                        					+'<div class="info_integral">'
+                        						+'<span class="title" style="font-size: 14px;">订单号：'+data.queryQuickExOrderByMobile[i].billNo+'</span>'
+                        					+'</div>'
+                        					+'<div style="display:none;">'
+                        						+'<div class="info_child" style=" color: #333;">'
+                        							+'<p>订单状态：'
+                        								+'<span style="color: #f60;">'+data.queryQuickExOrderByMobile[i].orderStatus+'</span>'
+                        							+'</p>'
+                        							+'<p>配送状态：'
+                        								+'<span style="color: #f60;">'+data.queryQuickExOrderByMobile[i].deliveryStatus+'</span>'
+                        							+'</p>'
+                        							+'<p>订单总额：'
+                        								+'<span style="color: #f60;">￥'+data.queryQuickExOrderByMobile[i].totalPrice+'</span>'
+                        							+'</p>'
+                        						+'</div>'
+                        						+'<div class="info_child_txt" style="text-align: center;">'
+                        							+wattingPayhtml
+                        							+'<a href="'+link2+'" style="color: #3897d7;">详情</a>'
+                        						+'</div>'
+                        					+'</div>'
+                        				+'</div>';
+                        							                     
+                        }
+                    // 如果没有数据
+                    }else{
+                        // 锁定
+                        me.lock();
+                        // 无数据
+                        me.noData();
+                    }
+                    // 为了测试，延迟1秒加载
+                    setTimeout(function(){
+                        // 插入数据到页面，放到最后面
+                        $('.contentLists').append(result);
+                        // 每次数据插入，必须重置
+                        me.resetload();
+                    });
+                    }
+                },
+                error: function(xhr, type){
+                    alert('抱歉，网络问题无法加载更多商品。');
+                    // 即使加载出错，也得重置
+                    //me.resetload();
+                }
+            });
+        }
+    });
 });
 </script>
 </body>

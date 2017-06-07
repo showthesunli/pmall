@@ -121,8 +121,7 @@
 			
 			.addAddressList input,
 			.addInvoiceList input {
-				width: 65%;
-				min-width: 180px;
+				width: 48%;
 				padding: 0 5px;
 				line-height: 26px;
 				outline: none;
@@ -142,8 +141,7 @@
 			}
 			.inputtext{
 				text-align: right;
-				min-width: 96px;
-				max-width: 92px;
+				min-width: 126px;
 				float: left;
 				color: #666;
 			}
@@ -386,7 +384,7 @@
 										<input type="text" value="" id="addBillReceiverMail" class="addrInputTxt" name="billReceiverMail" />
 									</p>
 									<p>
-										<span class="inputtext"  style="font-size: 10px;">公司纳税人识别号：</span>
+										<span class="inputtext" >公司纳税人识别号：</span>
 										<input type="text" id="addTaxpayerID" class="addrInputTxt" name="taxpayerID" value="" />
 									</p>
 									<p>

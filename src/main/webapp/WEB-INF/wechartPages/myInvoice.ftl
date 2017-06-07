@@ -23,11 +23,12 @@
 <script src="js/html5.js"></script>
 <![endif]-->
 <style>
+*:focus {outline: none;}
 .usercenter .cdv .inputRW{ border:1px solid #ccc;}
 .usercenter .cdv .inputRO{ border:1px solid #fff;}
-.usercenter .cdv p{ overflow: hidden; padding-bottom: 5px;}
-.usercenter .cdv .addrTxt{ text-align: right; min-width: 89px; max-width: 130px; float: left; color: #666;}
-.usercenter .cdv .addrInputTxt{ width: 70%; min-width: 150px; float: left; padding: 0 5px; height: 25px; line-height: 25px;}
+.usercenter .cdv p{ overflow: hidden; padding-bottom: 10px;}
+.usercenter .cdv .addrTxt{ text-align: right; min-width: 108px; max-width: 130px; float: left; color: #666;}
+.usercenter .cdv .addrInputTxt{ width: 62%; min-width: 150px; float: left; padding: 0 5px; height: 25px; line-height: 25px;-webkit-appearance: none;}
 .cdv p{ position: relative;}
 #errorShow{ text-align: center;}
 .errorTxt{ text-align: center; min-height: 20px; line-height: 20px; color: #f00; background:#ffebe7; padding: 0 10px; border: 1px solid #f00; border-radius:5px; display: none;}
@@ -77,8 +78,8 @@
 				    <#assign rec='法人'>
 				</#if>
 			    <input type="hidden" value="${item.receiptType}" />
-                <input id="receiptType" type="text" value="${rec}" class="inputRO " readOnly="true" style="width:30%;text-indent: 5px;"/>
-		    	<select name="receiptType" id="addReceiptType" style="display: none;">  
+                <input id="receiptType" type="text" value="${rec}" class="inputRO " readOnly="true" style="width:30%;text-indent: 5px;-webkit-appearance: none;"/>
+		    	<select name="receiptType" id="addReceiptType" style="display: none;>  
 		    		
 			        <option value="1">个人</option>   
 			        <option value="2">法人</option>   
@@ -102,7 +103,7 @@
 				<#assign rcp='礼品'>
 				</#if>
                 <input type="hidden" value="${item.rcptContent}" />
-                <input id="rcptContent" type="text" value="${rcp}" class="inputRO" readOnly="true"  style="width:30%;text-indent: 5px;"/>                               	
+                <input id="rcptContent" type="text" value="${rcp}" class="inputRO" readOnly="true"  style="width:30%;text-indent: 5px;-webkit-appearance: none"/>                               	
 		    	<select name="rcptContent" id="addRcptContent" style="display: none;">   
 			        <option value="0">明细</option>
 	                <option value="1">办公用品</option>
@@ -122,7 +123,7 @@
 		    	<input type="text"  class="addrInputTxt inputRO" id="billReceiverMail" name="billReceiverMail" value="${item.billReceiverMail}" readOnly="true"/>
 		    </p>
 		    <p>
-		    	<span class="addrTxt" style="font-size: 10px;">公司纳税人识别号：</span>
+		    	<span class="addrTxt" >公司纳税人识别号：</span>
 		    	<input type="text"   class="addrInputTxt inputRO"  id="taxpayerID" name="taxpayerID" value="${item.taxpayerID}" readOnly="true"/>
 		    </p>
 		    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>

@@ -62,6 +62,8 @@ public class PersonalInfoController extends HisuBaseControllerAdapter{
     public String modifyMemberInfo(Model model,
                                    @Valid UserInfo userInfo){
         StringBuilder condition = new StringBuilder();
+        condition.append("birthday=").append(userInfo.getBirthday().replaceAll("-","")).append("|");
+        condition.append("email=").append(userInfo.getEmail()).append("|");
         condition.append("gender=").append(userInfo.getGender());
         this.getJavaOperate().service("w_mmbCenterPage","cytModMmbInfo",condition.toString());
         return "redirect:/myInformation";

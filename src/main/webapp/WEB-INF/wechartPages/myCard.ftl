@@ -102,7 +102,7 @@ $(window).resize(function() {
 	var height = $(".fixed").height();
 	var padding = height+5+'px';
 	$(".usercenter").css("padding-top",padding);
-
+});
 $(document).ready(function() {
 	$("#content").accordion({
 		alwaysOpen: false,
@@ -112,7 +112,7 @@ $(document).ready(function() {
 	});
 	
 	// 页数
-    var page = 1;
+    var page = 2;
     // 每页展示个数
     var size = 6;
 	
@@ -161,7 +161,7 @@ $(document).ready(function() {
                         							+'</p>'
                         						+'</div>'
                         						+'<div class="info_child_txt" style="text-align: center;">'
-                        							+'<a href="'+link1+' style="color: #3897d7; margin-right: 20px;">发送卡密</a>'
+                        							+'<a href="'+link1+'" style="color: #3897d7; margin-right: 20px;">发送卡密</a>'
                         							+'<a href="'+link2+'" style="color: #3897d7;">转赠</a>'
                         						+'</div>'
                         					+'</div>'
@@ -187,7 +187,7 @@ $(document).ready(function() {
                 error: function(xhr, type){
                     alert('抱歉，网络问题无法加载更多商品。');
                     // 即使加载出错，也得重置
-                    me.resetload();
+                    //me.resetload();
                 }
             });
         }

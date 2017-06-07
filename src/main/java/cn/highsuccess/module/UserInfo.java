@@ -16,6 +16,26 @@ public class UserInfo {
     //地址
     private String addr;
 
+    private String birthday;
+
+    private String email;
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getGender() {
         return gender;
     }

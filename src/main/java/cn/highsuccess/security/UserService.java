@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  * Created by prototype on 2017/3/20.
- * 没有获取到password之前无法想后台验证并获取用户信息，
+ * 没有获取到password之前无法向后台验证并获取用户信息，
  * 此类只使用用户上送的用户名构建一个密码为空的用户实例，用户验证与用户信息查询交由HisuAuthenticationProvider
  */
 @Component

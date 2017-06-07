@@ -65,7 +65,7 @@
 
 		
 		<div style="margin:8px 0;">
-			<a href="javascript:void(0);" class="button button-block button-rounded button-caution button-large cencleOBtn">取消订单</a>
+			<a href="javascript:void(0);" id="deleteOrder" class="button button-block button-rounded button-caution button-large cencleOBtn" style="background: #faecec;color: #f60;border: 1px solid #f60;">取消订单</a>
 			<a href="javascript:void(0);" class="button button-block button-rounded button-caution button-large" style="width: 45%; padding: 0; float: right;" id="pay">支&nbsp;&nbsp;付</a>
 		</div>
 		
@@ -99,6 +99,11 @@ $(document).ready(function() {
 		header: '.info_integral',
 		clearStyle: true
 	});
+	//取消订单
+	$("#deleteOrder").click(function(){
+        window.location.href="<@spring.url '/myOrder'/>"
+        tipClose();
+    })
 	
 	$("#pay").click(function(){
         tipOpen();

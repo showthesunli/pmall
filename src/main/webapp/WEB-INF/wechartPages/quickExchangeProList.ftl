@@ -12,10 +12,12 @@
 <title>快捷兑换</title>
 <link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/style.css'/>">
 <link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/font-awesome.min.css'/>">
+<link rel="stylesheet" type="text/css" href="<@spring.url '/wechart/css/dropload.css'/>">
 <script type="text/javascript" src="<@spring.url '/wechart/js/jquery-1.10.2.min.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/wechart/js/jquery.accordion.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/wechart/js/unslider.min.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/wechart/js/util.js'/>"></script>
+<script type="text/javascript" src="<@spring.url '/wechart/js/dropload.min.js'/>"></script>
 <style>
 .info_card i img{ min-width:100px; max-width:100px;}
 .info_card{ padding-left: 100px;}
@@ -31,7 +33,8 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 	<div id="content">
 		
 		<div class="info_head info_light">
-			<#if queryShoppingCardByCompanyName[0]??>
+			<div class="droploadCon">
+
 			<#list queryShoppingCardByCompanyName as item>
                 <div class="info_card" style="position: relative;">
                     <a href="<@spring.url '/quickExchangeTHCard'/>;prdNo=${item.prdNo}">
@@ -42,15 +45,8 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
                 </div>
 			</#list>
 			
-			<#else>
-			
-			<div style="text-align: center; padding: 10px 20px; background: #ffefe5;">
-				<p style="line-height: 30px; color: #f60;"><b>暂无商品！</b></p>
-				<a href="javascript:history.go(-1);" style="padding:0 20px; color: #fff; background: #f60; display: inline-block; margin: 10px 0;">< 返回上一页</a>
 			</div>
-				
-			</#if>
-
+			
 		</div>
 	
 		<!--常用功能-->
@@ -67,6 +63,82 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 	<!--end 底部-->
 	
 </div>
+<script>
+$(document).ready(function() {
+	var urlinfo = window.location.href;
+	var strs = new Array();
+	var para = "";
+	strs = urlinfo.split(";");
+	for (i = 1; i < strs.length ; i++ ) 
+	{ 		
+		para += decodeURI(strs[i])+';';		
+	}
+	
+	// 页数
+    var page = 1;
+    // 每页展示个数
+    var size = 12;	
+	
+    // dropload
+    $('.info_head').dropload({
+        scrollArea : window,
+        domDown : {
+            domClass   : 'dropload-down',
+            domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
+            domLoad    : '<div class="dropload-load"><span class="loading"></span>加载中</div>',
+            domNoData  : '<div class="dropload-noData">暂无更多</div>'
+        },
+        loadDownFn : function(me){
+            page++;
+            // 拼接HTML
+            var result = '';
+            $.ajax({               
+                url: '<@spring.url "/quickExchangeProListForJSON;'+para+'currentPage='+page+';numOfPerPage='+size+';"/>',
+                type: 'GET',
+                dataType: 'json',
+                success: function(data){  
+                	if(data.queryShoppingCardByCompanyName_totalRecNum >= 0){
+                	var arrLen = data.queryShoppingCardByCompanyName.length;
+           
+                    if(arrLen > 0){
+                        for(var i=0; i<arrLen; i++){
+                        	var link1 = "<@spring.url '/proshow'/>;prdNo="+data.queryShoppingCardByCompanyName[i].prdNo+";keyWordsFld="+data.queryShoppingCardByCompanyName[i].prdNo+";";
+                        	var link2 = "<@spring.url '/imgsrc/'/>"+data.queryShoppingCardByCompanyName[i].iconFileName;
+                        	
+                        	result +=	'<div class="info_card">'
+                        					+'<a href="'+link1+'">'
+                        						+'<i><img src="'+link2+'" onerror="downloadErrImg(this,'+data.queryShoppingCardByCompanyName[i].iconFileName+')"></i>'
+                        						+'<h1>'+data.queryShoppingCardByCompanyName[i].productInfo+'</h1>'
+                        						+'<span class="titles">￥'+data.queryShoppingCardByCompanyName[i].prdPrice+'</span>'
+                        					+'</a>'
+                        				+'</div>';
+                        							                     
+                        }
+                    // 如果没有数据
+                    }else{
+                        // 锁定
+                        me.lock();
+                        // 无数据
+                        me.noData();
+                    }
+                    // 为了测试，延迟1秒加载
+                    setTimeout(function(){
+                        // 插入数据到页面，放到最后面
+                        $('.droploadCon').append(result);
+                        // 每次数据插入，必须重置
+                        me.resetload();
+                    });
+                    }
+                },
+                error: function(xhr, type){
+                    //alert('抱歉，网络问题无法加载更多商品。');
+                }
+            });
+        }
+    });
+    
+});
+</script>
 
 </body>
 </html>

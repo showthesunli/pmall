@@ -536,6 +536,8 @@
               <constructor-arg index="1">
                      <list>
                             <value>companyName</value>
+                            <value>currentPage</value>
+                            <value>numOfPerPage</value>
                      </list>
               </constructor-arg>
        </bean>
@@ -610,6 +612,8 @@
               <constructor-arg index="1">
                      <list>
                             <value>memberID</value>
+                            <value>currentPage</value>
+                            <value>numOfPerPage</value>
                      </list>
               </constructor-arg>
        </bean>

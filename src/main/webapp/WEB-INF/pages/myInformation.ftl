@@ -108,8 +108,8 @@
                         </div>
                         <div>
                             <label class="detialLabel">生日：</label>
-                            <input id="birthday" name="birthday" type="text" value="${memberInfo[0].birthday}" class="myDetialTxt inputRO" readOnly="true" maxlength="20" />
-                            <input id="birthdayDate" name="birthdayDate" type="text" value="${memberInfo[0].birthday}" class="myDetialTxt" readOnly="true" style="display: none;" oninput="oninputB()" />                           
+                            <input id="birthday"  type="text" value="${memberInfo[0].birthday}" class="myDetialTxt inputRO" readOnly="true" maxlength="20" />
+                            <input id="birthdayDate" name="birthday" type="text" value="${memberInfo[0].birthday}" class="myDetialTxt" readOnly="true" style="display: none;" oninput="oninputB()" />
                         </div>
                         <div>
                         	<input type="hidden" id="${_csrf.parameterName}" name="${_csrf.parameterName}" value="${_csrf.token}"/>

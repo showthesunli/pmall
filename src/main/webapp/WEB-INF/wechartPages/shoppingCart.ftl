@@ -18,9 +18,9 @@
 <script type="text/javascript" src="<@spring.url '/wechart/js/unslider.min.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/wechart/js/util.js'/>"></script>
 <style>
-.continueSBtn{background: -webkit-linear-gradient(#eee, #ccc); background: -o-linear-gradient(#eee, #ccc); background: -moz-linear-gradient(#eee, #ccc); background: linear-gradient(rgba(44, 154, 219, 0.8), #ccc);color:#333; border-color: #999;}
+.continueSBtn{background: -webkit-linear-gradient(#eee, #ccc); background: -o-linear-gradient(#eee, #ccc); background: -moz-linear-gradient(#eee, #ccc); background: linear-gradient(rgb(239, 145, 4), #f5ca89);color:#333; border-color: #999;}
 .sCartTitle{ font-size: 16px; font-weight: bold; color: #f60;}
-.f12{ font-size: 12px; font-weight: normal;margin: 15px 12px;}
+.f12{ font-size: 12px; font-weight: normal;margin: 15px 5px;}
 .iconfont{ width: 16px; height: 16px; display: inline-block;}
 .info_head{ position: relative;}
 .right em{ display: block; -webkit-border-radius: 20px; border-radius: 20px; color: #FFF; font-size: 12px; line-height: 12px; margin-top: 5px; padding: 4px 8px; top: 50%; text-shadow: 0 0 #FFFFFF; font-style: normal;}
@@ -30,9 +30,9 @@
 .info_card{ margin-top: 10px;}
 .gray{-webkit-filter: grayscale(100%); -moz-filter: grayscale(100%); -ms-filter: grayscale(100%); -o-filter: grayscale(100%); filter: grayscale(100%); filter: gray;cursor:not-allowed;
 }
-.gw_num{border: 1px solid #dbdbdb;width: 106px;line-height: 26px;overflow: hidden;margin-top: 10px;}
-.gw_num a{display: block;height: 26px;width: 26px;float: left;color: #7A7979;border-right: 1px solid #dbdbdb;text-align: center;cursor: pointer;}
-.gw_num .num{display: block;float: left;text-align: center;width: 52px;font-style: normal;font-size: 14px;line-height: 24px;border: 0;}
+.gw_num{border: 1px solid #dbdbdb;width: 82px;line-height: 26px;overflow: hidden;margin-top: 10px;}
+.gw_num a{display: block;height: 26px;width: 20px;float: left;color: #7A7979;border-right: 1px solid #dbdbdb;text-align: center;cursor: pointer;}
+.gw_num .num{display: block;float: left;text-align: center;width: 40px;font-style: normal;font-size: 14px;line-height: 26px;border: 0;}
 .gw_num a.add{float: right;border-right: 0;border-left: 1px solid #dbdbdb;}
 .gw_num,.left f12 red{float: left;}
 .banners{position:fixed ;z-index: 99999;width: 100%;}
@@ -82,7 +82,7 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 					<input type="text" value="${item.amount}" class="num"/>
 					<a class="add">+</a>
 			    </div>
-				<span class="left f12 red" >单价：￥${item.money}</span>
+				<span class="left f12 red" style="margin-left:15px;">单价：￥${item.money}</span>
 				<span class="left f12 red" >小计：￥${item.money * item.amount}</span>
 			</div>
 						

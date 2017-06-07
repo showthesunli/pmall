@@ -26,7 +26,7 @@
 <![endif]-->
 </head>
 <body class="huibg">
-<div class="vipcenter">
+<div class="vipcenter" style="padding-bottom: 50px;">
 	<div class="vipheader" style="height: 130px; margin: 11px 0;">
 		<a href="#">
 	    	<div class="touxiang"><img src="<@spring.url '/wechart/images/tx.jpg'/>" alt=""></div>
@@ -39,21 +39,14 @@
 	    <div class="col-xs-4 text-center" style="width:50%"><a href="<@spring.url "/accountRecharge"/>"><h4 style=" line-height: 2.4em; background: #f60; color: #fff; margin-top: 0.3em; ">途皓卡余额充值</h4></a></div>
 	</div>
 	
-	<ul class="vipul" style="margin-bottom: 50px;">
+	<ul class="vipul">
     	<li>
 			<a href="<@spring.url '/myInformation'/>">
 				<div class="icc"><i class="iconfont icon-yonghux"></i></div>
 				<div class="lzz">个人信息</div>
 				<div class="rizi"><i class="iconfont icon-jiantouri"></i></div>
 			</a>
-    	</li>
-    	<li>
-      		<a href="<@spring.url '/myAddress'/>">
-	       		<div class="icc"><i class="iconfont icon-chakangonglve"></i></div>
-	       		<div class="lzz">收货地址</div>
-	       		<div class="rizi"><i class="iconfont icon-jiantouri"></i></div>
-      		</a>
-    	</li>
+    	</li>   	
     	<li>
 	      	<a href="<@spring.url '/myOrder'/>">
 		       <div class="icc"><i class="iconfont icon-liebiao"></i></div>
@@ -68,7 +61,14 @@
 		       <div class="rizi"><i class="iconfont icon-jiantouri"></i></div>
 	      	</a>
 	    </li>
-	     <li>
+	    <li>
+      		<a href="<@spring.url '/myAddress'/>">
+	       		<div class="icc"><i class="iconfont icon-chakangonglve"></i></div>
+	       		<div class="lzz">收货地址</div>
+	       		<div class="rizi"><i class="iconfont icon-jiantouri"></i></div>
+      		</a>
+    	</li>
+	    <li>
 			<a href="<@spring.url '/myInvoice'/>">
 		       <div class="icc"><i class="iconfont icon-youhuiquan"></i></div>
 		       <div class="lzz">发票信息</div>

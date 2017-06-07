@@ -27,8 +27,8 @@
 <style>
 
 .usercenter .cdv p{ overflow: hidden; padding-bottom: 20px;}
-.usercenter .cdv .addrTxt{ text-align: right; min-width: 90px; max-width: 80px; float: left; color: #666;}
-.usercenter .cdv .addrInputTxt{ width: 70%; min-width: 150px; float: left; border: 1px solid #ccc; padding: 0 5px; height: 30px; line-height: 30px;}
+.usercenter .cdv .addrTxt{ text-align: right; min-width: 108px; max-width: 80px; float: left; color: #666;}
+.usercenter .cdv .addrInputTxt{ width: 62%; min-width: 150px; float: left; border: 1px solid #ccc; padding: 0 5px; height: 30px; line-height: 30px;}
 .usercenter .cdv .addBtnA{ background: #f60; height: 30px; line-height: 30px; color: #fff;}
 .cdv p{ position: relative;}
 </style>
@@ -101,12 +101,12 @@
 		    	<input type="text" value=""  id="addBillReceiverMail" class="addrInputTxt"  name="billReceiverMail"/>
 		    </p>
 		     <p>
-	        	<span class="addrTxt" style="font-size: 10px;">公司纳税人识别号：</span>
+	        	<span class="addrTxt" >公司纳税人识别号：</span>
 	        	<input type="text" id="addTaxpayerID" class="addrInputTxt" name="taxpayerID" value="" />
        		 </p>
 		    <p>
 		    	<span class="addrTxt">&nbsp;</span>
-		    	<input type="submit" value="确 定" class="addBtnA" style="width: 70%;" />
+		    	<input type="submit" value="确 定" class="addBtnA" style="width: 62%;" />
 		    </p>
 		    <input type="hidden" id="operType" name="operType" value="0"/>
 		    <input type="hidden" name="isDefault" value="0"/>
