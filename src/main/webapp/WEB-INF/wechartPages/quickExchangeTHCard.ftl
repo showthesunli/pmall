@@ -18,6 +18,8 @@
 <script type="text/javascript" src="<@spring.url '/wechart/js/jquery-1.10.2.min.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/wechart/js/jquery.accordion.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/wechart/js/unslider.min.js'/>"></script>
+<script language="javascript" src="<@spring.url '/wechart/js/jquery.validate.min.js'/>" ></script>
+<script language="javascript" src="<@spring.url '/wechart/js/jquery.validate.addMethod.js'/>" ></script>
 <style>
 .prodMin,.prodAdd{cursor: pointer; background: #f6f6f6; line-height: 26px; padding: 0 5px; display: inline-block; border: 1px solid #ccc; float: left;}
 .prodMin{ border-right: none;}
@@ -33,6 +35,8 @@
 #errorShow{ display: none; text-align: center; overflow: hidden; width: 100%; margin: 5px 0;}
 #cardInforError,.errorTxt{ display: inline-block; color:#f00; padding:0 10px; background:#ffebe7; line-height:26px; border:1px solid #f00; border-radius:5px;}
 #errorShow .errorTxt{ float: none;}
+.banners{position:fixed ;z-index: 99999;width: 100%;}
+#phone-error{color: #f00;margin-left: 42px;}
 </style>
 </head>
 
@@ -65,7 +69,9 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
                         <span>手机：</span>
                         <input type="text" value="" id="mobile" class="cardInputTxt cardPswTxt" placeholder="请输入购买人手机" />
                     </p>
-					<p style="height: 28px; margin-left: 42px;"><span id="cardInforError" style="display: none;"></span></p>
+					<p style="height: 28px; margin-left: 42px;">
+						<span id="cardInforError" style="display: none;"></span>
+					</p>
 					<div id="errorShow"><@sf.error field="msg"/></div>
 					
 					</form>
@@ -96,45 +102,62 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 	
 </div>
 
-<script>
-	$(document).ready(function(){
-		$("#go").click(function(){
-	        var cardNo = $('.cardNoTxt').val();
-	        var cardPsw = $('.cardPswTxt').val();
-			var mobile = $('#mobile').val();
-	        $('input[name=cardNo]').val(cardNo);
-	        $('input[name=cardPinCiperUnderZPK]').val(cardPsw);
-            $('input[name=prdNo]').val("${queryPrdDetail[0].prdNo}");
-			$('input[name=mobile]').val(mobile);
-
-	        if(cardNo == '' || cardPsw == '' || mobile ==''){
-	        	$('#cardInforError').css('display','block').text('请填写卡号、卡密、手机号。');
-	        }
-	        if(cardNo != '' && cardPsw != ''){
-	        	$('#cardInforError').css('display','none');
-	        	$("#formGo").submit();
-	        }
-	    })
-	})
-
-	//获取页面高度
-	var clientHeight = document.body.clientHeight;
-	//设置监听聚焦事件
-	document.body.addEventListener("focus", function(e) {
-		var focusElem = document.getElementById('input')
-	}, true);
-	//设置监听窗口变化时间
-	window.addEventListener("resize", function() {
-		if(focusElem && document.body.clientHeight < clientHeight) {
-			//使用scrollIntoView方法来控制输入框
-			focusElem.scrollIntoView(false);
-		}
-	});
-	
-	if($('#errorShow').text() != ''){
-		var t = $('#errorShow').text();
-    	$('#cardInforError').css('display','inline-block').text(t);
-   }
-    </script>
 </body>
 </html>
+
+<script>
+	//content层的padding-top值随着banners的高度变化而变化
+	$(document).ready(function(){
+		var height = $(".banners").height();
+		var padding = height+10+'px';
+		$("#content").css("padding-top",padding);
+		//console.log(height);
+		//console.log(padding);
+	});
+	$(window).resize(function() {
+		var height = $(".banners").height();
+		var padding = height+10+'px';
+		$("#content").css("padding-top",padding);
+		//console.log(height);
+		//console.log(padding);
+	});
+	
+    $().ready(function () {
+        // 在键盘按下并释放及提交后验证提交表单
+        $("#mobile").validate({
+            rules: {
+                mobile: {
+                    required: true,
+                    isPhone: []
+                },
+            },
+            messages: {
+                mobile: {
+                    required: "请输入手机号码",
+                    isPhone: "请输入正确的手机号码"
+                },
+            }
+        });
+    });
+    
+    $("#go").click(function () {
+        var phone = $("#mobile").val();
+        if (phone == "") {
+            if ($("#phone-error").length == 0) {
+                $('#mobile').after('<label id="phone-error" class="error" for="phone">请输入手机号码</label>');
+            } else
+                $("#phone-error").css('display','block');
+            return false;
+        }
+        var phoneRule = /^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0-9]|170)\d{8}$/;
+        // 手机号码错误
+        if (!phoneRule.test(phone)) {
+            if ($("#phone-error").length == 0) {
+                $('#mobile').after('<label id="phone-error" class="error" for="phone">请输入正确的手机号码</label>');
+            } else
+                $("#phone-error").css('display','block');
+                return false;
+        }
+
+    });
+</script>

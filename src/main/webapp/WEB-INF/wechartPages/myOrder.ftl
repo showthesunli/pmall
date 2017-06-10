@@ -74,6 +74,8 @@
 					<div class="info_child_txt" style="text-align: center;">
 						<#if key.orderStatus == "等待支付">
 						<a href="<@spring.url '/buycfm'/>;billNo=${key.billNo};termID=wechat" style="color: #3897d7; margin-right: 20px;">继续支付</a>
+						
+						<a href="<@spring.url '/deleteOrder'/>?billNo=${key.billNo}" style="color: #3897d7; margin-right: 20px;">取消订单</a>
 						</#if>
 						<a href="<@spring.url '/myDetial'/>?billNo=${key.billNo}" style="color: #3897d7;">详情</a>
 					</div>

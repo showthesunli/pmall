@@ -13,6 +13,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -60,6 +61,7 @@ public class RoutingController extends HisuBaseControllerAdapter{
         return path;
     }
 
+    @Profile("pmall")
     @GetMapping("/")
     public String index(Model model){
         logger.debug("/ path: index");

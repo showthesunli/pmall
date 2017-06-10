@@ -63,6 +63,7 @@ public class HisuControllerExceptionAdvice {
     @ExceptionHandler(Exception.class)
     public String handleException(HttpServletRequest req,Exception ex){
         logger.error("request:" + req.getRequestURI() + " exception:" + ex);
+        ex.printStackTrace();
         processExceptionMsg(req, ex);
         logger.debug("error msg:" + ex.getMessage());
         return "redirect:/500error";

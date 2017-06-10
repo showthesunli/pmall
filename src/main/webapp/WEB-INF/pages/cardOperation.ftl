@@ -51,7 +51,14 @@
                 </div>
                 
                 <form class="rechargeForm" autocomplete="off" method="post" action="<@spring.url '/cardOperation'/>">
-                	<h2>发送卡密码</h2>
+                	
+                	<#if operType == 0>
+                    <h2>发送卡密码</h2>
+                    </#if>
+                    <#if operType == 1>
+                    <h2>转赠</h2>
+                    </#if>
+                    
                 	<div id="errorShow">
 		                <span class="errorTxt"><@sf.error field="msg"/></span>
 		            </div>
@@ -67,7 +74,7 @@
                         </p>
                     <#else >
                         <p>
-                            <label class="inputTitle">手机号：</label>
+                            <label class="inputTitle" for="phone">手机号：</label>
                             <input type="text" id="phone" name="mobile" value=""  class="recTxt" placeholder="请输入手机号码" maxlength="11" />
                         </p>
                     </#if>
@@ -81,7 +88,7 @@
                 	<p>
                 		<label class="inputTitle"></label>
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                		<input type="submit" id="" value="确 定" class="rechargeBtn" />
+                		<input type="submit" id="btnSure" value="确 定" class="rechargeBtn" />
                 	</p>
                 	
                 </form>
@@ -124,5 +131,25 @@
                 },
             }
         });
+    });
+    
+    $("#btnSure").click(function () {
+        var phone = $("#phone").val();
+        if (phone == "") {
+            if ($("#phone-error").length == 0) {
+                $('#phone').after('<label id="phone-error" class="error" for="phone">请输入手机号码</label>');
+            } else
+                $("#phone-error").css('display','block');
+            return false;
+        }
+        var phoneRule = /^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0-9]|170)\d{8}$/;
+        // 手机号码错误
+        if (!phoneRule.test(phone)) {
+            if ($("#phone-error").length == 0) {
+                $('#phone').after('<label id="phone-error" class="error" for="phone">请输入正确的手机号码</label>');
+            } else
+                $("#phone-error").css('display','block');
+                return false;
+        }
     });
 </script>

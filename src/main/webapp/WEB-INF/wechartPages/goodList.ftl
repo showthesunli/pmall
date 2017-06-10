@@ -53,13 +53,6 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 						
 		</div>
 		
-		<!--常用功能-->
-		<#include "/lib/template/commFunctionsPage.ftl" encoding="UTF-8">
-		<!--end 常用功能-->
-		</div>	
-		
-		
-		<div style="padding:15px;"></div>
 			
 	</div>
 	

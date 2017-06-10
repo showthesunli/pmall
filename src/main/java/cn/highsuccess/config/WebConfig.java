@@ -26,7 +26,6 @@ import java.util.Properties;
 public class WebConfig extends DelegatingWebMvcConfiguration {
 
 
-//    @Bean(name = "viewReslover")
     @Bean
     public FreeMarkerViewResolver freeMarkerViewResolver(){
         FreeMarkerViewResolver freeMarkerViewResolver = new FreeMarkerViewResolver();
@@ -34,11 +33,9 @@ public class WebConfig extends DelegatingWebMvcConfiguration {
         freeMarkerViewResolver.setSuffix(".ftl");
         freeMarkerViewResolver.setContentType("text/html;");
         freeMarkerViewResolver.setCache(false);
-//        freeMarkerViewResolver.setCache(true);
         return freeMarkerViewResolver;
     }
 
-//    @Bean(name = "freemarkerConfig")
     @Bean
     @Profile("pmall")
     public FreeMarkerConfigurer freeMarkerConfigurer(){
@@ -47,7 +44,6 @@ public class WebConfig extends DelegatingWebMvcConfiguration {
         freeMarkerConfigurer.setDefaultEncoding("UTF-8");
         Properties properties = new Properties();
         properties.setProperty("template_exception_handler","rethrow");
-//        properties.setProperty("template_exception_handler","html_debug");
         freeMarkerConfigurer.setFreemarkerSettings(properties);
         return freeMarkerConfigurer;
     }
@@ -60,7 +56,6 @@ public class WebConfig extends DelegatingWebMvcConfiguration {
         freeMarkerConfigurer.setDefaultEncoding("UTF-8");
         Properties properties = new Properties();
         properties.setProperty("template_exception_handler","rethrow");
-//        properties.setProperty("template_exception_handler","html_debug");
         freeMarkerConfigurer.setFreemarkerSettings(properties);
         return freeMarkerConfigurer;
     }
