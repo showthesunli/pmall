@@ -27,6 +27,8 @@
 .tipDiv p{ margin-top:20px; text-align:center;}
 .sureBtn,.cancleBtn{ width:100%%; height:40px; border:1px solid #ea6870; border-radius:3px; background:#ea6870; text-align:center; line-height:40px; color:#fff; cursor:pointer;}
 .cancleBtn{background: #eee; color: #666; border-color:#999; margin-top:10px;}
+.gray{-webkit-filter: grayscale(100%); -moz-filter: grayscale(100%); -ms-filter: grayscale(100%); -o-filter: grayscale(100%); filter: grayscale(100%); filter: gray;cursor:not-allowed;
+}
 </style>
 </head>
 
@@ -106,7 +108,7 @@ $(document).ready(function() {
     })
 	
 	$("#pay").click(function(){
-        tipOpen();
+        //tipOpen();
         var payer = $(".cPayType").text();
         <#--window.open( "<@spring.url '/pay'/>"+"?orderNo=${queryMemberOrder[0].billNo}&payer="+payer+"&termID=wechat");-->
         window.location.href =  "<@spring.url '/pay'/>"+"?orderNo=${queryMemberOrder[0].billNo}&payer="+payer+"&termID=wechat";
@@ -159,13 +161,16 @@ $(document).ready(function() {
         if (type == 0) {
             var text = "<span style='font-size:16px; color:#666;'><img src='images/loading.gif' style='vertical-align:middle; margin-right:5px;'> 正在提交订单，请稍后......</span>";
             $("#orderMsg").html(text);
+            $("#pay").attr('disabled',true).addClass('gray');
         } else if (type == 1) {
             $("#orderMsg").css({
                 "padding-top": "5px",
                 "height": "70px"
             }).html("下单成功，请立即支付。<br/>如订单在45分钟内未支付，则会自动撤销！");
+             $("#pay").attr('disabled',false).removeClass('gray');
         } else if (type == 2) {
             $("#orderMsg").css("color", "#00b050").html("分配票券失败，因为：" + msg);
+            $("#pay").attr('disabled',true).addClass('gray');
         }
     },
     initStatus: function (billNo) {
