@@ -17,7 +17,7 @@
     <input type="hidden" name="paySsn" value="${paySsn}"/>
     <input type="hidden" name="payer" value="${payer}">
     <input type="hidden" name="memberId" value="${memberID}">
-    <input type="hidden" name="payAmt" value="${payAmt?string('#.00')}">
+    <input type="hidden" name="payAmt" value="${payAmt?string('0.00')}">
     <input type="hidden" name="backNoticeUrl" value="http://www.happypoints.cn:8080/wechart/notice"/>
     <input type="hidden" name="noticeurl" value="http://www.happypoints.cn/wechart/notice"/>
     <#--<input type="hidden" name="noticeurl" value="${noticeurl}"/>-->

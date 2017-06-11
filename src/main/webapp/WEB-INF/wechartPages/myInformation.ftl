@@ -76,7 +76,7 @@ a#radio {display: none;}
 		
 		<p><span class="width70">我的账号：</span><span id="memberID" name="memberID">${memberInfo[0].memberID}</span></p>
 	    <p><span class="width70">我的手机：</span><span id="mobile" name="mobile">${memberInfo[0].mobile}</span></p>
-	    <p><span class="width70">邮箱：</span><span id="mobile" name="mobile">${memberInfo[0].email}</span>
+	    <p><span class="width70">邮箱：</span><span id="mobile" class="email" name="mobile">${memberInfo[0].email}</span>
 	    	 <input id="email" name="email" type="text" value="${memberInfo[0].email}" class="myDetialTxt inputRO" readOnly="true" maxlength="20" style="display: none;"/>
 	    </p>
 	    <div>
@@ -97,8 +97,8 @@ a#radio {display: none;}
 	        </a>
         </p>
         </div>
-	    <p><span class="width70" id="data">生日：</span><span id="mobile" name="mobile">${memberInfo[0].birthday}</span>
-	    	<input type="text" name="" id="birth" readonly="readonly"   style="display: none;"/>
+	    <p><span class="width70" id="data">生日：</span><span id="mobile" class="birthday" name="mobile">${memberInfo[0].birthday}</span>
+	    	<input type="text" name="" id="birth" readonly="readonly"  value="${memberInfo[0].birthday}" style="display: none;"/>
 	    </p>
 		<input type="hidden" id="${_csrf.parameterName}" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 	    <div class="info_child_txt" style="text-align: center;">
@@ -143,6 +143,8 @@ function modifyInfor(){
 	$('#birth').css('display','inline-block');
 	$('#m').css('display','none').next('p').css('display','inline-block');
 	$('#email').css('display','inline-block');	
+	$('.birthday').css('display','none');
+	$('.email').css('display','none');
 	$('.modBtn').hide();
 	$('.updBtn').show();
 	$('.canBtn').show();
@@ -156,9 +158,9 @@ function updateInfor(){
 		closeInfor();
 		var memberID = $('#memberID').val();
 		var mobile = $('#mobile').val();
-		var identityCardNo = $('#identityCardNo').val();
 		var email = $('#email').val();
 		var gender = $('input:radio:checked').val();
+		var identityCardNo = $('#identityCardNo').val();
 		var birthdayDate = $('#birth').val();
 	}
 	$('#radio').css('display','none');
@@ -177,6 +179,8 @@ function cancelInfor(){
 	    $('#birth').css('display','none');
 		$('#email-error').css('display','none');
 		$('#email').val('${memberInfo[0].email}');
+		$('.birthday').css('display','inline-block');
+		$('.email').css('display','inline-block');
 		$('#gender').val('${gen}');
 		var b = '${memberInfo[0].birthday}';
 		if(b != "")$('#birthdayDate').val('b');

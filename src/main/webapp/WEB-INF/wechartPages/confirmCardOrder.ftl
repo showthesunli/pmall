@@ -32,6 +32,14 @@
 				border: 1px solid #3897d7;
 				border-radius: 5px;
 			}
+			.box_exp .noBtn{
+				padding: 0 10px;
+				height: 1.75em;
+				background: #fff;
+				color: #666;
+				border: 1px solid #666;
+				border-radius: 5px;
+			}
 			
 			.box_exp .cancBtn {
 				color: #666;
@@ -391,6 +399,7 @@
 										<p style="text-align: center;">
 											<input type="submit" id="invoiceAddBtn" class="addBtn" value="添 加" style="min-width:56px; max-width:56px; margin-right: 20px;" />
 											<input type="button" value="取 消" class="cancBtn" style="min-width:56px; max-width:56px;" onclick="closeAddDiv('addInvoiceList')" />
+											
 										</p>
 								</div>
 								<input type="hidden" name="isDefault" value="0" />
@@ -405,6 +414,7 @@
 							<input type="button" value="确 定" class="sureBtn" style="display: none;" onclick="changeInvoice()" />
 							<input type="button" value="取 消" class="cancBtn" style="display: none;  margin-left: 20px;" onclick="closeDiv('invoiceList')" />
 							<input type="button" value="添 加" class="addBtn" onclick="addInvoiceO()" />
+							<input type="button" value="不开发票" class="noBtn noInvoiceBtn" style="margin-left: 18px;"/>
 							<p style="color: #f00;">(只对金额支付部分开具发票)</p>
 						</div>
 					</div>
@@ -612,19 +622,23 @@
 					}
 				})
 			});
-
+             
 			function openDiv(obj, h) {
 				var divH = $('.' + h).height();
 				$('.' + obj).next().next('.info_child_txt').find('.modifyBtn').hide();
 				$('.' + obj).next().next('.info_child_txt').find('.addBtn').hide();
 				$('.' + obj).next().next('.info_child_txt').find('.sureBtn').show();
 				$('.' + obj).next().next('.info_child_txt').find('.cancBtn').show();
+				$('.' + obj).next().next('.info_child_txt').find('.noBtn').show();
 				$('.' + obj).animate({ height: divH + "px" });
 			}
-
+			
+            
+             
 			function closeDiv(obj) {
 				$('.' + obj).next().next('.info_child_txt').find('.modifyBtn').show();
 				$('.' + obj).next().next('.info_child_txt').find('.addBtn').show();
+				$('.' + obj).next().next('.info_child_txt').find('.noBtn').show();
 				$('.' + obj).next().next('.info_child_txt').find('.sureBtn').hide();
 				$('.' + obj).next().next('.info_child_txt').find('.cancBtn').hide();
 				$('.' + obj).animate({ height: 0 });
@@ -632,6 +646,7 @@
 
 			function closeAddDiv(obj) {
 				$('.' + obj).next('.info_child_txt').find('.modifyBtn').show();
+				$('.' + obj).next('.info_child_txt').find('.noBtn').show();
 				$('.' + obj).next('.info_child_txt').find('.sureBtn').hide();
 				$('.' + obj).next('.info_child_txt').find('.cancBtn').hide();
 				$('.' + obj).next('.info_child_txt').find('.addBtn').show();
@@ -695,6 +710,22 @@
 				$('.addInvoiceList').next('.info_child_txt').find('.modifyBtn').hide();
 				$('.addInvoiceList').next('.info_child_txt').find('.addBtn').hide();
 			}
+			 //不开发票
+		    $('.noInvoiceBtn').click(function(){
+		    	$(".invoiceDefaultDiv  .invoiceTitle").text('');
+		        $(".invoiceDefaultDiv  .invoiceType").text('');
+		        $(".invoiceDefaultDiv  .invoiceCon").text('');
+		        $(".invoiceDefaultDiv  .invoiceDefault").text('');
+		        $(".invoiceDefaultDiv  .invoiceID").text('');
+		        $(".invoiceDefaultDiv  .invoiceTag").text('');
+		       
+		    })
+		    $('.modifyBtn').click(function(){
+		    	$('.noInvoiceBtn').css('display','none');
+		    })
+		    $('.addBtn').click(function(){
+		    	$('.noInvoiceBtn').css('display','none');
+		    })
 			//修改支付方式
 			function changePayType() {
 				var pay = $('.payTypeDivHF').find('input:checked').val();

@@ -26,7 +26,7 @@
 .prodAdd{ border-left: none;}
 .prodNum{ width: 30px; padding: 0 5px; line-height: 26px; text-align: center; border: 1px solid #ccc; float: left;}
 .info_child span{ float: left;}
-.info_child p{ overflow: hidden; margin: 5px 0;}
+.info_child p{ overflow: hidden; }
 .pModel{overflow: hidden; display: inline-block;}
 .pModel a{ line-height: 26px; border: 1px solid #ccc; padding: 0 5px; display: inline-block;}
 .pModel .pModelBO{ border-color: #f60; color: #f60;}
@@ -37,6 +37,8 @@
 #errorShow .errorTxt{ float: none;}
 .banners{position:fixed ;z-index: 99999;width: 100%;}
 #phone-error{color: #f00;margin-left: 42px;}
+#cardNum-error,#cardPas-error,#mobile-error{ color: #f00;margin-left: 15px;position: absolute;left: 10%; top:31px; line-height: 12px;font-size: 10px;}
+.tet{ padding-left:10px;}
 </style>
 </head>
 
@@ -47,6 +49,7 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 		<a href="javascript:history.go(-1);"><img src="<@spring.url '/wechart/images/bg_info5.jpg'/>"></a>
 	</div>
 	<div id="content">
+		<form id="formGo" method="get" action="<@spring.url '/quickExchangeTHCard'/>">
 		<div class="box_exp info_light" style="padding-bottom: 0;">
 			<div class="info_integral">
 				<span class="title"><i class="icon-bookmark-empty"></i>商品信息</span>
@@ -57,48 +60,52 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 					<p><b>${queryPrdDetail[0].productInfo}</b></p>
 					<p><b style="color: #f60;">￥${queryPrdDetail[0].prdPrice}</b></p>
 					
-					<p style="margin: 0 0 10px 0;">
+					<p style="height: 45px; position: relative;">
 						<span>卡号：</span>
-						<input type="text" value="" class="cardInputTxt cardNoTxt" placeholder="请输入卡号" />
+						<input type="text" value="" id="cardNum" name="cardNum" class="cardInputTxt cardNoTxt error" placeholder="请输入卡号" />
 					</p>
-					<p>
+					<p style="height: 45px;position: relative;">
 						<span>卡密：</span>
-						<input type="password" value="" class="cardInputTxt cardPswTxt" placeholder="请输入卡密" />
+						<input type="text" onfocus="this.type='password'" value="" id="cardPas" name="cardPas" class="cardInputTxt cardPswTxt error" placeholder="请输入卡密" />
 					</p>
-                    <p>
+                    <p style="height: 45px;position: relative;">
                         <span>手机：</span>
-                        <input type="text" value="" id="mobile" class="cardInputTxt cardPswTxt" placeholder="请输入购买人手机" />
+                        <input type="text" value="" id="mobile" name="mobile" class="cardInputTxt cardPswTxt error" placeholder="请输入购买人手机" />
                     </p>
-					<p style="height: 28px; margin-left: 42px;">
+					<!--<p style="height: 28px; margin-left: 42px;">
 						<span id="cardInforError" style="display: none;"></span>
 					</p>
-					<div id="errorShow"><@sf.error field="msg"/></div>
+					<div id="errorShow"><@sf.error field="msg"/></div>-->
 					
-					</form>
+					
 					
 				</div>
 			</div>
 		</div>
 		
 		<div style="margin:8px 0;">
-			<span class="button button-block button-rounded button-caution button-large" id="go">兑&nbsp;&nbsp;换</span>
+			<!--<span class="button button-block button-rounded button-caution button-large" id="go">兑&nbsp;&nbsp;换</span>-->
+			<input type="submit" value="兑换" class="button button-block button-rounded button-caution button-large" style=" width: 100%;" />
 		</div>
 		
 		
 		<div style="padding:15px;"></div>
+		<input name="prdNo" type="hidden"/>
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+	</form>
 	</div>
 	
 	<!--底部-->
 	<#include "/lib/template/footer.ftl" encoding="UTF-8">
 	<!--end 底部-->
 	
-	<form action="<@spring.url '/quickExchangeTHCard'/>" method="post" id="formGo">
+	<!--<form action="<@spring.url '/quickExchangeTHCard'/>" method="post" id="formGo">
 	    <input name="cardNo" type="hidden"/>
 	    <input name="cardPinCiperUnderZPK" type="hidden"/>
 		<input name="prdNo" type="hidden"/>
 		<input name="mobile" type="hidden"/>
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-	</form>
+	</form>-->
 	
 </div>
 
@@ -111,53 +118,75 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 		var height = $(".banners").height();
 		var padding = height+10+'px';
 		$("#content").css("padding-top",padding);
-		//console.log(height);
-		//console.log(padding);
 	});
 	$(window).resize(function() {
 		var height = $(".banners").height();
 		var padding = height+10+'px';
 		$("#content").css("padding-top",padding);
-		//console.log(height);
-		//console.log(padding);
 	});
 	
     $().ready(function () {
-        // 在键盘按下并释放及提交后验证提交表单
-        $("#mobile").validate({
-            rules: {
-                mobile: {
-                    required: true,
-                    isPhone: []
-                },
+    // 在键盘按下并释放及提交后验证提交表单
+    $("#formGo").validate({
+		rules: {   
+			cardNum: {
+				required: true,
+				rangelength:[24,24]
+			},
+			cardPas: {
+				required: true,
+				rangelength:[6,20]
+			},
+			mobile: {
+				required: true,
+				isPhone: []
+			},
+			
+		},
+		messages: {
+			cardNum: {
+                required: "请输入卡号",
+                rangelength: "长度只能是24"
             },
-            messages: {
-                mobile: {
-                    required: "请输入手机号码",
-                    isPhone: "请输入正确的手机号码"
-                },
-            }
-        });
-    });
-    
-    $("#go").click(function () {
-        var phone = $("#mobile").val();
-        if (phone == "") {
-            if ($("#phone-error").length == 0) {
-                $('#mobile').after('<label id="phone-error" class="error" for="phone">请输入手机号码</label>');
-            } else
-                $("#phone-error").css('display','block');
-            return false;
-        }
+            cardPas: {
+                required: "请输入卡密",
+                rangelength: "长度只能在6-20个字符之间"
+            },
+			mobile: {
+				required: "请输入手机号码",
+				isPhone: "请输入正确的手机号码"
+			},
+		}
+	});
+});
+$.validator.addMethod("isPhone", function (value, element) {
+        var phone = $("#mobile").val();// 手机号码
         var phoneRule = /^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0-9]|170)\d{8}$/;
-        // 手机号码错误
-        if (!phoneRule.test(phone)) {
-            if ($("#phone-error").length == 0) {
-                $('#mobile').after('<label id="phone-error" class="error" for="phone">请输入正确的手机号码</label>');
-            } else
-                $("#phone-error").css('display','block');
-                return false;
-        }
 
-    });
+        // 手机号码错误
+        if (!phoneRule.test(phone))
+        	
+            return false;
+        return true;
+    }, "ignore");
+    
+   /* $("#go").click(function(){
+	        var cardNo = $('.cardNoTxt').val();
+	        var cardPsw = $('.cardPswTxt').val();
+			var mobile = $('#mobile').val();
+	        $('input[name=cardNo]').val(cardNo);
+	        $('input[name=cardPinCiperUnderZPK]').val(cardPsw);
+            $('input[name=prdNo]').val("${queryPrdDetail[0].prdNo}");
+			$('input[name=mobile]').val(mobile);
+
+	        if(cardNo == '' || cardPsw == '' || mobile ==''){
+	        	$('#cardInforError').css('display','block').text('请填写卡号、卡密、手机号。');
+	        }
+	        else{
+		        	$('#cardInforError').css('display','none');
+		        	$("#formGo").submit();
+	        }             
+	    })*/
+
+
 </script>

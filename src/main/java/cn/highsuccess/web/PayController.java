@@ -82,7 +82,7 @@ public class PayController extends HisuBaseControllerAdapter{
         //验证签名
         SortedMap<Object,Object> signParams = new TreeMap<Object,Object>();
         signParams.put("orderNumber",orderNumber);
-        signParams.put("retCode", retCode);
+        signParams.put("retCode", ""+retCode);
         signParams.put("payer", payer);
         signParams.put("sign", sign);
         boolean isSign = PayCommonUtil.isTenpaySign("UTF-8",signParams,PAY_WEB_KEY);

@@ -28,11 +28,11 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 <div id="page">
 	<div class="banner">
 		<ul>
-			<li style="background-image: url('images/index12.jpg');"></li>
-			<li style="background-image: url('images/index1.jpg');"></li>
-			<li style="background-image: url('images/index6.jpg');"></li>
-			<li style="background-image: url('images/index4.jpg');"></li>
-			<li style="background-image: url('images/index2.jpg');"></li>
+			<li style="background-image: url(<@spring.url '/images/index12.jpg'/>);"></li>
+			<li style="background-image: url(<@spring.url '/images/index1.jpg'/>);"></li>
+			<li style="background-image: url(<@spring.url '/images/index6.jpg'/>);"></li>
+			<li style="background-image: url(<@spring.url '/images/index4.jpg'/>);"></li>
+			<li style="background-image: url(<@spring.url '/images/index2.jpg'/>);"></li>
 		</ul>
 	</div>
 	<div id="content">

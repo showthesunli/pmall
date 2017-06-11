@@ -61,7 +61,7 @@
 			
 		<div class="box_exp info_light">
 			<div class="info_integral">
-				<span class="title" style="font-size: 14px;">订单号：11111</span>
+				<span class="title" style="font-size: 14px;">订单号：${queryQuickExOrderByMobile[0].billNo}</span>
 			</div>
 			<div style="display: block; overflow: hidden; opacity: 1;">
 				<div class="info_child" style=" color: #333;">
@@ -73,11 +73,15 @@
                     
                     <div class="info_child_txt" style="overflow: hidden;">
                     	
-                    	<a href="<@spring.url '/singleGood'/>" style=" padding-top: 10px; display: inline-block; width: 100%;">
-                    		<img src="<@spring.url '/imgsrc/'/>${queryMemberOrderDtl[0].iconFileName}" onerror="" style="width: 50px; height: 40px; float: left;" />
-                    		<span class="proInforTxt">ewgtwt</span>
-                    		<span class="proInforTxt" style="color: #f60; font-size: 12px;">数量：${queryMemberOrderDtl[0].prdNum}<b style="width: 20px; display: inline-block;"></b>金额：￥${queryMemberOrderDtl[0].prdUnitPrc}</span>
+                    	<#list queryMemberOrderDtl as item>
+                    		
+                    	<a href="<@spring.url '/proshow;prdNo=${item.prdNo};keyWordsFld=${item.prdNo};'/>" style=" padding-top: 10px; display: inline-block; width: 100%;">
+                    		<img src="<@spring.url '/imgsrc/'/>${item.iconFileName}" onerror="downloadErrImg(this,'${item.iconFileName}')" style="width: 50px; height: 40px; float: left;" />
+                    		<span class="proInforTxt">${item.prdInfo}</span>
+                    		<span class="proInforTxt" style="color: #f60; font-size: 12px;">数量：${item.prdNum}<b style="width: 20px; display: inline-block;"></b>金额：￥${item.totalPrice}</span>
                     	</a>
+                    	
+                    	</#list>
 
                     	
                     </div>
