@@ -49,6 +49,11 @@ public class PayService implements PayServiceProvider {
         this.orderPaySsn = orderPaySsn;
     }
 
+    /**
+     * FIXME w_mmbCenterPage需要改为jf_mmbCenterPage
+     * @param orderNo
+     * @param payer
+     */
     @Override
     public void perPayInitPaySsn(String orderNo,String payer) {
         this.getOrderPaySsn().setOrderNo(orderNo);

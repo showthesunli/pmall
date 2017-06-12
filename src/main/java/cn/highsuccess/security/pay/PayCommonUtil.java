@@ -71,13 +71,23 @@ public class PayCommonUtil {
 
 	
 	public static void main(String[] args){
-		 SortedMap<Object,Object> signParams = new TreeMap<Object,Object>();   
-	        signParams.put("payer", "00000000");
-	        signParams.put("payAmt", "529");
-	        signParams.put("paySsn", "170610000032");
-	        signParams.put("payDate", "20170610170318");
+		String WEB_KEY = "uwhc1jv4j8vpa97ozoftq1su73kqmeou";
+		 SortedMap<Object,Object> signParams = new TreeMap<Object,Object>();
+//	        signParams.put("payer", "00000000");
+//	        signParams.put("payAmt", "529");
+//	        signParams.put("paySsn", "170610000032");
+//	        signParams.put("payDate", "20170610170318");
+		 	signParams.put("orderNumber","170612000033");
+			signParams.put("retCode","0");
+		signParams.put("payer","04030000");
+		signParams.put("sign","852D39266867D07E3FCB71FDE2EBDD9C");
+		if(PayCommonUtil.isTenpaySign("UTF-8",signParams,WEB_KEY)){
+			System.out.println("sign success");
+		}else {
+			System.out.println("sign failure");
+		}
 
-	        String WEB_KEY = "uwhc1jv4j8vpa97ozoftq1su73kqmeou";
+		/**
 	        //生成签名
 	        String sign = PayCommonUtil.createSign("UTF-8", signParams, WEB_KEY);
 	        System.out.println("sign=["+sign+"]");
@@ -88,5 +98,6 @@ public class PayCommonUtil {
 	        if(PayCommonUtil.isTenpaySign("UTF-8", signParams, WEB_KEY)) { 
 	        	 System.out.println("Sign success!");
 	        }
+		 **/
 	}
 }

@@ -57,13 +57,13 @@
 	                	<div class="jf-overflowH" style="margin-bottom: 10px;">
                             <#if queryMemberOrder[0].saleOrderPrdType == '0'>
                             <#list payerForGoodsOrder as item>
-                                <label class="payTypeItem payTypeItemBO">
+                                <label class="payTypeItem">
                                     <input type="radio" name="RadioGroup1" value="${item.payer}" checked="checked" />
                                     <img src="<@spring.url '/imgsrc/'/>${item.iconFileName}" width="100" height="33" alt="${item.payerName}" />
                                 </label>
                             </#list>
                             <#list payToolsForPlatEnt as item>
-                                <label class="payTypeItem payTypeItemBO">
+                                <label class="payTypeItem">
                                     <input type="radio" name="RadioGroup1" value="${item.payer}" checked="checked" />
                                     <#--<img src="<@spring.url '/imgsrc/'/>${item.iconFileName}" width="100" height="33" alt="${item.payerName}" />-->
                                 <img src="<@spring.url '/imgsrc/'/>" width="100" height="33" alt="${item.payerName}" />
@@ -71,7 +71,7 @@
                             </#list>
                             <#else >
                                 <#list payerForCardsOrder as item>
-                                    <label class="payTypeItem payTypeItemBO">
+                                    <label class="payTypeItem">
                                         <input type="radio" name="RadioGroup1" value="${item.payer}" checked="checked" />
                                         <img src="<@spring.url '/imgsrc/'/>${item.iconFileName}" width="100" height="33" alt="${item.payerName}" />
                                     </label>
@@ -120,6 +120,9 @@
 </body>
 <script language="javascript">
 $(document).ready(function(e) {
+	$('.cPayType').text($('.payTypeChoice input:radio:checked').val());
+    $('.cPayTypeA').text($('.payTypeChoice input:radio:checked').next('img').attr('alt'));
+    $('.payTypeChoice input:radio:checked').parent().addClass('payTypeItemBO');
 	
 	//支付方式修改
     $('.payTypeItem').click(function(){

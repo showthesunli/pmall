@@ -1,7 +1,6 @@
 package cn.highsuccess.web;
 
 import cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId;
-import cn.highsuccess.config.systemproperties.HisuMngDataIdArgs;
 import cn.highsuccess.data.JavaDataSet;
 import cn.highsuccess.data.JavaOperate;
 import cn.highsuccess.sms.SendSms;
@@ -13,10 +12,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
@@ -61,7 +58,6 @@ public class RoutingController extends HisuBaseControllerAdapter{
         return path;
     }
 
-    @Profile("pmall")
     @GetMapping("/")
     public String index(Model model){
         logger.debug("/ path: index");

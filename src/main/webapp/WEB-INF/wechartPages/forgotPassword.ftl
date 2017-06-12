@@ -120,7 +120,7 @@ input.error{ border-color: #f00;}
             wait = 60;
         } else {
             obj.attr("disabled", true);
-            obj.text(wait + "S");
+            obj.text(wait + "秒");
             wait--;
             setTimeout(function () {
                         time(obj)
@@ -153,10 +153,9 @@ input.error{ border-color: #f00;}
                     } else{
                         $("#username-error").css('display','block').text(data.errorMsg.msg);
                     }
-                }else{
-                    time(this);
                 }
             }
-       }) 
+       })
+       time(this);
      });
 </script>

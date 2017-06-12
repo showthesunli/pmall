@@ -429,8 +429,8 @@
 					<div style="display: block; overflow: hidden; opacity: 1;">
 						<div class="info_child">
 							<p>资金支付：
-								<span class="payTypeT" style="color: #f60;">${payerForCardsOrder[0].payerName}</span>
-								<span class="payTypeA" style=" display: none;">${payerForCardsOrder[0].payer}</span>
+								<span class="payTypeT" style="color: #f60;"><!--${payerForCardsOrder[0].payerName}--></span>
+								<span class="payTypeA" style=" display: none;"><!--${payerForCardsOrder[0].payer}--></span>
 							</p>
 						</div>
 
@@ -439,7 +439,7 @@
 								<#list payerForCardsOrder as item>
 
 									<label class="payTypeItem">
-							<input type="radio" name="RadioGroup1" value="${item.payer}" />
+							<input type="radio" name="RadioGroup1" value="${item.payer}" onclick="changePayType()"/>
 							<img src="<@spring.url '/imgsrc/'/>${item.iconFileName}" onerror="downloadErrImg(this,'${item.iconFileName}')" width="100" height="33" alt="${item.payerName}"/>
 						</label>
 
@@ -451,8 +451,8 @@
 
 						<div class="info_child_txt" style="text-align: center;">
 							<input type="button" value="修 改" class="modifyBtn" onclick="openDiv('payTypeDivHF','payTypeDivH')" />
-							<input type="button" value="确 定" class="sureBtn" style="display: none;" onclick="changePayType()" />
-							<input type="button" value="取 消" class="cancBtn" style="display: none; margin-left: 20px;" onclick="closeDiv('payTypeDivHF')" />
+							<!--<input type="button" value="确 定" class="sureBtn" style="display: none;" onclick="changePayType()" />
+							<input type="button" value="取 消" class="cancBtn" style="display: none; margin-left: 20px;" onclick="closeDiv('payTypeDivHF')" />-->
 						</div>
 					</div>
 				</div>

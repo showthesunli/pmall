@@ -101,10 +101,10 @@
                         
                     </div>
                 </#list>
-                <div style="margin-left: 10px;">
+                <!--<div style="margin-left: 10px;">
                     <span class="addrModSureBtn">确定</span>
                     <span class="addrModCBtn" onclick="divHeightZ('addrSlide')">取消</span>
-                </div>
+                </div>-->
             </div>
         </div>
         <!--end收货地址-->
@@ -196,10 +196,10 @@
                 
                 </#list>
                 
-                <div style="margin-left: 10px;">
+                <!--<div style="margin-left: 10px;">
                     <span class="invoiceModSureBtn">确定</span>
                     <span class="addrModCBtn" onclick="divHeightZ('invoiceSlide')">取消</span>
-                </div>
+                </div>-->
             </div>
         </div>
         <!--end发票信息-->
@@ -211,9 +211,9 @@
                 <h4>支付方式</h4>
                 <div class="defaultDiv jf-overflowH" style="float:left;">
                 	<label class="payTypeT">账户支付：</label>
-                    <label class="payTypeA" style="display: none;">${payToolsForPlatEnt[0].payer}</label>
+                    <label class="payTypeA" style="display: none;"><!--${payToolsForPlatEnt[0].payer}--></label>
                     <#--<label class="payTypePayerName">账户余额</label>-->
-                    <label class="payTypePayerName">${payToolsForPlatEnt[0].payerName}</label>
+                    <label class="payTypePayerName"><!--${payToolsForPlatEnt[0].payerName}--></label>
                     <span class="payTypeModifyBtn">修改</span>
                 </div>
             </div>
@@ -240,10 +240,10 @@
                     </div>
                 </div>
 
-                <div style="margin-left: 10px;">
+                <!--<div style="margin-left: 10px;">
                     <span class="payTypeModSureBtn">确定</span>
                     <span class="addrModCBtn" onclick="divHeightZ('payTypeSlide')">取消</span>
-                </div>
+                </div>-->
             </div>
 
         </div>
@@ -407,7 +407,7 @@ $(document).ready(function(e) {
         $(".addrDiv").removeClass("bgCO");
         $(this).addClass("bgCO");
     });
-    $(".addrModSureBtn").click(function () {
+    $(".addrDiv").click(function () {
         var name = $(".bgCO .addrName").text();
         var phoneNum = $(".bgCO .addrPhone").text();
         var addr = $(".bgCO .address").text();
@@ -458,7 +458,7 @@ $(document).ready(function(e) {
         $(".invoiceDiv").removeClass("bgCOIn");
         $(this).addClass("bgCOIn");
     });
-    $(".invoiceModSureBtn").click(function () {
+    $(".invoiceDiv").click(function () {
         var title = $(".bgCOIn .invoiceTitle").text();
         var type = $(".bgCOIn .invoiceType").text();
         var con = $(".bgCOIn .invoiceCon").text();
@@ -498,7 +498,7 @@ $(document).ready(function(e) {
     	$(this).parent().parent().find('input').removeAttr('checked');
     	$(this).find('input').attr('checked','checked');
     });
-    $('.payTypeModSureBtn').click(function(){
+    $('.payTypeItem').click(function(){
     	var pay = $('.payTypeDiv').find('input:checked').val();
     	var type = $('.payTypeDiv').find('input:checked').parent().parent().prev().find('h5').text();
     	var payerName = $('.payTypeDiv').find('input:checked').next('img').attr('alt');

@@ -55,12 +55,12 @@
                     <p>订单状态：${queryMemberOrder[0].orderStatus}</p>
                     <p>支付金额：<span style="font-weight:bold; font-size:16px; color:#f60">￥${queryMemberOrder[0].totalPrice}</span></p>
                     <p>支付方式：<span class="cPayType" style="display: none;"></span><span class="cPayTypeA"></span></p>
-                	<div>
+                	<div class="payTypeChoice">
 						<#if queryMemberOrder[0].saleOrderPrdType == '0'>
                         <#list payerForGoodsOrder as item>
                             	
 			            <label class="payTypeItem">
-							<input type="radio" name="RadioGroup1" value="${item.payer}" />
+							<input type="radio" name="RadioGroup1" value="${item.payer}" checked="checked" />
 							<img src="<@spring.url '/imgsrc/'/>${item.iconFileName}" onerror="downloadErrImg(this,'${item.iconFileName}')" width="100" height="33" alt="${item.payerName}"/>
 						</label>
 			                        
@@ -69,7 +69,7 @@
 						<#list payToolsForPlatEnt as item>
                             	
 			            <label class="payTypeItem">
-							<input type="radio" name="RadioGroup1" value="${item.payer}" />
+							<input type="radio" name="RadioGroup1" value="${item.payer}" checked="checked" />
 							<img src="<@spring.url '/imgsrc/'/>" onerror="" width="100" height="33" alt="${item.payerName}"/>
 						</label>
 			                        
@@ -79,7 +79,7 @@
                         <#list payerForCardsOrder as item>
                             	
                         <label class="payTypeItem">
-							<input type="radio" name="RadioGroup1" value="${item.payer}" />
+							<input type="radio" name="RadioGroup1" value="${item.payer}" checked="checked" />
 							<img src="<@spring.url '/imgsrc/'/>${item.iconFileName}" onerror="downloadErrImg(this,'${item.iconFileName}')" width="100" height="33" alt="$${item.payerName}"/>
 						</label>
                             	
@@ -130,6 +130,10 @@
 
 <script>
 $(document).ready(function() {
+	$('.cPayType').text($('.payTypeChoice input:radio:checked').val());
+    $('.cPayTypeA').text($('.payTypeChoice input:radio:checked').next('img').attr('alt'));
+    $('.payTypeChoice input:radio:checked').parent().addClass('payTypeItemBO');
+    
 	$("#content").accordion({
 		alwaysOpen: false,
 		autoheight: false,

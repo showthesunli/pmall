@@ -37,11 +37,15 @@ function downloadErrImg(obj, imgName, imgPath) {
     } else {
         obj.src = 'images/default.gif';
     }
-    if (imgName == "")return;
+    if (imgName == ""){
+        obj.onerror = null;
+        return;
+    }
     var path = "ajaxGetimg";
     if (imgPath) {
         path = imgPath + path;
     }
+    obj.onerror = null;//结束，以防止无限循环的下载
     var operate = new xtyGetData(path);
     operate.data.fileName = imgName;
     operate.ajax(function (data) {

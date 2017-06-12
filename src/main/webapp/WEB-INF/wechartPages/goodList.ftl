@@ -22,9 +22,7 @@
 .info_card{ padding-left: 100px;}
 h1{ text-overflow: ellipsis; white-space: nowrap; overflow: hidden; height: 24px;}
 </style>
-<style>
-	.banners{position:fixed ;z-index: 99999;width: 100%;}
-</style>
+
 </head>
 
 <body ondragstart="return false;" onselectstart="return false;" oncontextmenu="return false" onselectstart="return false" 
@@ -64,17 +62,6 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 
 
 <script>
-//content层的padding-top值随着banners的高度变化而变化
-$(document).ready(function(){
-	var height = $(".banners").height();
-	var padding = height+10+'px';
-	$("#content").css("padding-top",padding);
-});
-$(window).resize(function() {
-	var height = $(".banners").height();
-	var padding = height+10+'px';
-	$("#content").css("padding-top",padding);
-});
 	
 $(document).ready(function() {	
 	var urlinfo = window.location.href;

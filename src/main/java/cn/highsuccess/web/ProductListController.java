@@ -14,6 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.MatrixVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.*;
 
@@ -31,7 +33,7 @@ public class ProductListController extends HisuBaseControllerAdapter {
         super(jds, javaOperate);
     }
 
-    @GetMapping(value = "/pro{matrix}")
+    @RequestMapping(value = "/pro{matrix}", method = RequestMethod.GET)
     public String showProductList(Model model,
                                   @MatrixVariable(required = false, defaultValue = "1") int currentPage,
                                   @MatrixVariable(required = false, defaultValue = "12") int numOfPerPage,

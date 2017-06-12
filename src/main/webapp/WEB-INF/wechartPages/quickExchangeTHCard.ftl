@@ -35,7 +35,6 @@
 #errorShow{ display: none; text-align: center; overflow: hidden; width: 100%; margin: 5px 0;}
 #cardInforError,.errorTxt{ display: inline-block; color:#f00; padding:0 10px; background:#ffebe7; line-height:26px; border:1px solid #f00; border-radius:5px;}
 #errorShow .errorTxt{ float: none;}
-.banners{position:fixed ;z-index: 99999;width: 100%;}
 #phone-error{color: #f00;margin-left: 42px;}
 #cardNum-error,#cardPas-error,#mobile-error{ color: #f00;margin-left: 15px;position: absolute;left: 10%; top:31px; line-height: 12px;font-size: 10px;}
 .tet{ padding-left:10px;}
@@ -49,7 +48,7 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 		<a href="javascript:history.go(-1);"><img src="<@spring.url '/wechart/images/bg_info5.jpg'/>"></a>
 	</div>
 	<div id="content">
-		<form id="formGo" method="get" action="<@spring.url '/quickExchangeTHCard'/>">
+		<form id="formGo" method="post" action="<@spring.url '/quickExchangeTHCard'/>">
 		<div class="box_exp info_light" style="padding-bottom: 0;">
 			<div class="info_integral">
 				<span class="title"><i class="icon-bookmark-empty"></i>商品信息</span>
@@ -62,11 +61,11 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 					
 					<p style="height: 45px; position: relative;">
 						<span>卡号：</span>
-						<input type="text" value="" id="cardNum" name="cardNum" class="cardInputTxt cardNoTxt error" placeholder="请输入卡号" />
+						<input type="text" value="" id="cardNum" name="cardNo" class="cardInputTxt cardNoTxt error" placeholder="请输入卡号" />
 					</p>
 					<p style="height: 45px;position: relative;">
 						<span>卡密：</span>
-						<input type="text" onfocus="this.type='password'" value="" id="cardPas" name="cardPas" class="cardInputTxt cardPswTxt error" placeholder="请输入卡密" />
+						<input type="text" onfocus="this.type='password'" value="" id="cardPas" name="cardPinCiperUnderZPK" class="cardInputTxt cardPswTxt error" placeholder="请输入卡密" />
 					</p>
                     <p style="height: 45px;position: relative;">
                         <span>手机：</span>
@@ -74,8 +73,10 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
                     </p>
 					<!--<p style="height: 28px; margin-left: 42px;">
 						<span id="cardInforError" style="display: none;"></span>
-					</p>
-					<div id="errorShow"><@sf.error field="msg"/></div>-->
+					</p>-->
+					<div id="errorShow">
+			            <span class="errorTxt"><@sf.error field="msg"/></span>
+			        </div>
 					
 					
 					
@@ -90,7 +91,7 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 		
 		
 		<div style="padding:15px;"></div>
-		<input name="prdNo" type="hidden"/>
+		<input name="prdNo" value="${queryPrdDetail[0].prdNo}" type="hidden"/>
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 	</form>
 	</div>
@@ -113,29 +114,16 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 </html>
 
 <script>
-	//content层的padding-top值随着banners的高度变化而变化
-	$(document).ready(function(){
-		var height = $(".banners").height();
-		var padding = height+10+'px';
-		$("#content").css("padding-top",padding);
-	});
-	$(window).resize(function() {
-		var height = $(".banners").height();
-		var padding = height+10+'px';
-		$("#content").css("padding-top",padding);
-	});
 	
     $().ready(function () {
     // 在键盘按下并释放及提交后验证提交表单
     $("#formGo").validate({
 		rules: {   
-			cardNum: {
+			cardNo: {
 				required: true,
-				rangelength:[24,24]
 			},
-			cardPas: {
+			cardPinCiperUnderZPK: {
 				required: true,
-				rangelength:[6,20]
 			},
 			mobile: {
 				required: true,
@@ -144,13 +132,11 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 			
 		},
 		messages: {
-			cardNum: {
+			cardNo: {
                 required: "请输入卡号",
-                rangelength: "长度只能是24"
             },
-            cardPas: {
+            cardPinCiperUnderZPK: {
                 required: "请输入卡密",
-                rangelength: "长度只能在6-20个字符之间"
             },
 			mobile: {
 				required: "请输入手机号码",
