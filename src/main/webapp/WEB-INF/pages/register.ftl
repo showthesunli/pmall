@@ -46,7 +46,7 @@
             <form id="signupForm" class="registerForm" method="post" action="<@spring.url '/register'/>">
                 <p>
                     <label class="txtLabel" for="id">用<span style="width:6px; display:inline-block"></span>户<span style="width:6px; display:inline-block"></span>名</label>
-                    <input id="id" name="id" type="text" class="registerTxt" maxlength="20" placeholder="您的账户名和登录名"  />
+                    <input id="id" name="id" type="text" class="registerTxt" maxlength="16" placeholder="您的账户名和登录名"  />
                     <@sf.error field="id"/>
                 </p>
 
@@ -105,7 +105,7 @@
             rules: {
                 id: {
                     required: true,
-                    rangelength:[4,20]
+                    rangelength:[6,16]
                 },
                 password: {
                     required: true,
@@ -125,7 +125,7 @@
             messages: {
                 id: {
                     required: "请输入用户名",
-                    rangelength: "长度只能在4-20个字符之间"
+                    rangelength: "长度只能在6-16个字符之间"
                 },
                 password: {
                     required: "请输入密码",

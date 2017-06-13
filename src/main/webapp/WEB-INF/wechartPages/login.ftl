@@ -37,7 +37,7 @@ input.error{ border-color: #f00;}
     <form class="loginForm" action="<@spring.url '/login'/>" method="post">
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr class="text">
-        <td class="text_1"><input type="text" id="username" name="username" class="tet" placeholder="请输入用户名" style="padding-left:10px;"></td>
+        <td class="text_1"><input type="text" id="username" name="username" class="tet" placeholder="请输入用户名" maxlength="16" style="padding-left:10px;"></td>
       </tr>
       <tr class="text">
 		<td class="text_1"><input type="password" id="password" name="password"  class="tet" placeholder="输入登录密码" style="padding-left:10px;"></td>
@@ -72,7 +72,7 @@ input.error{ border-color: #f00;}
             rules: {
                 username: {
                     required: true,
-                    rangelength:[4,20]
+                    rangelength:[6,16]
                 },
                 password: {
                     required: true,
@@ -82,7 +82,7 @@ input.error{ border-color: #f00;}
             messages: {
                 username: {
                     required: "请输入用户名",
-                    rangelength: "长度只能在4-20个字符之间"
+                    rangelength: "长度只能在6-16个字符之间"
                 },
                 password: {
                     required: "请输入密码",

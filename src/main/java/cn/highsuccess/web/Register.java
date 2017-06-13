@@ -38,7 +38,7 @@ public class Register extends HisuBaseControllerAdapter {
         logger.debug("phone :" + phone);
         if (errors.hasErrors()) {
             handleError(model, errors);
-            throw new HisuRegisterException("注册域非法！");
+            throw new HisuRegisterException("账号与密码为6到16个字符！");
         }
         user.setPassword(HisuOperatePasswd.hisuEncPasswd(user.getPassword()));
         this.getJavaOperate().service("w_mainPage", "mobileRegister", "memberID=" + user.getId() + "|mobile=" + phone + "|openCptAcc=1|useMobileRegister=1|securityCode=" + mCode + "|passwordCiper=" + user.getPassword());

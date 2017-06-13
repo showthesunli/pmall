@@ -41,7 +41,7 @@ input.error{ border-color: #f00;}
 		    	
 		    	<tr class="text">
 		        	<td class="text_1">
-		        		<input type="text" id="id" name="id" class="tet" placeholder="用户名" maxlength="20" />		
+		        		<input type="text" id="id" name="id" class="tet" placeholder="用户名" maxlength="16" />		
 		        	</td>		        	
 		      	</tr>
 		      	
@@ -108,7 +108,7 @@ input.error{ border-color: #f00;}
             rules: {
                 id: {
                     required: true,
-                    rangelength:[4,20]
+                    rangelength:[6,16]
                 },
                 password: {
                     required: true,
@@ -128,7 +128,7 @@ input.error{ border-color: #f00;}
             messages: {
                 id: {
                     required: "请输入用户名",
-                    rangelength: "长度只能在4-20个字符之间"
+                    rangelength: "长度只能在6-16个字符之间"
                 },
                 password: {
                     required: "请输入密码",

@@ -64,7 +64,7 @@ input{ outline:none;}
   </div>
 <nav class="navbar text-center">
    <button class="topleft" onclick="window.location.href='<@spring.url "/myCard"/>'"><span class="iconfont icon-fanhui"></span></button>
-  <a class="navbar-tit center-block">我的卡片</a>
+  <a class="navbar-tit center-block"><#if operType == 0>发送卡密码<#else>转赠</#if></a>
 </nav>
 
 
@@ -73,44 +73,60 @@ input{ outline:none;}
 		<div id="errorShow">
 			<span class="errorTxt"><@sf.error field="msg"/></span>
 		</div>
-	<form class="rechargeForm" autocomplete="off" method="post" action="<@spring.url '/cardOperation'/>">
-  		<table width="100%" border="0" cellspacing="0" cellpadding="0">
-      		<tr class="text">
-				<td class="text_1">
-					<span class="addrTxt">卡号：</span>
-					<input type="text" name="cardNo" value="${cardNo}"  class="addrInputTxt" readOnly="true" />					
-				</td>
-      		</tr>
-      
-      		<#if operType == 0>
-      	
-      		<tr class="text">
-				<td class="text_1">
-					<span class="addrTxt">手机：</span>
-					<input type="text" id="phone" name="mobile" value="${memberInfo[0].mobile}"  class="addrInputTxt" readOnly="true" />
-				</td>
-      		</tr>
-      
-      		<#else >
-      	
-      		<tr class="text">      			
-				<td class="text_1">
-					<span class="addrTxt">手机：</span>
-					<input type="text" id="phone" name="mobile"  class="addrInputTxt" placeholder="请输入手机号码" maxlength="11" />
-				</td>
-      		</tr>
-      
-      		</#if>
-      		
-      		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-      
-      		<tr class="text">
-        		<td class="text_1">
-        			<span class="addrTxt">&nbsp;</span><input type="submit" value="确 定" class="lg_btn" style="color:#fff; width: 70%; min-width: 150px; float: left; line-height: 35px; "/>
-        		</td>
-      		</tr>
-   		</table>
-   	</form>
+		
+		<#if operType == 0>
+			
+		<form class="rechargeForm" method="post" action="<@spring.url '/cardOperation'/>">
+	  		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+	      		<tr class="text">
+					<td class="text_1">
+						<span class="addrTxt">卡号：</span>
+						<input type="text" name="cardNo" value="${cardNo}"  class="addrInputTxt" readOnly="true" />					
+					</td>
+	      		</tr>	      	
+	      		<tr class="text">
+					<td class="text_1">
+						<span class="addrTxt">手机：</span>
+						<input type="text" id="phone" value="${memberInfo[0].mobile}" class="addrInputTxt" readOnly="true" />
+						<input type="hidden" name="mobile"  />
+					</td>
+	      		</tr>
+	      		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>      
+	      		<tr class="text">
+	        		<td class="text_1">
+	        			<span class="addrTxt">&nbsp;</span><input type="submit" value="确 定" class="lg_btn" style="color:#fff; width: 70%; min-width: 150px; float: left; line-height: 35px; "/>
+	        		</td>
+	      		</tr>
+	   		</table>
+	   	</form>
+	   	
+	   	<#else >
+   		
+   		<form class="rechargeForm1" method="post" action="<@spring.url '/cardOperation'/>">
+	  		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+	      		<tr class="text">
+					<td class="text_1">
+						<span class="addrTxt">卡号：</span>
+						<input type="text" name="cardNo" value="${cardNo}" class="addrInputTxt" readOnly="true" />					
+					</td>
+	      		</tr>	      	
+	      		<tr class="text">      			
+					<td class="text_1">
+						<span class="addrTxt">手机：</span>
+						<input type="text" id="phone" name="mobile" class="addrInputTxt" placeholder="请输入手机号码" maxlength="11" />
+					</td>
+	      		</tr>	      
+	      		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>	      
+	      		<tr class="text">
+	        		<td class="text_1">
+	        			<span class="addrTxt">&nbsp;</span><input type="submit" value="确 定" class="lg_btn" style="color:#fff; width: 70%; min-width: 150px; float: left; line-height: 35px; "/>
+	        		</td>
+	      		</tr>
+	   		</table>
+	   	</form>
+   		
+   		</#if>
+   		
    	</div>
 
  </div>
@@ -124,7 +140,7 @@ input{ outline:none;}
 <script>
     $().ready(function () {
         // 在键盘按下并释放及提交后验证提交表单
-        $(".rechargeForm").validate({
+        $(".rechargeForm1").validate({
             rules: {
             	mobile: {
                     required: true,

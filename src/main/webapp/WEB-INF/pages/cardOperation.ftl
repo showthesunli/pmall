@@ -16,10 +16,10 @@
 <script type="text/javascript" src="<@spring.url '/js/jquery.validate.min.js'/>" ></script>
 <script type="text/javascript" src="<@spring.url '/js/jquery.validate.addMethod.js'/>" ></script>
 <style>
-.rechargeForm{ padding:20px 30px;}	
-.rechargeForm p{ margin-bottom: 20px; position: relative;}
+.rechargeForm,.rechargeForm1{ padding:20px 30px;}	
+.rechargeForm p,.rechargeForm1 p{ margin-bottom: 20px; position: relative;}
 .inputTitle{ width: 80px; text-align: right; display: inline-block; font-size: 14px;}
-.rechargeForm h2{ font-weight: bold; color: #f60; line-height: 40px;}
+.rechargeForm h2,.rechargeForm1 h2{ font-weight: bold; color: #f60; line-height: 40px;}
 .recTxt{ width: 300px; border: 1px solid #ccc; border-radius: 5px; line-height: 35px; padding: 0 10px; font-size: 14px;}
 .rechargeBtn{width: 150px; height: 40px; border: 1px solid #f60; color: #fff; font-size: 16px; font-weight: bold; background:url(images/btnBg.png) no-repeat; background-position: 0 -75px; border-radius: 5px; cursor: pointer;}
 #phone-error,#cardPsw-error{ position:absolute; left:420px; top:0; color:#f00; padding:0 10px; background:#ffebe7; line-height:35px; border:1px solid #f00; border-radius:5px; text-align: left; font-size: 14px;}
@@ -50,15 +50,10 @@
                     </div>
                 </div>
                 
-                <form class="rechargeForm" autocomplete="off" method="post" action="<@spring.url '/cardOperation'/>">
-                	
-                	<#if operType == 0>
-                    <h2>发送卡密码</h2>
-                    </#if>
-                    <#if operType == 1>
-                    <h2>转赠</h2>
-                    </#if>
-                    
+              
+                <#if operType == 0>
+                <form class="rechargeForm" method="post" action="<@spring.url '/cardOperation'/>">
+                	<h2>发送卡密码</h2>
                 	<div id="errorShow">
 		                <span class="errorTxt"><@sf.error field="msg"/></span>
 		            </div>
@@ -66,25 +61,13 @@
                 		<label class="inputTitle">卡号：</label>
                 		<input type="text" id="cardNo" name="cardNo" value="${cardNo}"  class="recTxt inputRO" readOnly="true" />
                 	</p>
-                    <#if operType == 0>
-                        <p>
-                            <label class="inputTitle">手机号：</label>
-                            <input type="text" id="phoneRO"  value="${memberInfo[0].mobile}"  class="recTxt inputRO" readOnly="true" />
-                            <input type="text" id="phoneRO" name="mobile" value=""  class="recTxt inputRO" readOnly="true" />
-                        </p>
-                    <#else >
-                        <p>
-                            <label class="inputTitle" for="phone">手机号：</label>
-                            <input type="text" id="phone" name="mobile" value=""  class="recTxt" placeholder="请输入手机号码" maxlength="11" />
-                        </p>
-                    </#if>
-                    <!--
-                	<p>
-                		<label class="inputTitle">卡密：</label>
-                		<input type="hidden" />
-                		<input type="text" onfocus="this.type='password'" autocomplete="off" id="cardPsw" name="cardPinCiperUnderZPK" value="" placeholder="请输入卡密" class="recTxt" />
-                	</p>
-                	-->
+                    
+                    <p>
+                        <label class="inputTitle">手机号：</label>
+                        <input type="text" id="phone" value="${memberInfo[0].mobile}"  class="recTxt inputRO" readOnly="true" />
+                        <input type="hidden" name="mobile" />
+                    </p>
+                   
                 	<p>
                 		<label class="inputTitle"></label>
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
@@ -92,6 +75,34 @@
                 	</p>
                 	
                 </form>
+                
+                <#else>
+                	
+                <form class="rechargeForm1" method="post" action="<@spring.url '/cardOperation'/>">
+                	<h2>转赠</h2>
+                	<div id="errorShow">
+		                <span class="errorTxt"><@sf.error field="msg"/></span>
+		            </div>
+                	<p>
+                		<label class="inputTitle">卡号：</label>
+                		<input type="text" id="cardNo" name="cardNo" value="${cardNo}"  class="recTxt inputRO" readOnly="true" />
+                	</p>
+                    
+                    <p>
+                        <label class="inputTitle" for="phone">手机号：</label>
+                        <input type="text" id="phone" name="mobile" value=""  class="recTxt" placeholder="请输入手机号码" maxlength="11" />
+                    </p>
+                    
+                	<p>
+                		<label class="inputTitle"></label>
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                		<input type="submit" id="btnSure" value="确 定" class="rechargeBtn" />
+                	</p>
+                	
+                </form>
+                
+                </#if>
+                
             </div>
             
         </div>
@@ -111,45 +122,19 @@
 <script>
     $().ready(function () {
         // 在键盘按下并释放及提交后验证提交表单
-        $(".rechargeForm").validate({
+        $(".rechargeForm1").validate({
             rules: {
-            	phone: {
+            	mobile: {
                     required: true,
                     isPhone: []
                 },
-                cardPinCiperUnderZPK: {
-                    required: true,
-                },
             },
             messages: {
-                phone: {
+                mobile: {
                     required: "请输入手机号码",
                     isPhone: "请输入正确的手机号码"
                 },
-                cardPinCiperUnderZPK: {
-                    required: "请输入卡密",
-                },
             }
         });
-    });
-    
-    $("#btnSure").click(function () {
-        var phone = $("#phone").val();
-        if (phone == "") {
-            if ($("#phone-error").length == 0) {
-                $('#phone').after('<label id="phone-error" class="error" for="phone">请输入手机号码</label>');
-            } else
-                $("#phone-error").css('display','block');
-            return false;
-        }
-        var phoneRule = /^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0-9]|170)\d{8}$/;
-        // 手机号码错误
-        if (!phoneRule.test(phone)) {
-            if ($("#phone-error").length == 0) {
-                $('#phone').after('<label id="phone-error" class="error" for="phone">请输入正确的手机号码</label>');
-            } else
-                $("#phone-error").css('display','block');
-                return false;
-        }
     });
 </script>

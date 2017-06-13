@@ -79,7 +79,7 @@
 				</#if>
 			    <input type="hidden" value="${item.receiptType}" />
                 <input id="receiptType" type="text" value="${rec}" class="inputRO " readOnly="true" style="width:30%;text-indent: 5px;-webkit-appearance: none;"/>
-		    	<select name="receiptType" id="addReceiptType" style="display: none;>  
+		    	<select name="receiptType" id="addReceiptType">  
 		    		
 			        <option value="1">个人</option>   
 			        <option value="2">法人</option>   
@@ -151,7 +151,7 @@
 		$(".usercenter").css("padding-top",padding);
 	});	
 	$(function(){
-		
+		$('#addReceiptType').hide();
 		//删除发票
     $('.deleteAddr').click(function(){
     	var action = "<@spring.url '/deleteInvoice'/>";

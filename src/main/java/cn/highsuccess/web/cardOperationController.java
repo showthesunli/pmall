@@ -67,7 +67,11 @@ public class CardOperationController extends HisuBaseControllerAdapter {
         }catch (HisuOperateException e){
             Map<String,Object> map = new HashMap<>();
             map.put("cardNo",cardNo);
-            map.put("operType","1");
+            if (mobile.equals("")){
+                map.put("operType","0");
+            }else {
+                map.put("operType","1");
+            }
             throw new HisuFlashOperationExcetion("/cardOperation",e.getMessage(), map);
         }
         model.addAttribute("cardNo", cardNo);

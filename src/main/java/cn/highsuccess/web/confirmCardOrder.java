@@ -80,7 +80,7 @@ public class ConfirmCardOrder extends HisuBaseControllerAdapter{
         model.addAttribute(list);
         int  prdNum = 0;
         double prdMoney = 0.00;
-        if (buyerItem.getPrdType().equals("0")) {
+        if (buyerItem.getPrdType().equals("1")) {
             prdNum = buyerItem.getAmount();
             prdMoney = buyerItem.getMoney()*buyerItem.getAmount();
         }

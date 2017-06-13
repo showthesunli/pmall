@@ -169,7 +169,7 @@ $(document).ready(function() {
             }).html("下单成功，请立即支付。<br/>如订单在45分钟内未支付，则会自动撤销！");
              $("#pay").attr('disabled',false).removeClass('gray');
         } else if (type == 2) {
-            $("#orderMsg").css("color", "#00b050").html("分配票券失败，因为：" + msg);
+            $("#orderMsg").css("color", "#00b050").html("分配库存失败，因为：" + msg);
             $("#pay").attr('disabled',true).addClass('gray');
         }
     },

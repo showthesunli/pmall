@@ -181,7 +181,6 @@
 								</p>
 								<p><span class="address">${queryMemberAddress[0].addr}</span></p>
 							</div>
-
 							<#else>
 
 								<div class="info_child addrDefaultDiv">
@@ -197,12 +196,12 @@
 
 						<!--地址列表-->
 
-						<div class="addressList" style="height: 0; overflow: hidden;">
-							<div class="addressListGetH" style="overflow: hidden;">
+						<div class="addressList" style="height: 0; overflow: hidden;" >
+							<div class="addressListGetH" style="overflow: hidden;" onclick="changeAddress()">
 
 								<#list queryMemberAddress as item>
 
-									<div class="info_child info_child_list">
+									<div class="info_child info_child_list" id="newAddress">
 										<p>
 											<span class="addrName">${item.name}</span>
 											<span class="addrPhone">${item.phone}</span>
@@ -253,8 +252,8 @@
 
 						<div class="info_child_txt" style="text-align: center;">
 							<#if queryMemberAddress[0]??><input type="button" value="修 改" class="modifyBtn" onclick="openDiv('addressList','addressListGetH')" /></#if>
-							<input type="button" value="确 定" class="sureBtn" style="display: none;" onclick="changeAddress()" />
-							<input type="button" value="取 消" class="cancBtn" style="display: none;  margin-left: 20px;" onclick="closeDiv('addressList')" />
+							<!--<input type="button" value="确 定" class="sureBtn" style="display: none;" onclick="changeAddress()" />
+							<input type="button" value="取 消" class="cancBtn" style="display: none;  margin-left: 20px;" onclick="closeDiv('addressList')" />-->
 							<input type="button" value="添 加" class="addBtn" onclick="addAddressO()" />
 						</div>
 
@@ -306,7 +305,7 @@
 						</div>
 
 						<div class="invoiceList" style="height: 0; overflow: hidden;">
-							<div class="invoiceListGetH" style="overflow: hidden;">
+							<div class="invoiceListGetH" style="overflow: hidden;" onclick="changeInvoice()">
 
 								<#list queryMemberInvoice as item>
 
@@ -409,8 +408,8 @@
 
 						<div class="info_child_txt" style="text-align: center;">
 							<input type="button" value="修 改" class="modifyBtn" onclick="openDiv('invoiceList','invoiceListGetH')" />
-							<input type="button" value="确 定" class="sureBtn" style="display: none;" onclick="changeInvoice()" />
-							<input type="button" value="取 消" class="cancBtn" style="display: none;  margin-left: 20px;" onclick="closeDiv('invoiceList')" />
+							<!--<input type="button" value="确 定" class="sureBtn" style="display: none;" onclick="changeInvoice()" />
+							<input type="button" value="取 消" class="cancBtn" style="display: none;  margin-left: 20px;" onclick="closeDiv('invoiceList')" />-->
 							<input type="button" value="添 加" class="addBtn" onclick="addInvoiceO()" />
 							<input type="button" value="不开发票" class="noBtn noInvoiceBtn" style="margin-left: 18px;"/>
 							<p style="color: #f00;">(只对金额支付部分开具发票)</p>
@@ -683,7 +682,6 @@
 				var def = $(".borderCO .addrDefault").text();
 
 				closeDiv('addressList');
-
 				if(name != "" || phoneNum != "" || addr != "") {
 					$(".addrDefaultDiv .addrName").text(name);
 					$(".addrDefaultDiv .addrPhone").text(phoneNum);

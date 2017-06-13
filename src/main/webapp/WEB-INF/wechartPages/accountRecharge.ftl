@@ -70,7 +70,7 @@ input.error{ border-color: #f00;}
 		<span class="errorTxt"><@sf.error field="msg"/></span>
 	</div>
 	
-	<form class="rechargeForm" autocomplete="off" method="post" action="<@spring.url '/recharge'/>">
+	<form class="rechargeForm" autocomplete="off" method="post" action="<@spring.url '/accountRecharge'/>">
 	
 	  	<table width="100%" border="0" cellspacing="0" cellpadding="0">
 	      	<tr class="text">
