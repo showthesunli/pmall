@@ -7,4 +7,9 @@
         <error-code>500</error-code>
         <location>/500error</location>
     </error-page>
+
+    <error-page>
+        <error-code>403</error-code>
+        <location>/reOperation</location>
+    </error-page>
 </web-app>

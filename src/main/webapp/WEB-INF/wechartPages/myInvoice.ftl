@@ -33,6 +33,7 @@
 #errorShow{ text-align: center;}
 .errorTxt{ text-align: center; min-height: 20px; line-height: 20px; color: #f00; background:#ffebe7; padding: 0 10px; border: 1px solid #f00; border-radius:5px; display: none;}
 .fixed{position:fixed ;z-index: 99999;width: 100%;}
+label.error{ position:absolute; left: 107px; top:26px; color: #f00; font-weight: normal;}
 </style>
 </head>
 <body class="huibg">
@@ -46,7 +47,7 @@
     <a href="<@spring.url '/myInvoiceOperation'/>"><span>新增发票信息</span></a>
   </div>
    <#list queryMemberInvoice as item>
-  <form method="post" action="<@spring.url '/modInvoice'/>">
+  <form  class="addInvoiceForm" method="post" action="<@spring.url '/modInvoice'/>">
     
 	<div class="cdv dzi">
 		    <p style="padding-bottom: 5px;">
@@ -79,7 +80,7 @@
 				</#if>
 			    <input type="hidden" value="${item.receiptType}" />
                 <input id="receiptType" type="text" value="${rec}" class="inputRO " readOnly="true" style="width:30%;text-indent: 5px;-webkit-appearance: none;"/>
-		    	<select name="receiptType" id="addReceiptType">  
+		    	<select name="receiptType" id="addReceiptType"style="display: none;">  
 		    		
 			        <option value="1">个人</option>   
 			        <option value="2">法人</option>   
@@ -203,7 +204,33 @@
 });
 	
     
-
+ $().ready(function () {
+        // 在键盘按下并释放及提交后验证提交表单
+        $(".addInvoiceForm").validate({
+            rules: {
+               mobile: {
+                    required: true,
+                    isPhone: []
+                },
+			billReceiverMail: {
+				email:true,
+				isemail: []
+			},
+        },
+            messages: {
+              
+                mobile: {
+                    required: "请输入手机号码",
+                    isPhone: "请输入正确的手机号码"
+                },
+               billReceiverMail: {
+                	email:"请输入邮箱",
+                	isemail: "请输入正确格式邮箱"
+                },
+               
+            }
+        });
+    });
 </script>
 </body>
 </html>

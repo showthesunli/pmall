@@ -49,6 +49,11 @@
 .addrBtn:hover{ text-decoration: underline;}
 .baseinfo-Title{ margin-bottom: 0;}
 .memberMain-Right #errorShow{ margin-left:32px;}
+#addressPhone-error{position:absolute; color: #f00; font-weight: normal;top: 106px;width: 155px;text-align: center;}
+#addressName-error{position:absolute; color: #f00; font-weight: normal;top: 58px;width: 155px;text-align: center;}
+#addressAddr-error{position:absolute; color: #f00; font-weight: normal;top: 200px;left: 528px;width: 155px;text-align: center;}
+#addressZip-error{position:absolute; color: #f00; font-weight: normal;top: 154px;width: 155px;text-align: center;}
+#phone-error{position:absolute; color: #f00; font-weight: normal;top: 154px;width: 155px;text-align: center;}
 </style>
 </head>
 
@@ -73,7 +78,7 @@
                     <div class="myDetialList myAddress">
                         <input type="button" value="新增收货地址" class="detialBtn newAddress" onclick="openTipDiv('addressDiv')" style="margin-left:0; margin-top:0;" />
                         <#list queryMemberAddress as item>
-                        <form method="post" action="<@spring.url '/modAddr'/>">
+                        <form class="addAddress" method="post" action="<@spring.url '/modAddr'/>">
                             <div class="myAddressItem">
                                 <div class="addrDefaultInforTop">
                                     <div class="addrDefaultInfor">
@@ -118,15 +123,15 @@
 
     <div id="loginBg"></div>
     <!--地址-->
-    <div class="addressDiv">
-        <form method="post" action="<@spring.url '/addAddr'/>">
+    <div class="addressDiv" style="width: 700px; margin: -150px 0 0 -350px;">
+        <form class="addAddressForm" method="post" action="<@spring.url '/addAddr'/>">
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <div class="jf-overflowH tipDivTitle"><h3 style="float:left;">收货地址</h3><span onclick="closeTipDiv('addressDiv')" style="float:right; cursor:pointer; color:#999;font-size:25px;">×</span></div>
         <div><label><span class="colorRed">*</span> 收货人：</label><input type="text" id="addressName" name="receiverName" value="" /></div>
         <div><label><span class="colorRed">*</span> 手机号码：</label><input type="text" id="addressPhone" name="phone" value="" /></div>
         <div><label><span class="colorRed">*</span> 邮政编号：</label><input type="text" id="addressZip" name="zipCode" value="" /></div>
         <div>
-        	<label><span class="colorRed">*</span> 收货地址：</label><input type="text" id="addressAddr" name="addr" value="" style="width:477px;" />
+        	<label><span class="colorRed">*</span> 收货地址：</label><input type="text" id="addressAddr" name="addr" value="" style="width:400px;" />
         </div>
         <p style="margin:10px 0 0 90px;"><input type="hidden" id="operType" name="operType" value="0"/><input type="hidden" id="" name="" value=""/><input type="submit" value="保存" class="sureBtn"  /><input type="button" value="取消" class="cancleBtn"  onclick="closeTipDiv('addressDiv')" /></p>
             <input type="hidden" name="isDefault" value="0"/>
@@ -198,4 +203,44 @@ function closeTipDiv(obj) {
     $("#loginBg").css("display","none");
     $("." + obj).css("display","none");
 }
+
+</script>
+<script>
+    $().ready(function () {
+        // 在键盘按下并释放及提交后验证提交表单
+        $(".addAddressForm").validate({
+            rules: {
+            	receiverName: {
+                    required: true,
+                },
+               phone: {
+                    required: true,
+                    isPhone: []
+               },
+                zipCode: {
+                    required: true,
+                },
+                addr: {
+                    required: true,
+                },
+        },
+            messages: {
+                receiverName: {
+                    required: "请输入收货人",
+                },
+                phone: {
+                    required: "请输入手机号码",
+                    isPhone: "请输入正确的手机号码"
+                },
+                zipCode: {
+                    required: "请输入邮编",
+                },
+                addr: {
+                    required: "请输入收货地址",
+                },
+               
+            }
+        });
+    });
+     
 </script>

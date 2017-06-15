@@ -88,10 +88,4 @@ public class RootConfig {
     public OrderPaySsn getOrderPaySsn(){
         return new OrderPaySsn();
     }
-
-    @Bean
-    @Scope(value = WebApplicationContext.SCOPE_SESSION,proxyMode = ScopedProxyMode.TARGET_CLASS)
-    public User getUser(){
-        return new User();
-    }
 }
