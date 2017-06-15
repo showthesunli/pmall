@@ -7,6 +7,7 @@ import cn.highsuccess.data.JavaDataSet;
 import cn.highsuccess.module.Order;
 import cn.highsuccess.module.OrderPaySsn;
 import cn.highsuccess.module.ShoppingCart;
+import cn.highsuccess.module.User;
 import cn.highsuccess.sms.SendSms;
 import cn.highsuccess.sms.SendSmsImpl;
 import cn.highsuccess.transform.HisuTransform;
@@ -86,5 +87,11 @@ public class RootConfig {
     @Scope(value = WebApplicationContext.SCOPE_REQUEST,proxyMode = ScopedProxyMode.TARGET_CLASS)
     public OrderPaySsn getOrderPaySsn(){
         return new OrderPaySsn();
+    }
+
+    @Bean
+    @Scope(value = WebApplicationContext.SCOPE_SESSION,proxyMode = ScopedProxyMode.TARGET_CLASS)
+    public User getUser(){
+        return new User();
     }
 }
