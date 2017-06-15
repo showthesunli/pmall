@@ -77,7 +77,7 @@ a#radio {display: none;}
 		<p><span class="width70">我的账号：</span><span id="memberID" name="memberID">${memberInfo[0].memberID}</span></p>
 	    <p><span class="width70">我的手机：</span><span id="mobile" name="mobile">${memberInfo[0].mobile}</span></p>
 	    <p><span class="width70">邮箱：</span><span id="mobile" class="email" name="mobile">${memberInfo[0].email}</span>
-	    	 <input id="email" name="email" type="text" value="${memberInfo[0].email}" class="myDetialTxt inputRO" readOnly="true" maxlength="20" style="display: none;"/>
+	    	 <input id="email" name="email" type="text" value="${memberInfo[0].email}" class="myDetialTxt inputRO" readOnly="true" style="display: none;"/>
 	    </p>
 	    <div>
 		<#if memberInfo[0].gender == '0' || memberInfo[0].gender == ''>

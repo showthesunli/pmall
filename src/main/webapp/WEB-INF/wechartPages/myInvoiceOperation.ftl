@@ -31,6 +31,7 @@
 .usercenter .cdv .addrInputTxt{ width: 62%; min-width: 150px; float: left; border: 1px solid #ccc; padding: 0 5px; height: 30px; line-height: 30px;}
 .usercenter .cdv .addBtnA{ background: #f60; height: 30px; line-height: 30px; color: #fff;}
 .cdv p{ position: relative;}
+label.error{ position:absolute; left: 107px; top:26px; color: #f00; font-weight: normal;}
 </style>
 </head>
 <body class="huibg">
@@ -61,7 +62,7 @@
 <div class="usercenter">
   
   
-  	<form method="post" action="<@spring.url '/addInvoice'/>">
+  	<form class="addInvoiceForm" method="post" action="<@spring.url '/addInvoice'/>">
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>  	
 	  	<div class="cdv dzi" style="padding-top: 25px;">
 	  	
@@ -94,11 +95,11 @@
 		    </p>
 		    <p>
 		    	<span class="addrTxt">收票人手机：</span>
-		    	<input type="text" value="" id="addMobile" class="addrInputTxt"  name="mobile"/>
+		    	<input type="text" value="" id="addMobile phone" class="addrInputTxt"  name="mobile" maxlength="11"/>
 		    </p>
 		    <p>
 		    	<span class="addrTxt">收票人邮箱：</span>
-		    	<input type="text" value=""  id="addBillReceiverMail" class="addrInputTxt"  name="billReceiverMail"/>
+		    	<input type="text" value=""  id="addBillReceiverMail email" class="addrInputTxt email"  name="billReceiverMail"/>
 		    </p>
 		     <p>
 	        	<span class="addrTxt" >公司纳税人识别号：</span>
@@ -123,4 +124,31 @@
 	<!--end 底部--> 
 
 </body>
+<script>
+    $().ready(function () {
+        // 在键盘按下并释放及提交后验证提交表单
+        $(".addInvoiceForm").validate({
+            rules: {
+               mobile: {
+                    required: true,
+                    isPhone: []
+                },
+			billReceiverMail: {
+				email:true
+			},
+        },
+            messages: {
+              
+                mobile: {
+                    required: "请输入手机号码",
+                    isPhone: "请输入正确的手机号码"
+                },
+               billReceiverMail: {
+                	email:"请输入正确格式的邮箱"
+                },
+               
+            }
+        });
+    });
+</script>
 </html>

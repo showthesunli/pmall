@@ -12,6 +12,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.MatrixVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.util.HashMap;
@@ -33,10 +34,14 @@ public class AccountRechargeController extends HisuBaseControllerAdapter{
 
     @RequestMapping(value = "/accountRecharge{matrix}")
     public String accountRecharge(Model model,
+                                  @RequestParam(required = false) String cardNo,
                                   @MatrixVariable(required = false) Map<String,String> map){
         Map<String,Object> param = new HashMap<>(map);
         param.put("memberID", this.getJds().getUserName());
         excute(model, param, hisuMngDataGroupAndId);
+        if (cardNo != null){
+            model.addAttribute("cardNo",cardNo);
+        }
         return "/accountRecharge";
     }
 

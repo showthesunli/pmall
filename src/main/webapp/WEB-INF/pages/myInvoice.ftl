@@ -46,6 +46,8 @@
 .addrBtn:hover{ text-decoration: underline;}
 select{ margin-left: 5px; line-height: 25px; height: 25px; border-color: #ccc; color: #666;}
 .addressDiv select{ margin-left: 0;}
+label#addMobile-error{ position:absolute; left:352px;top:241px; color: #f00; font-weight: normal;width: 155px;text-align: center;}
+label#addBillReceiverMail-error{ position:absolute; left:352px;top:290px; color: #f00; font-weight: normal;width: 155px;text-align: center;}
 </style>
 </head>
 
@@ -67,7 +69,7 @@ select{ margin-left: 5px; line-height: 25px; height: 25px; border-color: #ccc; c
                     <div class="myDetialList myAddress">
                         <input type="button" value="新增发票信息" class="detialBtn newAddress" onclick="openTipDiv('addressDiv')" style="margin-left:0; margin-top:0;" />
                         <#list queryMemberInvoice as item>
-                        <form method="post" action="<@spring.url '/modInvoice'/>">
+                        <form class="InvoiceForm" method="post" action="<@spring.url '/modInvoice'/>">
                             <div class="myAddressItem">
                                 <div class="addrDefaultInforTop">
                                     <div class="addrDefaultInfor">
@@ -168,7 +170,7 @@ select{ margin-left: 5px; line-height: 25px; height: 25px; border-color: #ccc; c
     <div id="loginBg"></div>
     <!--新增发票-->
     <div class="addressDiv">
-        <form method="post" action="<@spring.url '/addInvoice'/>">
+        <form class="addInvoiceForm" method="post" action="<@spring.url '/addInvoice'/>">
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>    
         <div class="jf-overflowH tipDivTitle"><h3 style="float:left;">发票信息</h3><span onclick="closeTipDiv('addressDiv')" style="float:right; cursor:pointer; color:#999;font-size:25px;">×</span></div>
         <div>
@@ -188,7 +190,7 @@ select{ margin-left: 5px; line-height: 25px; height: 25px; border-color: #ccc; c
         </div>
         <div>
         	<label><span class="colorRed"></span>发票内容：</label>
-        	<select id="addRcptContent" name="intAttrValue2" >
+        	<select id="addRcptContent" name="rcptContent" >
 				<option value="0">明细</option>
                 <option value="1">办公用品</option>
                 <option value="2">电脑配件</option>
@@ -288,4 +290,33 @@ function closeTipDiv(obj) {
     $("#loginBg").css("display","none");
     $("." + obj).css("display","none");
 }
+
+</script>
+<script>
+    $().ready(function () {
+        // 在键盘按下并释放及提交后验证提交表单
+        $(".addInvoiceForm").validate({
+            rules: {
+               mobile: {
+                    required: true,
+                    isPhone: []
+                },
+			billReceiverMail: {
+				email:true
+			},
+        },
+            messages: {
+              
+                mobile: {
+                    required: "请输入手机号码",
+                    isPhone: "请输入正确的手机号码"
+                },
+               billReceiverMail: {
+                	email:"请输入正确格式的邮箱"
+                },
+               
+            }
+        });
+    });
+     
 </script>

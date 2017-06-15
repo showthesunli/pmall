@@ -107,7 +107,7 @@ $(document).ready(function() {
                         					+'</a>'
                         				+'</div>';
                         							                     
-                        }
+                        }                    
                     // 如果没有数据
                     }else{
                         // 锁定
@@ -123,6 +123,11 @@ $(document).ready(function() {
                         me.resetload();
                     });
                     }
+                	else{
+                        me.lock();
+                        me.noData();
+                        me.resetload();
+                	}   
                 },
                 error: function(xhr, type){
                     //alert('抱歉，网络问题无法加载更多商品。');

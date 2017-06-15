@@ -214,10 +214,10 @@
                     <label class="payTypeA" style="display: none;"><!--${payToolsForPlatEnt[0].payer}--></label>
                     <#--<label class="payTypePayerName">账户余额</label>-->
                     <label class="payTypePayerName"><!--${payToolsForPlatEnt[0].payerName}--></label>
-                    <span class="payTypeModifyBtn">修改</span>
+                   <!-- <span class="payTypeModifyBtn">修改</span>-->
                 </div>
             </div>
-            <div class="jf-overflowH payTypeSlide" style="height:0;">
+            <div class="jf-overflowH payTypeSlide">
                 <div class="payTypeDiv jf-overflowH" style="padding:0 10px;">
                 	<div><h5>积分支付</h5></div>
                 	<div class="jf-overflowH" style="margin-bottom: 10px;">
@@ -513,9 +513,9 @@ $(document).ready(function(e) {
     });
         
 })
-function divHeightZ(obj) {
-    $("." + obj).animate({height: 0});
-}
+//function divHeightZ(obj) {
+//  $("." + obj).animate({height: 0});
+//}
 function divHeightA(obj) {
     var h = $("." + obj + " div").length * 40;
     $("." + obj).animate({height: h + "px"});

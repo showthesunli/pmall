@@ -434,7 +434,7 @@
 							</p>
 						</div>
 
-						<div class="payTypeDivHF" style=" height: 0; overflow: hidden;">
+						<div class="payTypeDivHF">
 							<div class="payTypeDivH">
 								<#list payerForCardsOrder as item>
 
@@ -449,11 +449,11 @@
 
 						<div style="display: none;"></div>
 
-						<div class="info_child_txt" style="text-align: center;">
+						<!--<div class="info_child_txt" style="text-align: center;">
 							<input type="button" value="修 改" class="modifyBtn" onclick="openDiv('payTypeDivHF','payTypeDivH')" />
-							<!--<input type="button" value="确 定" class="sureBtn" style="display: none;" onclick="changePayType()" />
-							<input type="button" value="取 消" class="cancBtn" style="display: none; margin-left: 20px;" onclick="closeDiv('payTypeDivHF')" />-->
-						</div>
+							<input type="button" value="确 定" class="sureBtn" style="display: none;" onclick="changePayType()" />
+							<input type="button" value="取 消" class="cancBtn" style="display: none; margin-left: 20px;" onclick="closeDiv('payTypeDivHF')" />
+						</div>-->
 					</div>
 				</div>
 				<!--end 支付方式-->
@@ -731,7 +731,7 @@
 				var pay = $('.payTypeDivHF').find('input:checked').val();
 				var payerName = $('.payTypeDivHF').find('input:checked').next('img').attr('alt');
 
-				closeDiv('payTypeDivHF');
+//				closeDiv('payTypeDivHF');
 				$('.payTypeDivHF').prev('.info_child').find('span').text(payerName);
 				$('.payTypeA').text(pay);
 

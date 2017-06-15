@@ -67,6 +67,7 @@ td{ overflow:hidden; height:30px;}
                                     <td class="orderBtn">
                                         <a href="<@spring.url '/cardOperation'/>?cardNo=${item.cardNo}&operType=0" style="margin-left:0;" >发送卡密</a>
                                         <a href="<@spring.url '/cardOperation'/>?cardNo=${item.cardNo}&operType=1" style="margin-left:0;" psw="${item.cardPassword}">转赠</a>
+                                        <a href="<@spring.url '/accountRecharge'/>?cardNo=${item.cardNo}" style="margin-left:0;" psw="${item.cardPassword}">充值</a>
                                     </td>
                                     <td>${item.cardStatus}</td>
                                 </tr>

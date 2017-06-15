@@ -213,10 +213,10 @@
                 	<label class="payTypeT">资金支付：</label>
                    	<label class="payTypeA" style="display: none;"><!--${payerForCardsOrder[0].payer}--></label>
                    <label class="payTypePayerName"><!--${payerForCardsOrder[0].payerName}--></label>
-                    <span class="payTypeModifyBtn">修改</span>
+                  <!--  <span class="payTypeModifyBtn">修改</span>-->
                 </div>
             </div>
-            <div class="jf-overflowH payTypeSlide" style="height:0;">
+            <div class="jf-overflowH payTypeSlide">
                 <div class="payTypeDiv jf-overflowH" style="padding:0 10px;">
                     <div><h5>资金支付</h5></div>
                     <div class="jf-overflowH" style="margin-bottom: 10px;">
@@ -495,9 +495,9 @@ $(document).ready(function(e) {
     })
         
 })
-function divHeightZ(obj) {
-    $("." + obj).animate({height: 0});
-}
+//function divHeightZ(obj) {
+//  $("." + obj).animate({height: 0});
+//}
 function divHeightA(obj) {
     var h = $("." + obj + " div").length * 40;
     $("." + obj).animate({height: h + "px"});

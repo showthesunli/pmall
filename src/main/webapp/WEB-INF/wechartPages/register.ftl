@@ -23,8 +23,9 @@
 .getCodeBtn{background: -webkit-linear-gradient(#eee, #ccc); background: -o-linear-gradient(#eee, #ccc); background: -moz-linear-gradient(#eee, #ccc); background: linear-gradient(#eee, #ccc);color:#fff; width: 29%; margin-left: 1%; height: 40px; line-height: 40px; color: #666; border: 1px solid #999; border-radius: 3px;}
 .tet{ padding-left:10px;}
 .text_1{ position: relative;}
-#id-error,#phone-error,#password-error,#confirm_password-error,#registerCode-error,#agree-error{ position:absolute; left: 10%; top:52px; color: #f00;}
+#id-error,#phone-error,#password-error,#confirm_password-error,#registerCode-error,#agree-error{ position:absolute; left: 8%; top:52px; color: #f00;}
 #agree-error{ top:32px;}
+#id-error{font-size: 10px;}
 input.error{ border-color: #f00;}
 </style>
 </head>
@@ -41,31 +42,31 @@ input.error{ border-color: #f00;}
 		    	
 		    	<tr class="text">
 		        	<td class="text_1">
-		        		<input type="text" id="id" name="id" class="tet" placeholder="用户名" maxlength="16" />		
+		        		<input type="text" id="id" name="id" class="tet" placeholder="您的账户名和登录名" maxlength="16" />		
 		        	</td>		        	
 		      	</tr>
 		      	
 		      	<tr class="text">
 					<td class="text_1">
-						<input type="password" id="password" name="password"  class="tet" placeholder="设置密码" maxlength="20" />			
+						<input type="password" id="password" name="password"  class="tet" placeholder="请输入密码，密码至少6位" maxlength="20" />			
 					</td>
 			    </tr>
 			    
 		      	<tr class="text">
 					<td class="text_1">
-						<input type="password" id="confirm_password" name="confirm_password"  class="tet" placeholder="确认密码" maxlength="20" />
+						<input type="password" id="confirm_password" name="confirm_password"  class="tet" placeholder="再次输入您的密码" maxlength="20" />
 					</td>
 		      	</tr>
 		      	
 		      	<tr class="text">
 		        	<td class="text_1">
-		        		<input type="text" id="phone" name="phone" class="tet" placeholder="手机号码" maxlength="11" />	
+		        		<input type="text" id="phone" name="phone" class="tet" placeholder="建议使用常用手机" maxlength="11" />	
 		        	</td>
 		     	</tr>
 		     	
 		      	<tr class="text">
 		        	<td class="text_1">
-		        		<input type="text" id="registerCode" name="mCode" class="tet" placeholder="验证码" style=" width:50% ;" maxlength="10" />
+		        		<input type="text" id="registerCode" name="mCode" class="tet" placeholder="请输入验证码" style=" width:50% ;" maxlength="10" />
 		        		 <button type="button" class="getCodeBtn"  id="second">获取验证码</button>
 		        		
 		        	</td>
@@ -108,11 +109,13 @@ input.error{ border-color: #f00;}
             rules: {
                 id: {
                     required: true,
+                    isId:[],
                     rangelength:[6,16]
                 },
                 password: {
                     required: true,
-                    rangelength:[6,20]
+                    isPsw:[],
+                    rangelength:[6,16]
                 },
                 confirm_password: {
                     required: true,
@@ -128,11 +131,13 @@ input.error{ border-color: #f00;}
             messages: {
                 id: {
                     required: "请输入用户名",
+                    isId: "必须为数字、字母、指定符号@_中任意两种的组合",
                     rangelength: "长度只能在6-16个字符之间"
                 },
                 password: {
                     required: "请输入密码",
-                    rangelength: "长度只能在6-20个字符之间"
+                    isPsw: "必须为数字、字母、指定符号@_中任意两种的组合",
+                    rangelength: "长度只能在6-16个字符之间"
                 },
                 confirm_password: {
                     required: "请输入密码",
@@ -146,6 +151,24 @@ input.error{ border-color: #f00;}
                 },
             }
         });
+        $.validator.addMethod("isId", function (value, element) {
+	        var id = $("#id").val();
+	        var idRule = /((?=.*[a-z])(?=.*\d)|(?=[a-z])(?=.*[@_])|(?=.*\d)(?=.*[@_]))[a-z\d@_]{1,16}$/;
+	
+	        // 用户名错误
+	        if (!idRule.test(id))
+	            return false;
+	        return true;
+	    }, "ignore");
+	    $.validator.addMethod("isPsw", function (value, element) {
+	        var psw = $("#password").val();
+	        var idPsw = /((?=.*[a-z])(?=.*\d)|(?=[a-z])(?=.*[@_])|(?=.*\d)(?=.*[@_]))[a-z\d@_]{1,16}$/;
+	
+	        // 用户名错误
+	        if (!idPsw.test(psw))
+	            return false;
+	        return true;
+	    }, "ignore");
     });
 </script>
 <script type="text/javascript">
@@ -167,24 +190,29 @@ input.error{ border-color: #f00;}
                     },
                     1000);
         }
-    }
+    }    
     $("#second").click(function () {
         var phone = $("#phone").val();
-        if (phone == "") {
-            if ($("#phone-error").length == 0) {
-                $('#phone').after('<label id="phone-error" class="error" for="phone">请输入手机号码</label>');
-            } else
-                $("#phone-error").css('display','block');
-            return false;
+        var id = $("#id").val();
+        var psw = $("#password").val();
+        var confirm_password = $("#confirm_password").val();
+        
+        showError(phone,'phone','请输入手机号码');
+        showError(id,'id','请输入用户名');
+        showError(psw,'password','请输入密码');
+        showError(confirm_password,'confirm_password','请再次确认密码');
+        
+        if($("#phone-error").text()){
+        	return false;
         }
-        var phoneRule = /^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0-9]|170)\d{8}$/;
-        // 手机号码错误
-        if (!phoneRule.test(phone)) {
-            if ($("#phone-error").length == 0) {
-                $('#phone').after('<label id="phone-error" class="error" for="phone">请输入正确的手机号码</label>');
-            } else
-                $("#phone-error").css('display','block');
-                return false;
+        if($("#id-error").text()){
+        	return false;
+        }
+        if($("#password-error").text()){
+        	return false;
+        }
+        if($("#confirm_password-error").text()){
+        	return false;
         }
 
         //ajax发送验证码
@@ -209,4 +237,14 @@ input.error{ border-color: #f00;}
             }
         })
     });
+function showError(val,obj,txt){
+	if(val == ""){
+		if ($("#"+obj+"-error").length == 0) {
+			$('#'+obj).after('<label id="'+obj+'-error" class="error" for="'+obj+'">'+txt+'</label>');
+		} else{
+			$("#"+obj+"-error").css('display','block');
+		}
+		return false;
+	}
+}
 </script>

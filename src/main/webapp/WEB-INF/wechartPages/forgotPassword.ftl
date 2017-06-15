@@ -25,7 +25,7 @@
 .getCodeBtn{background: -webkit-linear-gradient(#eee, #ccc); background: -o-linear-gradient(#eee, #ccc); background: -moz-linear-gradient(#eee, #ccc); background: linear-gradient(#eee, #ccc);color:#fff; width: 29%; margin-left: 1%; height: 40px; line-height: 40px; color: #666; border: 1px solid #999; border-radius: 3px;}
 .tet{ padding-left:10px;}
 .text_1{ position: relative;}
-#username-error,#registerCode-error,#password-error{ position:absolute; left: 10%; top:52px; color: #f00;}
+#username-error,#registerCode-error,#password-error,#confirm_password-error{ position:absolute; left: 10%; top:52px; color: #f00;}
 input.error{ border-color: #f00;}
 </style>
 </head>
@@ -57,6 +57,11 @@ input.error{ border-color: #f00;}
 		      	<tr class="text">
 					<td class="text_1">
 						<input type="text" onfocus="this.type='password'" id="password" name="password"  class="tet" placeholder="请设置密码，至少六位" maxlength="20" />			
+					</td>
+			    </tr>
+			    <tr class="text">
+					<td class="text_1">
+						<input type="text" onfocus="this.type='password'" id="confirm_password" name="confirm_password"  class="tet" placeholder="请再次输入密码" maxlength="20" />			
 					</td>
 			    </tr>
 		      
@@ -92,6 +97,10 @@ input.error{ border-color: #f00;}
                     required: true,
                     rangelength:[6,20]
                 },
+                 confirm_password: {
+                    required: true,
+                    equalTo: "#password"
+                },
                 mCode: "required"
             },
             messages: {
@@ -102,6 +111,10 @@ input.error{ border-color: #f00;}
                 password: {
                     required: "请输入密码",
                     rangelength: "长度只能在6-20个字符之间"
+                },
+                confirm_password: {
+                    required: "密码不能为空",
+                    equalTo: "两次密码输入不一致"
                 },
                 mCode: "请输入验证码",
             }

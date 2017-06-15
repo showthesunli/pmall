@@ -128,6 +128,11 @@ $(document).ready(function() {
                         me.resetload();
                     });
                     }
+                	else{
+                        me.lock();
+                        me.noData();
+                        me.resetload();
+                	}
                 },
                 error: function(xhr, type){
                     //alert('抱歉，网络问题无法加载更多商品。');

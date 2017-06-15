@@ -105,11 +105,13 @@
             rules: {
                 id: {
                     required: true,
+                    isId:[],
                     rangelength:[6,16]
                 },
                 password: {
                     required: true,
-                    rangelength:[6,20]
+                    isPsw:[],
+                    rangelength:[6,16]
                 },
                 confirm_password: {
                     required: true,
@@ -125,11 +127,13 @@
             messages: {
                 id: {
                     required: "请输入用户名",
+                    isId: "必须为数字、字母、指定符号@_中任意两种的组合",
                     rangelength: "长度只能在6-16个字符之间"
                 },
                 password: {
                     required: "请输入密码",
-                    rangelength: "长度只能在6-20个字符之间"
+                    isPsw: "必须为数字、字母、指定符号@_中任意两种的组合",
+                    rangelength: "长度只能在6-16个字符之间"
                 },
                 confirm_password: {
                     required: "请输入密码",
@@ -143,7 +147,26 @@
                 },
             }
         });
+    $.validator.addMethod("isId", function (value, element) {
+        var id = $("#id").val();
+        var idRule = /((?=.*[a-z])(?=.*\d)|(?=[a-z])(?=.*[@_])|(?=.*\d)(?=.*[@_]))[a-z\d@_]{1,16}$/;
+
+        // 用户名错误
+        if (!idRule.test(id))
+            return false;
+        return true;
+    }, "ignore");
+    $.validator.addMethod("isPsw", function (value, element) {
+	        var psw = $("#password").val();
+	        var idPsw = /((?=.*[a-z])(?=.*\d)|(?=[a-z])(?=.*[@_])|(?=.*\d)(?=.*[@_]))[a-z\d@_]{1,16}$/;
+	
+	        // 用户名错误
+	        if (!idPsw.test(psw))
+	            return false;
+	        return true;
+	    }, "ignore");
     });
+    
 </script>
 
 <script>
@@ -177,21 +200,26 @@
     }
     $("#second").click(function () {
         var phone = $("#phone").val();
-        if (phone == "") {
-            if ($("#phone-error").length == 0) {
-                $('#phone').after('<label id="phone-error" class="error" for="phone">请输入手机号码</label>');
-            } else
-                $("#phone-error").css('display','block');
-            return false;
+        var id = $("#id").val();
+        var psw = $("#password").val();
+        var confirm_password = $("#confirm_password").val();
+        
+        showError(phone,'phone','请输入手机号码');
+        showError(id,'id','请输入用户名');
+        showError(psw,'password','请输入密码');
+        showError(confirm_password,'confirm_password','请再次确认密码');
+        
+        if($("#phone-error").text()){
+        	return false;
         }
-        var phoneRule = /^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0-9]|170)\d{8}$/;
-        // 手机号码错误
-        if (!phoneRule.test(phone)) {
-            if ($("#phone-error").length == 0) {
-                $('#phone').after('<label id="phone-error" class="error" for="phone">请输入正确的手机号码</label>');
-            } else
-                $("#phone-error").css('display','block');
-                return false;
+        if($("#id-error").text()){
+        	return false;
+        }
+        if($("#password-error").text()){
+        	return false;
+        }
+        if($("#confirm_password-error").text()){
+        	return false;
         }
 
         //ajax发送验证码
@@ -216,4 +244,14 @@
             }
         })
     });
+function showError(val,obj,txt){
+	if(val == ""){
+		if ($("#"+obj+"-error").length == 0) {
+			$('#'+obj).after('<label id="'+obj+'-error" class="error" for="'+obj+'">'+txt+'</label>');
+		} else{
+			$("#"+obj+"-error").css('display','block');
+		}
+		return false;
+	}
+}
 </script>

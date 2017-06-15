@@ -57,7 +57,7 @@
 		            </div>
                 	<p>
                 		<label>卡号：</label>
-                		<input type="text" id="cardNo" name="cardNo" value="" placeholder="请输入您的卡号" class="recTxt" />
+                		<input type="text" id="cardNo" name="cardNo" value="${cardNo!""}" placeholder="请输入您的卡号" class="recTxt" />
                 	</p>
                 	<p>
                 		<label>卡密：</label>

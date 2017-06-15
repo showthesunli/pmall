@@ -87,7 +87,7 @@
                         </div>-->
                         <div>
                             <label class="detialLabel">邮箱：</label>
-                            <input id="email" name="email" type="text" value="${memberInfo[0].email}" class="myDetialTxt inputRO" readOnly="true" maxlength="20" />
+                            <input id="email" name="email" type="text" value="${memberInfo[0].email}" class="myDetialTxt inputRO" readOnly="true" />
                         </div>
                         
                         <div>

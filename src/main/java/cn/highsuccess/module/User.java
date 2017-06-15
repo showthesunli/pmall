@@ -7,7 +7,7 @@ import javax.validation.constraints.Size;
 /**
  * Created by prototype on 2017/3/20.
  */
-public class User  {
+public class User {
     @NotNull
     @Size(min = 6,max = 16,message = "账号必须在2-16位之间")
     private String id;

@@ -75,7 +75,7 @@ input.error{ border-color: #f00;}
 	  	<table width="100%" border="0" cellspacing="0" cellpadding="0">
 	      	<tr class="text">
 				<td class="text_1">
-					<input type="text" id="cardNo" name="cardNo" value="" placeholder="请输入您的卡号"  class="tet" style="padding-left:10px;">				
+					<input type="text" id="cardNo" name="cardNo" value="${cardNo!""}" placeholder="请输入您的卡号"  class="tet" style="padding-left:10px;">
 				</td>
 	      	</tr>
 	      	
