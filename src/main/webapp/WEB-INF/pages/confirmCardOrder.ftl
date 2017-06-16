@@ -149,8 +149,10 @@
                     <span class="invoiceDefault" style="float: none;"><#if queryMemberInvoice[0].isDefault == '1'>默认发票信息</#if></span>
                     
                     <span class="noInvoiceBtn" onclick="divHeightZ('invoiceSlide')">不开发票</span>
-                    <span class="addrModifyBtn" onclick="openTipDiv('invoiceDivDiv')">添加</span>
-                    <span class="invoiceModifyBtn" onclick="divHeightA('invoiceSlide')">修改</span>                                 
+                    <span class="addrModifyBtn" onclick="openTipDiv('invoiceDivDiv')" >添加</span>
+                    <span class="invoiceModifyBtn" onclick="divHeightA('invoiceSlide')">修改</span>    
+                     <#else>
+                     <span class="addrModifyBtn" onclick="openTipDiv('invoiceDivDiv')">添加</span>
                     </#if>
                    
                 </div>
@@ -511,6 +513,8 @@ function closeTipDiv(obj) {
     $("#loginBg").css("display","none");
     $("." + obj).css("display","none");
 }
+
+
 </script>
 
 </html>

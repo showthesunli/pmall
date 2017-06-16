@@ -76,7 +76,8 @@
 						
 						<a href="<@spring.url '/cardOperation'/>?cardNo=${item.cardNo}&operType=0" style="color: #3897d7; margin-right: 20px;">发送卡密</a>
 					
-						<a href="<@spring.url '/cardOperation'/>?cardNo=${item.cardNo}&operType=1" style="color: #3897d7;">转赠</a>
+						<a href="<@spring.url '/cardOperation'/>?cardNo=${item.cardNo}&operType=1" style="color: #3897d7; margin-right: 20px;" psw="${item.cardPassword}">转赠</a>
+						<a href="<@spring.url '/accountRecharge'/>?cardNo=${item.cardNo}" style="color: #3897d7;" psw="${item.cardPassword}">充值</a>
 					</div>
 				</div>
 			</div>
@@ -142,6 +143,7 @@ $(document).ready(function() {
                         for(var i=0; i<arrLen; i++){
                         	var link1 = "<@spring.url '/cardOperation'/>?cardNo="+data.selectPersonalCard[i].cardNo+"&operType=0";
                         	var link2 = "<@spring.url '/cardOperation'/>?cardNo="+data.selectPersonalCard[i].cardNo+"&operType=1";
+                        	var link3 = "<@spring.url '/accountRecharge'/>?cardNo="+data.selectPersonalCard[i].cardNo;
                         	
                         	result +=	'<div class="box_exp info_light">'
                         					+'<div class="info_integral" style="position: relative;">'
@@ -162,7 +164,8 @@ $(document).ready(function() {
                         						+'</div>'
                         						+'<div class="info_child_txt" style="text-align: center;">'
                         							+'<a href="'+link1+'" style="color: #3897d7; margin-right: 20px;">发送卡密</a>'
-                        							+'<a href="'+link2+'" style="color: #3897d7;">转赠</a>'
+                        							+'<a href="'+link2+'" style="color: #3897d7; margin-right: 20px;" psw="'+data.selectPersonalCard[i].cardPassword+'">转赠</a>'
+                        							+'<a href="'+link3+'" style="color: #3897d7;" psw="'+data.selectPersonalCard[i].cardPassword+'">充值</a>'
                         						+'</div>'
                         					+'</div>'
                         				+'</div>';

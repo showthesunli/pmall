@@ -1,19 +1,14 @@
 package cn.highsuccess.web.advice;
 
-import cn.highsuccess.web.exception.HisuFlashOperationExcetion;
-import cn.highsuccess.web.exception.HisuOperateException;
-import cn.highsuccess.web.exception.HisuPathNotFoundException;
-import cn.highsuccess.web.exception.HisuRegisterException;
+import cn.highsuccess.web.exception.*;
+import com.alibaba.fastjson.JSON;
 import com.sun.tracing.dtrace.ModuleAttributes;
 import freemarker.core.InvalidReferenceException;
 import freemarker.template.TemplateException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.MatrixVariable;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.FlashMap;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.support.RequestContextUtils;
@@ -58,6 +53,16 @@ public class HisuControllerExceptionAdvice {
         logger.debug("error viewName:" + ex.getRedirectUrl());
         logger.debug("error msg:" + ex.getMessage());
         return rw;
+    }
+
+    @ExceptionHandler(HisuFlashOperationForJSONException.class)
+    @ResponseBody
+    public String handleFlashOperationForJSONException(HttpServletRequest req,HisuFlashOperationForJSONException ex){
+        Map<String,Object> map = new HashMap<>();
+        Map<String,String> msg = new HashMap<>();
+        msg.put("msg",ex.getMessage());
+        map.put("errorMsg", msg);
+        return JSON.toJSONString(map);
     }
 
     @ExceptionHandler(Exception.class)

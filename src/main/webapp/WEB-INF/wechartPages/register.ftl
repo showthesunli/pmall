@@ -16,7 +16,7 @@
 <script type="text/javascript" src="<@spring.url '/wechart/js/jquery.accordion.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/wechart/js/unslider.min.js'/>"></script>
 <script language="javascript" src="<@spring.url '/wechart/js/jquery.validate.min.js'/>" ></script>
-<script language="javascript" src="<@spring.url '/wechart/js/jquery.validate.addMethod.js'/>" ></script>
+<script language="javascript" src="<@spring.url '/wechart/js/jquery.validate.addMethod.js?t=20170616'/>" ></script>
 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 <title>微商城注册-逸乐生活网</title>
 <style>
@@ -131,12 +131,12 @@ input.error{ border-color: #f00;}
             messages: {
                 id: {
                     required: "请输入用户名",
-                    isId: "必须为数字、字母、指定符号@_中任意两种的组合",
+                    isId: "只能为数字、字母、指定符号@_任意的组合",
                     rangelength: "长度只能在6-16个字符之间"
                 },
                 password: {
                     required: "请输入密码",
-                    isPsw: "必须为数字、字母、指定符号@_中任意两种的组合",
+                    isPsw: "只能为数字、字母、指定符号@_任意两种及以上的组合",
                     rangelength: "长度只能在6-16个字符之间"
                 },
                 confirm_password: {
@@ -151,24 +151,7 @@ input.error{ border-color: #f00;}
                 },
             }
         });
-        $.validator.addMethod("isId", function (value, element) {
-	        var id = $("#id").val();
-	        var idRule = /((?=.*[a-z])(?=.*\d)|(?=[a-z])(?=.*[@_])|(?=.*\d)(?=.*[@_]))[a-z\d@_]{1,16}$/;
-	
-	        // 用户名错误
-	        if (!idRule.test(id))
-	            return false;
-	        return true;
-	    }, "ignore");
-	    $.validator.addMethod("isPsw", function (value, element) {
-	        var psw = $("#password").val();
-	        var idPsw = /((?=.*[a-z])(?=.*\d)|(?=[a-z])(?=.*[@_])|(?=.*\d)(?=.*[@_]))[a-z\d@_]{1,16}$/;
-	
-	        // 用户名错误
-	        if (!idPsw.test(psw))
-	            return false;
-	        return true;
-	    }, "ignore");
+        
     });
 </script>
 <script type="text/javascript">
@@ -179,11 +162,11 @@ input.error{ border-color: #f00;}
         var obj = $(obj);
         if (wait == 0) {
             obj.removeAttr("disabled");
-            obj.text("获取短信验证码");
+            obj.text("获取验证码");
             wait = 60;
         } else {
             obj.attr("disabled", true);
-            obj.text(wait + "S");
+            obj.text(wait + "秒");
             wait--;
             setTimeout(function () {
                         time(obj)
@@ -231,11 +214,10 @@ input.error{ border-color: #f00;}
                     } else{
                         $("#phone-error").css('display','block').text(data.errorMsg.msg);
                     }
-                }else{
-                    time(this);
                 }
             }
         })
+        time(this);
     });
 function showError(val,obj,txt){
 	if(val == ""){

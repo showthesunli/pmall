@@ -40,6 +40,9 @@
                     </div>
                     <div class="baseinfo-Tip">
                         <p>途皓卡余额：<span style="font-size:20px; margin:0 10px;">${queryMmbAccInfo[0].balanceAmount}</span>元</p>
+                        <#if transAmt??>
+                                <span >本次充值：${transAmt}元</span>
+                        </#if>
                         <p><input type="button" value="途皓卡余额充值" onclick="window.location='<@spring.url "/accountRecharge"/>'" /></p>
                     </div>
                 </div>

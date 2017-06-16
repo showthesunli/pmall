@@ -95,7 +95,7 @@ label.error{ position:absolute; left: 107px; top:26px; color: #f00; font-weight:
 		    </p>
 		    <p>
 		    	<span class="addrTxt">收票人手机：</span>
-		    	<input type="text" value="" id="addMobile phone" class="addrInputTxt"  name="mobile" maxlength="11"/>
+		    	<input type="text" value="" id="phone" class="addrInputTxt"  name="mobile" maxlength="11"/>
 		    </p>
 		    <p>
 		    	<span class="addrTxt">收票人邮箱：</span>

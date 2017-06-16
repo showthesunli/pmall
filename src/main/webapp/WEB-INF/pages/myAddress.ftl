@@ -17,7 +17,7 @@
 <script type="text/javascript" src="<@spring.url '/js/util.js'/>" ></script>
 <script type="text/javascript" src="<@spring.url '/js/jquery-ui-datepicker.js'/>"></script>
 <script language="javascript" src="<@spring.url '/js/jquery.validate.min.js'/>" ></script>
-<script language="javascript" src="<@spring.url '/js/jquery.validate.addMethod.js'/>" ></script>
+<script language="javascript" src="<@spring.url '/js/jquery.validate.addMethod.js?t=20170616'/>" ></script>
 <style>
 .myAddress .myAddressItem{ border:2px solid #eee; padding:10px 15px; margin-top:10px;}
 .myAddressItem div{ margin-bottom:0;}
@@ -49,11 +49,10 @@
 .addrBtn:hover{ text-decoration: underline;}
 .baseinfo-Title{ margin-bottom: 0;}
 .memberMain-Right #errorShow{ margin-left:32px;}
-#addressPhone-error{position:absolute; color: #f00; font-weight: normal;top: 106px;width: 155px;text-align: center;}
 #addressName-error{position:absolute; color: #f00; font-weight: normal;top: 58px;width: 155px;text-align: center;}
 #addressAddr-error{position:absolute; color: #f00; font-weight: normal;top: 200px;left: 528px;width: 155px;text-align: center;}
 #addressZip-error{position:absolute; color: #f00; font-weight: normal;top: 154px;width: 155px;text-align: center;}
-#phone-error{position:absolute; color: #f00; font-weight: normal;top: 154px;width: 155px;text-align: center;}
+#phone-error{position:absolute; color: #f00; font-weight: normal;top: 106px;width: 155px;text-align: center;}
 </style>
 </head>
 
@@ -97,7 +96,7 @@
                                     </div>
                                 </div>
                                 <div class="marginTB"><label>收货人：</label><input id="name" name="receiverName" type="text" value="${item.name}" class="myDetialTxt inputRO" readOnly="true"  maxlength="10" /></div>
-                                <div class="marginTB"><label>手机号码：</label><input id="phone" name="phone" type="text" value="${item.phone}" class="myDetialTxt inputRO" readOnly="true"  maxlength="11" /></div>
+                                <div class="marginTB"><label>手机号码：</label><input id="aphone" name="phone" type="text" value="${item.phone}" class="myDetialTxt inputRO" readOnly="true"  maxlength="11" /></div>
                                 <div class="marginTB"><label>邮政编号：</label><input id="zip" name="zipCode" type="text" value="${item.zip}" class="myDetialTxt inputRO" readOnly="true"  maxlength="10" /></div>
                                 <div class="marginTB"><label>收货地址：</label><input id="addr" name="addr" type="text" value="${item.addr}" class="myDetialTxt inputRO" readOnly="true" style="width: 680px;" /></div>
                                 <input type="hidden" name="objectID" value="${item.objectID}"/>
@@ -128,7 +127,7 @@
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <div class="jf-overflowH tipDivTitle"><h3 style="float:left;">收货地址</h3><span onclick="closeTipDiv('addressDiv')" style="float:right; cursor:pointer; color:#999;font-size:25px;">×</span></div>
         <div><label><span class="colorRed">*</span> 收货人：</label><input type="text" id="addressName" name="receiverName" value="" /></div>
-        <div><label><span class="colorRed">*</span> 手机号码：</label><input type="text" id="addressPhone" name="phone" value="" /></div>
+        <div><label><span class="colorRed">*</span> 手机号码：</label><input type="text" id="phone" name="phone" value="" /></div>
         <div><label><span class="colorRed">*</span> 邮政编号：</label><input type="text" id="addressZip" name="zipCode" value="" /></div>
         <div>
         	<label><span class="colorRed">*</span> 收货地址：</label><input type="text" id="addressAddr" name="addr" value="" style="width:400px;" />
@@ -186,7 +185,7 @@ $(document).ready(function(e) {
         $('#addressName').val('');
         $('#addressZip').val('');
         $('#addressAddr').val('');
-        $('#addressPhone').val('');
+        $('#phone').val('');
         //$('#idProvnice').val('0');
         //$('#idCity').val('0');
         //$('#idArea').val('0');
@@ -241,6 +240,7 @@ function closeTipDiv(obj) {
                
             }
         });
+ 
     });
      
 </script>

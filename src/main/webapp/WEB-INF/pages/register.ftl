@@ -10,7 +10,7 @@
 <script type="text/javascript" src="<@spring.url '/js/jquery-1.7.2.min.js'/>"></script>
 <script language="javascript" src="<@spring.url '/js/menu.js'/>" ></script>
 <script language="javascript" src="<@spring.url '/js/jquery.validate.min.js'/>" ></script>
-<script language="javascript" src="<@spring.url '/js/jquery.validate.addMethod.js'/>" ></script>
+<script language="javascript" src="<@spring.url '/js/jquery.validate.addMethod.js?t=20170616'/>" ></script>
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 <style>
 .topNav a{ line-height:37px;}
@@ -127,12 +127,12 @@
             messages: {
                 id: {
                     required: "请输入用户名",
-                    isId: "必须为数字、字母、指定符号@_中任意两种的组合",
+                    isId: "只能为数字、字母、指定符号@_任意的组合",
                     rangelength: "长度只能在6-16个字符之间"
                 },
                 password: {
                     required: "请输入密码",
-                    isPsw: "必须为数字、字母、指定符号@_中任意两种的组合",
+                    isPsw: "只能为数字、字母、指定符号@_任意两种及以上的组合",
                     rangelength: "长度只能在6-16个字符之间"
                 },
                 confirm_password: {
@@ -147,24 +147,7 @@
                 },
             }
         });
-    $.validator.addMethod("isId", function (value, element) {
-        var id = $("#id").val();
-        var idRule = /((?=.*[a-z])(?=.*\d)|(?=[a-z])(?=.*[@_])|(?=.*\d)(?=.*[@_]))[a-z\d@_]{1,16}$/;
 
-        // 用户名错误
-        if (!idRule.test(id))
-            return false;
-        return true;
-    }, "ignore");
-    $.validator.addMethod("isPsw", function (value, element) {
-	        var psw = $("#password").val();
-	        var idPsw = /((?=.*[a-z])(?=.*\d)|(?=[a-z])(?=.*[@_])|(?=.*\d)(?=.*[@_]))[a-z\d@_]{1,16}$/;
-	
-	        // 用户名错误
-	        if (!idPsw.test(psw))
-	            return false;
-	        return true;
-	    }, "ignore");
     });
     
 </script>
@@ -238,11 +221,10 @@
                     } else{
                         $("#phone-error").css('display','block').text(data.errorMsg.msg);
                     }
-                }else{
-                    time(this);
                 }
             }
         })
+        time(this);
     });
 function showError(val,obj,txt){
 	if(val == ""){

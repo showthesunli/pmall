@@ -14,7 +14,7 @@
 <script type="text/javascript" src="<@spring.url '/js/jquery-1.7.2.min.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/js/menu.js'/>" ></script>
 <script language="javascript" src="<@spring.url '/js/jquery.validate.min.js'/>" ></script>
-<script language="javascript" src="<@spring.url '/js/jquery.validate.addMethod.js'/>" ></script>
+<script language="javascript" src="<@spring.url '/js/jquery.validate.addMethod.js?t=20170616'/>" ></script>
 <style>
 .myAddress .myAddressItem{ border:2px solid #eee; padding:10px 15px; margin-top:10px;}
 .myAddressItem div{ margin-bottom:0;}
@@ -39,14 +39,13 @@
 .myAddressItem label{ width: 130px; line-height: 27px;}
 .birthD{ height:25px; line-height: 25px;}
 #informationOfMy div{ position:relative;}
-#memberName-error,#identityCardNo-error,#email-error,#gender-error,#birthdayDate-error{ position:absolute; left:305px; top:0; color:#f00; padding:0 10px; background:#ffebe7; line-height:25px; border:1px solid #f00; border-radius:5px;}
 .birthD{ color:#666;}
 .marginTB{ margin: 5px 0;}
 .addrBtn{ background: #fff; border: none; color: #3897d7; cursor: pointer;}
 .addrBtn:hover{ text-decoration: underline;}
 select{ margin-left: 5px; line-height: 25px; height: 25px; border-color: #ccc; color: #666;}
 .addressDiv select{ margin-left: 0;}
-label#addMobile-error{ position:absolute; left:352px;top:241px; color: #f00; font-weight: normal;width: 155px;text-align: center;}
+label.error{ position:absolute; left:352px;top:241px; color: #f00; font-weight: normal;width: 155px;text-align: center;}
 label#addBillReceiverMail-error{ position:absolute; left:352px;top:290px; color: #f00; font-weight: normal;width: 155px;text-align: center;}
 </style>
 </head>
@@ -202,7 +201,7 @@ label#addBillReceiverMail-error{ position:absolute; left:352px;top:290px; color:
         </div>
         <div>
         	<label><span class="colorRed"></span> 收票人手机：</label>
-        	<input type="text" id="addMobile" name="mobile" value="" />
+        	<input type="text" id="phone" name="mobile" value="" />
         </div>
         <div>
         	<label><span class="colorRed"></span>收票人邮箱：</label>
@@ -298,7 +297,6 @@ function closeTipDiv(obj) {
         $(".addInvoiceForm").validate({
             rules: {
                mobile: {
-                    required: true,
                     isPhone: []
                 },
 			billReceiverMail: {
@@ -308,7 +306,6 @@ function closeTipDiv(obj) {
             messages: {
               
                 mobile: {
-                    required: "请输入手机号码",
                     isPhone: "请输入正确的手机号码"
                 },
                billReceiverMail: {

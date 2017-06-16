@@ -20,8 +20,10 @@
 <script language="javascript" src="<@spring.url '/wechart/js/jquery.validate.min.js'/>" ></script>
 <style>
 input{ outline:none;}
-#content p{ position: relative; margin: 30px 0;}
-#mobile-error{ position:absolute; left: 0; top:42px; color: #f00;}
+#content p{ position: relative; margin: 20px 0;}
+label.error{ position:absolute; left: 0; top:42px; color: #f00;}
+.getCodeBtn{background: -webkit-linear-gradient(#eee, #ccc); background: -o-linear-gradient(#eee, #ccc); background: -moz-linear-gradient(#eee, #ccc); background: linear-gradient(#eee, #ccc);color:#fff; width: 30%; float:right; height: 41px; line-height: 41px; color: #666; border: 1px solid #999; border-radius: 3px;}
+.cardInputTxt{ width: 100%; line-height: 40px; height: 40px; text-indent: 10px; border: none;}
 </style>
 </head>
 
@@ -33,7 +35,11 @@ input{ outline:none;}
 	<div id="content">
 		<form id="signupForm" method="get" action="<@spring.url '/quickSearchOrder'/>">
 		<p style="border: 1px solid #ccc;">
-			<input type="text" value="" id="mobile" name="mobile" class="cardInputTxt cardPswTxt" placeholder="请输入手机号码" style=" width: 100%; line-height: 40px; height: 40px; text-indent: 10px; border: none;" />
+			<input type="text" value="" id="mobile" name="mobile" class="cardInputTxt cardPswTxt" placeholder="请输入手机号码" style="" />
+		</p>
+		<p style="overflow: hidden; margin-bottom: 0; padding-bottom: 20px;">
+			<input type="text" id="registerCode" name="mCode" class="cardInputTxt cardPswTxt" placeholder="请输入验证码" style=" width: 68%; border: 1px solid #ccc; float: left;" maxlength="10" />
+			<button type="button" class="getCodeBtn" id="second">获取验证码</button>
 		</p>
 		<div style="margin:8px 0;">
 			<#--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
@@ -60,14 +66,69 @@ $().ready(function () {
 				required: true,
 				isPhone: []
 			},
+			mCode: {
+				required: true,
+			},
 		},
 		messages: {
 			mobile: {
 				required: "请输入手机号码",
 				isPhone: "请输入正确的手机号码"
 			},
+			mCode: {
+				required: "请输入验证码",
+			},
 		}
 	});
+	
+	//验证码倒计时
+    var wait = 60;
+    $("#second").attr("disabled", false);
+    function time(obj) {
+        var obj = $(obj);
+        if (wait == 0) {
+            obj.removeAttr("disabled");
+            obj.text("获取验证码");
+            wait = 60;
+        } else {
+            obj.attr("disabled", true);
+            obj.text(wait + "秒");
+            wait--;
+            setTimeout(function () {
+                        time(obj)
+                    },
+                    1000);
+        }
+    }
+    
+    $("#second").click(function () {
+        var phone = $("#mobile").val();
+        showError(phone,'mobile','请输入手机号码');
+        if($("#mobile-error").text()){
+        	return false;
+        }        
+        
+        //ajax发送验证码
+        var phoneNumber = $("#mobile").val();
+        var mcode = "";
+        var $this = this;
+        $.ajax({
+            url:"<@spring.url '/getQuickSearchMcode'/>",
+            data:"mobile="+phoneNumber,
+            type:"GET",
+            dataType: "json",
+            success: function (data) {
+                if(data.errorMsg.msg){
+                    if ($("#mobile-error").length == 0) {
+                        $('#mobile').after('<label id="mobile-error" class="error" for="mobile">'+data.errorMsg.msg+'</label>');
+                    } else{
+                        $("#mobile-error").css('display','block').text(data.errorMsg.msg);
+                    }
+                }
+            }
+        })
+        time(this);
+    });
 });
 $.validator.addMethod("isPhone", function (value, element) {
         var phone = $("#mobile").val();// 手机号码
@@ -78,4 +139,14 @@ $.validator.addMethod("isPhone", function (value, element) {
             return false;
         return true;
     }, "ignore");
+function showError(val,obj,txt){
+	if(val == ""){
+		if ($("#"+obj+"-error").length == 0) {
+			$('#'+obj).after('<label id="'+obj+'-error" class="error" for="'+obj+'">'+txt+'</label>');
+		} else{
+			$("#"+obj+"-error").css('display','block');
+		}
+		return false;
+	}
+}
 </script>

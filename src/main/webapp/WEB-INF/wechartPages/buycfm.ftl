@@ -171,13 +171,24 @@ $(document).ready(function() {
         } else if (type == 2) {
             $("#orderMsg").css("color", "#00b050").html("分配库存失败，因为：" + msg);
             $("#pay").attr('disabled',true).addClass('gray');
+        } else if (type == 3) {
+         	var hf = "<@spring.url '/myOrder'/>";
+            $("#orderMsg").css({"padding-top": "5px","height": "70px","color": "#00b050"}).html("订单配货未完成，请稍后再支付!<br/>稍后可到<a href='"+hf+"' style=' text-decoration: underline; color: #f60; margin: 0 3px;'>我的订单</a>页面进行操作。");
+            $("#pay").attr('disabled',true).addClass('gray');
         }
     },
     initStatus: function (billNo) {
-        statusMsg.printText(0);
-        setTimeout(function () {
-            statusMsg.doStatus(billNo);
-        }, 100);
+        var i = 0;
+    	i++;
+    	if(i <= 5){
+	        statusMsg.printText(0);
+	        setTimeout(function () {
+	            statusMsg.doStatus(billNo);
+	        }, 2000);
+        }
+    	else{
+    		statusMsg.printText(3);
+    	}
     }
 }
 statusMsg.initStatus("${queryMemberOrder[0].billNo}");

@@ -69,7 +69,7 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 					</p>
                     <p style="height: 45px;position: relative;">
                         <span>手机：</span>
-                        <input type="text" value="" id="mobile" name="mobile" class="cardInputTxt cardPswTxt error" placeholder="请输入购买人手机" />
+                        <input type="text" value="" id="mobile" name="mobile" class="cardInputTxt cardPswTxt error" placeholder="请输入手机号" />
                     </p>
 					<!--<p style="height: 28px; margin-left: 42px;">
 						<span id="cardInforError" style="display: none;"></span>

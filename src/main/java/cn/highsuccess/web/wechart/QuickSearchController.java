@@ -4,6 +4,8 @@ import cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId;
 import cn.highsuccess.data.JavaDataSet;
 import cn.highsuccess.data.JavaOperate;
 import cn.highsuccess.web.HisuBaseControllerAdapter;
+import cn.highsuccess.web.exception.HisuFlashOperationForJSONException;
+import cn.highsuccess.web.exception.HisuOperateException;
 import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -29,6 +31,14 @@ public class QuickSearchController extends HisuBaseControllerAdapter{
         super(jds, javaOperate);
     }
 
+    /**
+     * FIXME 未增加验证码参数
+     * @param model
+     * @param mobile
+     * @param currentPage
+     * @param numOfPerPage
+     * @return
+     */
     @RequestMapping(value = "/quickSearchOrder{matrix}")
     public String showQucikSearch(Model model,
                                   @RequestParam @NotNull String mobile,
@@ -42,6 +52,27 @@ public class QuickSearchController extends HisuBaseControllerAdapter{
         return "/quickSearchOrder";
     }
 
+    @RequestMapping(value = "/getQuickSearchMcode")
+    public String getQuickSearchMcode(@RequestParam(required = false) String mobile){
+        StringBuilder condition = new StringBuilder();
+        condition.append("mobile=").append(mobile);
+        try {
+            this.getJavaOperate().service("jf_wechat_quickExchangePage","getMobileVeriCode",condition.toString());
+        }catch (HisuOperateException e){
+            throw new HisuFlashOperationForJSONException(e.getMessage());
+        }
+        return null;
+    }
+
+    /**
+     * FIXME 未增加验证码参数
+     * @param model
+     * @param mobile
+     * @param currentPage
+     * @param numOfPerPage
+     * @param map
+     * @return
+     */
     @RequestMapping(value = "/quickSearchOrderList{matrix}",method = RequestMethod.GET,produces = "application/json;charset=UTF-8;")
     @ResponseBody
     public String quickSearchList(Model model,
