@@ -61,7 +61,7 @@ public class AccountRechargeController extends HisuBaseControllerAdapter{
         condition.append("memberID=").append(this.getJds().getUserName());
         this.getJavaOperate().service("jf_memberCenter", "rechargeForMemberAcc", condition.toString());
         JSONObject result = this.getJavaOperate().getResponseData();
-        ra.addFlashAttribute("transAmt",result.optString("transAmt"));
+        ra.addFlashAttribute("transAmt",result.optString("amountStr"));
         return "redirect:/member";
     }
 }

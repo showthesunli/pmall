@@ -135,17 +135,23 @@
 				outline: none;
 			}
 			
+			label.error {
+				position: absolute;				
+				top: 26px;
+				color: #f00;
+				font-weight: normal;
+			}
 			#addressName-error,
 			#phone-error,
 			#addressZip-error,
-			#addressAddr-error,
-			#invoiceName-error,
-			#invoiceCon-error {
-				position: absolute;
+			#addAddr-error{
 				left: 70px;
-				top: 25px;
-				color: #f00;
-				font-weight: normal;
+			}
+			#addRcptTitle-error,
+			#addMobile-error,
+			#addBillReceiverMail-error,
+			#addTaxpayerID-error{
+				left: 126px;
 			}
 			.inputtext{
 				text-align: right;
@@ -176,7 +182,7 @@
 								<p>
 									<span class="addrName">${queryMemberAddress[0].name}</span>
 									<span class="addrPhone">${queryMemberAddress[0].phone}</span>
-									<span class="addrDefault">默认地址</span>
+									<span class="addrDefault"><#if queryMemberAddress[0].isDefault == "1">默认地址</#if></span>
 
 								</p>
 								<p><span class="address">${queryMemberAddress[0].addr}</span></p>
@@ -184,7 +190,7 @@
 
 							<#else>
 
-								<div class="info_child addrDefaultDiv">
+								<div class="info_child addrDefaultDiv" id="selectDiv">
 									<p>
 										<span class="addrName"></span>
 										<span class="addrPhone"></span>
@@ -362,7 +368,7 @@
 									</p>
 									<p>
 										<span class="inputtext">发票抬头：</span>
-										<input type="text" value="" id="addBillTag" class="addrInputTxt" name="rcptTitle" />
+										<input type="text" value="" id="addRcptTitle" class="addrInputTxt" name="rcptTitle" />
 									</p>
 									<p>
 										<span class="inputtext">发票类型：</span>
@@ -564,22 +570,59 @@
 
 				$(".addInvoiceForm").validate({
 					rules: {
-						invoiceName: {
-							required: true,
-						},
-						invoiceCon: {
-							required: true,
-						},
-					},
-					messages: {
-						invoiceName: {
-							required: "请输入发票抬头",
-						},
-						invoiceCon: {
-							required: "请输入发票内容",
-						},
-					}
+		                rcptTitle: {
+		                    required: true,
+		                },
+		                
+		                mobile: {
+		                    required: true,
+		                    isPhone1: []
+		                },
+		                billReceiverMail: {  
+		                	required: true,
+							email:true,
+		                },
+		                taxpayerID: {
+		                    required: true,
+		                },
+		            },
+		            messages: {
+		                rcptTitle: {
+		                    required: "请输入发票抬头",
+		                },
+		                
+		                mobile: {
+		                    required: "请输入手机号码",
+							isPhone1: "请输入正确的手机号码"
+		                },
+		                billReceiverMail: {
+		                	required: "请输入邮箱",
+		                	email:"请输入正确格式的邮箱",
+		                },
+		                taxpayerID: {
+		                    required: "请输入纳税人识别号",
+		                },
+		            }
 				});
+				$.validator.addMethod("isPhone1", function (value, element) {
+			        var phone = $("#addMobile").val();// 手机号码
+			        var phoneRule = /^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0-9]|170)\d{8}$/;					 
+			        // 手机号码错误
+			        if (!phoneRule.test(phone))
+			        	
+			            return false;
+			        return true;
+			    }, "ignore");
+			    $('#invoiceAddBtn').click(function(){			    	
+			    	var biaoqian = $('#addBillTag').val();
+			    	var taitou = $('#addRcptTitle').val();
+			    	var shouji = $('#addMobile').val();
+			    	var youxiang = $('#addBillReceiverMail').val();
+			    	var shibiehao = $('#addTaxpayerID').val();
+			    	if(taitou!='' && shouji!='' && youxiang!='' && shibiehao!='' && biaoqian==''){
+			    	$('#addBillTag').val('我的发票');   		
+			    	}    	
+			    });
 
 				$('.info_child_list').eq(0).addClass('borderCO');
 				$('.info_child_list').click(function() {

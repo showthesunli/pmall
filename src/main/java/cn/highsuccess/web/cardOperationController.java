@@ -75,7 +75,11 @@ public class CardOperationController extends HisuBaseControllerAdapter {
             throw new HisuFlashOperationExcetion("/cardOperation",e.getMessage(), map);
         }
         model.addAttribute("cardNo", cardNo);
-        return "/sendCardPswSuc";
+        if (!mobile.equals("")){
+            return "/getCardPswSuc";
+        }else {
+            return "/sendCardPswSuc";
+        }
     }
 
 }

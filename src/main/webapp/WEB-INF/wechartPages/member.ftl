@@ -35,7 +35,13 @@
 	</div>
 	
 	<div class="vipsan">   
-	    <div class="col-xs-4 text-center" style="width:50%;"><a><h4>途皓卡余额</h4><p style="color: #f60;">${queryMmbAccInfo[0].balanceAmount}</p></a></div>
+	    <div class="col-xs-4 text-center" style="width:50%;padding-top: 10px;">
+	    	<p style="color: #000;">途皓卡余额 : <span style="color: #f60;">${queryMmbAccInfo[0].balanceAmount} 元</span></p>	 
+	    	 <#if transAmt??>
+	    	<p style="color: #000;">本次充值：<span style="color: #f60;">${transAmt} 元</p>
+	    	 </#if>
+	    	
+	    </div>
 	    <div class="col-xs-4 text-center" style="width:50%"><a href="<@spring.url "/accountRecharge"/>"><h4 style=" line-height: 2.4em; background: #f60; color: #fff; margin-top: 0.3em; ">途皓卡余额充值</h4></a></div>
 	</div>
 	

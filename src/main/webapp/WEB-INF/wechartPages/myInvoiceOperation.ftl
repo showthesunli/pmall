@@ -68,7 +68,8 @@ label.error{ position:absolute; left: 107px; top:26px; color: #f00; font-weight:
 	  	
              <p>
 	        	<span class="addrTxt">发票标签：</span>
-	        	<input type="text" id="addBillTag" class="addrInputTxt" name="billTag" value=""  />
+	        	<input type="text" id="addBillTag" class="addrInputTxt" name="billTagShow" value=""  />
+	        	<input type="hidden" name="billTag" />
         	</p>
 		    <p>
 		    	<span class="addrTxt">发票抬头：</span>
@@ -129,26 +130,60 @@ label.error{ position:absolute; left: 107px; top:26px; color: #f00; font-weight:
         // 在键盘按下并释放及提交后验证提交表单
         $(".addInvoiceForm").validate({
             rules: {
-               mobile: {
+               rcptTitle: {
                     required: true,
+                },
+                receiptType: {
+                    required: true,
+                },
+                rcptContent: {
+                    required: true,
+                },
+               	mobile: {
+               		required: true,
                     isPhone: []
                 },
-			billReceiverMail: {
-				email:true
-			},
-        },
+				billReceiverMail: {
+					required: true,
+					email:true
+				},
+				taxpayerID: {
+                    required: true,
+                },
+        	},
             messages: {
-              
+              	rcptTitle: {
+                    required: "请输入发票抬头"
+                },
+                receiptType: {
+                    required: "请输入发票类型"
+                },
+                rcptContent: {
+                    required: "请输入发票内容"
+                },
                 mobile: {
-                    required: "请输入手机号码",
+                	required: "请输手机号码",
                     isPhone: "请输入正确的手机号码"
                 },
-               billReceiverMail: {
+               	billReceiverMail: {
+               		required: "请输入邮箱",
                 	email:"请输入正确格式的邮箱"
                 },
-               
+                taxpayerID: {
+                    required: "请输入公司纳税人识别号"
+                },               
             }
         });
+        
+        $('.addInvoiceForm .addBtnA').click(function(){
+    		var tag = $('#addBillTag').val();
+    		if(tag != ""){
+    			$('.addInvoiceForm input[name=billTag]').val(tag);
+    		}
+    		else{
+    			$('.addInvoiceForm input[name=billTag]').val('我的发票');
+    		}
+    	})
     });
 </script>
 </html>

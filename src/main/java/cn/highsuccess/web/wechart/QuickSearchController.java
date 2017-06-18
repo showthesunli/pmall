@@ -3,6 +3,7 @@ package cn.highsuccess.web.wechart;
 import cn.highsuccess.config.systemproperties.HisuMngDataGroupAndId;
 import cn.highsuccess.data.JavaDataSet;
 import cn.highsuccess.data.JavaOperate;
+import cn.highsuccess.data.serivce.ParamService;
 import cn.highsuccess.web.HisuBaseControllerAdapter;
 import cn.highsuccess.web.exception.HisuFlashOperationForJSONException;
 import cn.highsuccess.web.exception.HisuOperateException;
@@ -27,12 +28,14 @@ public class QuickSearchController extends HisuBaseControllerAdapter{
     private HisuMngDataGroupAndId hisuMngDataGroupAndId;
 
     @Autowired
+    private ParamService paramService;
+
+    @Autowired
     protected QuickSearchController(JavaDataSet jds, JavaOperate javaOperate) {
         super(jds, javaOperate);
     }
 
     /**
-     * FIXME 未增加验证码参数
      * @param model
      * @param mobile
      * @param currentPage
@@ -42,10 +45,13 @@ public class QuickSearchController extends HisuBaseControllerAdapter{
     @RequestMapping(value = "/quickSearchOrder{matrix}")
     public String showQucikSearch(Model model,
                                   @RequestParam @NotNull String mobile,
+                                  @RequestParam @NotNull String VERIFYCODE,
                                   @MatrixVariable(required = false,defaultValue = "1") String currentPage,
                                   @MatrixVariable(required = false,defaultValue = "6") String numOfPerPage){
+        this.paramService.setQucikSearchMcode(VERIFYCODE);
         Map<String,Object> param = new HashMap<>();
         param.put("memberID", mobile);
+        param.put("VERIFYCODE",VERIFYCODE);
         param.put("currentPage",currentPage);
         param.put("numOfPerPage",numOfPerPage);
         excute(model, param, hisuMngDataGroupAndId);
@@ -65,7 +71,6 @@ public class QuickSearchController extends HisuBaseControllerAdapter{
     }
 
     /**
-     * FIXME 未增加验证码参数
      * @param model
      * @param mobile
      * @param currentPage
@@ -82,6 +87,7 @@ public class QuickSearchController extends HisuBaseControllerAdapter{
                                   @MatrixVariable Map<String,Object> map){
         Map<String,Object> param = new HashMap<>(map);
         param.put("memberID", mobile);
+        param.put("VERIFYCODE",this.paramService.getQuickSearchMcode());
         excute(model, param, hisuMngDataGroupAndId);
         return JSON.toJSONString(model.asMap());
     }

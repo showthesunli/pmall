@@ -65,7 +65,7 @@ label.error{ position:absolute; left: 107px; top:26px; color: #f00; font-weight:
 		    </p>
 		     <p>
 		    	<span class="addrTxt">发票标签：</span>
-		    	<input type="text" id="addBillTag" name="billTag" class="addrInputTxt inputRO"   readOnly="true" value="${item.billTag}"/>
+		    	<input type="text" id="addBillTag" name="billTag" class="addrInputTxt" readOnly="true" value="${item.billTag}"/>
 		    </p>
 		    <p>
 		    	<span class="addrTxt">发票抬头：</span>
@@ -202,35 +202,6 @@ label.error{ position:absolute; left: 107px; top:26px; color: #f00; font-weight:
     });
 
 });
-	
-    
- $().ready(function () {
-        // 在键盘按下并释放及提交后验证提交表单
-        $(".addInvoiceForm").validate({
-            rules: {
-               mobile: {
-                    required: true,
-                    isPhone: []
-                },
-			billReceiverMail: {
-				email:true,
-				isemail: []
-			},
-        },
-            messages: {
-              
-                mobile: {
-                    required: "请输入手机号码",
-                    isPhone: "请输入正确的手机号码"
-                },
-               billReceiverMail: {
-                	email:"请输入邮箱",
-                	isemail: "请输入正确格式邮箱"
-                },
-               
-            }
-        });
-    });
 </script>
 </body>
 </html>

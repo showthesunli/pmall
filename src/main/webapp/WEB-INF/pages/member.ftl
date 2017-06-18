@@ -15,6 +15,8 @@
 <script type="text/javascript" src="<@spring.url '/js/menu.js'/>" ></script>
 <style>
 .baseinfo-Account label{ display: inline-block; width: 70px; text-align: right;}	
+.yuan{font-size: 20px;margin: 0 10px;}
+.recharge{border: 1px solid #f60;padding: 10px 0;width: 176px;margin-left: 80px;}
 </style>
 </head>
 
@@ -40,9 +42,9 @@
                     </div>
                     <div class="baseinfo-Tip">
                         <p>途皓卡余额：<span style="font-size:20px; margin:0 10px;">${queryMmbAccInfo[0].balanceAmount}</span>元</p>
-                        <#if transAmt??>
-                                <span >本次充值：${transAmt}元</span>
-                        </#if>
+                             <#if transAmt??>
+                                <p class="recharge">本次充值：<span class="yuan">${transAmt}</span>元</p>
+                             </#if>
                         <p><input type="button" value="途皓卡余额充值" onclick="window.location='<@spring.url "/accountRecharge"/>'" /></p>
                     </div>
                 </div>
@@ -51,7 +53,8 @@
                     <h2>我的订单</h2>
                     <table width="100%" border="0" cellpadding="0" cellspacing="0" class="orderTable">
                         <tr>
-                            <th width="40%">订单编号</th>
+                            <th width="35%">订单编号</th>
+                            <th width="15%">下单时间</th>
                             <th width="10%">价格</th>
                             <th width="10%">配送状态</th>
                             <th width="10%">订单状态</th>
@@ -60,13 +63,14 @@
                         <#list queryMemberOrder as key>
                         <tr>
                             <td><a href="<@spring.url '/myDetial'/>?billNo=${key.billNo}">${key.billNo}</a></td>
+                            <td>${key.saleDateTime}</td>
                             <td>￥${key.totalPrice}</td>
                             <td>${key.deliveryStatus}</td>
                             <td>${key.orderStatus}</td>
                             <td>
                                 <#if key.orderStatus == "等待支付">
                                     <a href="<@spring.url '/buycfm;billNo=${key.billNo};termID=web;'/>" style="color:#3897d7;">继续支付</a>
-                                	<a href="<@spring.url '/deleteOrder'/>?billNo=${key.billNo}" style="margin-left:0;">取消订单</a>
+                                	<a href="<@spring.url '/deleteOrder'/>?billNo=${key.billNo}" style="margin-left:10px;color:#3897d7;">取消订单</a>
                                 </#if>
                             </td>
                         </tr>

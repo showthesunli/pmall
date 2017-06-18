@@ -45,8 +45,8 @@
 .addrBtn:hover{ text-decoration: underline;}
 select{ margin-left: 5px; line-height: 25px; height: 25px; border-color: #ccc; color: #666;}
 .addressDiv select{ margin-left: 0;}
-label.error{ position:absolute; left:352px;top:241px; color: #f00; font-weight: normal;width: 155px;text-align: center;}
-label#addBillReceiverMail-error{ position:absolute; left:352px;top:290px; color: #f00; font-weight: normal;width: 155px;text-align: center;}
+.addInvoiceForm div{ position: relative;}
+label.error{ position:absolute; left:135px; top:30px; width: 155px; text-align: left; border:none; background: none; }
 </style>
 </head>
 
@@ -174,7 +174,8 @@ label#addBillReceiverMail-error{ position:absolute; left:352px;top:290px; color:
         <div class="jf-overflowH tipDivTitle"><h3 style="float:left;">发票信息</h3><span onclick="closeTipDiv('addressDiv')" style="float:right; cursor:pointer; color:#999;font-size:25px;">×</span></div>
         <div>
         	<label><span class="colorRed"></span>发票标签：</label>
-        	<input type="text" id="addBillTag" name="billTag" value="" style="width:427px;" />
+        	<input type="text" id="addBillTag" name="billTagShow" value="" style="width:427px;" />
+        	<input type="hidden" name="billTag" value="" />
         </div>
         <div>
         	<label><span class="colorRed"></span>发票抬头：</label>
@@ -296,24 +297,60 @@ function closeTipDiv(obj) {
         // 在键盘按下并释放及提交后验证提交表单
         $(".addInvoiceForm").validate({
             rules: {
-               mobile: {
+            	rcptTitle: {
+                    required: true,
+                },
+                receiptType: {
+                    required: true,
+                },
+                rcptContent: {
+                    required: true,
+                },
+               	mobile: {
+               		required: true,
                     isPhone: []
                 },
-			billReceiverMail: {
-				email:true
-			},
-        },
+				billReceiverMail: {
+					required: true,
+					email:true
+				},
+				taxpayerID: {
+                    required: true,
+                },
+        	},
             messages: {
-              
+              	rcptTitle: {
+                    required: "请输入发票抬头"
+                },
+                receiptType: {
+                    required: "请输入发票类型"
+                },
+                rcptContent: {
+                    required: "请输入发票内容"
+                },
                 mobile: {
+                	required: "请输手机号码",
                     isPhone: "请输入正确的手机号码"
                 },
-               billReceiverMail: {
+               	billReceiverMail: {
+               		required: "请输入邮箱",
                 	email:"请输入正确格式的邮箱"
                 },
-               
+                taxpayerID: {
+                    required: "请输入公司纳税人识别号"
+                },               
             }
         });
+        
+    	$('.addInvoiceForm .sureBtn').click(function(){
+    		var tag = $('#addBillTag').val();
+    		if(tag != ""){
+    			$('.addInvoiceForm input[name=billTag]').val(tag);
+    		}
+    		else{
+    			$('.addInvoiceForm input[name=billTag]').val('我的发票');
+    		}
+    	})
     });
      
 </script>

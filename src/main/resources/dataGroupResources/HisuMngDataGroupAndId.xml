@@ -612,6 +612,7 @@
               <constructor-arg index="1">
                      <list>
                             <value>memberID</value>
+                            <value>VERIFYCODE</value>
                             <value>currentPage</value>
                             <value>numOfPerPage</value>
                      </list>

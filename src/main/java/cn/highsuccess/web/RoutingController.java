@@ -131,6 +131,11 @@ public class RoutingController extends HisuBaseControllerAdapter{
         return  this.getJavaOperate().getResponseData().toString();
     }
 
+    @RequestMapping(value = "/reOperation")
+    public String timeOutRedirect(){
+        return "/reOperation";
+    }
+
     @ExceptionHandler(HisuFlashOperationExcetion.class)
     @ResponseBody
     public String handError(HttpServletRequest req,HisuFlashOperationExcetion ex){

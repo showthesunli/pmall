@@ -22,6 +22,7 @@ td{ overflow:hidden; height:30px;}
 .orderBtn a:hover{ text-decoration:underline;}
 .orderBtn .orderPaid{ color:#999; cursor:default;}
 .orderBtn .orderPaid:hover{ text-decoration:none;}
+.monthSearch span,.monthSearch select{ height: 25px; line-height: 25px; font-size: 14px;}
 </style>
 </head>
 
@@ -42,9 +43,19 @@ td{ overflow:hidden; height:30px;}
                 <h1 class="baseinfo-Title">我的订单</h1>
                 <div class="rightOrder">
                     <div>
+                        <#-- TODO 注释按照日期分类
+                    	<div class="monthSearch" style="text-align: right; margin-bottom: 10px;">
+                    		<span>下单日期：</span>
+                    		<select>
+                    			<option disabled="disabled" selected="selected">--请选择--</option>
+                    		</select>
+                    		
+                    	</div>
+                    	-->
                         <table width="100%" border="0" cellpadding="0" cellspacing="0" class="orderTable">
                             <tr>
-                                <th width="50%">订单编号</th>
+                                <th width="35%">订单编号</th>
+                                <th width="15%">下单时间</th>
                                 <th width="10%">订单状态</th>
                                 <th width="10%">配送状态</th>
                                 <th width="10%">价格</th>
@@ -53,13 +64,14 @@ td{ overflow:hidden; height:30px;}
                             <#list queryMemberOrder as key>
                             <tr>
                                 <td><a href="<@spring.url '/myDetial'/>?billNo=${key.billNo}">${key.billNo}</a></td>
+                                <td>${key.saleDateTime}</td>
                                 <td>${key.orderStatus}</td>
                                 <td>${key.deliveryStatus}</td>
                                 <td style="color:#f60;">￥${key.totalPrice}</td>
                                 <td class="orderBtn">
                                     <#if key.orderStatus == "等待支付">
                                         <a href="<@spring.url '/buycfm'/>;billNo=${key.billNo};termID=web" style="margin-left:0;">继续支付</a>
-                                        <a href="<@spring.url '/deleteOrder'/>?billNo=${key.billNo}" style="margin-left:0;">取消订单</a>
+                                        <a href="<@spring.url '/deleteOrder'/>?billNo=${key.billNo}" style="margin-left:10px;">取消订单</a>
                                     </#if>
                                 </td>
                             </tr>
@@ -89,3 +101,26 @@ td{ overflow:hidden; height:30px;}
 
 </body>
 </html>
+<script>
+$(document).ready(function(){
+	getMonth();
+	$('.monthSearch select').change(function(){
+		window.location.href = "<@spring.url '/myOrder'/>";
+	})
+})
+function getMonth(){
+	var myDate = new Date();
+	var year=myDate.getFullYear();
+	var month=myDate.getMonth()+1;
+	
+	for(y=year;y>=2017;y--){
+		for(m=month;m>=1;m--){
+			if(m<10) m1 = '0' + m;
+			else m1 = m;
+			var html = '<option>' + y + m1 + '</option>';
+			$('.monthSearch select').append(html);
+		}
+	}
+	
+}
+</script>

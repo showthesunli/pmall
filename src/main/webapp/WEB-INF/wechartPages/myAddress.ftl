@@ -74,7 +74,7 @@ label.error{ position:absolute; left: 70px; top:22px; color: #f00; font-weight: 
   
     <#list queryMemberAddress as item>
     	
-  	<form class="addressForm" method="post" action="<@spring.url '/modAddr'/>">
+  	<form method="post" action="<@spring.url '/modAddr'/>">
 	  	<div class="cdv dzi">
 		    <p style="padding-bottom: 5px;">
 		    	<span class="label label-warning pull-right deleteAddr" style="margin-left: 10px; background: #ccc; color: #666">删除</span>

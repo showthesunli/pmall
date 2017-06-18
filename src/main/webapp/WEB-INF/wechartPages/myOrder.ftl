@@ -65,7 +65,7 @@
 				</div>
 				<div style="display: block; overflow: hidden; opacity: 1;">
 					<div class="info_child" style=" color: #333;">
-						
+						<p>下单时间：<span style="color: #f60;">${key.saleDateTime}</span></p>
 						<p>订单状态：<span style="color: #f60;">${key.orderStatus}</span></p>
 						<p>配送状态：<span style="color: #f60;">${key.deliveryStatus}</span></p>
 						<p>订单总额：<span style="color: #f60;">￥${key.totalPrice}</span></p>
@@ -154,6 +154,9 @@ $(document).ready(function() {
                         					+'</div>'
                         					+'<div style="display:none;">'
                         						+'<div class="info_child" style=" color: #333;">'
+	                        						+'<p>下单时间：'
+	                        							+'<span style="color: #f60;">'+data.queryMemberOrder[i].saleDateTime+'</span>'
+                        							+'</p>'
                         							+'<p>订单状态：'
                         								+'<span style="color: #f60;">'+data.queryMemberOrder[i].orderStatus+'</span>'
                         							+'</p>'

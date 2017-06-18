@@ -11,6 +11,8 @@
 <script type="text/javascript" src="<@spring.url '/js/jquery-1.7.2.min.js'/>"></script>
 <script language="javascript" src="<@spring.url '/js/menu.js'/>" ></script>
 <script type="text/javascript" src="<@spring.url '/js/util.js'/>"></script>
+<script language="javascript" src="<@spring.url '/js/jquery.validate.min.js'/>" ></script>
+<script language="javascript" src="<@spring.url '/js/jquery.validate.addMethod.js?t=20170616'/>" ></script>
 <style>
 .addrDiv:hover,.invoiceDiv:hover{ background: #ffefe5;}
 .jf-productList{ width:323px; margin:0 10px 10px 0; background:none;}
@@ -53,6 +55,15 @@
 .errorCon{ height: 40px; border:1px solid #f00; border-radius: 5px; background: #ffebe7; padding:0 10px; display: inline-block; float: left; width: 400px; margin:10px 0 0 440px; display: none;}
 .errorCon p{ line-height: 20px; font-size: 14px; color:#f00;}
 .cartShopBtn{ border-color:#f60; color: #f60; background: #faecec;}
+#addRcptTitle-error,#addMobile-error,#addBillReceiverMail-error,#addTaxpayerID-error { color: #f00;position: absolute;left: 145px; top:31px;font-size: 10px;z-index: -1;text-align: left;}
+#addressName-error,#addressPhone-error,#addressZip-error,#addressAddr-error { color: #f00;position: absolute;left: 95px; top:31px;font-size: 10px;z-index: -1;text-align: left;}
+label.error {
+    padding: 0 ; 
+    border: 0; 
+    background:white;
+    width: auto!important;
+}
+.postionRelative{position: relative;}
 </style>
 </head>
 
@@ -305,15 +316,15 @@
     <div id="loginBg"></div>
     <!--新增地址-->
     <div class="addressDiv">
-        <form action="<@spring.url '/addAddr'/>" method="post">
+        <form action="<@spring.url '/addAddr'/>" method="post" id="addressForm">
         <div class="jf-overflowH tipDivTitle"><h3 style="float:left;">收货地址</h3><span onclick="closeTipDiv('addressDiv')" style="float:right; cursor:pointer; color:#999;font-size:25px;">×</span></div>
-        <div><label><span class="colorRed">*</span> 收货人：</label><input type="text" id="addressName" name="receiverName" value="" /></div>
-        <div><label><span class="colorRed">*</span> 手机号码：</label><input type="text" id="addressPhone" name="phone" value="" /></div>
-        <div><label><span class="colorRed">*</span> 邮政编号：</label><input type="text" id="addressZip" name="zipCode" value="" /></div>
-        <div>
+        <div class="postionRelative"><label><span class="colorRed">*</span> 收货人：</label><input type="text" id="addressName" name="receiverName" value="" /></div>
+        <div class="postionRelative"><label><span class="colorRed">*</span> 手机号码：</label><input type="text" id="addressPhone" name="phone" value="" /></div>
+        <div class="postionRelative"><label><span class="colorRed">*</span> 邮政编号：</label><input type="text" id="addressZip" name="zipCode" value="" /></div>
+        <div class="postionRelative">
         	<label><span class="colorRed">*</span> 收货地址：</label><input type="text" id="addressAddr" name="addr" value="" style="width:477px;" />
         </div>
-        <p style="margin:10px 0 0 90px;"><input type="hidden" id="operType" name="operType" value="0"/><input type="hidden" id="" name="" value=""/><input type="submit" value="保存" class="sureBtn"  onclick="closeTipDiv('addressDiv')"  /><input type="button" value="取消" class="cancleBtn"  onclick="closeTipDiv('addressDiv')" /></p>
+        <p style="margin:10px 0 0 90px;"><input type="hidden" id="operType" name="operType" value="0"/><input type="hidden" id="" name="" value=""/><input type="submit" value="保存" class="sureBtn"/><input type="button" value="取消" class="cancleBtn"  onclick="closeTipDiv('addressDiv')" /></p>
             <input type="hidden" name="isDefault" value="0"/>
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <input type="hidden" name="forword" value="confirmCardOrder;termID=web"/>
@@ -323,14 +334,14 @@
     <!--新增地址 end-->
     <!--新增发票-->
     <div class="invoiceDivDiv">
-        <form method="post" action="<@spring.url '/addInvoice'/>">
+        <form method="post" action="<@spring.url '/addInvoice'/>" id="invoiceForm">
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>    
         <div class="jf-overflowH tipDivTitle"><h3 style="float:left;">发票信息</h3><span onclick="closeTipDiv('invoiceDivDiv')" style="float:right; cursor:pointer; color:#999;font-size:25px;">×</span></div>
         <div>
         	<label><span class="colorRed"></span>发票标签：</label>
         	<input type="text" id="addBillTag" name="billTag" value="" style="width:427px;" />
         </div>
-        <div>
+        <div class="postionRelative">
         	<label><span class="colorRed"></span>发票抬头：</label>
         	<input type="text" id="addRcptTitle" name="rcptTitle" value="" style="width:427px;" />
         </div>
@@ -353,15 +364,15 @@
                 <option value="12">礼品</option>
 			</select>
         </div>
-        <div>
+        <div class="postionRelative">
         	<label><span class="colorRed"></span> 收票人手机：</label>
         	<input type="text" id="addMobile" name="mobile" value="" />
         </div>
-        <div>
+        <div class="postionRelative">
         	<label><span class="colorRed"></span>收票人邮箱：</label>
         	<input type="text" id="addBillReceiverMail" name="billReceiverMail" value="" />
         </div>
-        <div>
+        <div class="postionRelative">
         	<label><span class="colorRed"></span> 公司纳税人识别号：</label>
         	<input type="text" id="addTaxpayerID" name="taxpayerID" value="" />
         </div>
@@ -386,6 +397,118 @@
 </body>
 
 <script language="javascript">
+//新增收货地址验证
+$().ready(function () {
+        // 在键盘按下并释放及提交后验证提交表单
+        $("#addressForm").validate({
+            rules: {
+                receiverName: {
+                    required: true,
+                },
+                
+                phone: {
+                    required: true,
+                    isPhone1: []
+                },
+                zipCode: {  
+                	required: true,					
+                },
+                addr: {
+                    required: true,
+                },
+            },
+            messages: {
+                receiverName: {
+                    required: "请输入收货人",
+                },
+                
+                phone: {
+                    required: "请输入手机号码",
+					isPhone1: "请输入正确的手机号码"
+                },
+                zipCode: {
+                	required: "请输入邮政编码",
+                },
+                addr: {
+                    required: "请输入收货地址",
+                },
+            }
+        });
+	$.validator.addMethod("isPhone1", function (value, element) {
+	        var phone = $("#addressPhone").val();// 手机号码
+	        var phoneRule = /^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0-9]|170)\d{8}$/;
+			 console.log(1);
+	        // 手机号码错误
+	        if (!phoneRule.test(phone))
+	        	
+	            return false;
+	        return true;
+	    }, "ignore");
+	   
+});
+
+//新增发票信息验证	
+$().ready(function () {
+        // 在键盘按下并释放及提交后验证提交表单
+        $("#invoiceForm").validate({
+            rules: {
+                rcptTitle: {
+                    required: true,
+                },
+                
+                mobile: {
+                    required: true,
+                    isPhone: []
+                },
+                billReceiverMail: {  
+                	required: true,
+					email:true,
+                },
+                taxpayerID: {
+                    required: true,
+                },
+            },
+            messages: {
+                rcptTitle: {
+                    required: "请输入发票抬头",
+                },
+                
+                mobile: {
+                    required: "请输入手机号码",
+					isPhone: "请输入正确的手机号码"
+                },
+                billReceiverMail: {
+                	required: "请输入邮箱",
+                	email:"请输入正确格式的邮箱",
+                },
+                taxpayerID: {
+                    required: "请输入纳税人识别号",
+                },
+            }
+        });
+	$.validator.addMethod("isPhone", function (value, element) {
+	        var phone = $("#addMobile").val();// 手机号码
+	        var phoneRule = /^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0-9]|170)\d{8}$/;
+	
+	        // 手机号码错误
+	        if (!phoneRule.test(phone))
+	        	
+	            return false;
+	        return true;
+	    }, "ignore");
+    $('.sureBtn').click(function(){
+    	var biaoqian = $('#addBillTag').val();
+    	var taitou = $('#addRcptTitle').val();
+    	var shouji = $('#addMobile').val();
+    	var youxiang = $('#addBillReceiverMail').val();
+    	var shibiehao = $('#addTaxpayerID').val();
+    	if(taitou!='' && shouji!='' && youxiang!='' && shibiehao!='' && biaoqian==''){
+    	$('#addBillTag').val('我的发票');   		
+    	}
+    	
+    });
+});	
+	
 $(document).ready(function(e) {
     //地址修改
     $(".addrDiv").click(function () {

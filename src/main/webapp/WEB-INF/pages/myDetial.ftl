@@ -48,7 +48,7 @@
                    	<p><span>订单状态：</span><span>${queryMemberOrder[0].orderStatus}</span></p>
                     <p><span>配送状态：</span><span>${queryMemberOrder[0].deliveryStatus}</span></p>
                    	<p><span>订单金额：</span><span>￥${queryMemberOrder[0].totalPrice}</span></p>
-                    <p><span>收货人：</span><span>${queryMemberOrder[0].receiverName}</span></p>
+                    <p><span>收货人  ：</span><span>${queryMemberOrder[0].receiverName}</span></p>
                     <p><span>收货地址：</span><span>${queryMemberOrder[0].addr}</span></p>
                     <p><span>订单类型：</span>
                         <#if queryMemberOrder[0].saleOrderPrdType == "0">

@@ -38,7 +38,7 @@ label.error{ position:absolute; left: 0; top:42px; color: #f00;}
 			<input type="text" value="" id="mobile" name="mobile" class="cardInputTxt cardPswTxt" placeholder="请输入手机号码" style="" />
 		</p>
 		<p style="overflow: hidden; margin-bottom: 0; padding-bottom: 20px;">
-			<input type="text" id="registerCode" name="mCode" class="cardInputTxt cardPswTxt" placeholder="请输入验证码" style=" width: 68%; border: 1px solid #ccc; float: left;" maxlength="10" />
+			<input type="text" id="registerCode" name="VERIFYCODE" class="cardInputTxt cardPswTxt" placeholder="请输入验证码" style=" width: 68%; border: 1px solid #ccc; float: left;" maxlength="10" />
 			<button type="button" class="getCodeBtn" id="second">获取验证码</button>
 		</p>
 		<div style="margin:8px 0;">
