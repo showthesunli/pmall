@@ -49,7 +49,7 @@ input.error{ border-color: #f00;}
 		      			     	
 		      	<tr class="text">
 		        	<td class="text_1">
-		        		<input type="text" id="registerCode" name="mCode" class="tet" placeholder="请输入验证码" style=" width:50% ;" maxlength="10" />
+		        		<input type="text" id="registerCode" name="mCode" class="tet" placeholder="请输入验证码" style=" width:50% ;" maxlength="4" />
 		        		<button type="button" class="getCodeBtn"  id="second">获取验证码</button>
 		        		
 		        	</td>
@@ -91,34 +91,59 @@ input.error{ border-color: #f00;}
             rules: {
                 username: {
                     required: true,
+                    isUsername:[],
                     rangelength:[6,16]
                 },
                 password: {
                     required: true,
+                    isPsw:[],
                     rangelength:[6,20]
                 },
                  confirm_password: {
                     required: true,
                     equalTo: "#password"
                 },
-                mCode: "required"
+                mCode:  {
+					required: true,
+					isNum: [],
+					rangelength:[4,4]
+				},
             },
             messages: {
                 username: {
                     required: "请输入用户名",
+                    isUsername:"只能为数字、字母、指定符号@_任意的组合",
                     rangelength: "长度只能在6-16个字符之间"
                 },
                 password: {
                     required: "请输入密码",
+                    isPsw: "只能为数字、字母、指定符号@_任意两种及以上的组合",
                     rangelength: "长度只能在6-20个字符之间"
                 },
                 confirm_password: {
                     required: "密码不能为空",
                     equalTo: "两次密码输入不一致"
                 },
-                mCode: "请输入验证码",
+                mCode: {
+					required: "请输入验证码",
+					isNum: "只能为数字",
+					rangelength:"长度只能为4"
+				},
             }
         });
+        $.validator.addMethod("isUsername", function (value, element) {
+			var id = $("#username").val();
+			var idRule = /^[a-zA-Z0-9@_]{0,}$/;
+			
+			if(id != ""){
+				if (!idRule.test(id))
+					return false;
+			}
+			return true;
+		}, "ignore");
+		$("#password").bind("copy cut paste",function(e){
+			return false;
+	    });
     });
 </script>
 <script type="text/javascript">

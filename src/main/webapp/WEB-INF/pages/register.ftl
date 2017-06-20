@@ -67,7 +67,7 @@
 
                 <p style="margin-bottom:0;">
                     <label class="txtLabel">验<span style="width:6px; display:inline-block"></span>证<span style="width:6px; display:inline-block"></span>码</label>
-                    <input name="mCode" id="registerCode" type="text" class="registerTxt" maxlength="6" placeholder="请输入验证码"  style="width:118px;"  />
+                    <input name="mCode" id="registerCode" type="text" class="registerTxt" maxlength="4" placeholder="请输入验证码"  style="width:118px;"  />
                     <button type="button" class="sendCode"  id="second">获取验证码</button>
                 </p>
 
@@ -122,7 +122,11 @@
                     isPhone: []
                 },
                 agree: "required",
-                mCode: "required"
+                mCode:  {
+					required: true,
+					isNum: [],
+					rangelength:[4,4]
+				},
             },
             messages: {
                 id: {
@@ -140,7 +144,11 @@
                     equalTo: "两次密码输入不一致"
                 },
                 agree: "请接受我们的声明",
-                mCode: "请输入验证码",
+                mCode: {
+					required: "请输入验证码",
+					isNum: "只能为数字",
+					rangelength:"长度只能为4"
+				},
                 phone: {
                     required: "请输入手机号码",
                     isPhone: "请输入正确的手机号码"

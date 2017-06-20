@@ -99,10 +99,12 @@
             rules: {
                 oldPassword: {
                     required: true,
+                    isPsw1:[],
                     rangelength:[6,20],
                 },
                 newPassword: {
                     required: true,
+                    isPsw2:[],
                     rangelength:[6,20],
                 },
                 confirm_password: {
@@ -113,10 +115,12 @@
             messages: {
                oldPassword: {
                     required: "密码不能为空",
+                    isPsw1: "只能为数字、字母、指定符号@_任意两种及以上的组合",
                     rangelength: "长度只能在6-20个字符之间",
                 },
                 newPassword: {
                     required: "密码不能为空",
+                    isPsw2: "只能为数字、字母、指定符号@_任意两种及以上的组合",
                     rangelength: "长度只能在6-20个字符之间",
                 },
                 confirm_password: {
@@ -125,5 +129,31 @@
                 },
             }
         });
+        $("input.recTxt").bind("copy cut paste",function(e){
+			return false;
+	    });
+        //密码验证
+		$.validator.addMethod("isPsw1", function (value, element) {
+			var psw = $("#oldPsw").val();
+			var pswRule = /((?=.*[a-zA-Z])(?=.*\d)|(?=.*[a-zA-Z])(?=.*[@_])|(?=.*[@_])(?=.*[a-zA-Z])|(?=.*\d)(?=.*[@_]))[a-zA-Z\d@_]{1,16}$/;
+			
+			if(psw != ""){
+				if (!pswRule.test(psw)){
+					return false;
+				}
+			}
+			return true;
+		}, "ignore");
+		$.validator.addMethod("isPsw2", function (value, element) {
+			var psw = $("#newPsw").val();
+			var pswRule = /((?=.*[a-zA-Z])(?=.*\d)|(?=.*[a-zA-Z])(?=.*[@_])|(?=.*[@_])(?=.*[a-zA-Z])|(?=.*\d)(?=.*[@_]))[a-zA-Z\d@_]{1,16}$/;
+			
+			if(psw != ""){
+				if (!pswRule.test(psw)){
+					return false;
+				}
+			}
+			return true;
+		}, "ignore");
     });
 </script>

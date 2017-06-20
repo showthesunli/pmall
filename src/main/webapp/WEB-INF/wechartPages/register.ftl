@@ -66,7 +66,7 @@ input.error{ border-color: #f00;}
 		     	
 		      	<tr class="text">
 		        	<td class="text_1">
-		        		<input type="text" id="registerCode" name="mCode" class="tet" placeholder="请输入验证码" style=" width:50% ;" maxlength="10" />
+		        		<input type="text" id="registerCode" name="mCode" class="tet" placeholder="请输入验证码" style=" width:50% ;" maxlength="4" />
 		        		 <button type="button" class="getCodeBtn"  id="second">获取验证码</button>
 		        		
 		        	</td>
@@ -126,7 +126,11 @@ input.error{ border-color: #f00;}
                     isPhone: []
                 },
                 agree: "required",
-                mCode: "required"
+                mCode:  {
+					required: true,
+					isNum: [],
+					rangelength:[4,4]
+				},
             },
             messages: {
                 id: {
@@ -144,7 +148,11 @@ input.error{ border-color: #f00;}
                     equalTo: "两次密码输入不一致"
                 },
                 agree: "请接受我们的声明",
-                mCode: "请输入验证码",
+                mCode: {
+					required: "请输入验证码",
+					isNum: "只能为数字",
+					rangelength:"长度只能为4"
+				},
                 phone: {
                     required: "请输入手机号码",
                     isPhone: "请输入正确的手机号码"

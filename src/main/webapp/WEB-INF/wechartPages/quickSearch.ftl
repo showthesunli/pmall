@@ -18,6 +18,7 @@
 <script type="text/javascript" src="<@spring.url '/wechart/js/jquery.accordion.js'/>"></script>
 <script type="text/javascript" src="<@spring.url '/wechart/js/unslider.min.js'/>"></script>
 <script language="javascript" src="<@spring.url '/wechart/js/jquery.validate.min.js'/>" ></script>
+<script language="javascript" src="<@spring.url '/wechart/js/jquery.validate.addMethod.js'/>" ></script>
 <style>
 input{ outline:none;}
 #content p{ position: relative; margin: 20px 0;}
@@ -38,7 +39,7 @@ label.error{ position:absolute; left: 0; top:42px; color: #f00;}
 			<input type="text" value="" id="mobile" name="mobile" class="cardInputTxt cardPswTxt" placeholder="请输入手机号码" style="" />
 		</p>
 		<p style="overflow: hidden; margin-bottom: 0; padding-bottom: 20px;">
-			<input type="text" id="registerCode" name="VERIFYCODE" class="cardInputTxt cardPswTxt" placeholder="请输入验证码" style=" width: 68%; border: 1px solid #ccc; float: left;" maxlength="10" />
+			<input type="text" id="registerCode" name="VERIFYCODE" class="cardInputTxt cardPswTxt" placeholder="请输入验证码" style=" width: 68%; border: 1px solid #ccc; float: left;" maxlength="4"/>
 			<button type="button" class="getCodeBtn" id="second">获取验证码</button>
 		</p>
 		<div style="margin:8px 0;">
@@ -66,18 +67,28 @@ $().ready(function () {
 				required: true,
 				isPhone: []
 			},
-			mCode: {
+			VERIFYCODE: {
 				required: true,
+				isNum: [],
+				rangelength:[4,4]
 			},
+			/*mCode: {
+				required: true,
+			},*/
 		},
 		messages: {
 			mobile: {
 				required: "请输入手机号码",
 				isPhone: "请输入正确的手机号码"
 			},
-			mCode: {
+			VERIFYCODE: {
 				required: "请输入验证码",
+				isNum: "只能为数字",
+				rangelength:"长度只能为4"
 			},
+			/*mCode: {
+				required: "请输入验证码",
+			},*/
 		}
 	});
 	
@@ -139,6 +150,9 @@ $.validator.addMethod("isPhone", function (value, element) {
             return false;
         return true;
     }, "ignore");
+    
+
+
 function showError(val,obj,txt){
 	if(val == ""){
 		if ($("#"+obj+"-error").length == 0) {

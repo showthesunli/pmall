@@ -45,5 +45,17 @@ $.validator.addMethod("isPsw", function (value, element) {
 	return true;
 }, "ignore");
 
+//验证码验证
+$.validator.addMethod("isNum", function (value, element) {
+	var yzm = $("#registerCode").val();
+	var yzmRule = /^[0-9]*$/;	
+	if(yzm != ""){
+		if (!yzmRule.test(yzm)){
+			return false;
+		}
+	}
+	return true;
+}, "ignore");
+
 })
 

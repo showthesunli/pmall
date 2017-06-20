@@ -50,7 +50,7 @@ ondragstart="return false" onbeforecopy="return false" oncopy=document.selection
 							<div class="line3">
 								<a href="<@spring.url '/proshow;prdNo=${queryPrdListByPrdTypeItem.prdNo};keyWordsFld=${queryPrdListByPrdTypeItem.prdNo};'/>">
 									<i>
-										<img src="<@spring.url '/imgsrc/${queryPrdListByPrdTypeItem.iconFileName}'/>" onerror="downloadErrImg(this,'${queryPrdListByPrdTypeItem.iconFileName}')" />
+										<img src="<@spring.url '/imgsrc/${queryPrdListByPrdTypeItem.iconFileName}'/>" onerror="downloadErrImg(this,'${queryPrdListByPrdTypeItem.iconFileName}','../')" />
 									</i>
 									<span style="overflow:hidden;text-overflow:ellipsis; height:1em;">${queryPrdListByPrdTypeItem.productInfo}</span>
 									<em>￥${queryPrdListByPrdTypeItem.prdPrice}</em>
