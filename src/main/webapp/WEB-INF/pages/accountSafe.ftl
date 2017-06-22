@@ -99,13 +99,14 @@
             rules: {
                 oldPassword: {
                     required: true,
-                    isPsw1:[],
+                    isPsw:[],
                     rangelength:[6,20],
                 },
                 newPassword: {
                     required: true,
-                    isPsw2:[],
+                    isPsw:[],
                     rangelength:[6,20],
+                    notEqualTo:"#oldPsw"
                 },
                 confirm_password: {
                     required: true,
@@ -115,12 +116,10 @@
             messages: {
                oldPassword: {
                     required: "密码不能为空",
-                    isPsw1: "只能为数字、字母、指定符号@_任意两种及以上的组合",
                     rangelength: "长度只能在6-20个字符之间",
                 },
                 newPassword: {
                     required: "密码不能为空",
-                    isPsw2: "只能为数字、字母、指定符号@_任意两种及以上的组合",
                     rangelength: "长度只能在6-20个字符之间",
                 },
                 confirm_password: {
@@ -129,31 +128,17 @@
                 },
             }
         });
-        $("input.recTxt").bind("copy cut paste",function(e){
-			return false;
-	    });
-        //密码验证
-		$.validator.addMethod("isPsw1", function (value, element) {
-			var psw = $("#oldPsw").val();
-			var pswRule = /((?=.*[a-zA-Z])(?=.*\d)|(?=.*[a-zA-Z])(?=.*[@_])|(?=.*[@_])(?=.*[a-zA-Z])|(?=.*\d)(?=.*[@_]))[a-zA-Z\d@_]{1,16}$/;
+        
+		//密码验证
+		$.validator.addMethod("isPsw", function (value,element,param) {
+			var pswRule = /^((?=.*[a-zA-Z])(?=.*\d)|(?=.*[a-zA-Z])(?=.*[@_])|(?=.*\d)(?=.*[@_]))[a-zA-Z\d@_]{0,}$/;
 			
-			if(psw != ""){
-				if (!pswRule.test(psw)){
-					return false;
-				}
-			}
-			return true;
-		}, "ignore");
-		$.validator.addMethod("isPsw2", function (value, element) {
-			var psw = $("#newPsw").val();
-			var pswRule = /((?=.*[a-zA-Z])(?=.*\d)|(?=.*[a-zA-Z])(?=.*[@_])|(?=.*[@_])(?=.*[a-zA-Z])|(?=.*\d)(?=.*[@_]))[a-zA-Z\d@_]{1,16}$/;
-			
-			if(psw != ""){
-				if (!pswRule.test(psw)){
-					return false;
-				}
-			}
-			return true;
-		}, "ignore");
+			return this.optional(element) || (pswRule.test(value));
+		}, $.validator.format("只能为数字、字母、指定符号@_任意两种及以上的组合"));
+		
+		// 验证两次输入值是否不相同
+		$.validator.addMethod("notEqualTo", function(value,element,param) {
+			return value != $(param).val();
+		}, $.validator.format("您新设置的密码与您输入的旧密码一致，请重新设置"));
     });
 </script>
