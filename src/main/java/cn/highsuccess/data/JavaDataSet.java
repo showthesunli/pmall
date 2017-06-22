@@ -4,6 +4,7 @@ import cn.highsuccess.config.systemproperties.HisuMngAttribute;
 import cn.highsuccess.config.systemproperties.HisuMngSvr;
 import cn.highsuccess.data.BaseConnect;
 import cn.highsuccess.transform.HisuTransform;
+import cn.highsuccess.web.exception.HisuOperateException;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -12,6 +13,7 @@ public class JavaDataSet extends BaseConnect {
     private String pageID;
     private String pageDataGrpID;
     private String condition;
+    private JSONObject JSONResult;
 
     public JavaDataSet(HisuMngAttribute hmsi, HisuMngSvr hisuMngSvr, HisuTransform htf) {
         super(hmsi, hisuMngSvr, htf);
@@ -27,8 +29,45 @@ public class JavaDataSet extends BaseConnect {
         this.pageDataGrpID = pageDataGrpID;
 
         JSONObject responsedata = htf.getDataSet(this.getUserDetails().getRemoteAddress(),this.getUserName() , productName, pageID, pageDataGrpID, condition);
-        data = responsedata;
-        return responsedata;
+        try {
+            JSONResult = responsedata.getJSONObject("responseObj");
+            String codestr = responsedata.getString("responseCode");
+            returnCode = Integer.parseInt(codestr);
+            data = responsedata.optJSONObject("responseFileData");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        if (!this.getResult()){
+            throw new HisuOperateException(this.getErrMessage());
+        }
+        return this.data;
+    }
+
+    /**
+     * 查询结果
+     *
+     * @return 返回成功或者失败
+     */
+    public boolean getResult() {
+        if (returnCode < 0) return false;
+        return true;
+    }
+
+    /**
+     * 获取操作失败时候返回的错误信息
+     *
+     * @return
+     */
+    public String getErrMessage() {
+        if (this.returnCode >= 0){
+            return "";
+        }
+        try {
+            return JSONResult.getString("错误原因");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 
     /**

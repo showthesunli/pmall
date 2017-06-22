@@ -9,6 +9,7 @@ import cn.highsuccess.sms.SendSms;
 import cn.highsuccess.sms.SendSmsImpl;
 import cn.highsuccess.transform.HisuTransform;
 import cn.highsuccess.transform.impl.HisuTransformImpl;
+import cn.highsuccess.transform.impl.HisuTransformImplUpdate;
 import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.web.context.WebApplicationContext;
@@ -38,7 +39,8 @@ public class RootConfig {
      */
     @Bean
     public HisuTransform hisuTransform(HisuMngSvr hisuMngSvr){
-        return new HisuTransformImpl(hisuMngSvr.getIp(),hisuMngSvr.getProt());
+//        return new HisuTransformImpl(hisuMngSvr.getIp(),hisuMngSvr.getProt());
+        return new HisuTransformImplUpdate(hisuMngSvr.getIp(),hisuMngSvr.getProt());
     }
 
     /**

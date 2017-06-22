@@ -23,7 +23,7 @@ public class PmallLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler imp
         if (successurl != null){
             httpServletResponse.sendRedirect(basePath+successurl);
         }else {
-            httpServletResponse.sendRedirect(basePath+"/login");
+            httpServletResponse.sendRedirect(basePath+"login");
         }
     }
 }

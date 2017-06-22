@@ -611,7 +611,7 @@
               <constructor-arg index="0" value="queryQuickExOrderByMobile"/>
               <constructor-arg index="1">
                      <list>
-                            <value>memberID</value>
+                            <value>mobile</value>
                             <value>VERIFYCODE</value>
                             <value>currentPage</value>
                             <value>numOfPerPage</value>

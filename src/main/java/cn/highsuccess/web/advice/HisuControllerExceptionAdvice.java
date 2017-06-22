@@ -42,7 +42,9 @@ public class HisuControllerExceptionAdvice {
     @ExceptionHandler(HisuFlashOperationExcetion.class)
     public RedirectView hanlFlashOperationException(HttpServletRequest req,HisuFlashOperationExcetion ex){
         logger.error("request:" + req.getRequestURI() + " exception:" + ex);
-        RedirectView rw = new RedirectView(ex.getRedirectUrl());
+        String path = req.getContextPath();
+        logger.debug("path:" + path);
+        RedirectView rw = new RedirectView(path + ex.getRedirectUrl());
         rw.setAttributesMap(ex.getMap());
         FlashMap outputFlashMap = RequestContextUtils.getOutputFlashMap(req);
         if (outputFlashMap != null){
