@@ -36,6 +36,7 @@ public class JavaOperate extends BaseConnect{
             JSONResult = obj.getJSONObject("responseObj");
             String codestr = obj.getString("responseCode");
             returnCode = Integer.parseInt(codestr);
+            data = obj.optJSONObject("responseFileData");
         } catch (JSONException e) {
             e.printStackTrace();
         }
