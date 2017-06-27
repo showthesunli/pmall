@@ -41,7 +41,7 @@ public class ProShowController extends HisuBaseControllerAdapter {
 
     @GetMapping(value = "/proshow{matrix}")
     public String proDetailShow(Model model,@MatrixVariable Map<String,Object> map,HttpServletRequest request){
-        excute(model, map, hisuMngDataGroupAndId);
+    	excute(model, map, hisuMngDataGroupAndId);
         parseFile(model.asMap().get("queryPrdDetail"),"$[*].fileName",request);
         return "/proshow";
     }

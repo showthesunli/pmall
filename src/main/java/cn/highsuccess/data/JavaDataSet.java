@@ -85,7 +85,7 @@ public class JavaDataSet extends BaseConnect {
      * @return 返回数据列表
      */
     public JSONArray getDataList() {
-        if (data == null) return new JSONArray();
+    	if (data == null) return new JSONArray();
         JSONArray arr = null;
         try {
             arr = data.getJSONArray(pageDataGrpID);
